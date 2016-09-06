@@ -23,6 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initInstances() {
         tvName = (TextView) findViewById(R.id.tvName);
-        tvName.setText("" + name);
+        tvName.setText("ชื่อ " + name);
     }
 }
