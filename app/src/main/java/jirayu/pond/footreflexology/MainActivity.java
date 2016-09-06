@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvAppName;
     EditText editName;
     Button btnSignUp, btnIntoMainPage;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == btnSignUp){
+            name = editName.getText().toString();
+
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            intent.putExtra("name", name);
             startActivity(intent);
         }
     }
