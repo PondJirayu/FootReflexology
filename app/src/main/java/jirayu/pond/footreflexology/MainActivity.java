@@ -1,14 +1,16 @@
 package jirayu.pond.footreflexology;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvAppName;
     EditText editName;
@@ -37,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp.startAnimation(anim);
         anim.setDuration(2000);
         btnIntoMainPage.startAnimation(anim);
+
+        btnSignUp.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == btnSignUp){
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 }
