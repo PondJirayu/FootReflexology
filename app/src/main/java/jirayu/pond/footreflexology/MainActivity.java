@@ -31,6 +31,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnIntoMainPage = (Button) findViewById(R.id.btnIntoMainPage);
 
+        btnSignUp.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnSignUp) {
+            name = editName.getText().toString();
+
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            intent.putExtra("name", name);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha_anim);
         anim.setDuration(500);
         tvAppName.startAnimation(anim);
@@ -40,18 +58,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSignUp.startAnimation(anim);
         anim.setDuration(2000);
         btnIntoMainPage.startAnimation(anim);
-
-        btnSignUp.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
-        if(v == btnSignUp){
-            name = editName.getText().toString();
+    protected void onResume() {
+        super.onResume();
+    }
 
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            intent.putExtra("name", name);
-            startActivity(intent);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
+
