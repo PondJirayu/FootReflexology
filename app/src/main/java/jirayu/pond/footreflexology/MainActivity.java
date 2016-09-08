@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editName;
     Button btnSignUp, btnIntoMainPage;
     String name;
+    Animation anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha_anim);
 
         initInstances();
     }
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
-        Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha_anim);
         anim.setDuration(500);
         tvAppName.startAnimation(anim);
         anim.setDuration(1000);
