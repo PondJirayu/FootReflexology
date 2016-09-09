@@ -32,6 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editName = (EditText) findViewById(R.id.editName);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnIntoMainPage = (Button) findViewById(R.id.btnIntoMainPage);
+        anim.setDuration(500);
+        tvAppName.startAnimation(anim);
+        anim.setDuration(1000);
+        editName.startAnimation(anim);
+        anim.setDuration(1500);
+        btnSignUp.startAnimation(anim);
+        anim.setDuration(2000);
+        btnIntoMainPage.startAnimation(anim);
 
         btnSignUp.setOnClickListener(this);
     }
@@ -50,15 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-
-        anim.setDuration(500);
-        tvAppName.startAnimation(anim);
-        anim.setDuration(1000);
-        editName.startAnimation(anim);
-        anim.setDuration(1500);
-        btnSignUp.startAnimation(anim);
-        anim.setDuration(2000);
-        btnIntoMainPage.startAnimation(anim);
     }
 
     @Override
