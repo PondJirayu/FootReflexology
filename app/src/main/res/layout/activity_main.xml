@@ -9,79 +9,86 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackGround" />
 
-    <LinearLayout
+    <ScrollView
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAppName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="15dp"
-                android:fontFamily="casual"
-                android:gravity="center"
-                android:padding="15dp"
-                android:text="@string/app_name_background"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/app_name_background"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-
-            <EditText
-                android:id="@+id/editName"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/editname_margin_left"
-                android:layout_marginRight="@dimen/editname_margin_right"
-                android:background="@drawable/edittext_person_circle"
-                android:inputType="text"
-                android:text="@string/editname_surname"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btnSignUp"
+                <TextView
+                    android:id="@+id/tvAppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/app_name_background"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/app_name_background"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignLeft="@id/editName"
-                android:layout_alignRight="@id/editName"
-                android:layout_below="@id/editName"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/btn_signup"
-                android:gravity="center"
-                android:text="ลงทะเบียนผู้ป่วย"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btnIntoMainPage"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@id/btnSignUp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
-                android:background="@android:color/transparent"
-                android:text="เข้าสู่หน้าหลัก"
-                android:textColor="@drawable/selector_btn_intomainpage"
-                android:textStyle="bold" />
 
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/editname_margin_left"
+                    android:layout_marginRight="@dimen/editname_margin_right"
+                    android:background="@drawable/edittext_person_circle"
+                    android:inputType="number"
+                    android:text="@string/editname_surname"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignLeft="@id/editName"
+                    android:layout_alignRight="@id/editName"
+                    android:layout_below="@id/editName"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/btn_signup"
+                    android:gravity="center"
+                    android:text="ลงทะเบียนผู้ป่วย"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnIntoMainPage"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/btnSignUp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="35dp"
+                    android:background="@android:color/transparent"
+                    android:text="เข้าสู่หน้าหลัก"
+                    android:textColor="@drawable/selector_btn_intomainpage"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Foot Reflexology</string>
     <string name="app_name_background">Foot Reflexology</string>
-    <string name="editname_surname">ชื่อและนามสกุล</string>
+    <string name="editname_surname">เลขประจำตัวประชาชน 13 หลัก</string>
 </resources>
