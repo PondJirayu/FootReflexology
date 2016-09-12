@@ -1,4 +1,4 @@
-package jirayu.pond.footreflexology;
+package jirayu.pond.footreflexology.activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import jirayu.pond.footreflexology.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
