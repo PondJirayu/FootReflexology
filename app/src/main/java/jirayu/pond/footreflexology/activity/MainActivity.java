@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.util.ScreenUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,8 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
         setContentView(R.layout.activity_main);
+
+//        ทดลองใช้ Model Singleton
+//        int screenWidth = ScreenUtils.getInstance().getScreenWidth();
+//        int screenHeight = ScreenUtils.getInstance().getScreenHeight();
+
         anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha_anim);
 
         initInstances();
