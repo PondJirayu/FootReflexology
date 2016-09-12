@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.util.ScreenUtils;
@@ -31,9 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         setContentView(R.layout.activity_main);
 
-//        ทดลองใช้ Model Singleton
+        // ทดลองใช้ Model Singleton
 //        int screenWidth = ScreenUtils.getInstance().getScreenWidth();
 //        int screenHeight = ScreenUtils.getInstance().getScreenHeight();
+
+        // Toast screenWidth & screenHeight
+//        Toast.makeText(MainActivity.this, "Width : " + screenWidth + " Height : " + screenHeight, Toast.LENGTH_SHORT).show();
 
         anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha_anim);
 
