@@ -55,7 +55,8 @@
                     android:layout_marginRight="@dimen/editname_margin_right"
                     android:background="@drawable/edittext_person_circle"
                     android:inputType="number"
-                    android:text="@string/editname_surname"
+                    android:hint="@string/editname_surname"
+                    android:textColorHint="@android:color/white"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
