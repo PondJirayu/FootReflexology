@@ -54,10 +54,8 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
-            name = editName.getText().toString();
 
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            intent.putExtra("name", name);
             startActivity(intent);
         }
     }
