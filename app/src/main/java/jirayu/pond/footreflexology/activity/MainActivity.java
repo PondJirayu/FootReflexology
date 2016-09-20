@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         initInstances();
+
+        // แปะ fragment
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, MainFragment.newInstance())
+                    .commit();
+        }
     }
 
     private void initInstances() {
