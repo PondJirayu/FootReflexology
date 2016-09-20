@@ -2,4 +2,6 @@
     <string name="app_name">Foot Reflexology</string>
     <string name="app_name_background">Foot Reflexology</string>
     <string name="editname_surname">เลขประจำตัวประชาชน 13 หลัก</string>
+    <string name="open_drawer">Open Menu</string>
+    <string name="close_drawer">Close Menu</string>
 </resources>

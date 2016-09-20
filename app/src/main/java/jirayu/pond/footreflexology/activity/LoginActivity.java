@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     public void onClick(View v) {
         if (v == btnSignUp) {
 
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
     }
