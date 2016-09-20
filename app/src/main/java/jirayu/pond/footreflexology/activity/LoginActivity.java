@@ -49,12 +49,16 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
         btnIntoMainPage.startAnimation(anim);
 
         btnSignUp.setOnClickListener(this);
+        btnIntoMainPage.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
-
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+        if (v == btnIntoMainPage){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }

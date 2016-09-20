@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:orientation="vertical"
+         android:orientation="vertical"
         android:padding="16dp"
         android:layout_marginRight="16dp">
 
@@ -25,18 +25,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@android:color/black"
             android:text="1.หัวใจ" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@android:color/black"
             android:text="2.ปอด" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@android:color/black"
             android:text="3.ไต" />
 
     </LinearLayout>
