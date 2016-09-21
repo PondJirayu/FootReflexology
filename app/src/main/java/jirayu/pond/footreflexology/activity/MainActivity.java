@@ -2,7 +2,6 @@ package jirayu.pond.footreflexology.activity;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.os.PersistableBundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.util.Random;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.MainFragment;
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    ImageView imageView;
+
+    int[] image_list = new int[4];
+    int n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
                 drawerLayout,
@@ -54,6 +61,15 @@ public class MainActivity extends AppCompatActivity{
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Random Background DrawerMenu
+        image_list[0] = R.drawable.stock1;
+        image_list[1] = R.drawable.stock2;
+        image_list[2] = R.drawable.stock3;
+        image_list[3] = R.drawable.stock4;
+        Random random = new Random();
+        n = random.nextInt(4);
+        imageView.setImageResource(image_list[n]);
     }
 
     @Override
@@ -81,7 +97,7 @@ public class MainActivity extends AppCompatActivity{
             return true;
         }
 
-        // Menu
+        // menu_main
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
