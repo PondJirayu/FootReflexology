@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity{
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // inflate
 
         initInstances();
 
-        // แปะ fragment
+        // Place fragment here
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, MainFragment.newInstance())
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void initInstances() {
+        // findViewById here
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
+    // Handle Click
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)){
