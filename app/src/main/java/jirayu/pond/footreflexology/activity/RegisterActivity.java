@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.LoginFragment;
+import jirayu.pond.footreflexology.fragment.RegisterFragment;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -16,6 +18,12 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         initInstances();
+
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, RegisterFragment.newInstance())
+                    .commit();
+        }
     }
 
     private void initInstances() {
