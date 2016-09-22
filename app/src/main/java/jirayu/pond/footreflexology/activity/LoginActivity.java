@@ -18,7 +18,6 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     TextView tvAppName;
     EditText editName;
     Button btnSignUp, btnIntoMainPage;
-    String name;
     Animation anim;
 
     @Override

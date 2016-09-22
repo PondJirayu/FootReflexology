@@ -4,32 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:padding="16dp"
-            android:text="กรอกประวัติส่วนตัว"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/editname_margin_left"
+            android:layout_marginRight="@dimen/editname_margin_right" />
 
-    </RelativeLayout>
+        <EditText
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/editname_margin_left"
+            android:layout_marginRight="@dimen/editname_margin_right" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        <EditText
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/editname_margin_left"
+            android:layout_marginRight="@dimen/editname_margin_right" />
 
         <Button
-            android:layout_centerInParent="true"
-            android:padding="16dp"
+            android:layout_gravity="center"
+            android:id="@+id/btnOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ยืนยัน"/>
+            android:text="OK"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

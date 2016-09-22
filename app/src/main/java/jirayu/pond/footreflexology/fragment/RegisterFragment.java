@@ -1,18 +1,23 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.activity.MainActivity;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener{
+
+    Button btnOK;
 
     public RegisterFragment() {
         super();
@@ -35,6 +40,17 @@ public class RegisterFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnOK = (Button) rootView.findViewById(R.id.btnOK);
+
+        btnOK.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnOK){
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
