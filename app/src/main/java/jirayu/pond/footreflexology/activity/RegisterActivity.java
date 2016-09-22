@@ -19,6 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         initInstances();
 
+        // Place Fragment here
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, RegisterFragment.newInstance())

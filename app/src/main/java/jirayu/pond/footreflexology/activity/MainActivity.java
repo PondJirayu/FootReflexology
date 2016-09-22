@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
 
         initInstances();
 
-        // Place fragment here
+        // Place Fragment here
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, MainFragment.newInstance())
