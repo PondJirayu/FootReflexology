@@ -35,7 +35,7 @@
         android:layout_width="@dimen/drawer_menu_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
+        android:background="#80000000"
         android:orientation="vertical">
 
         <ImageView
@@ -44,7 +44,24 @@
             android:layout_height="168dp"
             android:scaleType="centerCrop" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="ประวัติการรักษา"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="ประวัติส่วนตัว"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
