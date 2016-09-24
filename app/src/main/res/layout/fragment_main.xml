@@ -11,7 +11,7 @@
         android:layout_weight="2"
         android:padding="60dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/new_foot" />
+        android:src="@drawable/foot_right" />
 
     <LinearLayout
         android:layout_width="0dp"
