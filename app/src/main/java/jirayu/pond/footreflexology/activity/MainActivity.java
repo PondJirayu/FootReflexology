@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
+        getSupportActionBar().setTitle("หน้าหลัก");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -102,6 +103,8 @@ public class MainActivity extends AppCompatActivity{
         // menu_main
         switch (item.getItemId()) {
             case R.id.action_settings:
+                return true;
+            case R.id.action_about:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
