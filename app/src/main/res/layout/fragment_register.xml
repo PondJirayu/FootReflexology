@@ -5,38 +5,106 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="@dimen/editname_margin_left"
-            android:layout_marginRight="@dimen/editname_margin_right" />
 
-        <EditText
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="@dimen/editname_margin_left"
-            android:layout_marginRight="@dimen/editname_margin_right" />
-
-        <EditText
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="@dimen/editname_margin_left"
-            android:layout_marginRight="@dimen/editname_margin_right" />
-
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnOK"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="OK"/>
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/edit_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ชื่อ"
+                android:inputType="text" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3">
+
+            <EditText
+                android:id="@+id/edit_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="นามสกุล"
+                android:inputType="text" />
+
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="เพศ "/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="5dp"
+        android:checkedButton="@+id/rbMale"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="4dp"
+            android:text="ชาย" />
+
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:text="หญิง" />
+
+    </RadioGroup>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/edit_identification_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="เลขประจำตัวประชาชน"
+            android:inputType="number"
+            android:maxLength="13" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_signup"
+        android:text="ลงทะเบียน"
+        android:textSize="16sp" />
 
 </LinearLayout>

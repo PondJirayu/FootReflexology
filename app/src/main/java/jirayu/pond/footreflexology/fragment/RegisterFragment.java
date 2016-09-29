@@ -17,7 +17,7 @@ import jirayu.pond.footreflexology.activity.MainActivity;
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener{
 
-    Button btnOK;
+    Button btnSignUp;
 
     public RegisterFragment() {
         super();
@@ -40,15 +40,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btnOK = (Button) rootView.findViewById(R.id.btnOK);
+        btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
 
-        btnOK.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v == btnOK){
-            Intent intent = new Intent(getContext(), MainActivity.class);
+        if (v == btnSignUp){
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         }
     }
