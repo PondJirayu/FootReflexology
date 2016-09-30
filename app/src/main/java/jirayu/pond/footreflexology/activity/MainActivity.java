@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import java.util.Random;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.fragment.MainFragment;
+import jirayu.pond.footreflexology.fragment.LeftFootFragment;
+import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
         // Place Fragment here
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, MainFragment.newInstance())
+                    .add(R.id.contentContainer, LeftFootFragment.newInstance())
                     .commit();
         }
     }

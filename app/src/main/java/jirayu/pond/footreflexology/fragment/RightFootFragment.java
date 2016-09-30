@@ -12,14 +12,14 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class MainFragment extends Fragment {
+public class RightFootFragment extends Fragment {
 
-    public MainFragment() {
+    public RightFootFragment() {
         super();
     }
 
-    public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
+    public static RightFootFragment newInstance() {
+        RightFootFragment fragment = new RightFootFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -28,7 +28,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
         initInstances(rootView);
         return rootView;
     }
