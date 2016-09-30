@@ -49,7 +49,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
 
-        // Spinner
+        // Create Spinner
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
