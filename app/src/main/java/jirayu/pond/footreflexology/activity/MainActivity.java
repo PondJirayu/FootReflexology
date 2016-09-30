@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
         // Place Fragment here
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, LeftFootFragment.newInstance())
+                    .add(R.id.contentContainer, RightFootFragment.newInstance())
                     .commit();
         }
     }
