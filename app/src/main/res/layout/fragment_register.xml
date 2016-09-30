@@ -127,6 +127,23 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ที่อยู่"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,35 +160,11 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ที่อยู่"
-                        android:inputType="text"
-                        android:textSize="16sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:hint="ตำบล"
                         android:inputType="text"
                         android:textSize="16sp" />
 
                 </android.support.design.widget.TextInputLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="12dp">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
@@ -187,19 +180,30 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_gravity="center"
+                    android:text="จังหวัด"
+                    android:textSize="16sp" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="จังหวัด"
-                        android:inputType="text"
-                        android:textSize="16sp" />
-
-                </android.support.design.widget.TextInputLayout>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinnerProvince"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp" />
 
             </LinearLayout>
 

@@ -6,7 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -15,9 +20,11 @@ import jirayu.pond.footreflexology.activity.MainActivity;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class RegisterFragment extends Fragment implements View.OnClickListener{
+public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     Button btnSignUp;
+    Spinner spinnerProvince;
+    ArrayAdapter<CharSequence> adapter;
 
     public RegisterFragment() {
         super();
@@ -41,6 +48,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
+
+        // Spinner
+        spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
+        adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.province_names, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProvince.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
+        spinnerProvince.setOnItemSelectedListener(this); // handle click
 
         btnSignUp.setOnClickListener(this);
     }
@@ -81,5 +96,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+
+    // Handle click Spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
