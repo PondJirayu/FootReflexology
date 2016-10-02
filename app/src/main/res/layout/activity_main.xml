@@ -15,7 +15,7 @@
 
         <include layout="@layout/toolbar" />
 
-        <include layout="@layout/content_container"/>
+        <include layout="@layout/content_container" />
 
     </LinearLayout>
 
@@ -32,13 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="ประวัติการรักษา"/>
+            android:text="ประวัติการรักษา" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="ประวัติผู้ป่วย"/>
+            android:text="ประวัติผู้ป่วย" />
 
     </LinearLayout>
 
