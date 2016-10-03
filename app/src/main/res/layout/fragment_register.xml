@@ -215,7 +215,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/selector_btn_signup"
+                android:background="@drawable/selector_btn_sign_up"
                 android:padding="16dp"
                 android:text="ตกลง"
                 android:textColor="@android:color/white"
