@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.activity;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.support.design.widget.TabLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    TabLayout tabLayout;
 
 //    ImageView imageView;
 //    int[] image_list = new int[4];
@@ -48,10 +50,16 @@ public class MainActivity extends AppCompatActivity{
     private void initInstances() {
         // findViewById here
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         setSupportActionBar(toolbar);
+        tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
+        tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
+        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น ๆ"));
+        tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 //        imageView = (ImageView) findViewById(R.id.imageView);
+
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
                 drawerLayout,
