@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity{
         if (actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-
         // menu_main
         switch (item.getItemId()) {
             case R.id.action_settings:
