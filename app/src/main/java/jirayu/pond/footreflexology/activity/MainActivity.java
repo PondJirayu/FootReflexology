@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
-//    ImageView imageView;
 
+//    ImageView imageView;
 //    int[] image_list = new int[4];
 //    int n;
 
