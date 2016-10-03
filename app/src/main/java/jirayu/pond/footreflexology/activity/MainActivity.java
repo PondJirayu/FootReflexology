@@ -102,13 +102,14 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
-    // Handle Click
+    // Handle Click Hamburger Icon, Options Menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Hamburger Icon
         if (actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-        // menu_main
+        // Options Menu
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
