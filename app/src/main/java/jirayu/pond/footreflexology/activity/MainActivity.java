@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
         tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
-        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น ๆ"));
+        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
         tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
