@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.activity;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,12 +19,13 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     TabLayout tabLayout;
+    NavigationView navigation;
 
 //    ImageView imageView;
 //    int[] image_list = new int[4];
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getResources().getBoolean(R.bool.portrait_only)){
+        if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         setContentView(R.layout.activity_main); // inflate
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
         initInstances();
 
         // Place Fragment here
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, RightFootFragment.newInstance())
                     .commit();
@@ -61,10 +63,12 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
         tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
 
+        navigation = (NavigationView) findViewById(R.id.navigation);
+        assert navigation != null;
+        navigation.setNavigationItemSelectedListener(this);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 //        imageView = (ImageView) findViewById(R.id.imageView);
-
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
                 drawerLayout,
                 R.string.open_drawer,
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Hamburger Icon
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         // Options Menu
@@ -122,6 +126,12 @@ public class MainActivity extends AppCompatActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // Handle Navigation Menu
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 
     @Override
@@ -153,5 +163,5 @@ public class MainActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
     }
-}
 
+}
