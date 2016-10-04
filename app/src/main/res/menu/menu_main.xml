@@ -8,8 +8,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_SignOut"
-        android:title="@string/action_SignOut"
+        android:id="@+id/action_LogOut"
+        android:title="@string/action_LogOut"
         app:showAsAction="never" />
 
 </menu>

@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
-            case R.id.action_SignOut:
+            case R.id.action_LogOut:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -8,8 +8,8 @@
             android:title="หน้าหลัก" />
         <item
             android:id="@+id/navItem2"
-            android:icon="@drawable/ic_account_box_black_24dp"
-            android:title="ประวัติผู้ป่วย" />
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="ข้อมูลส่วนตัว" />
         <item
             android:id="@+id/navItem3"
             android:icon="@drawable/ic_accessible_black_24dp"
