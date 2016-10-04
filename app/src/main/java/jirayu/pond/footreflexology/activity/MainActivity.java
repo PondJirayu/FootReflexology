@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity{
         }
         setContentView(R.layout.activity_main); // inflate
 
+        initToolbar();
         initInstances();
 
         // Place Fragment here
@@ -47,11 +48,14 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private void initToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
     private void initInstances() {
         // findViewById here
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
         tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
         tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));

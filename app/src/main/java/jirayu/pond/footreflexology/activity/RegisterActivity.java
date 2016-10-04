@@ -19,6 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        initToolbar();
         initInstances();
 
         // Place Fragment here
@@ -29,10 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void initInstances() {
+    private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
+    private void initInstances() {
+        // findViewById here
         getSupportActionBar().setTitle("ลงทะเบียนผู้ป่วย");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
