@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     tools:context="jirayu.pond.footreflexology.activity.LoginActivity">
 
-    <include layout="@layout/content_container"/>
+    <include layout="@layout/content_container" />
 
 </RelativeLayout>

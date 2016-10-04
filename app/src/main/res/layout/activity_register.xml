@@ -8,7 +8,7 @@
 
     <include layout="@layout/toolbar" />
 
-    <include layout="@layout/toolbar_drop_shadow"/>
+    <include layout="@layout/toolbar_drop_shadow" />
 
     <include layout="@layout/content_container" />
 
