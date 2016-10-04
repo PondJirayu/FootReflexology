@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     TabLayout tabLayout;
-    NavigationView navigation;
+    NavigationView navigationView;
 
 //    ImageView imageView;
 //    int[] image_list = new int[4];
@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
         tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
 
-        navigation = (NavigationView) findViewById(R.id.navigation);
-        assert navigation != null;
-        navigation.setNavigationItemSelectedListener(this);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
+        assert navigationView != null;
+        navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 //        imageView = (ImageView) findViewById(R.id.imageView);
@@ -103,34 +103,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    // inflate menu_main
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // inflate menu_main
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    // Handle Click Hamburger Icon, Options Menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Hamburger Icon
+        // Handle click Hamburger Icon
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Options Menu
+        // Handle click Options Menu
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
-            case R.id.action_about:
+            case R.id.action_SignOut:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    // Handle Navigation Menu
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle Navigation Menu
         return false;
     }
 

@@ -4,16 +4,33 @@
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/navItem1"
-            android:title="Home" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="หน้าหลัก" />
         <item
             android:id="@+id/navItem2"
-            android:title="Blog" />
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:title="ประวัติผู้ป่วย" />
         <item
             android:id="@+id/navItem3"
-            android:title="About" />
+            android:icon="@drawable/ic_accessible_black_24dp"
+            android:title="ประวัติการรักษา" />
         <item
             android:id="@+id/navItem4"
-            android:title="Contact" />
+            android:icon="@drawable/ic_insert_comment_black_24dp"
+            android:title="บันทึกช่วยจำ" />
     </group>
+
+    <item android:title="เพิ่มเติม">
+
+        <menu>
+            <item
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/action_settings" />
+            <item
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="@string/action_about" />
+        </menu>
+
+    </item>
 
 </menu>
