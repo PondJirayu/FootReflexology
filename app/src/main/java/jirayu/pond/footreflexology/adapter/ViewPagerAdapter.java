@@ -22,9 +22,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new RightFootFragment();
+            return RightFootFragment.newInstance();
         } else if (position == 1) {
-            return new LeftFootFragment();
+            return LeftFootFragment.newInstance();
         }
         return null;
     }
