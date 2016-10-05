@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
@@ -13,7 +15,13 @@ import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    private final int PAGE_NUMBER = 2;
+    private ArrayList<Fragment> fragments = new ArrayList<>();
+    private ArrayList<String> tabTitles = new ArrayList<>();
+
+    public void addFragments(Fragment fragments, String tabTitles){
+        this.fragments.add(fragments);
+        this.tabTitles.add(tabTitles);
+    }
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -21,16 +29,16 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return RightFootFragment.newInstance();
-        } else if (position == 1) {
-            return LeftFootFragment.newInstance();
-        }
-        return null;
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return PAGE_NUMBER;
+        return tabTitles.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles.get(position);
     }
 }

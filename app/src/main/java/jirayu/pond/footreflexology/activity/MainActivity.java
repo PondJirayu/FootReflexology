@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
 
-//    ImageView imageView;
-//    int[] image_list = new int[4];
-//    int n;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +43,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initInstances();
 
         // Place Fragment here
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        // AddFragment into ViewPager
+        viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
+        viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
         viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void initToolbar() {
@@ -60,17 +60,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initInstances() {
         // findViewById here
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
-        tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
-        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
-        tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
+//        tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
+//        tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
+//        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
+//        tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
 
+        // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-//        imageView = (ImageView) findViewById(R.id.imageView);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
                 drawerLayout,
                 R.string.open_drawer,
@@ -83,14 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        // Random Background DrawerMenu
-//        image_list[0] = R.drawable.stock1;
-//        image_list[1] = R.drawable.stock2;
-//        image_list[2] = R.drawable.stock3;
-//        image_list[3] = R.drawable.stock4;
-//        Random random = new Random();
-//        n = random.nextInt(4);
-//        imageView.setImageResource(image_list[n]);
     }
 
     @Override
