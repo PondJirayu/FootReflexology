@@ -1,10 +1,13 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.LoginFragment;
@@ -23,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         initInstances();
 
         // Place Fragment here
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, RegisterFragment.newInstance())
                     .commit();
@@ -55,6 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_LogOut:
+                return true;
+            case android.R.id.home: // Handle on BackPress and Hide Keyboard.
+                finish();
+                hideSoftKeyboard();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -89,5 +96,12 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void hideSoftKeyboard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }
