@@ -16,6 +16,10 @@
             android:title="ประวัติการรักษา" />
         <item
             android:id="@+id/navItem4"
+            android:icon="@drawable/ic_title_black_24dp"
+            android:title="คำสำคัญ" />
+        <item
+            android:id="@+id/navItem5"
             android:icon="@drawable/ic_insert_comment_black_24dp"
             android:title="บันทึกช่วยจำ" />
     </group>
