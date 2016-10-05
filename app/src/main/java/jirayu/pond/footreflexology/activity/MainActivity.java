@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import java.util.Random;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.adapter.ViewPagerAdapter;
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     TabLayout tabLayout;
     NavigationView navigationView;
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
 
 //    ImageView imageView;
 //    int[] image_list = new int[4];
@@ -43,11 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initInstances();
 
         // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, RightFootFragment.newInstance())
-                    .commit();
-        }
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setAdapter(viewPagerAdapter);
     }
 
     private void initToolbar() {
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle Drawer Menu
-        return true;
+        return false;
     }
 
     @Override
