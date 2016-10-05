@@ -12,13 +12,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-
-import java.util.Random;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.ViewPagerAdapter;
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
+import jirayu.pond.footreflexology.fragment.InTheFootFragment;
+import jirayu.pond.footreflexology.fragment.OnTheBackFootFragment;
+import jirayu.pond.footreflexology.fragment.OutSideFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // AddFragment into ViewPager
         viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
         viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
+        viewPagerAdapter.addFragments(InTheFootFragment.newInstance(), "ด้านในเท้า");
+        viewPagerAdapter.addFragments(OutSideFootFragment.newInstance(), "ด้านนอกเท้า");
+        viewPagerAdapter.addFragments(OnTheBackFootFragment.newInstance(), "ด้านหลังเท้า");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
