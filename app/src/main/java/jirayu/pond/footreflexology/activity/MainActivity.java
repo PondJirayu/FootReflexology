@@ -43,13 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initInstances();
 
         // Place Fragment here
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        // AddFragment into ViewPager
-        viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
-        viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void initToolbar() {
@@ -60,11 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initInstances() {
         // findViewById here
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-//        tabLayout.addTab(tabLayout.newTab().setText("เท้าขวา"));
-//        tabLayout.addTab(tabLayout.newTab().setText("เท้าซ้าย"));
-//        tabLayout.addTab(tabLayout.newTab().setText("ด้านอื่น"));
-//        tabLayout.addTab(tabLayout.newTab().setText("คำสำคัญ"));
-
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -82,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // AddFragment into ViewPager
+        viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
+        viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
