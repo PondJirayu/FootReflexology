@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle Navigation Menu
-        return false;
+        // Handle Drawer Menu
+        return true;
     }
 
     @Override
