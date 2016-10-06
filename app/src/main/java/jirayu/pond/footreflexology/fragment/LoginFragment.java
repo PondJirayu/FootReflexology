@@ -88,6 +88,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         .setAction("เปิด WI-FI", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                // Enable Wi-Fi
                                 WifiManager wifi = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
                                 wifi.setWifiEnabled(true);
                             }
@@ -131,7 +132,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    // check internet access
+    // function check internet access
     private boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
