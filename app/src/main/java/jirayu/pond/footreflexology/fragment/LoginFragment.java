@@ -2,8 +2,10 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -82,9 +84,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getContext(), RegisterActivity.class);
                 startActivity(intent);
             } else {
-                Snackbar.make(rootLayout, "กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนลงทะเบียนผู้ป่วย", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(rootLayout, "กรุณาเชื่อมต่ออินเทอร์เน็ต", Snackbar.LENGTH_LONG)
+                        .setAction("เปิด WI-FI", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                WifiManager wifi = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
+                                wifi.setWifiEnabled(true);
+                            }
+                        })
+                        .show();
             }
-
         }
         if (v == btnIntoMainPage) {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -122,9 +131,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+    // check internet access
+    private boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
