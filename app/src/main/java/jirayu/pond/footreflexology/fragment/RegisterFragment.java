@@ -48,9 +48,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
+        spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
 
         // Create Spinner
-        spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,7 +97,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             // Restore Instance State here
         }
     }
-
 
     // Handle Click Spinner
     @Override

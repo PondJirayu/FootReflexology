@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F8E9"
-    android:orientation="vertical">
+    android:background="#F1F8E9">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="260dp"
-        android:layout_gravity="center"
-        android:padding="15dp"
-        android:src="@drawable/in_the_foot" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เลือกจุดตอบสนอง"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinnerInTheFoot"
+                    style="@style/Base.Widget.AppCompat.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/in_the_foot" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

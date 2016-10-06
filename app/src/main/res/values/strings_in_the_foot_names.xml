@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="in_the_foot_names">
+        <item>1.xxxxx</item>
+        <item>2.xxxxx</item>
+        <item>3.xxxxx</item>
+    </string-array>
+</resources>
