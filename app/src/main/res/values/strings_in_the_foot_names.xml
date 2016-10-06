@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="in_the_foot_names">
-        <item>1.xxxxx</item>
-        <item>2.xxxxx</item>
-        <item>3.xxxxx</item>
+        <item>1. ลำไส้ใหญ่ตรง</item>
+        <item>2. ไต</item>
+        <item>3. ข้อสะโพก</item>
+        <item>4. มดลูก, ต่อมลูกหมาก</item>
+        <item>5. ระดูกก้นกบ</item>
+        <item>6. ช่องคลอด, องคชาติ, ท่อปัสสาวะ</item>
+        <item>7. กระเพาะปัสสาวะ</item>
+        <item>8. กระดูกสันหลัง</item>
+        <item>9. กระดูกสันหลังอก</item>
+        <item>10. กระดูกสันหลังคอ</item>
+        <item>11. จมูก</item>
+        <item>12. ระบบต่อมไร้ท่อ</item>
+        <item>13. ต่อมน้ำเหลืองบริเวณท่อนล่างร่างกาย</item>
+        <item>14. ต่อมน้ำเหลืองขาหนีบ</item>
     </string-array>
 </resources>
