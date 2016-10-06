@@ -1,7 +1,11 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import jirayu.pond.footreflexology.R;
@@ -21,12 +26,13 @@ import jirayu.pond.footreflexology.activity.RegisterActivity;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class LoginFragment extends Fragment implements View.OnClickListener {
 
     TextView tvAppName;
     EditText editName;
     Button btnSignUp, btnIntoMainPage;
     Animation anim;
+    RelativeLayout rootLayout;
 
     public LoginFragment() {
         super();
@@ -54,6 +60,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         editName = (EditText) rootView.findViewById(R.id.editName);
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         btnIntoMainPage = (Button) rootView.findViewById(R.id.btnIntoMainPage);
+        rootLayout = (RelativeLayout) rootView.findViewById(R.id.rootLayout);
 
         anim.setDuration(500);
         tvAppName.startAnimation(anim);
@@ -71,10 +78,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
-            Intent intent = new Intent(getContext(), RegisterActivity.class);
-            startActivity(intent);
+            if (isOnline()) {
+                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                startActivity(intent);
+            } else {
+                Snackbar.make(rootLayout, "กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนลงทะเบียนผู้ป่วย", Snackbar.LENGTH_LONG).show();
+            }
+
         }
-        if (v == btnIntoMainPage){
+        if (v == btnIntoMainPage) {
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -108,5 +120,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

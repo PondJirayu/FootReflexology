@@ -99,13 +99,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     }
 
 
-    // Handle click Spinner
+    // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(),
-                parent.getItemAtPosition(position).toString(),
-                Toast.LENGTH_SHORT)
-                .show();
+        Toast.makeText(getActivity(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
