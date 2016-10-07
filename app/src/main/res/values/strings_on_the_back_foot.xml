@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="on_the_back_foot_names">
+        <item>1. อวัยวะทรงตัวหูชั้นใน</item>
+        <item>2. ทรวงอก</item>
+        <item>3. กระบังลม</item>
+        <item>4. ต่อมน้ำเหลืองท่อนบนร่างกาย</item>
+        <item>5. ต่อมน้ำเหลืองบริเวณท่อนล่างร่างกาย</item>
+        <item>6. ต่อมทอมซิล</item>
+        <item>7. ขากรรไกรล่าง</item>
+        <item>8. ขากรรไกรบน</item>
+        <item>9. ฟัน</item>
+        <item>10. ต่อมน้ำเหลืองทรวงอก</item>
+        <item>11. คอหอย</item>
+        <item>12. สะโพก</item>
+    </string-array>
+</resources>

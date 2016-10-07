@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="out_side_foot_names">
+        <item>1. ท้องน้อย</item>
+        <item>2. ไต</item>
+        <item>3. ข้อสะโพก</item>
+        <item>4. รังไข่, อัณฑะ</item>
+        <item>5. กระดูกก้นกบ</item>
+        <item>6. เส้นประสาทกระเบ็นเหน็บ</item>
+        <item>7. สะโพก</item>
+        <item>8. เข่า</item>
+        <item>9. ข้อศอก</item>
+        <item>10. ไหล่</item>
+        <item>11. อวัยวะทรงตัวหูชั้นใน</item>
+        <item>12. ทรวงอก</item>
+        <item>13. ขมับศีรษะ</item>
+        <item>14. กระบังลม</item>
+        <item>15. ข้อไหล่, สะบัก</item>
+        <item>16. ต่อมน้ำเหลืองบริเวณท่อนบนร่างกาย</item>
+        <item>17. เข่า</item>
+    </string-array>
+</resources>
