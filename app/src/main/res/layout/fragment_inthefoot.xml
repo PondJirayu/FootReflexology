@@ -16,21 +16,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="เลือกจุดตอบสนอง"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="16dp"
+                    android:text="เลือกจุดตอบสนอง :"
+                    android:textSize="14sp" />
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerInTheFoot"
-                    style="@style/Base.Widget.AppCompat.Spinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp" />
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="10dp"
+                    android:spinnerMode="dropdown" />
 
             </LinearLayout>
 
