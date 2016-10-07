@@ -47,8 +47,10 @@ public class InTheFootFragment extends Fragment implements AdapterView.OnItemSel
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.in_the_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
-        spinnerInTheFoot.setOnItemSelectedListener(this); // handle click
+        // สั่งให้ spinner ทำงานคู่กับ adapter
+        spinnerInTheFoot.setAdapter(adapter);
+        // handle click
+        spinnerInTheFoot.setOnItemSelectedListener(this);
     }
 
     @Override
