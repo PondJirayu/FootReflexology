@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
 
@@ -12,7 +15,10 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class OnTheBackFootFragment extends Fragment {
+public class OnTheBackFootFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    Spinner spinnerOnTheBackFoot;
+    ArrayAdapter<CharSequence> adapter;
 
     public OnTheBackFootFragment() {
         super();
@@ -35,6 +41,16 @@ public class OnTheBackFootFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
+
+        // Create Spinner
+        adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Spinner + Adapter
+        spinnerOnTheBackFoot.setAdapter(adapter);
+        // Handle Click
+        spinnerOnTheBackFoot.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -65,5 +81,16 @@ public class OnTheBackFootFragment extends Fragment {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    // Handle Click Spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
