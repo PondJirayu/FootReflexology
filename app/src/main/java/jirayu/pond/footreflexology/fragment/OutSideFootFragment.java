@@ -43,7 +43,7 @@ public class OutSideFootFragment extends Fragment implements AdapterView.OnItemS
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOutSideFoot = (Spinner) rootView.findViewById(R.id.spinnerOutSideFoot);
 
-        // Create Spinner
+        // Create Adapter of Spinner
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.out_side_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

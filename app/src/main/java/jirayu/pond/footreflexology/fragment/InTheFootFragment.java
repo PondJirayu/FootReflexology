@@ -43,7 +43,7 @@ public class InTheFootFragment extends Fragment implements AdapterView.OnItemSel
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerInTheFoot = (Spinner) rootView.findViewById(R.id.spinnerInTheFoot);
 
-        // Create Spinner
+        // Create Adapter of Spinner
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.in_the_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

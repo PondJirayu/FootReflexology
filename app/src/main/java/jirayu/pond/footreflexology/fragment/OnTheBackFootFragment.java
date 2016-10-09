@@ -43,7 +43,7 @@ public class OnTheBackFootFragment extends Fragment implements AdapterView.OnIte
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
 
-        // Create Spinner
+        // Create Adapter of Spinner
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
