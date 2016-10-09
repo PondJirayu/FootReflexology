@@ -13,18 +13,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/out_side_foot" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/select_the_response"
-                    android:textSize="14sp" />
+                <include layout="@layout/tv_select_the_response" />
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerOutSideFoot"
@@ -37,13 +39,6 @@
                     android:spinnerMode="dropdown" />
 
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="260dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                android:src="@drawable/out_side_foot" />
 
         </LinearLayout>
 
