@@ -84,16 +84,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getContext(), RegisterActivity.class);
                 startActivity(intent);
             } else {
-                Snackbar.make(rootLayout, "กรุณาเชื่อมต่ออินเทอร์เน็ต", Snackbar.LENGTH_LONG)
-                        .setAction("เปิด WI-FI", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Enable Wi-Fi
-                                WifiManager wifi = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
-                                wifi.setWifiEnabled(true);
-                            }
-                        })
-                        .show();
+                Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
             }
         }
         if (v == btnIntoMainPage) {
