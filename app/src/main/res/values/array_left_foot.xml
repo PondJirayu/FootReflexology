@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="left_foot_names">
+        <item>1. โพรงอากาศ กระดูกหน้าผาก</item>
+        <item>2. สมอง</item>
+        <item>3. ตา</item>
+        <item>4. หู</item>
+        <item>5. กล้ามเนื้อทราปิเซียส</item>
+        <item>6. ฟัน</item>
+        <item>7. ไหล่ซ้าย</item>
+        <item>8. ลำไส้ใหญ่ส่วนตรง</item>
+        <item>9. ลำไส้ใหญ่ส่วนงอ</item>
+        <item>10. ต่อมหมวกไต</item>
+        <item>11. ลำไส้ใหญ่ขาลง</item>
+        <item>12. หัวใจ</item>
+        <item>13. เข่าซ้าย</item>
+        <item>14. ม้าม</item>
+        <item>15. ต่อมไพเนียล</item>
+        <item>16. ต่อมใต้สมอง</item>
+        <item>17. จมูก</item>
+        <item>18. ขมับศีรษะ</item>
+        <item>19. สมองใหญ่</item>
+        <item>20. สมองเล็กและก้านสมอง</item>
+        <item>21. ศีรษะต้นคอ</item>
+        <item>22. ต่อมธัยรอยด์ ต่อมพาราธัยรอยด์</item>
+        <item>23. หลอดลมคอหอย</item>
+        <item>24. ปอด, ท่อหลอดลม</item>
+        <item>25. ระบบประสาท</item>
+        <item>26. กระเพาะอาหาร</item>
+        <item>27. เส้นประสาทช่องท้อง</item>
+        <item>28. กระบังลม</item>
+        <item>29. ตับอ่อน</item>
+        <item>30. ลำไส้เล็กส่วนตัว</item>
+        <item>31. ลำไส้ใหญ่ส่วนขวาง</item>
+        <item>32. ไต</item>
+        <item>33. หลอดไต</item>
+        <item>34. ลำไส้เล็กส่วนกลางและปลาย</item>
+        <item>35. กระเพาะปัสสาวะ</item>
+        <item>36. กระดูกเชิงกราน</item>
+        <item>37. สะโพก</item>
+        <item>38. เส้นประสาทกระเบนเหน็บ</item>
+    </string-array>
+</resources>
