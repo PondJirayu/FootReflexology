@@ -11,7 +11,6 @@ import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
 
-
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -47,10 +46,8 @@ public class InTheFootFragment extends Fragment implements AdapterView.OnItemSel
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.in_the_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // สั่งให้ spinner ทำงานคู่กับ adapter
-        spinnerInTheFoot.setAdapter(adapter);
-        // Handle Click
-        spinnerInTheFoot.setOnItemSelectedListener(this);
+        spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
+        spinnerInTheFoot.setOnItemSelectedListener(this); // Handle Click Spinner
     }
 
     @Override
@@ -86,7 +83,7 @@ public class InTheFootFragment extends Fragment implements AdapterView.OnItemSel
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        // TODO: Handle Click Spinner of in the foot
     }
 
     @Override

@@ -47,10 +47,8 @@ public class OnTheBackFootFragment extends Fragment implements AdapterView.OnIte
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Spinner + Adapter
-        spinnerOnTheBackFoot.setAdapter(adapter);
-        // Handle Click
-        spinnerOnTheBackFoot.setOnItemSelectedListener(this);
+        spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
+        spinnerOnTheBackFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
     }
 
     @Override
@@ -86,7 +84,7 @@ public class OnTheBackFootFragment extends Fragment implements AdapterView.OnIte
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        // TODO: Handle Click Spinner of on the back foot
     }
 
     @Override

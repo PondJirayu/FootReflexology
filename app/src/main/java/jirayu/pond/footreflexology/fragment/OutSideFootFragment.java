@@ -47,10 +47,8 @@ public class OutSideFootFragment extends Fragment implements AdapterView.OnItemS
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.out_side_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Spinner + Adapter
-        spinnerOutSideFoot.setAdapter(adapter);
-        // Handle Click
-        spinnerOutSideFoot.setOnItemSelectedListener(this);
+        spinnerOutSideFoot.setAdapter(adapter); // Spinner + Adapter
+        spinnerOutSideFoot.setOnItemSelectedListener(this); // Handle Click Spinner
     }
 
     @Override
@@ -86,7 +84,7 @@ public class OutSideFootFragment extends Fragment implements AdapterView.OnItemS
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        // TODO: Handle Click Spinner of out side foot
     }
 
     @Override

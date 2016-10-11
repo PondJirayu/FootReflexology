@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initInstances();
 
         // Place Fragment here
+
     }
 
     private void initToolbar() {
@@ -94,20 +95,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // inflate menu_main
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle click Hamburger Icon
+        // Handle Click Hamburger Icon
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Handle click Options Menu
+        // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
@@ -118,9 +119,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // Handle Drawer Menu
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle Drawer Menu
+        // TODO: Handle Drawer Menu here
+
         return false;
     }
 

@@ -64,6 +64,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         btnIntoMainPage = (Button) rootView.findViewById(R.id.btnIntoMainPage);
         rootLayout = (RelativeLayout) rootView.findViewById(R.id.rootLayout);
 
+        // Play Animation
         anim.setDuration(500);
         tvAppName.startAnimation(anim);
         anim.setDuration(800);
@@ -73,10 +74,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         anim.setDuration(1800);
         btnIntoMainPage.startAnimation(anim);
 
+        // Handle Click Button
         btnSignUp.setOnClickListener(this);
         btnIntoMainPage.setOnClickListener(this);
     }
 
+    // Handle Click Button
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
@@ -123,7 +126,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    // function check internet access
+    // Function Check Internet Access
     private boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

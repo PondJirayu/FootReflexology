@@ -47,10 +47,8 @@ public class RightFootFragment extends Fragment implements AdapterView.OnItemSel
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.right_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Spinner + Adapter
-        spinnerRightFoot.setAdapter(adapter);
-        // Handle Click
-        spinnerRightFoot.setOnItemSelectedListener(this);
+        spinnerRightFoot.setAdapter(adapter); // Spinner + Adapter
+        spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
     }
 
     @Override
@@ -86,7 +84,7 @@ public class RightFootFragment extends Fragment implements AdapterView.OnItemSel
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        // TODO: Handle CLick Spinner of right foot
     }
 
     @Override
