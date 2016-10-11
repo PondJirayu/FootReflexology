@@ -61,6 +61,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
         // Handle Click Button
         btnSignUp.setOnClickListener(this);
+        btnSelectBirthDay.setOnClickListener(this);
     }
 
     // Handle Click Button
@@ -69,6 +70,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         if (v == btnSignUp) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
+        }
+        if (v == btnSelectBirthDay){
+            // TODO: Handle Click btnSelectBirthDay
         }
     }
 
