@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="12dp"
-                android:text="เพศ "
+                android:text="เพศ"
                 android:textSize="14sp" />
 
             <RadioGroup
@@ -90,7 +90,35 @@
 
             </RadioGroup>
 
-            <!--date-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="วันเกิด"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@android:color/black"
+                    android:text="26/12/2536"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="เลือกวันเกิด" />
+
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -142,7 +170,6 @@
                     android:textSize="16sp" />
 
             </android.support.design.widget.TextInputLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
