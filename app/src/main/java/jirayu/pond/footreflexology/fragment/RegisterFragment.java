@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -22,7 +22,8 @@ import jirayu.pond.footreflexology.activity.MainActivity;
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    Button btnSignUp;
+    Button btnSignUp, btnSelectBirthDay;
+    TextView tvBirthDay;
     Spinner spinnerProvince;
     ArrayAdapter<CharSequence> adapter;
 
@@ -49,6 +50,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
+        btnSelectBirthDay = (Button) rootView.findViewById(R.id.btnSelectBirthDay);
+        tvBirthDay = (TextView) rootView.findViewById(R.id.tvBirthDay);
 
         // Create Spinner
         adapter = ArrayAdapter.createFromResource(getActivity(),
