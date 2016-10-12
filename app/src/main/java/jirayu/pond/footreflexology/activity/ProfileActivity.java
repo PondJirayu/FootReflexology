@@ -5,30 +5,30 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.fragment.RegisterFragment;
+import jirayu.pond.footreflexology.fragment.ProfileFragment;
 
-public class RegisterActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_profile);
 
         initToolbar();
         initInstances();
 
         // Place Fragment here
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, RegisterFragment.newInstance())
+                    .add(R.id.contentContainer, ProfileFragment.newInstance())
                     .commit();
         }
     }
+
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle("ลงทะเบียนผู้ป่วย");
+        getSupportActionBar().setTitle("ข้อมูลส่วนตัว");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_register, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -59,9 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
                 return true;
             case R.id.action_LogOut:
                 return true;
-            case android.R.id.home: // Handle on BackPress and Hide Keyboard.
+            case android.R.id.home: // Handle on BackPress
                 finish();
-                hideSoftKeyboard();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -96,12 +95,5 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    public void hideSoftKeyboard() {
-        if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
     }
 }

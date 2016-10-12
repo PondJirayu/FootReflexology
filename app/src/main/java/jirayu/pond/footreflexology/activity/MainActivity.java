@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_Settings:
                 return true;
             case R.id.action_LogOut:
                 return true;
@@ -123,7 +124,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // TODO: Handle Drawer Menu here
-
+        switch (item.getItemId()){
+            case R.id.action_MainPage:
+                return true;
+            case R.id.action_Profile:
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                return true;
+        }
         return false;
     }
 
