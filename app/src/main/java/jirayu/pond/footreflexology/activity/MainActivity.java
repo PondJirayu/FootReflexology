@@ -124,15 +124,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // TODO: Handle Drawer Menu here
-        switch (item.getItemId()){
+
+        // Checking if the item is in checked state or not, if not make it in checked state
+        if (item.isChecked()) {
+            item.setChecked(false);
+        } else {
+            item.setChecked(true);
+        }
+
+        // Closing drawer menu on item click
+        drawerLayout.closeDrawers();
+
+        switch (item.getItemId()) {
             case R.id.action_MainPage:
                 return true;
             case R.id.action_Profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 return true;
+            default:
+                return true;
         }
-        return false;
     }
 
     @Override

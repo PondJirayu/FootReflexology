@@ -69,9 +69,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         tvAppName.startAnimation(anim);
         anim.setDuration(800);
         editName.startAnimation(anim);
-        anim.setDuration(1300);
+        anim.setDuration(1100);
         btnSignUp.startAnimation(anim);
-        anim.setDuration(1800);
+        anim.setDuration(1400);
         btnIntoMainPage.startAnimation(anim);
 
         // Handle Click Button
