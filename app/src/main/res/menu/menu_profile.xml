@@ -12,4 +12,10 @@
         android:title="@string/action_logout"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_Edit"
+        android:icon="@drawable/ic_mode_edit_white_24dp"
+        android:title="@string/action_edit"
+        app:showAsAction="ifRoom" />
+
 </menu>

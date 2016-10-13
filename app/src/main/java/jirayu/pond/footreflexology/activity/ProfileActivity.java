@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
@@ -58,6 +58,8 @@ public class ProfileActivity extends AppCompatActivity {
             case R.id.action_Settings:
                 return true;
             case R.id.action_LogOut:
+                return true;
+            case R.id.action_Edit:
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();

@@ -2,5 +2,5 @@
     <string name="app_name">นวดเท้าเพื่อสุขภาพ</string>
     <string name="action_settings">การตั้งค่า</string>
     <string name="action_about">เกี่ยวกับ</string>
-    <string name="action_LogOut">ออกจากระบบ</string>
+    <string name="action_logout">ออกจากระบบ</string>
 </resources>
