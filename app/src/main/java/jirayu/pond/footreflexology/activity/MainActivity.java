@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // AddFragment into ViewPager
         viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
         viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
-        viewPagerAdapter.addFragments(InTheFootFragment.newInstance(), "ด้านในเท้า");
-        viewPagerAdapter.addFragments(OutSideFootFragment.newInstance(), "ด้านนอกเท้า");
-        viewPagerAdapter.addFragments(OnTheBackFootFragment.newInstance(), "ด้านหลังเท้า");
+        viewPagerAdapter.addFragments(InTheFootFragment.newInstance(), "ในเท้า");
+        viewPagerAdapter.addFragments(OutSideFootFragment.newInstance(), "นอกเท้า");
+        viewPagerAdapter.addFragments(OnTheBackFootFragment.newInstance(), "หลังเท้า");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
