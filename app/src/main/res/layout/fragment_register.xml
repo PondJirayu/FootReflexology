@@ -21,7 +21,6 @@
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -32,6 +31,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/first_name"
+                        android:imeOptions="actionNext"
                         android:inputType="textCapWords|textAutoCorrect"
                         android:textSize="16sp" />
 
@@ -47,6 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/last_name"
+                        android:imeOptions="actionNext"
                         android:inputType="textCapWords|textAutoCorrect"
                         android:textSize="16sp" />
 
@@ -91,7 +92,6 @@
             </RadioGroup>
 
             <!--TODO: Select BirthDay-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/birthday"
+                    android:text="@string/day_of_birth"
                     android:textSize="16sp" />
 
                 <TextView
@@ -111,17 +111,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:textColor="@android:color/black"
                     android:text="26/12/2536"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnSelectBirthDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:layout_marginLeft="16dp"
                     android:text="เลือกวันเกิด" />
 
             </LinearLayout>
@@ -138,6 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/identification_number"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="13"
                     android:textSize="16sp" />
@@ -155,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_number"
+                    android:imeOptions="actionNext"
                     android:inputType="phone"
                     android:maxLength="10"
                     android:textSize="16sp" />
@@ -172,6 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapWords|textAutoCorrect"
                     android:textSize="16sp" />
 
@@ -194,6 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/sub_district"
+                        android:imeOptions="actionNext"
                         android:inputType="textCapWords|textAutoCorrect"
                         android:textSize="16sp" />
 
@@ -208,6 +212,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/district"
+                        android:imeOptions="actionGo"
                         android:inputType="textCapWords|textAutoCorrect"
                         android:textSize="16sp" />
 
