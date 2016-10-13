@@ -55,9 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // menu_main
         switch (item.getItemId()) {
-            case R.id.action_Settings:
+            case R.id.action_settings:
                 return true;
-            case R.id.action_LogOut:
+            case R.id.action_logout:
                 return true;
             case android.R.id.home: // Handle on BackPress and Hide Keyboard.
                 finish();

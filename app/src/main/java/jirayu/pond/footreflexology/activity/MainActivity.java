@@ -111,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_Settings:
+            case R.id.action_settings:
                 return true;
-            case R.id.action_LogOut:
+            case R.id.action_logout:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -136,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
-            case R.id.action_MainPage:
+            case R.id.action_main_page:
                 return true;
-            case R.id.action_Profile:
+            case R.id.action_profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 return true;

@@ -3,11 +3,11 @@
 
     <group android:checkableBehavior="all">
         <item
-            android:id="@+id/action_MainPage"
+            android:id="@+id/action_main_page"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="หน้าหลัก" />
         <item
-            android:id="@+id/action_Profile"
+            android:id="@+id/action_profile"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="ข้อมูลส่วนตัว" />
         <item

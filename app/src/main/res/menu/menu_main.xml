@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_Settings"
+        android:id="@+id/action_settings"
         android:title="@string/action_settings"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_LogOut"
+        android:id="@+id/action_logout"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

@@ -26,4 +26,5 @@
     <string name="province">จังหวัด</string>
     <string name="age">อายุ</string>
     <string name="year">ปี</string>
+    <string name="action_search">ค้นหา..</string>
 </resources>

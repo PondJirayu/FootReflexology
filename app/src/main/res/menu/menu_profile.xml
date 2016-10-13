@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_Settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_LogOut"
-        android:title="@string/action_logout"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_Edit"
+        android:id="@+id/action_edit"
         android:icon="@drawable/ic_mode_edit_white_24dp"
         android:title="@string/action_edit"
         app:showAsAction="ifRoom" />
