@@ -18,10 +18,13 @@
     <string name="male">ชาย</string>
     <string name="female">หญิง</string>
     <string name="birthday">วันเกิด</string>
+    <string name="day_of_birth">เกิดวันที่</string>
     <string name="identification_number">เลขประจำตัวประชาชน</string>
     <string name="phone_number">เบอร์โทรศัพท์</string>
     <string name="address">ที่อยู่</string>
     <string name="sub_district">ตำบล</string>
     <string name="district">อำเภอ</string>
     <string name="province">จังหวัด</string>
+    <string name="age">อายุ</string>
+    <string name="year">ปี</string>
 </resources>

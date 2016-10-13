@@ -55,7 +55,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ชื่อ"
+                                    android:text="@string/first_name"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -87,7 +87,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="เพศ"
+                                    android:text="@string/gender"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -109,7 +109,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="เกิดวันที่"
+                                    android:text="@string/day_of_birth"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -131,7 +131,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="อายุ"
+                                    android:text="@string/age"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -146,7 +146,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="14dp"
-                                    android:text="ปี"
+                                    android:text="@string/year"
                                     android:textSize="@dimen/text_size_profile" />
 
                             </LinearLayout>
@@ -160,7 +160,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="เลขประจำตัวประชาชน"
+                                    android:text="@string/identification_number"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -181,7 +181,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="เบอร์โทรศัพท์"
+                                    android:text="@string/phone_number"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
@@ -226,13 +226,13 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ที่อยู่"
+                                    android:text="@string/address"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginLeft="25dp"
                                     android:text="505 ม.6 ถนนราชดำเนิน ซอยราชเกษม 1"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
@@ -248,13 +248,13 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ตำบล"
+                                    android:text="@string/sub_district"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginLeft="18dp"
                                     android:text="บ้านหม้อ"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
@@ -270,13 +270,13 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="อำเภอ"
+                                    android:text="@string/district"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginLeft="15dp"
                                     android:text="เมือง"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
@@ -293,13 +293,13 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="จังหวัด"
+                                    android:text="@string/province"
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginLeft="13dp"
                                     android:text="เพชรบุรี"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
