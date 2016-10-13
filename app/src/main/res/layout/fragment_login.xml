@@ -83,7 +83,7 @@
                     android:layout_marginTop="35dp"
                     android:background="@android:color/transparent"
                     android:text="@string/btn_MainPage"
-                    android:textColor="@drawable/selector_btn_mainpage"
+                    android:textColor="@drawable/selector_btn_main_page"
                     android:textStyle="bold" />
 
             </RelativeLayout>
