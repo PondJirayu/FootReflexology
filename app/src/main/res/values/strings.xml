@@ -12,4 +12,16 @@
     <string name="action_logout">Logout</string>
     <string name="select_the_response">เลือกเขตตอบสนอง :</string>
     <string name="action_edit">Edit Profile</string>
+    <string name="first_name">ชื่อ</string>
+    <string name="last_name">นามสกุล</string>
+    <string name="gender">เพศ</string>
+    <string name="male">ชาย</string>
+    <string name="female">หญิง</string>
+    <string name="birthday">วันเกิด</string>
+    <string name="identification_number">เลขประจำตัวประชาชน</string>
+    <string name="phone_number">เบอร์โทรศัพท์</string>
+    <string name="address">ที่อยู่</string>
+    <string name="sub_district">ตำบล</string>
+    <string name="district">อำเภอ</string>
+    <string name="province">จังหวัด</string>
 </resources>
