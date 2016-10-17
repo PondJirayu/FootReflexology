@@ -52,7 +52,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/edit_name_margin_left"
                     android:layout_marginRight="@dimen/edit_name_margin_right"
-                    android:background="@drawable/edittext_person_circle"
+                    android:background="@drawable/edit_person_circle"
                     android:inputType="number"
                     android:hint="@string/editName_FirstLast_Name"
                     android:maxLength="13"
