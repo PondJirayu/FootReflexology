@@ -1,5 +1,0 @@
-<resources>
-    <dimen name="app_name_background">66sp</dimen>
-    <dimen name="edit_name_margin_left">150dp</dimen>
-    <dimen name="edit_name_margin_right">150dp</dimen>
-</resources>
