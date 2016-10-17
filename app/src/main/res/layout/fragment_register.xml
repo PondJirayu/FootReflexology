@@ -119,7 +119,7 @@
                     android:id="@+id/btnSelectBirthDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="26dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:text="เลือกวันเกิด" />
