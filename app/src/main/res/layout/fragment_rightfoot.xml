@@ -18,7 +18,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/foot_right" />
+                android:src="@drawable/foot_right"
+                android:contentDescription="@string/foot_right" />
 
             <LinearLayout
                 android:layout_width="match_parent"
