@@ -28,9 +28,12 @@
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.MemoActivity" />
         <activity android:name=".activity.AboutActivity" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ac9501e33cd0a953452c6e8348aa75947a706845" />
+
+        <activity android:name=".activity.MajorTermActivity"></activity>
     </application>
 
 </manifest>

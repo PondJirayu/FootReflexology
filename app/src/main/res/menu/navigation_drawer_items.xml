@@ -11,11 +11,11 @@
             android:icon="@drawable/ic_person_black_24dp"
             android:title="ข้อมูลส่วนตัว" />
         <item
-            android:id="@+id/navItem3"
+            android:id="@+id/action_medical_history"
             android:icon="@drawable/ic_accessible_black_24dp"
             android:title="ประวัติการรักษา" />
         <item
-            android:id="@+id/navItem4"
+            android:id="@+id/action_major_term"
             android:icon="@drawable/ic_title_black_24dp"
             android:title="คำสำคัญ" />
         <item

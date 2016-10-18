@@ -143,6 +143,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_medical_history:
+                return true;
+            case R.id.action_major_term:
+                intent = new Intent(MainActivity.this, MajorTermActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.action_memo:
                 intent = new Intent(MainActivity.this, MemoActivity.class);
                 startActivity(intent);
