@@ -44,19 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    // Inflate Options Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_register, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
             case android.R.id.home: // Handle on BackPress and Hide Keyboard.
                 finish();
                 hideSoftKeyboard();
