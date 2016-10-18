@@ -146,8 +146,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_memo:
                 intent = new Intent(MainActivity.this, MemoActivity.class);
                 startActivity(intent);
-            default:
                 return true;
+            case R.id.action_about:
+                intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return false;
         }
     }
 
