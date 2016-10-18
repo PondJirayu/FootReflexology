@@ -3,10 +3,6 @@
 
     <group android:checkableBehavior="all">
         <item
-            android:id="@+id/action_main_page"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="หน้าหลัก" />
-        <item
             android:id="@+id/action_profile"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="ข้อมูลส่วนตัว" />
@@ -22,20 +18,22 @@
             android:id="@+id/action_memo"
             android:icon="@drawable/ic_insert_comment_black_24dp"
             android:title="บันทึกช่วยจำ" />
+
+        <item android:title="เพิ่มเติม">
+
+            <menu>
+                <item
+                    android:id="@+id/action_settings"
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:title="@string/action_settings" />
+                <item
+                    android:id="@+id/action_about"
+                    android:icon="@drawable/ic_info_black_24dp"
+                    android:title="@string/action_about" />
+            </menu>
+
+        </item>
+
     </group>
-
-    <item android:title="เพิ่มเติม">
-
-        <menu>
-            <item
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/action_settings" />
-            <item
-                android:id="@+id/action_about"
-                android:icon="@drawable/ic_info_black_24dp"
-                android:title="@string/action_about" />
-        </menu>
-
-    </item>
 
 </menu>

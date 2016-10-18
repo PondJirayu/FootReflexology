@@ -137,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
-            case R.id.action_main_page:
-                return true;
             case R.id.action_profile:
                 intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
