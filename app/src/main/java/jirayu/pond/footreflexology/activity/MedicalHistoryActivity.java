@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.MedicalHistoryFragment;
 
 public class MedicalHistoryActivity extends AppCompatActivity {
 
@@ -21,7 +22,11 @@ public class MedicalHistoryActivity extends AppCompatActivity {
         initInstances();
 
         // Place Fragment here
-
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, MedicalHistoryFragment.newInstance())
+                    .commit();
+        }
     }
 
     private void initToolbar() {
