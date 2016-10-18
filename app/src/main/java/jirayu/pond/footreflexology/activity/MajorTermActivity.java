@@ -3,6 +3,7 @@ package jirayu.pond.footreflexology.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
@@ -42,10 +43,21 @@ public class MajorTermActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    // Inflate Options Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_major_term, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle Click Home Button
         switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_logout:
+                return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
                 return true;

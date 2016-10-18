@@ -57,8 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
-            case R.id.action_logout:
-                return true;
             case android.R.id.home: // Handle on BackPress and Hide Keyboard.
                 finish();
                 hideSoftKeyboard();
