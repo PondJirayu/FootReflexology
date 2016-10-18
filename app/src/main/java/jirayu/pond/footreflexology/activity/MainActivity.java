@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 return true;
             case R.id.action_medical_history:
+                intent = new Intent(MainActivity.this, MedicalHistoryActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_major_term:
                 intent = new Intent(MainActivity.this, MajorTermActivity.class);

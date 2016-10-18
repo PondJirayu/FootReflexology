@@ -7,26 +7,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.fragment.MajorTermFragment;
 
-public class MajorTermActivity extends AppCompatActivity {
+public class MedicalHistoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_major_term);
+        setContentView(R.layout.activity_medical_history);
 
         initToolbar();
         initInstances();
 
         // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, MajorTermFragment.newInstance())
-                    .commit();
-        }
+
     }
 
     private void initToolbar() {
@@ -38,7 +33,7 @@ public class MajorTermActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle("คำสำคัญ");
+        getSupportActionBar().setTitle("ประวัติการรักษา");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -46,7 +41,7 @@ public class MajorTermActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_major_term, menu);
+        getMenuInflater().inflate(R.menu.menu_medical_history, menu);
         return true;
     }
 
