@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,9 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_main_page:
                 return true;
             case R.id.action_profile:
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_memo:
+                intent = new Intent(MainActivity.this, MemoActivity.class);
+                startActivity(intent);
             default:
                 return true;
         }

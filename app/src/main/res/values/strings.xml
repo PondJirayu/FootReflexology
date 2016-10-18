@@ -29,4 +29,6 @@
     <string name="action_search">ค้นหา..</string>
     <string name="foot_right">foot_right</string>
     <string name="ok">ตกลง</string>
+    <string name="action_save">Save</string>
+    <string name="write_something">เขียนอะไรบางอย่าง..</string>
 </resources>

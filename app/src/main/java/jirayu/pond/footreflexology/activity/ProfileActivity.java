@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // menu_main
+        // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;

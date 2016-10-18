@@ -8,16 +8,16 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.fragment.RegisterFragment;
+import jirayu.pond.footreflexology.fragment.MemoFragment;
 
-public class RegisterActivity extends AppCompatActivity {
+public class MemoActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_memo);
 
         initToolbar();
         initInstances();
@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, RegisterFragment.newInstance())
+                    .add(R.id.contentContainer, MemoFragment.newInstance())
                     .commit();
         }
     }
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle("ลงทะเบียนผู้ป่วย");
+        getSupportActionBar().setTitle("บันทึกช่วยจำ");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_register, menu);
+        getMenuInflater().inflate(R.menu.menu_memo, menu);
         return true;
     }
 
@@ -55,9 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            case R.id.action_logout:
+            case R.id.action_save:
                 return true;
             case android.R.id.home: // Handle on BackPress and Hide Keyboard.
                 finish();

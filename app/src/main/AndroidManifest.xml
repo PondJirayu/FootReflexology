@@ -12,14 +12,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateVisible"></activity>
         <activity
             android:name=".activity.LoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden">
@@ -29,14 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProfileActivity">
-
-        </activity>
-
+        <activity android:name=".activity.ProfileActivity"></activity>
+        <activity android:name=".activity.MemoActivity"></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ac9501e33cd0a953452c6e8348aa75947a706845" />
-
     </application>
 
 </manifest>
