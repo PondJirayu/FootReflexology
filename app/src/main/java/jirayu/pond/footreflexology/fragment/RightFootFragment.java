@@ -20,7 +20,7 @@ import jirayu.pond.footreflexology.manager.StringsManager;
  */
 public class RightFootFragment extends Fragment  {
 
-    /***********
+    /************
     * Variables
      ***********/
 
@@ -126,7 +126,7 @@ public class RightFootFragment extends Fragment  {
             }
         }
     };
-    
+
     /**************
      * Inner Class
      **************/

@@ -25,11 +25,11 @@ public class ShowDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details);
 
-        Intent intent = getIntent();
-        String result = intent.getStringExtra("result");
+        Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
+        String result = intent.getStringExtra("result"); // หยิบของออกมา (result)
 
         initToolbar();
-        initInstances(result);
+        initInstances(result); // ส่ง result ไปใช้งาน
 
         // Place Fragment here
         if (savedInstanceState == null) {
