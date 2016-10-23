@@ -6,7 +6,14 @@ package jirayu.pond.footreflexology.manager;
 
 public class StringsManager {
 
+    /************
+     * Variables
+     ************/
     private String word;
+
+    /************
+     * Functions
+     ************/
 
     public StringsManager() {
 
