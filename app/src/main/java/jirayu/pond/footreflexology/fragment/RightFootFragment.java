@@ -126,8 +126,7 @@ public class RightFootFragment extends Fragment  {
             }
         }
     };
-
-
+    
     /**************
      * Inner Class
      **************/
