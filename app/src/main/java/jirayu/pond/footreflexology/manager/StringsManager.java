@@ -4,11 +4,11 @@ package jirayu.pond.footreflexology.manager;
  * Created by lp700 on 23/10/2559.
  */
 
-public class WordsManager {
+public class StringsManager {
 
     private String word;
 
-    public WordsManager() {
+    public StringsManager() {
 
     }
 
@@ -20,8 +20,7 @@ public class WordsManager {
         this.word = word;
     }
 
-    public String getNewWord() {
-        String[] newWord = word.split(".");
-        return newWord[1];
+    public String getWordNoneNumberAndNoneWhiteSpace() {
+        return word.substring(3).trim();
     }
 }

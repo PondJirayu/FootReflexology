@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,15 +11,25 @@ import jirayu.pond.footreflexology.fragment.ShowDetailsFragment;
 
 public class ShowDetailsActivity extends AppCompatActivity {
 
+    /************
+     * Variables
+     ************/
     Toolbar toolbar;
+
+    /************
+     * Functions
+     ************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details);
 
+        Intent intent = getIntent();
+        String result = intent.getStringExtra("result");
+
         initToolbar();
-        initInstances();
+        initInstances(result);
 
         // Place Fragment here
         if (savedInstanceState == null) {
@@ -33,25 +44,14 @@ public class ShowDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void initInstances() {
+    private void initInstances(String result) {
         // findViewById here
 
+
         // Set Home Button
-        getSupportActionBar().setTitle("เขตตอบสนอง");
+        getSupportActionBar().setTitle("เขตตอบสนองของ" + result);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle Click Options Menu
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
@@ -83,5 +83,25 @@ public class ShowDetailsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    /***************
+     * Listener Zone
+     ***************/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle Click Options Menu
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*************
+     * Inner Class
+     *************/
 }
 

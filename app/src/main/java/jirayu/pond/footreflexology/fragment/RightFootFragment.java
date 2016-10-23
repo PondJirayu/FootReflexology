@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
-import jirayu.pond.footreflexology.manager.WordsManager;
+import jirayu.pond.footreflexology.manager.StringsManager;
 
 
 /**
@@ -29,7 +29,7 @@ public class RightFootFragment extends Fragment  {
     Spinner spinnerRightFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
-    WordsManager wordsmanager;
+    StringsManager stringsManager;
 
     /************
      * Functions
@@ -107,13 +107,8 @@ public class RightFootFragment extends Fragment  {
     AdapterView.OnItemSelectedListener spinnerClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            wordsmanager = new WordsManager();
-            wordsmanager.setWord(parent.getItemAtPosition(position).toString());
-
-            Toast.makeText(parent.getContext(),
-                    wordsmanager.getWord(),
-                    Toast.LENGTH_LONG)
-                    .show();
+            stringsManager = new StringsManager();
+            stringsManager.setWord(parent.getItemAtPosition(position).toString());
         }
 
         @Override
@@ -128,6 +123,7 @@ public class RightFootFragment extends Fragment  {
         public void onClick(View v) {
             if (v == btnShowDetails){
                 Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
                 startActivity(intent);
             }
         }
