@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
@@ -29,14 +30,8 @@ public class ShowDetailsActivity extends AppCompatActivity {
         String result = intent.getStringExtra("result"); // หยิบของออกมา (result)
 
         initToolbar();
-        initInstances(result); // ส่ง result ไปใช้งาน
-
-        // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, ShowDetailsFragment.newInstance())
-                    .commit();
-        }
+        initInstances(result); // Send "result" ไปกำหนด Subtitle
+        initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
@@ -47,11 +42,27 @@ public class ShowDetailsActivity extends AppCompatActivity {
     private void initInstances(String result) {
         // findViewById here
 
-
         // Set Home Button
-        getSupportActionBar().setTitle("เขตตอบสนองของ" + result);
+        getSupportActionBar().setTitle("โรคกับเขตตอบสนอง");
+        getSupportActionBar().setSubtitle(result);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initFragments(Bundle savedInstanceState) {
+        // Place Fragment here
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, ShowDetailsFragment.newInstance())
+                    .commit();
+        }
+    }
+
+    // Inflate Options Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_show_details, menu);
+        return true;
     }
 
     @Override
