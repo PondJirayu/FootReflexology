@@ -12,7 +12,15 @@ import jirayu.pond.footreflexology.fragment.RegisterFragment;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    /************
+     * Variables
+     ************/
+
     Toolbar toolbar;
+
+    /************
+     * Functions
+     ************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
-
-        // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, RegisterFragment.newInstance())
-                    .commit();
-        }
+        initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
@@ -42,6 +44,15 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("ลงทะเบียนผู้ป่วย");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initFragments(Bundle savedInstanceState) {
+        // Place Fragment here
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, RegisterFragment.newInstance())
+                    .commit();
+        }
     }
 
     @Override
@@ -93,4 +104,12 @@ public class RegisterActivity extends AppCompatActivity {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    /**************
+     * Inner Class
+     **************/
 }

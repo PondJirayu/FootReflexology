@@ -12,7 +12,15 @@ import jirayu.pond.footreflexology.fragment.MemoFragment;
 
 public class MemoActivity extends AppCompatActivity {
 
+    /************
+     * Variables
+     ************/
+
     Toolbar toolbar;
+
+    /************
+     * Functions
+     ************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +29,9 @@ public class MemoActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
+        initFragments(savedInstanceState);
 
-        // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, MemoFragment.newInstance())
-                    .commit();
-        }
+
     }
 
     private void initToolbar() {
@@ -44,30 +48,20 @@ public class MemoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private void initFragments(Bundle savedInstanceState) {
+        // Place Fragment here
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, MemoFragment.newInstance())
+                    .commit();
+        }
+    }
+
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_memo, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle Click Options Menu
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            case R.id.action_logout:
-                return true;
-            case R.id.action_save:
-                return true;
-            case android.R.id.home: // Handle on BackPress and Hide Keyboard.
-                finish();
-                hideSoftKeyboard();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
@@ -106,4 +100,31 @@ public class MemoActivity extends AppCompatActivity {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle Click Options Menu
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_logout:
+                return true;
+            case R.id.action_save:
+                return true;
+            case android.R.id.home: // Handle on BackPress and Hide Keyboard.
+                finish();
+                hideSoftKeyboard();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**************
+     * Inner Class
+     **************/
 }

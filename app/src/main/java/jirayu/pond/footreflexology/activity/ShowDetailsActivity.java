@@ -15,6 +15,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
     /************
      * Variables
      ************/
+
     Toolbar toolbar;
 
     /************
@@ -95,9 +96,9 @@ public class ShowDetailsActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    /***************
+    /****************
      * Listener Zone
-     ***************/
+     ****************/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -111,8 +112,8 @@ public class ShowDetailsActivity extends AppCompatActivity {
         }
     }
 
-    /*************
+    /**************
      * Inner Class
-     *************/
+     **************/
 }
 

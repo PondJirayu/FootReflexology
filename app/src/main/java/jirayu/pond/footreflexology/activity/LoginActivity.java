@@ -9,6 +9,13 @@ import jirayu.pond.footreflexology.fragment.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /************
+     * Variables
+     ************/
+
+    /************
+     * Functions
+     ************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
+        initFragments(savedInstanceState);
+    }
+
+    private void initFragments(Bundle savedInstanceState) {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -55,4 +66,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    /**************
+     * Inner Class
+     **************/
 }

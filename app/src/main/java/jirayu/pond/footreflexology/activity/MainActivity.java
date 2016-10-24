@@ -22,7 +22,11 @@ import jirayu.pond.footreflexology.fragment.OnTheBackFootFragment;
 import jirayu.pond.footreflexology.fragment.OutSideFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
+
+    /************
+     * Variables
+     ************/
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -33,19 +37,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapter viewPagerAdapter;
     Intent intent;
 
+    /************
+     * Functions
+     ************/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
         setContentView(R.layout.activity_main); // inflate
 
         initToolbar();
         initInstances();
-
-        // Place Fragment here
-
+        initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
@@ -60,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
+        assert navigationView != null;
+        navigationView.setNavigationItemSelectedListener(navigationViewListener);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
@@ -69,8 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.close_drawer
         );
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
+        // Set Home Button
         getSupportActionBar().setTitle("หน้าหลัก");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPagerAdapter.addFragments(OnTheBackFootFragment.newInstance(), "หลังเท้า");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void initFragments(Bundle savedInstanceState) {
+        // Place Fragment here
     }
 
     @Override
@@ -102,64 +115,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle Click Hamburger Icon
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle Click Options Menu
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            case R.id.action_logout:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    // Handle Drawer Menu
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // TODO: Handle Drawer Menu here
-
-        // Checking if the item is in checked state or not, if not make it in checked state
-        if (item.isChecked()) {
-            item.setChecked(false);
-        } else {
-            item.setChecked(true);
-        }
-
-        // Closing drawer menu on item click
-        drawerLayout.closeDrawers();
-
-        switch (item.getItemId()) {
-            case R.id.action_profile:
-                intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_medical_history:
-                intent = new Intent(MainActivity.this, MedicalHistoryActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_major_term:
-                intent = new Intent(MainActivity.this, MajorTermActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_memo:
-                intent = new Intent(MainActivity.this, MemoActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_about:
-                intent = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return false;
-        }
     }
 
     @Override
@@ -191,5 +146,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle Click Hamburger Icon
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle Click Options Menu
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_logout:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Handle Drawer Menu
+    NavigationView.OnNavigationItemSelectedListener navigationViewListener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            // TODO: Handle Drawer Menu here
+
+            // Checking if the item is in checked state or not, if not make it in checked state
+            if (item.isChecked()) {
+                item.setChecked(false);
+            } else {
+                item.setChecked(true);
+            }
+
+            // Closing drawer menu on item click
+            drawerLayout.closeDrawers();
+
+            switch (item.getItemId()) {
+                case R.id.action_profile:
+                    intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.action_medical_history:
+                    intent = new Intent(MainActivity.this, MedicalHistoryActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.action_major_term:
+                    intent = new Intent(MainActivity.this, MajorTermActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.action_memo:
+                    intent = new Intent(MainActivity.this, MemoActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.action_about:
+                    intent = new Intent(MainActivity.this, AboutActivity.class);
+                    startActivity(intent);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    };
+
+    /***************
+     * Inner Class
+     **************/
 
 }

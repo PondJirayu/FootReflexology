@@ -10,7 +10,15 @@ import jirayu.pond.footreflexology.fragment.AboutFragment;
 
 public class AboutActivity extends AppCompatActivity {
 
+    /************
+     * Variables
+     ************/
+
     Toolbar toolbar;
+
+    /************
+     * Functions
+     ************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +27,7 @@ public class AboutActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
-
-        // Place Fragment here
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, AboutFragment.newInstance())
-                    .commit();
-        }
+        initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
@@ -42,17 +44,16 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle Click Home Button
-        switch (item.getItemId()){
-            case android.R.id.home: // Handle on BackPress
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    private void initFragments(Bundle savedInstanceState) {
+        // Place Fragment here
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, AboutFragment.newInstance())
+                    .commit();
         }
     }
+
+
 
     @Override
     protected void onStart() {
@@ -83,5 +84,25 @@ public class AboutActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle Click Home Button
+        switch (item.getItemId()){
+            case android.R.id.home: // Handle on BackPress
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**************
+     * Inner Class
+     **************/
 }
 
