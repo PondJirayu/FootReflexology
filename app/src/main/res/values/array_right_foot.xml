@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="right_foot_names">
-        <item>1. โพรงอากาศ กระดูกหน้าผาก</item>
+        <item>1. โพรงอากาศและกระดูกหน้าผาก</item>
         <item>2. สมอง</item>
         <item>3. ตา</item>
         <item>4. หู</item>
@@ -22,9 +22,9 @@
         <item>19. สมองใหญ่</item>
         <item>20. สมองเล็กและก้านสมอง</item>
         <item>21. ศีรษะต้นคอ</item>
-        <item>22. ต่อมธัยรอยด์ ต่อมพาราธัยรอยด์</item>
+        <item>22. ต่อมธัยรอยด์และต่อมพาราธัยรอยด์</item>
         <item>23. หลอดลมคอหอย</item>
-        <item>24. ปอด, ท่อหลอดลม</item>
+        <item>24. ปอดและท่อหลอดลม</item>
         <item>25. ระบบประสาท</item>
         <item>26. กระเพาะอาหาร</item>
         <item>27. เส้นประสาทช่องท้อง</item>
