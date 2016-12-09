@@ -21,7 +21,7 @@ import jirayu.pond.footreflexology.activity.MainActivity;
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    Button btnSignUp, btnSelectBirthDay;
+    Button btnSignUp;
     TextView tvBirthDay;
     Spinner spinnerProvince;
     ArrayAdapter<CharSequence> adapter;
@@ -49,7 +49,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
-        btnSelectBirthDay = (Button) rootView.findViewById(R.id.btnSelectBirthDay);
         tvBirthDay = (TextView) rootView.findViewById(R.id.tvBirthDay);
 
         // Create Adapter of Spinner
@@ -61,7 +60,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
         // Handle Click Button
         btnSignUp.setOnClickListener(this);
-        btnSelectBirthDay.setOnClickListener(this);
     }
 
     // Handle Click Button
@@ -70,9 +68,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         if (v == btnSignUp) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-        }
-        if (v == btnSelectBirthDay){
-            // TODO: Handle Click btnSelectBirthDay
         }
     }
 
