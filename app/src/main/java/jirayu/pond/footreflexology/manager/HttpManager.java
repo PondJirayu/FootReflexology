@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
 public class HttpManager {
 
     private static HttpManager instance;
@@ -29,13 +30,13 @@ public class HttpManager {
     private HttpManager() {
         mContext = Contextor.getInstance().getContext();
 
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+//                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.yourdomain.com/api/footreflexology/")
-                .addConverterFactory(GsonConverterFactory.create(gson)) // อยา่ลืมพิมพ์บรรทัดนี้
+                .baseUrl("http://www.footreflexology.pe.hu/api/footreflexology/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         service = retrofit.create(ApiService.class);
