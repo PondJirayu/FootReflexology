@@ -64,7 +64,7 @@ public class MemberItemDao {
         this.gender = gender;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 

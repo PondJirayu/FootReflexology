@@ -2,6 +2,8 @@ package jirayu.pond.footreflexology.manager;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import jirayu.pond.footreflexology.manager.http.ApiService;
@@ -27,9 +29,13 @@ public class HttpManager {
     private HttpManager() {
         mContext = Contextor.getInstance().getContext();
 
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.yourdomain.com/api/footreflexology/")
-                .addConverterFactory(GsonConverterFactory.create()) // อยา่ลืมพิมพ์บรรทัดนี้
+                .addConverterFactory(GsonConverterFactory.create(gson)) // อยา่ลืมพิมพ์บรรทัดนี้
                 .build();
 
         service = retrofit.create(ApiService.class);

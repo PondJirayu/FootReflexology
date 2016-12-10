@@ -2,10 +2,8 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -18,11 +16,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.LoginActivity;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.activity.RegisterActivity;
+import jirayu.pond.footreflexology.dao.MemberItemDao;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -84,8 +90,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == btnSignUp) {
             if (isOnline()) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class);
-                startActivity(intent);
+                Call<MemberItemDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
+                call.enqueue(new Callback<MemberItemDao>() {
+                    @Override   // ติดต่อกับ server สำเร็จและได้ข้อมูลกลับมา
+                    public void onResponse(Call<MemberItemDao> call, Response<MemberItemDao> response) {
+                        if (response.isSuccessful()) {
+                            MemberItemDao dao = response.body();
+                            Toast.makeText(getActivity(), dao.getFirstName(), Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override   // ติดต่อกับ server ไม่สำเร็จ
+                    public void onFailure(Call<MemberItemDao> call, Throwable t) {
+                        Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+//                Intent intent = new Intent(getContext(), RegisterActivity.class);
+//                startActivity(intent);
             } else {
                 Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
             }
