@@ -88,32 +88,37 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
-            if (isOnline()) {
-                Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
-                call.enqueue(new Callback<MemberItemCollectionDao>() {
-                    @Override
-                    public void onResponse(Call<MemberItemCollectionDao> call,
-                                           Response<MemberItemCollectionDao> response) {
-                        if (response.isSuccessful()) {
-                            MemberItemCollectionDao dao = response.body();
-                            Toast.makeText(getActivity(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
-                        } else {
-                            try {
-                                Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+            if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
+                if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
+                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก ก่อนกดลงทะเบียนผู้ป่วย", Snackbar.LENGTH_LONG).show();
+                } else {
+                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
+                    call.enqueue(new Callback<MemberItemCollectionDao>() {
+                        @Override
+                        public void onResponse(Call<MemberItemCollectionDao> call,
+                                               Response<MemberItemCollectionDao> response) {
+                            if (response.isSuccessful()) {
+                                MemberItemCollectionDao dao = response.body();
+                                Toast.makeText(getActivity(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                            } else {
+                                try {
+                                    Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<MemberItemCollectionDao> call,
-                                          Throwable t) {
-                        Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<MemberItemCollectionDao> call,
+                                              Throwable t) {
+//                            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
+                        }
+                    });
 //                Intent intent = new Intent(getContext(), RegisterActivity.class);
 //                startActivity(intent);
+                }
             } else {
                 Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
             }
