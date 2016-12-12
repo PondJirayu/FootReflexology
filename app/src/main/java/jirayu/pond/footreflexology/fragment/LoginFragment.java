@@ -101,11 +101,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 MemberItemCollectionDao dao = response.body();
                                 Toast.makeText(getActivity(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
                             } else {
-                                try {
-                                    Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+//                                try {
+//                                    Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+                                Snackbar.make(rootLayout, "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Snackbar.LENGTH_LONG).show();
                             }
                         }
 
@@ -113,14 +114,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         public void onFailure(Call<MemberItemCollectionDao> call,
                                               Throwable t) {
 //                            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
-                            Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
                         }
                     });
 //                Intent intent = new Intent(getContext(), RegisterActivity.class);
 //                startActivity(intent);
                 }
             } else {
-                Snackbar.make(rootLayout, "โปรดตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
             }
         }
         if (v == btnIntoMainPage) {
