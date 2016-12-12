@@ -21,11 +21,8 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.activity.LoginActivity;
 import jirayu.pond.footreflexology.activity.MainActivity;
-import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemDao;
-import jirayu.pond.footreflexology.dao.OrganItemDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,13 +88,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == btnSignUp) {
             if (isOnline()) {
-                Call<OrganItemDao> call = HttpManager.getInstance().getService().loadOrganList("organs", "ตา");
-                call.enqueue(new Callback<OrganItemDao>() {
-                    @Override   // ติดต่อกับ server สำเร็จและได้ข้อมูลกลับมา
-                    public void onResponse(Call<OrganItemDao> call, Response<OrganItemDao> response) {
+                Call<MemberItemDao> call = HttpManager.getInstance().getService().loadMemberList("members", "1769900332760");
+                call.enqueue(new Callback<MemberItemDao>() {
+                    @Override
+                    public void onResponse(Call<MemberItemDao> call,
+                                           Response<MemberItemDao> response) {
                         if (response.isSuccessful()) {
-                            OrganItemDao dao = response.body();
-                            Toast.makeText(getActivity(), dao.getOrganName(), Toast.LENGTH_LONG).show();
+                            MemberItemDao dao = response.body();
+                            Toast.makeText(getActivity(), dao.getFirstName(), Toast.LENGTH_LONG).show();
                         } else {
                             try {
                                 Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
@@ -107,8 +105,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         }
                     }
 
-                    @Override   // ติดต่อกับ server ไม่สำเร็จ
-                    public void onFailure(Call<OrganItemDao> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<MemberItemDao> call,
+                                          Throwable t) {
                         Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
