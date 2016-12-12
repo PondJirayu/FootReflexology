@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
+import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
@@ -99,7 +100,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                                Response<MemberItemCollectionDao> response) {
                             if (response.isSuccessful()) {
                                 MemberItemCollectionDao dao = response.body();
-                                Toast.makeText(getActivity(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                                if (dao.getData().isEmpty()){ // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
+                                    Intent intent = new Intent(getContext(), RegisterActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                    startActivity(intent);
+                                }
                             } else {
 //                                try {
 //                                    Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
@@ -117,8 +124,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
                         }
                     });
-//                Intent intent = new Intent(getContext(), RegisterActivity.class);
-//                startActivity(intent);
                 }
             } else {
                 Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
