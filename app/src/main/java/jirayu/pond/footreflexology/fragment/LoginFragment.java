@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
+import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -88,14 +89,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == btnSignUp) {
             if (isOnline()) {
-                Call<MemberItemDao> call = HttpManager.getInstance().getService().loadMemberList("members", "1769900332760");
-                call.enqueue(new Callback<MemberItemDao>() {
+                Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
+                call.enqueue(new Callback<MemberItemCollectionDao>() {
                     @Override
-                    public void onResponse(Call<MemberItemDao> call,
-                                           Response<MemberItemDao> response) {
+                    public void onResponse(Call<MemberItemCollectionDao> call,
+                                           Response<MemberItemCollectionDao> response) {
                         if (response.isSuccessful()) {
-                            MemberItemDao dao = response.body();
-                            Toast.makeText(getActivity(), dao.getFirstName(), Toast.LENGTH_LONG).show();
+                            MemberItemCollectionDao dao = response.body();
+                            Toast.makeText(getActivity(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
                         } else {
                             try {
                                 Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
@@ -106,7 +107,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     }
 
                     @Override
-                    public void onFailure(Call<MemberItemDao> call,
+                    public void onFailure(Call<MemberItemCollectionDao> call,
                                           Throwable t) {
                         Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
                     }
