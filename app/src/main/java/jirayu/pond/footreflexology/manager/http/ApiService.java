@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.manager.http;
 
+import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemDao;
 import retrofit2.Call;
@@ -15,5 +16,6 @@ public interface ApiService {
 
     @GET("{tableName}/{key}")
     Call<MemberItemCollectionDao> loadMemberList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<DetailItemCollectionDao>   loadDetailList(@Path("tableName") String tableName, @Path("key") String key);
 
 }
