@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 public interface ApiService {
 
     @GET("{tableName}/{key}")
-    Call<MemberItemCollectionDao> loadMemberList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<MemberItemCollectionDao>   loadMemberList(@Path("tableName") String tableName, @Path("key") String key);
     Call<DetailItemCollectionDao>   loadDetailList(@Path("tableName") String tableName, @Path("key") String key);
     Call<DiseaseItemCollectionDao>  loadDiseaseList(@Path("tableName") String tableName, @Path("key") String key);
     Call<OrganItemCollectionDao>    loadOrganList(@Path("tableName") String tableName, @Path("key") String key);
