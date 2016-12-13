@@ -89,4 +89,5 @@ public class DetailItemDao {
     public void setRecommend(String recommend) {
         this.recommend = recommend;
     }
+
 }
