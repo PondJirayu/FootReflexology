@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -41,6 +42,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     Button btnSignUp, btnIntoMainPage;
     Animation anim;
     RelativeLayout rootLayout;
+    ProgressDialog progressDialog;
 
     public LoginFragment() {
         super();
@@ -88,11 +90,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     // Handle Click Button
     @Override
     public void onClick(View v) {
+        // Create Dialog
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(true);
+        progressDialog.setTitle("รอสักครู่...");
+        progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
+
+
         if (v == btnSignUp) {
             if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
                 if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
-                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก ก่อนกดลงทะเบียนผู้ป่วย", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก", Snackbar.LENGTH_LONG).show();
+                } else if (editName.getText().toString().trim().length() < 13){
+                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก", Snackbar.LENGTH_LONG).show();
                 } else {
+                    progressDialog.show();
                     Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
                     call.enqueue(new Callback<MemberItemCollectionDao>() {
                         @Override
@@ -101,9 +113,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             if (response.isSuccessful()) {
                                 MemberItemCollectionDao dao = response.body();
                                 if (dao.getData().isEmpty()){ // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
+                                    progressDialog.dismiss();
                                     Intent intent = new Intent(getContext(), RegisterActivity.class);
                                     startActivity(intent);
                                 } else {
+                                    progressDialog.dismiss();
                                     Intent intent = new Intent(getContext(), MainActivity.class);
                                     startActivity(intent);
                                 }
@@ -113,6 +127,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //                                } catch (IOException e) {
 //                                    e.printStackTrace();
 //                                }
+                                progressDialog.dismiss();
                                 Snackbar.make(rootLayout, "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Snackbar.LENGTH_LONG).show();
                             }
                         }
@@ -121,6 +136,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         public void onFailure(Call<MemberItemCollectionDao> call,
                                               Throwable t) {
 //                            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
                             Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
                         }
                     });
