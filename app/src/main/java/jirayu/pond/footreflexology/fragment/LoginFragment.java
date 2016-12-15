@@ -169,7 +169,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
                                     startActivity(intent);
-                                    getActivity().finish();
+                                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
                                 }
                             } else {
 //                                try {
