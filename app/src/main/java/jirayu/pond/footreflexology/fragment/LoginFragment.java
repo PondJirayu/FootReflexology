@@ -26,6 +26,7 @@ import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -145,7 +146,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
 
-
         if (v == btnSignUp) {
             if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
                 if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
@@ -165,7 +165,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
                                     startActivity(intent);
-                                } else {
+                                } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
+                                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
                                     startActivity(intent);

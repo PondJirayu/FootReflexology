@@ -171,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_logout:
-                Toast.makeText(MainActivity.this, "ออกจากระบบแล้ว", Toast.LENGTH_LONG).show();
+                System.gc(); // Destroy Objects
+                Toast.makeText(MainActivity.this, "ออกจากระบบแล้ว", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

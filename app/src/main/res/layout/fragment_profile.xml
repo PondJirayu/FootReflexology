@@ -64,7 +64,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="14dp"
-                                    android:text="จิรายุ"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -73,7 +72,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:text="สุมังคละพันธุ์"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -92,10 +90,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvGender"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="14dp"
-                                    android:text="ชาย"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -114,10 +112,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvBirthDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="14dp"
-                                    android:text="26/12/2536"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -136,10 +134,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvAge"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="14dp"
-                                    android:text="23"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -165,10 +163,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvIdentificationNumber"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:text="1769900332760"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -186,10 +184,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvTelephoneNumber"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:text="0866128982"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -232,10 +230,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvHouseVillage"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="25dp"
-                                    android:text="505 ม.6 ถนนราชดำเนิน ซอยราชเกษม 1"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -254,10 +252,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvSubDistrict"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="18dp"
-                                    android:text="บ้านหม้อ"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -276,10 +274,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvDistrict"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="15dp"
-                                    android:text="เมือง"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
@@ -298,10 +296,10 @@
                                     android:textSize="@dimen/text_size_profile" />
 
                                 <TextView
+                                    android:id="@+id/tvProvince"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="13dp"
-                                    android:text="เพชรบุรี"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/text_size_profile_show" />
 
