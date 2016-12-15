@@ -147,6 +147,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
         if (v == btnIntoMainPage) {
             Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.putExtra("isShowDrawerMenu", false);
             startActivity(intent);
         }
     }

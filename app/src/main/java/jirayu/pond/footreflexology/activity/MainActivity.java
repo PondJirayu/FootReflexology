@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     Intent intent;
+    Boolean isShowDrawerMenu;
+
 
     /************
      * Functions
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        // เปิดซองจดหมาย (intent)
+        Intent intent = getIntent();
+        isShowDrawerMenu = intent.getBooleanExtra("isShowDrawerMenu", true);
 
         setContentView(R.layout.activity_main); // inflate
 
@@ -81,8 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Set Home Button
         getSupportActionBar().setTitle("หน้าหลัก");
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(isShowDrawerMenu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(isShowDrawerMenu);
+
 
         // AddFragment into ViewPager
         viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
@@ -113,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (isShowDrawerMenu)
+            getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
