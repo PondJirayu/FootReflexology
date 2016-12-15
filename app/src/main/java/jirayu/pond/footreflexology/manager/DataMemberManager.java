@@ -22,6 +22,10 @@ public class DataMemberManager {
     private Context mContext;
     private MemberItemDao memberItemDao;
 
+    private DataMemberManager() {
+        mContext = Contextor.getInstance().getContext();
+    }
+
     public MemberItemDao getMemberItemDao() {
         return memberItemDao;
     }
