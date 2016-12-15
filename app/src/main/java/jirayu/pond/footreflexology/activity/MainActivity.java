@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (isShowDrawerMenu)
             getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
