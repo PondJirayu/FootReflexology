@@ -12,11 +12,11 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 
 public class DetailsListAdapter extends BaseAdapter {
 
-    private int count;
+    private String diseaseName;
 
     @Override
     public int getCount() {
-        return count;
+        return 10;
     }
 
     @Override
@@ -34,8 +34,11 @@ public class DetailsListAdapter extends BaseAdapter {
         return new DetailsListItem(parent.getContext());
     }
 
-    public void setCount(int count){
-       this.count = count;
+    public String getDiseaseName() {
+        return diseaseName;
     }
 
+    public void setDiseaseName(String diseaseName) {
+        this.diseaseName = diseaseName;
+    }
 }

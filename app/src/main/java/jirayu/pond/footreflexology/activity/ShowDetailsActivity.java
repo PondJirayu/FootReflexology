@@ -17,6 +17,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
+    private String result;
 
     /************
      * Functions
@@ -28,10 +29,10 @@ public class ShowDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_details);
 
         Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
-        String result = intent.getStringExtra("result"); // หยิบของออกมา (result)
+        setResult(intent.getStringExtra("result"));  // หยิบของออกมา (result)
 
         initToolbar();
-        initInstances(result); // Send "result" ไปกำหนด Subtitle
+        initInstances();
         initFragments(savedInstanceState);
     }
 
@@ -40,12 +41,11 @@ public class ShowDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void initInstances(String result) {
+    private void initInstances() {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle("โรคกับเขตตอบสนอง");
-        getSupportActionBar().setSubtitle(result);
+        getSupportActionBar().setTitle(getResult());
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -64,6 +64,14 @@ public class ShowDetailsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_details, menu);
         return true;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 
 
@@ -42,7 +43,7 @@ public class ShowDetailsFragment extends Fragment {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView);
         listAdapter = new DetailsListAdapter();
-        listAdapter.setCount(5);
+        listAdapter.setDiseaseName(((ShowDetailsActivity)getActivity()).getResult());   // ส่งชื่อโรคให้ Adapter เอาไปใช้งาน
         listView.setAdapter(listAdapter);
     }
 
