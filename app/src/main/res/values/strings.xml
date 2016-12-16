@@ -32,4 +32,8 @@
     <string name="action_save">Save</string>
     <string name="write_something">เขียนอะไรบางอย่าง..</string>
     <string name="do_details">แสดงรายละเอียด</string>
+    <string name="disease_name">ชื่อโรค</string>
+    <string name="detail">รายละเอียด</string>
+    <string name="treatment">การรักษา</string>
+    <string name="recommend">คำแนะนำ</string>
 </resources>
