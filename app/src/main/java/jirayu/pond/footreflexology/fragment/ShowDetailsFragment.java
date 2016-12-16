@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 
 
 /**
@@ -16,6 +17,7 @@ import jirayu.pond.footreflexology.R;
 public class ShowDetailsFragment extends Fragment {
 
     ListView listView;
+    DetailsListAdapter listAdapter;
 
     public ShowDetailsFragment() {
         super();
@@ -39,6 +41,9 @@ public class ShowDetailsFragment extends Fragment {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView);
+        listAdapter = new DetailsListAdapter();
+        listAdapter.setCount(5);
+        listView.setAdapter(listAdapter);
     }
 
     @Override
