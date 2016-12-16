@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import jirayu.pond.footreflexology.R;
 
@@ -13,6 +14,8 @@ import jirayu.pond.footreflexology.R;
  * Created by nuuneoi on 11/16/2014.
  */
 public class ShowDetailsFragment extends Fragment {
+
+    ListView listView;
 
     public ShowDetailsFragment() {
         super();
@@ -35,6 +38,7 @@ public class ShowDetailsFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        listView = (ListView) rootView.findViewById(R.id.listView);
     }
 
     @Override
