@@ -96,20 +96,20 @@ public class DetailsListItem extends BaseCustomViewGroup {
         // Restore State from bundle here
     }
 
-    public void setDiseaseName(String diseaseName) {
-        tvDiseaseName.setText(diseaseName);
+    public void setDiseaseName(String text) {
+        tvDiseaseName.setText(text);
     }
 
-    public void setDetail(String detail) {
-        tvDetail.setText(detail);
+    public void setDetail(String text) {
+        tvDetail.setText(text);
     }
 
-    public void setTreatment(String treatment) {
-        tvTreatment.setText(treatment);
+    public void setTreatment(String text) {
+        tvTreatment.setText(text);
     }
 
-    public void setRecommend(String recommend) {
-        tvRecommend.setText(recommend);
+    public void setRecommend(String text) {
+        tvRecommend.setText(text);
     }
 
 }
