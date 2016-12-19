@@ -11,7 +11,6 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 
-
 /**
  * Created by nuuneoi on 11/16/2014.
  */
