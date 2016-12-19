@@ -14,25 +14,19 @@
             android:id="@+id/action_major_term"
             android:icon="@drawable/ic_title_black_24dp"
             android:title="คำสำคัญ" />
+        <!--<item-->
+        <!--android:id="@+id/action_memo"-->
+        <!--android:icon="@drawable/ic_insert_comment_black_24dp"-->
+        <!--android:title="บันทึกช่วยจำ" />-->
+
         <item
-            android:id="@+id/action_memo"
-            android:icon="@drawable/ic_insert_comment_black_24dp"
-            android:title="บันทึกช่วยจำ" />
-
-        <item android:title="เพิ่มเติม">
-
-            <menu>
-                <item
-                    android:id="@+id/action_settings"
-                    android:icon="@drawable/ic_settings_black_24dp"
-                    android:title="@string/action_settings" />
-                <item
-                    android:id="@+id/action_about"
-                    android:icon="@drawable/ic_info_black_24dp"
-                    android:title="@string/action_about" />
-            </menu>
-
-        </item>
+            android:id="@+id/action_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/action_settings" />
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/action_about" />
 
     </group>
 

@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_logout:
                 System.gc(); // Destroy Objects
-                Toast.makeText(MainActivity.this, "ออกจากระบบแล้ว", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "ออกจากระบบแล้ว", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -211,10 +211,10 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(MainActivity.this, MajorTermActivity.class);
                     startActivity(intent);
                     return true;
-                case R.id.action_memo:
-                    intent = new Intent(MainActivity.this, MemoActivity.class);
-                    startActivity(intent);
-                    return true;
+//                case R.id.action_memo:
+//                    intent = new Intent(MainActivity.this, MemoActivity.class);
+//                    startActivity(intent);
+//                    return true;
                 case R.id.action_about:
                     intent = new Intent(MainActivity.this, AboutActivity.class);
                     startActivity(intent);
