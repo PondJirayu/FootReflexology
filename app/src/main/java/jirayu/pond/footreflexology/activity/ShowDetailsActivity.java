@@ -17,7 +17,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    private String result;
+    private String result;  // ตัวแปร Result เก็บชื่ออวัยวะ
 
     /************
      * Functions

@@ -41,10 +41,9 @@ public class ShowDetailsFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView = (ListView) rootView.findViewById(R.id.listView);
-        listAdapter = new DetailsListAdapter();
-        listAdapter.setDiseaseName(((ShowDetailsActivity)getActivity()).getResult());   // ส่งชื่อโรคให้ Adapter เอาไปใช้งาน
-        listView.setAdapter(listAdapter);
+        listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
+        listAdapter = new DetailsListAdapter();     // Create Adapter
+        listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
     }
 
     @Override
