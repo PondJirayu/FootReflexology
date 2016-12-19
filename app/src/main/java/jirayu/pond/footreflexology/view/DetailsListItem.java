@@ -18,7 +18,7 @@ import jirayu.pond.footreflexology.R;
  */
 public class DetailsListItem extends BaseCustomViewGroup {
 
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
+    private TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
 
     public DetailsListItem(Context context) {
         super(context);
