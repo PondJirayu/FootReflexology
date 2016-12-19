@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
@@ -16,6 +17,8 @@ import jirayu.pond.footreflexology.R;
  * Created by nuuneoi on 11/16/2014.
  */
 public class DetailsListItem extends BaseCustomViewGroup {
+
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
 
     public DetailsListItem(Context context) {
         super(context);
@@ -51,6 +54,10 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
     private void initInstances() {
         // findViewById here
+        tvDiseaseName = (TextView) findViewById(R.id.tvDiseaseName);
+        tvDetail = (TextView) findViewById(R.id.tvDetail);
+        tvTreatment = (TextView) findViewById(R.id.tvTreatment);
+        tvRecommend = (TextView) findViewById(R.id.tvRecommend);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -87,6 +94,22 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
         Bundle bundle = ss.getBundle();
         // Restore State from bundle here
+    }
+
+    public void setDiseaseName(String diseaseName) {
+        tvDiseaseName.setText(diseaseName);
+    }
+
+    public void setDetail(String detail) {
+        tvDetail.setText(detail);
+    }
+
+    public void setTreatment(String treatment) {
+        tvTreatment.setText(treatment);
+    }
+
+    public void setRecommend(String recommend) {
+        tvRecommend.setText(recommend);
     }
 
 }

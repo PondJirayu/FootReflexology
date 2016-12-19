@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.view.DetailsListItem;
 
 /**
@@ -11,6 +12,12 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
  */
 
 public class DetailsListAdapter extends BaseAdapter {
+
+    private DetailItemCollectionDao dao;
+
+    public void setDao(DetailItemCollectionDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public int getCount() {
