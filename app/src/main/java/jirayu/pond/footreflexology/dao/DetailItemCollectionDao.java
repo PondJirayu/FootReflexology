@@ -28,4 +28,5 @@ public class DetailItemCollectionDao {
     public void setData(List<DetailItemDao> data) {
         this.data = data;
     }
+
 }
