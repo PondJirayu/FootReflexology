@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,35 @@ import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
  */
 public class ShowDetailsFragment extends Fragment {
 
+    /************
+     * Variables
+     ************/
+
     ListView listView;
     DetailsListAdapter listAdapter;
+    String result;
+
+    /************
+     * Functions
+     ************/
 
     public ShowDetailsFragment() {
         super();
     }
 
-    public static ShowDetailsFragment newInstance() {
+    public static ShowDetailsFragment newInstance(String result) {
         ShowDetailsFragment fragment = new ShowDetailsFragment();
         Bundle args = new Bundle();
-        fragment.setArguments(args);
+        args.putString("result", "");   // เอาตัวแปร result เก็บใน Arguments
+        fragment.setArguments(args);    // สั่งให้ Arguments ผุกกับ Fragment
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Read from Arguments / อ่านค่าจาก Arguments ใส่ Member Variable
+        result = getArguments().getString("result");
     }
 
     @Override
@@ -43,6 +61,12 @@ public class ShowDetailsFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new DetailsListAdapter();     // Create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
+//        result = ((ShowDetailsActivity)getActivity()).getResult(); // ดึงค่า Result จาก Activity
+        reloadData(result);
+    }
+
+    private void reloadData(String result) {
+
     }
 
     @Override
@@ -74,4 +98,14 @@ public class ShowDetailsFragment extends Fragment {
             // Restore Instance State here
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+
+
+    /**************
+     * Inner Class
+     **************/
 }

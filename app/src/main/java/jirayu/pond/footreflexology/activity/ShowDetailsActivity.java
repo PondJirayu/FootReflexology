@@ -17,7 +17,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    private String result;  // ตัวแปร Result เก็บชื่ออวัยวะ
+    String result;  // ตัวแปร Result เก็บชื่ออวัยวะ
 
     /************
      * Functions
@@ -29,7 +29,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_details);
 
         Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
-        setResult(intent.getStringExtra("result"));  // หยิบของออกมา (result)
+        result = intent.getStringExtra("result");  // หยิบของออกมา (result)
 
         initToolbar();
         initInstances();
@@ -45,7 +45,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle(getResult());
+        getSupportActionBar().setTitle(result);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -54,7 +54,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, ShowDetailsFragment.newInstance())
+                    .add(R.id.contentContainer, ShowDetailsFragment.newInstance(result))
                     .commit();
         }
     }
@@ -64,14 +64,6 @@ public class ShowDetailsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_details, menu);
         return true;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
     }
 
     @Override
