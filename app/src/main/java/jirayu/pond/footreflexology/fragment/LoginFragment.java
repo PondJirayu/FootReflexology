@@ -159,6 +159,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onResponse(Call<MemberItemCollectionDao> call,
                                                Response<MemberItemCollectionDao> response) {
+
                             if (response.isSuccessful()) {
                                 MemberItemCollectionDao dao = response.body();
                                 if (dao.getData().isEmpty()){ // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
@@ -191,6 +192,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
                         }
                     });
+
                 }
             } else {
                 Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();

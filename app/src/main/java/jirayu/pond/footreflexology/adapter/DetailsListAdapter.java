@@ -13,7 +13,7 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 
 public class DetailsListAdapter extends BaseAdapter {
 
-    private DetailItemCollectionDao dao;
+    DetailItemCollectionDao dao;
 
     public void setDao(DetailItemCollectionDao dao) {
         this.dao = dao;
