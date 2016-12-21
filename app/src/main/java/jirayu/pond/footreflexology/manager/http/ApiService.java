@@ -17,9 +17,17 @@ public interface ApiService {
 
     @GET("{tableName}/{key}")
     Call<MemberItemCollectionDao>   loadMemberList(@Path("tableName") String tableName, @Path("key") String key);
+
+    @GET("{tableName}/{key}")
     Call<DetailItemCollectionDao>   loadDetailList(@Path("tableName") String tableName, @Path("key") String key);
+
+    @GET("{tableName}/{key}")
     Call<DiseaseItemCollectionDao>  loadDiseaseList(@Path("tableName") String tableName, @Path("key") String key);
+
+    @GET("{tableName}/{key}")
     Call<OrganItemCollectionDao>    loadOrganList(@Path("tableName") String tableName, @Path("key") String key);
+
+    @GET("{tableName}/{key}")
     Call<MedicalHistoryItemDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") String key);
 
 }

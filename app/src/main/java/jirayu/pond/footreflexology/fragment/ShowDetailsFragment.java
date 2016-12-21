@@ -74,31 +74,31 @@ public class ShowDetailsFragment extends Fragment {
         listAdapter = new DetailsListAdapter();     // Create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
 
+        // ติดต่อกับ server
         reloadData();
     }
 
     private void reloadData() {
         Toast.makeText(getContext(), "1", Toast.LENGTH_LONG).show();
-        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", "1769900332760");
-        call.enqueue(new Callback<MemberItemCollectionDao>() {
+        Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList("details", result);
+        call.enqueue(new Callback<DetailItemCollectionDao>() {
             @Override
-            public void onResponse(Call<MemberItemCollectionDao> call,
-                                   Response<MemberItemCollectionDao> response) {
+            public void onResponse(Call<DetailItemCollectionDao> call,
+                                   Response<DetailItemCollectionDao> response) {
                 Toast.makeText(getContext(), "onResponse", Toast.LENGTH_LONG).show();
-
                 if (response.isSuccessful()) {
-                    MemberItemCollectionDao dao = response.body();
+                    DetailItemCollectionDao dao = response.body();
                     if (dao.getData().isEmpty()) {
                         Toast.makeText(getContext(), "ไม่พบข้อมูล", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getContext(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), dao.getData().get(0).getDiseaseName() , Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getContext(), "server ไม่ตอบสนอง", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
-            public void onFailure(Call<MemberItemCollectionDao> call,
+            public void onFailure(Call<DetailItemCollectionDao> call,
                                   Throwable t) {
                 Toast.makeText(getContext(), "onFailure", Toast.LENGTH_LONG).show();
             }
