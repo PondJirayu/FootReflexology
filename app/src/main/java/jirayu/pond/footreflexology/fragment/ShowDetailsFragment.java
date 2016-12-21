@@ -16,6 +16,7 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,35 +78,29 @@ public class ShowDetailsFragment extends Fragment {
     }
 
     private void reloadData() {
-        // Create Dialog
-//        progressDialog = new ProgressDialog(getActivity());
-//        progressDialog.setCancelable(true);
-//        progressDialog.setTitle("รอสักครู่...");
-//        progressDialog.setMessage("กำลังดาวโหลดข้อมูล");
-//        progressDialog.show();
-
-        Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList("details", result);
-        call.enqueue(new Callback<DetailItemCollectionDao>() {
+        Toast.makeText(getContext(), "1", Toast.LENGTH_LONG).show();
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", "1769900332760");
+        call.enqueue(new Callback<MemberItemCollectionDao>() {
             @Override
-            public void onResponse(Call<DetailItemCollectionDao> call,
-                                   Response<DetailItemCollectionDao> response) {
-//                if (response.isSuccessful()) {
-//                    DetailItemCollectionDao dao = response.body();
-//                    if (dao.getData().isEmpty()) {
-////                        progressDialog.dismiss();
-//                        Snackbar.make(rootLayout, "ไม่พบข้อมูล", Snackbar.LENGTH_LONG).show();
-//                    } else {
-//                        // ส่ง dao ให้ Adapter
-//                    }
-//                } else {
-////                    progressDialog.dismiss();
-//                    Snackbar.make(rootLayout, "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Snackbar.LENGTH_LONG).show();
-//                }
+            public void onResponse(Call<MemberItemCollectionDao> call,
+                                   Response<MemberItemCollectionDao> response) {
+                Toast.makeText(getContext(), "onResponse", Toast.LENGTH_LONG).show();
+
+                if (response.isSuccessful()) {
+                    MemberItemCollectionDao dao = response.body();
+                    if (dao.getData().isEmpty()) {
+                        Toast.makeText(getContext(), "ไม่พบข้อมูล", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), dao.getData().get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "server ไม่ตอบสนอง", Toast.LENGTH_LONG).show();
+                }
             }
-
             @Override
-            public void onFailure(Call<DetailItemCollectionDao> call, Throwable t) {
-//                Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
+            public void onFailure(Call<MemberItemCollectionDao> call,
+                                  Throwable t) {
+                Toast.makeText(getContext(), "onFailure", Toast.LENGTH_LONG).show();
             }
         });
     }

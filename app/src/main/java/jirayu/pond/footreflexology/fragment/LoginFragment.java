@@ -162,7 +162,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                             if (response.isSuccessful()) {
                                 MemberItemCollectionDao dao = response.body();
-                                if (dao.getData().isEmpty()){ // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
+                                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
                                     startActivity(intent);
