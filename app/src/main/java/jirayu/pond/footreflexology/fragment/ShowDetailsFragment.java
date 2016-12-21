@@ -73,7 +73,7 @@ public class ShowDetailsFragment extends Fragment {
         listAdapter = new DetailsListAdapter();     // Create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
 
-//        reloadData();
+        reloadData();
     }
 
     private void reloadData() {
