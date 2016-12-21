@@ -79,28 +79,26 @@ public class ShowDetailsFragment extends Fragment {
     }
 
     private void reloadData() {
-        Toast.makeText(getContext(), "1", Toast.LENGTH_LONG).show();
         Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList("details", result);
         call.enqueue(new Callback<DetailItemCollectionDao>() {
             @Override
             public void onResponse(Call<DetailItemCollectionDao> call,
                                    Response<DetailItemCollectionDao> response) {
-                Toast.makeText(getContext(), "onResponse", Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     DetailItemCollectionDao dao = response.body();
-                    if (dao.getData().isEmpty()) {
-                        Toast.makeText(getContext(), "ไม่พบข้อมูล", Toast.LENGTH_LONG).show();
-                    } else {
+                    if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
+                        Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_LONG).show();
+                    } else { // พบข้อมูล
                         Toast.makeText(getContext(), dao.getData().get(0).getDiseaseName() , Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getContext(), "server ไม่ตอบสนอง", Toast.LENGTH_LONG).show();
+                } else { // 404 NOT FOUND
+                    Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
             public void onFailure(Call<DetailItemCollectionDao> call,
                                   Throwable t) {
-                Toast.makeText(getContext(), "onFailure", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_LONG).show();
             }
         });
     }
