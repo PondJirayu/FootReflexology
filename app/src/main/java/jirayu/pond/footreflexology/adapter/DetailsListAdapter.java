@@ -60,7 +60,7 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatMent());
         // ตรวจสอบว่ามีคำแนะนำหรือไม่
         if (dao.getRecommend().isEmpty()) {
-            item.setRecommend("ไม่มีคำแนะนำ");
+            item.setRecommend("");
         } else {
             item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
         }

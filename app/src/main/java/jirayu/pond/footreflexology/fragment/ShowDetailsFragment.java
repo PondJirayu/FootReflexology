@@ -87,19 +87,19 @@ public class ShowDetailsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     DetailItemCollectionDao dao = response.body();
                     if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-                        Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_SHORT).show();
                     } else { // พบข้อมูล
                         listAdapter.setDao(dao);    // โยน dao ให้ Adapter
                         listAdapter.notifyDataSetChanged();     // adapter สั่งให้ listView refresh ตัวเอง
                     }
                 } else { // 404 NOT FOUND
-                    Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<DetailItemCollectionDao> call,
                                   Throwable t) {
-                Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
             }
         });
     }

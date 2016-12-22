@@ -18,7 +18,7 @@ import jirayu.pond.footreflexology.R;
  */
 public class DetailsListItem extends BaseCustomViewGroup {
 
-    private TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
+    private TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold;
 
     public DetailsListItem(Context context) {
         super(context);
@@ -58,6 +58,7 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvDetail = (TextView) findViewById(R.id.tvDetail);
         tvTreatment = (TextView) findViewById(R.id.tvTreatment);
         tvRecommend = (TextView) findViewById(R.id.tvRecommend);
+        tvRecommendBold = (TextView) findViewById(R.id.tvRecommendBold);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -109,7 +110,16 @@ public class DetailsListItem extends BaseCustomViewGroup {
     }
 
     public void setRecommend(String text) {
-        tvRecommend.setText(text);
+        if (text.isEmpty()) {
+            // "GONE" ซ่อน View A -> และขยับ View B แทนที่ View A
+            tvRecommendBold.setVisibility(TextView.GONE);
+            tvRecommend.setVisibility(TextView.GONE);
+        } else {
+            // "VISIBLE" แสดง View
+            tvRecommendBold.setVisibility(TextView.VISIBLE);
+            tvRecommend.setVisibility(TextView.VISIBLE);
+            tvRecommend.setText(text);
+        }
     }
 
 }
