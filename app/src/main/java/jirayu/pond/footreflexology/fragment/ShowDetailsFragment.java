@@ -89,7 +89,8 @@ public class ShowDetailsFragment extends Fragment {
                     if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
                         Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_LONG).show();
                     } else { // พบข้อมูล
-                        Toast.makeText(getContext(), dao.getData().get(0).getDiseaseName() , Toast.LENGTH_LONG).show();
+                        listAdapter.setDao(dao);    // โยน dao ให้ Adapter
+                        listAdapter.notifyDataSetChanged();     // adapter สั่งให้ listView refresh ตัวเอง
                     }
                 } else { // 404 NOT FOUND
                     Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_LONG).show();

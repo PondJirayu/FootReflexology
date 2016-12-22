@@ -21,7 +21,13 @@ public class DetailsListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        if (dao == null) {
+            return 0;
+        }
+        if (dao.getData() == null) {
+            return 0;
+        }
+        return dao.getData().size() + 1;
     }
 
     @Override
