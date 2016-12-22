@@ -42,7 +42,12 @@ public class DetailsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return new DetailsListItem(parent.getContext());
+        DetailsListItem item = new DetailsListItem(parent.getContext());
+        item.setDiseaseName(dao.getData().get(0).getDiseaseName());
+        item.setDetail(dao.getData().get(0).getDetail());
+        item.setTreatment(dao.getData().get(0).getTreatMent());
+        item.setRecommend(dao.getData().get(0).getRecommend());
+        return item;
     }
 
 }
