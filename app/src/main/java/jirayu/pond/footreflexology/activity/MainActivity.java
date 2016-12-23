@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        // Drawer Menu
+//        // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(navigationViewListener);
@@ -186,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView.OnNavigationItemSelectedListener navigationViewListener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
-            // TODO: Handle Drawer Menu here
 
             // Checking if the item is in checked state or not, if not make it in checked state
             if (item.isChecked()) {
