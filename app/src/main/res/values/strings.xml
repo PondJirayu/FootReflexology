@@ -26,7 +26,7 @@
     <string name="province">จังหวัด</string>
     <string name="age">อายุ</string>
     <string name="year">ปี</string>
-    <string name="action_search">ค้นหา..</string>
+    <string name="action_search">ค้นหาโรค..</string>
     <string name="foot_right">foot_right</string>
     <string name="ok">ยืนยันการลงทะเบียน</string>
     <string name="action_save">Save</string>

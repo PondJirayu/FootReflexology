@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.support.v7.widget.SearchView;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.ViewPagerAdapter;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     Intent intent;
     Boolean isShowDrawerMenu;
+    MenuItem menuItem;
+    SearchView searchView;
 
     /************
      * Functions
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        // Drawer Menu
+        // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(navigationViewListener);
@@ -121,9 +124,13 @@ public class MainActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (isShowDrawerMenu)
+        if (isShowDrawerMenu) {
             getMenuInflater().inflate(R.menu.menu_main, menu);
-
+            // Handle SearchView (First Step)
+            menuItem = menu.findItem(R.id.action_search);
+            searchView = (SearchView) menuItem.getActionView();
+            searchView.setOnQueryTextListener(searchViewListener);
+        }
         return true;
     }
 
@@ -172,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_logout:
-                System.gc(); // Destroy Objects
-//                Toast.makeText(MainActivity.this, "ออกจากระบบแล้ว", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -222,6 +227,20 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return false;
             }
+        }
+    };
+
+    // Handle SearchView (Second Step)
+    SearchView.OnQueryTextListener searchViewListener = new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            Toast.makeText(MainActivity.this, query, Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
         }
     };
 
