@@ -70,8 +70,8 @@ public class ShowDetailsFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
-        listAdapter = new DetailsListAdapter();     // Create Adapter
+        listView = (ListView) rootView.findViewById(R.id.listView); // create ListView
+        listAdapter = new DetailsListAdapter();     // create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
 
         // ติดต่อกับ server

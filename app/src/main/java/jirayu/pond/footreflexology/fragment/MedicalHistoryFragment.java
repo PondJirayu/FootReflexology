@@ -5,14 +5,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.adapter.MedicalHistoryAdapter;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
 public class MedicalHistoryFragment extends Fragment {
+
+    /************
+     * Variables
+     ************/
+
+    ListView listView;
+    MedicalHistoryAdapter listAdapter;
+
+    /************
+     * Functions
+     ************/
 
     public MedicalHistoryFragment() {
         super();
@@ -35,6 +48,9 @@ public class MedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        listView = (ListView) rootView.findViewById(R.id.listView); // create listView
+        listAdapter = new MedicalHistoryAdapter();  // create Adapter
+        listView.setAdapter(listAdapter);   // listView with Adapter ทำงานร่วมกัน
     }
 
     @Override
@@ -66,4 +82,14 @@ public class MedicalHistoryFragment extends Fragment {
             // Restore Instance State here
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+
+
+    /**************
+     * Inner Class
+     **************/
 }
