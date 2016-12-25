@@ -92,4 +92,12 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
         // Restore State from bundle here
     }
 
+    public void setDiseaseName(String text) {
+        tvDiseaseName.setText(text);
+    }
+
+    public void setBehavior(String text) {
+        tvBehavior.setText(text);
+    }
+
 }
