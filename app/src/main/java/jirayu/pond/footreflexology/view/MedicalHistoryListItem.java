@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import com.inthecheesefactory.thecheeselibrary.R;
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
@@ -14,6 +15,8 @@ import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
  * Created by nuuneoi on 11/16/2014.
  */
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
+
+    TextView tvDiseaseName, tvBehavior;
 
     public MedicalHistoryListItem(Context context) {
         super(context);
@@ -49,6 +52,8 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     private void initInstances() {
         // findViewById here
+        tvDiseaseName = (TextView) findViewById(R.id.tvDiseaseName);
+        tvBehavior = (TextView) findViewById(R.id.tvBehavior);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
