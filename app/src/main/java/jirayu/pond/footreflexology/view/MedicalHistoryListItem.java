@@ -7,9 +7,10 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.inthecheesefactory.thecheeselibrary.R;
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
 import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
+
+import jirayu.pond.footreflexology.R;
 
 /**
  * Created by nuuneoi on 11/16/2014.
