@@ -4,6 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.view.MedicalHistoryListItem;
 
 /**
@@ -12,14 +14,26 @@ import jirayu.pond.footreflexology.view.MedicalHistoryListItem;
 
 public class MedicalHistoryAdapter extends BaseAdapter {
 
+    MedicalHistoryItemCollectionDao dao;
+
+    public void setDao(MedicalHistoryItemCollectionDao dao) {
+        this.dao = dao;
+    }
+
     @Override
     public int getCount() {
-        return 10;
+        if (dao == null) {
+            return 0;
+        }
+        if (dao.getData() == null) {
+            return 0;
+        }
+        return dao.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return dao.getData().get(position);
     }
 
     @Override
@@ -29,6 +43,19 @@ public class MedicalHistoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return new MedicalHistoryListItem(parent.getContext());
+        MedicalHistoryListItem item;
+
+        if (convertView != null) {
+            // Reuse
+            item = (MedicalHistoryListItem) convertView;
+        } else {
+            // Create
+            item = new MedicalHistoryListItem(parent.getContext());
+        }
+        MedicalHistoryItemDao dao = (MedicalHistoryItemDao) getItem(position);
+        // set ค่าให้ view ของ customViewGroup
+        item.setDiseaseName(dao.getDiseaseName());
+        item.setBehavior(dao.getList());
+        return item;
     }
 }

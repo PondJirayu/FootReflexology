@@ -90,7 +90,7 @@ public class ShowDetailsFragment extends Fragment {
                         Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_SHORT).show();
                     } else { // พบข้อมูล
                         listAdapter.setDao(dao);    // โยน dao ให้ Adapter
-                        listAdapter.notifyDataSetChanged();     // adapter สั่งให้ listView refresh ตัวเอง
+                        listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
                     }
                 } else { // 404 NOT FOUND
                     Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
