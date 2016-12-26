@@ -6,9 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Path;
 
 
 /**
@@ -17,7 +25,7 @@ import jirayu.pond.footreflexology.R;
 public class QueryResponseFragment extends Fragment {
 
     String query;
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
+    ListView listView;
 
     public QueryResponseFragment() {
         super();
@@ -48,17 +56,15 @@ public class QueryResponseFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        tvDiseaseName = (TextView) rootView.findViewById(R.id.tvDiseaseName);
-        tvDetail = (TextView) rootView.findViewById(R.id.tvDetail);
-        tvTreatment = (TextView) rootView.findViewById(R.id.tvTreatment);
-        tvRecommend =(TextView) rootView.findViewById(R.id.tvRecommend);
+        listView = (ListView) rootView.findViewById(R.id.listView);
 
         // ติดต่อกับ Server
         reloadData();
     }
 
     private void reloadData() {
-
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("disease", query);
+        call.enqueue(loadDiseaseListener);
     }
 
     @Override
@@ -90,4 +96,35 @@ public class QueryResponseFragment extends Fragment {
             // Restore Instance State here
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    Callback<DiseaseItemCollectionDao> loadDiseaseListener = new Callback<DiseaseItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseItemCollectionDao> call,
+                               Response<DiseaseItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                DiseaseItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
+                    Toast.makeText(getContext(), "ไม่พบโรคที่ค้นหา", Toast.LENGTH_SHORT).show();
+                } else { // พบช้อมูล
+
+                }
+            } else { // 404 NOT FOUND
+                Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseItemCollectionDao> call,
+                              Throwable t) {
+            Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    /**************
+     * Inner Class
+     **************/
 }
