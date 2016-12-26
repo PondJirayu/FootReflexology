@@ -234,7 +234,9 @@ public class MainActivity extends AppCompatActivity {
     SearchView.OnQueryTextListener searchViewListener = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
-            Toast.makeText(MainActivity.this, query, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, QueryResponseActivity.class);
+            intent.putExtra("query", query); // แนบชื่อโรคที่ค้นหาไปกับ intent
+            startActivity(intent);
             return true;
         }
 

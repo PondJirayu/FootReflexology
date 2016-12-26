@@ -1,10 +1,12 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.QueryResponseFragment;
 
 public class QueryResponseActivity extends AppCompatActivity {
 
@@ -13,6 +15,7 @@ public class QueryResponseActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
+    String query;
 
     /************
      * Functions
@@ -21,6 +24,11 @@ public class QueryResponseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // เปิดซองจดหมาย (intent)
+        Intent intent = getIntent();
+        query = intent.getStringExtra("query"); // เอาชื่อโรคที่ค้นหาเก็บในตัวแปร query
+
         setContentView(R.layout.activity_query_response); // inflate
 
         initToolbar();
@@ -37,7 +45,7 @@ public class QueryResponseActivity extends AppCompatActivity {
         // findViewById here
 
         // Set HomeButton
-        getSupportActionBar().setTitle("โรค");
+        getSupportActionBar().setTitle("ข้อมูลโรค" + query);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -45,7 +53,9 @@ public class QueryResponseActivity extends AppCompatActivity {
     private void initFragments(Bundle savedInstanceState) {
         // Place Fragment here
         if (savedInstanceState == null) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentContainer, QueryResponseFragment.newInstance(query))
+                    .commit();
         }
     }
 
