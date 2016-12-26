@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import jirayu.pond.footreflexology.R;
 
@@ -16,6 +17,7 @@ import jirayu.pond.footreflexology.R;
 public class QueryResponseFragment extends Fragment {
 
     String query;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend;
 
     public QueryResponseFragment() {
         super();
@@ -46,6 +48,17 @@ public class QueryResponseFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        tvDiseaseName = (TextView) rootView.findViewById(R.id.tvDiseaseName);
+        tvDetail = (TextView) rootView.findViewById(R.id.tvDetail);
+        tvTreatment = (TextView) rootView.findViewById(R.id.tvTreatment);
+        tvRecommend =(TextView) rootView.findViewById(R.id.tvRecommend);
+
+        // ติดต่อกับ Server
+        reloadData();
+    }
+
+    private void reloadData() {
+
     }
 
     @Override
