@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.adapter.DiseaseListAdapter;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -26,6 +27,7 @@ public class QueryResponseFragment extends Fragment {
 
     String query;
     ListView listView;
+    DiseaseListAdapter listAdapter;
 
     public QueryResponseFragment() {
         super();
@@ -56,14 +58,16 @@ public class QueryResponseFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView = (ListView) rootView.findViewById(R.id.listView);
+        listView = (ListView) rootView.findViewById(R.id.listView); // create listView
+        listAdapter = new DiseaseListAdapter(); // create Adapter
+        listView.setAdapter(listAdapter);   // สั่งให้ listView with Adapter ทำงานร่วมกัน
 
         // ติดต่อกับ Server
         reloadData();
     }
 
     private void reloadData() {
-        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("disease", query);
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", query);
         call.enqueue(loadDiseaseListener);
     }
 
@@ -110,7 +114,8 @@ public class QueryResponseFragment extends Fragment {
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
                     Toast.makeText(getContext(), "ไม่พบโรคที่ค้นหา", Toast.LENGTH_SHORT).show();
                 } else { // พบช้อมูล
-
+                    listAdapter.setDao(dao); // โยน dao ให้ adapter
+                    listAdapter.notifyDataSetChanged();
                 }
             } else { // 404 NOT FOUND
                 Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
