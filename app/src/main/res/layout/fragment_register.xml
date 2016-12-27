@@ -92,7 +92,6 @@
 
             </RadioGroup>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,18 +108,28 @@
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerDays"
+                    style="@style/Base.Widget.AppCompat.Spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:spinnerMode="dialog" />
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerMonths"
+                    style="@style/Base.Widget.AppCompat.Spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:spinnerMode="dialog" />
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerYears"
+                    style="@style/Base.Widget.AppCompat.Spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -235,7 +244,7 @@
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerProvince"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    style="@style/Base.Widget.AppCompat.Spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

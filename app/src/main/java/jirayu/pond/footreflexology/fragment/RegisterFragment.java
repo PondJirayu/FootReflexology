@@ -22,8 +22,8 @@ import jirayu.pond.footreflexology.activity.MainActivity;
 public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     Button btnSignUp;
-    Spinner spinnerProvince;
-    ArrayAdapter<CharSequence> adapter;
+    Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
+    ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
 
     public RegisterFragment() {
         super();
@@ -48,13 +48,30 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
+        spinnerDays = (Spinner) rootView.findViewById(R.id.spinnerDays);
+        spinnerMonths = (Spinner) rootView.findViewById(R.id.spinnerMonths);
+        spinnerYears = (Spinner) rootView.findViewById(R.id.spinnerYears);
 
-        // Create Adapter of Spinner
-        adapter = ArrayAdapter.createFromResource(getActivity(),
+        // Create Adapter of Spinner (Province)
+        adapterProvince = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProvince.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
+        adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProvince.setAdapter(adapterProvince); // สั่งให้ spinner ทำงานคู่กับ adapter
         spinnerProvince.setOnItemSelectedListener(this); // Handle Click Spinner
+
+        // Create Adapter of Spinner (Day)
+        adapterDays = ArrayAdapter.createFromResource(getActivity(),
+                R.array.array_days, android.R.layout.simple_spinner_item);
+        adapterDays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDays.setAdapter(adapterDays);
+        spinnerDays.setOnItemSelectedListener(this);
+
+        // Create Adapter of Spinner (Month)
+        adapterMonths = ArrayAdapter.createFromResource(getActivity(),
+                R.array.array_months, android.R.layout.simple_spinner_item);
+        adapterMonths.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonths.setAdapter(adapterMonths);
+        spinnerMonths.setOnItemSelectedListener(this);
 
         // Handle Click Button
         btnSignUp.setOnClickListener(this);
