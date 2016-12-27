@@ -25,9 +25,17 @@ import retrofit2.http.Path;
  */
 public class QueryResponseFragment extends Fragment {
 
+    /************
+     * Variables
+     ************/
+
     String query;
     ListView listView;
     DiseaseListAdapter listAdapter;
+
+    /************
+     * Functions
+     ************/
 
     public QueryResponseFragment() {
         super();

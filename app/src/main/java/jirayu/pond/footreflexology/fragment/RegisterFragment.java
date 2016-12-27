@@ -21,9 +21,17 @@ import jirayu.pond.footreflexology.activity.MainActivity;
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    /************
+     * Variables
+     ************/
+
     Button btnSignUp;
     Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
     ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
+
+    /************
+     * Functions
+     ************/
 
     public RegisterFragment() {
         super();
@@ -84,15 +92,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         btnSignUp.setOnClickListener(this);
     }
 
-    // Handle Click Button
-    @Override
-    public void onClick(View v) {
-        if (v == btnSignUp) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -123,6 +122,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    // Handle Click Button
+    @Override
+    public void onClick(View v) {
+        if (v == btnSignUp) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -132,8 +149,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 //                .show();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    /**************
+     * Inner Class
+     **************/
 
-    }
 }
