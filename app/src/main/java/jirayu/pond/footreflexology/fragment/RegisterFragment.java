@@ -73,6 +73,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         spinnerMonths.setAdapter(adapterMonths);
         spinnerMonths.setOnItemSelectedListener(this);
 
+        // Create Adapter of Spinner (Year)
+        adapterYears = ArrayAdapter.createFromResource(getActivity(),
+                R.array.array_years, android.R.layout.simple_spinner_item);
+        adapterYears.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerYears.setAdapter(adapterYears);
+        spinnerYears.setOnItemSelectedListener(this);
+
         // Handle Click Button
         btnSignUp.setOnClickListener(this);
     }
