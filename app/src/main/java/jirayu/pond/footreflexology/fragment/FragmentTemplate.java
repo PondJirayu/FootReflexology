@@ -14,6 +14,14 @@ import jirayu.pond.footreflexology.R;
  */
 public class FragmentTemplate extends Fragment {
 
+    /************
+     * Variables
+     ************/
+
+    /************
+     * Functions
+     ************/
+
     public FragmentTemplate() {
         super();
     }
@@ -66,4 +74,13 @@ public class FragmentTemplate extends Fragment {
             // Restore Instance State here
         }
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    /**************
+     * Inner Class
+     **************/
+
 }
