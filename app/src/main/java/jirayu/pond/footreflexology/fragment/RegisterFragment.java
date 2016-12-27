@@ -22,7 +22,6 @@ import jirayu.pond.footreflexology.activity.MainActivity;
 public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     Button btnSignUp;
-    TextView tvBirthDay;
     Spinner spinnerProvince;
     ArrayAdapter<CharSequence> adapter;
 
@@ -49,7 +48,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
-        tvBirthDay = (TextView) rootView.findViewById(R.id.tvBirthDay);
 
         // Create Adapter of Spinner
         adapter = ArrayAdapter.createFromResource(getActivity(),
