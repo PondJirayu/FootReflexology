@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
+import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -32,6 +36,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
     EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
     RadioButton rbMale, rbFemale;
+    ProgressDialog progressDialog;
+    String firstName, lastName, identificationNumber, telephoneNumber, address, subDistrict, district;
 
     /************
      * Functions
@@ -144,6 +150,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     }
 
+    private void getTextToVariables() {
+        firstName = editFirstName.getText().toString();
+        lastName = editLastName.getText().toString();
+        identificationNumber = editIdentificationNumber.getText().toString();
+        telephoneNumber = editTelephoneNumber.getText().toString();
+        address = editAddress.getText().toString();
+        subDistrict = editSubDistrict.getText().toString();
+        district = editDistrict.getText().toString();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -151,7 +167,33 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     // Handle Click Button
     @Override
     public void onClick(View v) {
+        // create Dialog
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(true);
+        progressDialog.setTitle("รอสักครู่...");
+        progressDialog.setMessage("กำลังบันทึกข้อมูล");
+
         if (v == btnSignUp) {
+
+            // ฟังก์ชั่น get text ใส้ตัวแปร
+            getTextToVariables();
+
+            if (firstName.trim().length() == 0
+                    || lastName.trim().length() == 0
+                    || identificationNumber.trim().length() == 0
+                    || telephoneNumber.trim().length() == 0
+                    || address.trim().length() == 0
+                    || subDistrict.trim().length() == 0
+                    || district.trim().length() == 0) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนข้อมูลให้ครบถ้วน",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                progressDialog.show();
+                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList("member", firstName, lastName,
+                        identificationNumber, telephoneNumber, address, subDistrict, district);
+            }
 //            Intent intent = new Intent(getActivity(), MainActivity.class);
 //            startActivity(intent);
         }
