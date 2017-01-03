@@ -175,7 +175,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
         if (v == btnSignUp) {
 
-            // ฟังก์ชั่น get text ใส้ตัวแปร
+            // getText to variable
             getTextToVariables();
 
             if (firstName.trim().length() == 0
