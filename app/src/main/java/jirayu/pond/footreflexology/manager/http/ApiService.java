@@ -6,6 +6,7 @@ import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.OrganItemCollectionDao;
+import jirayu.pond.footreflexology.dao.StatusDao;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -35,12 +36,12 @@ public interface ApiService {
     @GET("{tableName}/none/create?firstname={firstName}&lastname={lastName}&identification_number={identificationNumber}" +
             "&gender={gender}&birthdate={birthDate}&telephone_number={telephoneNumber}&house_village={houseVillage}&sub_district={subDistrict}" +
             "&district={district}&province={province}&created_at={createdAt}&updated_at={updatedAt}")
-    Call<Object>    InsertMemberList(@Path("tableName") String tableName, @Path("firstName") String firstName,
-                                     @Path("lastName") String lastName, @Path("identificationNumber") String identificationNumber,
-                                     @Path("gender") String gender, @Path("birthDate") String birthDate,
-                                     @Path("telephoneNumber") String telephoneNumber, @Path("houseVillage") String houseVillage,
-                                     @Path("subDistrict") String subDistrict, @Path("district") String district,
-                                     @Path("province") String province, @Path("createdAt") String createdAt,
-                                     @Path("updatedAt") String updatedAt);
+    Call<StatusDao>    InsertMemberList(@Path("tableName") String tableName, @Path("firstName") String firstName,
+                                        @Path("lastName") String lastName, @Path("identificationNumber") String identificationNumber,
+                                        @Path("gender") String gender, @Path("birthDate") String birthDate,
+                                        @Path("telephoneNumber") String telephoneNumber, @Path("houseVillage") String houseVillage,
+                                        @Path("subDistrict") String subDistrict, @Path("district") String district,
+                                        @Path("province") String province, @Path("createdAt") String createdAt,
+                                        @Path("updatedAt") String updatedAt);
 
 }
