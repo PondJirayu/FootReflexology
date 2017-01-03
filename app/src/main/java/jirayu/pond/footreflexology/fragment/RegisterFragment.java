@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
     ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
     EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
+    RadioButton rbMale, rbFemale;
 
     /************
      * Functions
@@ -68,6 +70,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
+        rbMale = (RadioButton) rootView.findViewById(R.id.rbMale);
+        rbFemale = (RadioButton) rootView.findViewById(R.id.rbFemale);
 
         createSpinner();
 
