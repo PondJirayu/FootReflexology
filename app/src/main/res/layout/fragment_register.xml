@@ -160,6 +160,7 @@
                 android:layout_marginTop="12dp">
 
                 <EditText
+                    android:id="@+id/edit_telephone_number"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_number"
@@ -178,6 +179,7 @@
                 android:layout_marginTop="12dp">
 
                 <EditText
+                    android:id="@+id/edit_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
@@ -201,6 +203,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edit_sub_district"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/sub_district"
@@ -216,6 +219,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edit_district"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/district"

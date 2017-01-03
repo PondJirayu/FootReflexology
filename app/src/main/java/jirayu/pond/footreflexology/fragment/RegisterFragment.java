@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     Button btnSignUp;
     Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
     ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
+    EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
 
     /************
      * Functions
@@ -59,6 +61,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         spinnerDays = (Spinner) rootView.findViewById(R.id.spinnerDays);
         spinnerMonths = (Spinner) rootView.findViewById(R.id.spinnerMonths);
         spinnerYears = (Spinner) rootView.findViewById(R.id.spinnerYears);
+        editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
+        editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
+        editIdentificationNumber = (EditText) rootView.findViewById(R.id.edit_identification_number);
+        editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
+        editAddress = (EditText) rootView.findViewById(R.id.edit_address);
+        editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
+        editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
 
         createSpinner();
 
@@ -139,8 +148,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v == btnSignUp) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(), MainActivity.class);
+//            startActivity(intent);
         }
     }
 
