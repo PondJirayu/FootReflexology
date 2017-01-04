@@ -34,14 +34,13 @@ public interface ApiService {
     @GET("{tableName}/{key}")
     Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") int key);
 
-    @GET("{tableName}/none/create")
-    Call<StatusDao>    InsertMemberList(@Path("tableName") String tableName, @Query("firstName") String firstName,
-                                        @Query("lastName") String lastName, @Query("identificationNumber") String identificationNumber,
-                                        @Query("gender") String gender, @Query("birthDate") String birthDate,
-                                        @Query("telephoneNumber") String telephoneNumber, @Query("houseVillage") String houseVillage,
-                                        @Query("subDistrict") String subDistrict, @Query("district") String district,
-                                        @Query("province") String province, @Query("createdAt") String createdAt,
-                                        @Query("updatedAt") String updatedAt);
+    @GET("member/none/create")
+    Call<StatusDao>    InsertMemberList(@Query("firstName") String firstName, @Query("lastName") String lastName,
+                                        @Query("identificationNumber") String identificationNumber, @Query("gender") String gender,
+                                        @Query("birthDate") String birthDate, @Query("telephoneNumber") String telephoneNumber,
+                                        @Query("houseVillage") String houseVillage, @Query("subDistrict") String subDistrict,
+                                        @Query("district") String district, @Query("province") String province,
+                                        @Query("createdAt") String createdAt, @Query("updatedAt") String updatedAt);
 
 //    ?firstname={firstName}&lastname={lastName}&identification_number={identificationNumber}" +
 //            "&gender={gender}&birthdate={birthDate}&telephone_number={telephoneNumber}&house_village={houseVillage}&sub_district={subDistrict}" +

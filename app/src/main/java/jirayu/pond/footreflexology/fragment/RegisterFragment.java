@@ -188,7 +188,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         progressDialog.setMessage("กำลังบันทึกข้อมูล");
 
         if (v == btnSignUp) {
-
             // getText to variable
             getTextToVariables();
 
@@ -205,7 +204,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         .show();
             } else {
                 progressDialog.show();
-                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList("member", firstName, lastName,
+                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList(firstName, lastName,
                         identificationNumber, gender, birthDate,telephoneNumber, houseVillage, subDistrict, district, province,
                         createdAt, updatedAt);
                 call.enqueue(insertMemberList);
