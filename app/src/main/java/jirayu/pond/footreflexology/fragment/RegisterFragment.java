@@ -221,20 +221,25 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             if (response.isSuccessful()) {
                 StatusDao dao = response.body();
                 if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
+                    progressDialog.dismiss();
                     Toast.makeText(getActivity(),
                             "ลงทะเบียนสำเร็จ",
                             Toast.LENGTH_SHORT)
                             .show();
+                    // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+
                     // เข้าสู่หน้าหลัก
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                } else { // ลงทะเบียนไม่สำเร็จ
+                } else if (dao.getSuccess() == 0) { // ลงทะเบียนไม่สำเร็จ
+                    progressDialog.dismiss();
                     Toast.makeText(getActivity(),
                             "ขออภัยลงทะเบียนไม่สำเร็จ",
                             Toast.LENGTH_SHORT)
                             .show();
                 }
             } else { // 404 NOT FOUND
+                progressDialog.dismiss();
                 Toast.makeText(getActivity(),
                         "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลงทะเบียนอีกครั้งในภายหลัง",
                         Toast.LENGTH_SHORT)
@@ -257,10 +262,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        Toast.makeText(getActivity(),
-//                parent.getItemAtPosition(position).toString(),
-//                Toast.LENGTH_SHORT)
-//                .show();
+
+        Spinner spinner = (Spinner) parent;
+
+        if (spinner.getId() == R.id.spinnerProvince) {
+            province = spinnerProvince.getItemAtPosition(position).toString();
+        } else {
+            birthDate = spinnerYears.getItemAtPosition(position).toString() + "-"
+                    + spinnerMonths.getItemAtPosition(position).toString() + "-"
+                    + spinnerDays.getItemAtPosition(position).toString();
+        }
+
+
     }
 
     /**************

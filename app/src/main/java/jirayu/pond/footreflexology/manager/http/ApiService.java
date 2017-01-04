@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by lp700 on 9/12/2559.
@@ -33,15 +34,16 @@ public interface ApiService {
     @GET("{tableName}/{key}")
     Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") int key);
 
-    @GET("{tableName}/none/create?firstname={firstName}&lastname={lastName}&identification_number={identificationNumber}" +
-            "&gender={gender}&birthdate={birthDate}&telephone_number={telephoneNumber}&house_village={houseVillage}&sub_district={subDistrict}" +
-            "&district={district}&province={province}&created_at={createdAt}&updated_at={updatedAt}")
-    Call<StatusDao>    InsertMemberList(@Path("tableName") String tableName, @Path("firstName") String firstName,
-                                        @Path("lastName") String lastName, @Path("identificationNumber") String identificationNumber,
-                                        @Path("gender") String gender, @Path("birthDate") String birthDate,
-                                        @Path("telephoneNumber") String telephoneNumber, @Path("houseVillage") String houseVillage,
-                                        @Path("subDistrict") String subDistrict, @Path("district") String district,
-                                        @Path("province") String province, @Path("createdAt") String createdAt,
-                                        @Path("updatedAt") String updatedAt);
+    @GET("{tableName}/none/create")
+    Call<StatusDao>    InsertMemberList(@Path("tableName") String tableName, @Query("firstName") String firstName,
+                                        @Query("lastName") String lastName, @Query("identificationNumber") String identificationNumber,
+                                        @Query("gender") String gender, @Query("birthDate") String birthDate,
+                                        @Query("telephoneNumber") String telephoneNumber, @Query("houseVillage") String houseVillage,
+                                        @Query("subDistrict") String subDistrict, @Query("district") String district,
+                                        @Query("province") String province, @Query("createdAt") String createdAt,
+                                        @Query("updatedAt") String updatedAt);
 
+//    ?firstname={firstName}&lastname={lastName}&identification_number={identificationNumber}" +
+//            "&gender={gender}&birthdate={birthDate}&telephone_number={telephoneNumber}&house_village={houseVillage}&sub_district={subDistrict}" +
+//            "&district={district}&province={province}&created_at={createdAt}&updated_at={updatedAt}
 }
