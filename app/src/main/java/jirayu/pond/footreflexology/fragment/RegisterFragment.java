@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,10 @@ import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static jirayu.pond.footreflexology.R.string.address;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -35,9 +40,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
     ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
     EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
-    RadioButton rbMale, rbFemale;
     ProgressDialog progressDialog;
-    String firstName, lastName, identificationNumber, telephoneNumber, address, subDistrict, district;
+    String firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
+    RadioGroup radioGroup;
 
     /************
      * Functions
@@ -76,8 +81,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
-        rbMale = (RadioButton) rootView.findViewById(R.id.rbMale);
-        rbFemale = (RadioButton) rootView.findViewById(R.id.rbFemale);
+        radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
 
         createSpinner();
 
@@ -155,9 +159,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         lastName = editLastName.getText().toString();
         identificationNumber = editIdentificationNumber.getText().toString();
         telephoneNumber = editTelephoneNumber.getText().toString();
-        address = editAddress.getText().toString();
+        houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
+
+        // check operator
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbMale:
+                gender = "ชาย";
+                break;
+            case R.id.rbFemale:
+                gender = "หญิง";
+                break;
+        }
     }
 
     /****************
@@ -182,7 +196,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                     || lastName.trim().length() == 0
                     || identificationNumber.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
-                    || address.trim().length() == 0
+                    || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
                 Toast.makeText(getActivity(),
@@ -192,12 +206,53 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             } else {
                 progressDialog.show();
                 Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList("member", firstName, lastName,
-                        identificationNumber, telephoneNumber, address, subDistrict, district);
+                        identificationNumber, gender, birthDate,telephoneNumber, houseVillage, subDistrict, district, province,
+                        createdAt, updatedAt);
+                call.enqueue(insertMemberList);
             }
-//            Intent intent = new Intent(getActivity(), MainActivity.class);
-//            startActivity(intent);
         }
     }
+
+    Callback<StatusDao> insertMemberList = new Callback<StatusDao>() {
+        @Override
+        public void onResponse(Call<StatusDao> call,
+                               Response<StatusDao> response) {
+
+            if (response.isSuccessful()) {
+                StatusDao dao = response.body();
+                if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
+                    Toast.makeText(getActivity(),
+                            "ลงทะเบียนสำเร็จ",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                    // เข้าสู่หน้าหลัก
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                } else { // ลงทะเบียนไม่สำเร็จ
+                    Toast.makeText(getActivity(),
+                            "ขออภัยลงทะเบียนไม่สำเร็จ",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            } else { // 404 NOT FOUND
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลงทะเบียนอีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<StatusDao> call,
+                              Throwable t) {
+
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+    };
 
     // Handle Click Spinner
     @Override
