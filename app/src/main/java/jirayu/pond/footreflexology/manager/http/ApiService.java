@@ -35,18 +35,18 @@ public interface ApiService {
     Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") int key);
 
     @GET("member/none/create")
-    Call<StatusDao>    InsertMemberList(@Query("firstName") String firstName,
-                                        @Query("lastName") String lastName,
-                                        @Query("identificationNumber") String identificationNumber,
+    Call<StatusDao>    InsertMemberList(@Query("firstname") String firstName,
+                                        @Query("lastname") String lastName,
+                                        @Query("identification_number") String identificationNumber,
                                         @Query("gender") String gender,
-                                        @Query("birthDate") String birthDate,
-                                        @Query("telephoneNumber") String telephoneNumber,
-                                        @Query("houseVillage") String houseVillage,
-                                        @Query("subDistrict") String subDistrict,
+                                        @Query("birthdate") String birthDate,
+                                        @Query("telephone_number") String telephoneNumber,
+                                        @Query("house_village") String houseVillage,
+                                        @Query("sub_district") String subDistrict,
                                         @Query("district") String district,
                                         @Query("province") String province,
-                                        @Query("createdAt") String createdAt,
-                                        @Query("updatedAt") String updatedAt);
+                                        @Query("created_at") String createdAt,
+                                        @Query("updated_at") String updatedAt);
 
 //    ?firstname={firstName}&lastname={lastName}&identification_number={identificationNumber}" +
 //            "&gender={gender}&birthdate={birthDate}&telephone_number={telephoneNumber}&house_village={houseVillage}&sub_district={subDistrict}" +
