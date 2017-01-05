@@ -194,13 +194,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             // getText to variable
             getTextToVariables();
 
-            if (firstName.trim().length() == 0
-                    || lastName.trim().length() == 0
-                    || identificationNumber.trim().length() == 0
-                    || telephoneNumber.trim().length() == 0
-                    || houseVillage.trim().length() == 0
-                    || subDistrict.trim().length() == 0
-                    || district.trim().length() == 0) {
+            if (firstName.trim().length() == 0 || lastName.trim().length() == 0 || identificationNumber.trim().length() == 0 || telephoneNumber.trim().length() == 0
+                    || houseVillage.trim().length() == 0 || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
+
                 Toast.makeText(getActivity(),
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
