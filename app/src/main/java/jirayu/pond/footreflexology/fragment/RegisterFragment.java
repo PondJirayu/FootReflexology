@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.dao.StatusDao;
@@ -43,6 +46,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     ProgressDialog progressDialog;
     String firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
     RadioGroup radioGroup;
+    Map<String, String> data;
 
     /************
      * Functions
@@ -82,6 +86,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
+        data = new HashMap<>(); // เก๋บ Query
 
         createSpinner();
 
@@ -172,6 +177,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 gender = "หญิง";
                 break;
         }
+
+        data.put("firstname", firstName);
+        data.put("lastname", lastName);
+        data.put("identification_number", identificationNumber);
+        data.put("gender", gender);
+        data.put("birthdate", birthDate);
+        data.put("telephone_number", telephoneNumber);
+        data.put("house_village", houseVillage);
+        data.put("sub_district", subDistrict);
+        data.put("district", district);
+        data.put("province", province);
+        data.put("created_at", createdAt);
+        data.put("updated_at", updatedAt);
     }
 
     /****************
@@ -204,9 +222,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         .show();
             } else {
                 progressDialog.show();
-                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList(firstName, lastName,
-                        identificationNumber, gender, birthDate,telephoneNumber, houseVillage, subDistrict, district, province,
-                        createdAt, updatedAt);
+                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList(data);
                 call.enqueue(insertMemberList);
             }
         }
