@@ -37,22 +37,20 @@ public interface ApiService {
     @GET("{tableName}/{key}")
     Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") int key);
 
-//    @GET("member/none/create")
-//    Call<StatusDao>    InsertMemberList(@Query("firstname") String firstName,
-//                                        @Query("lastname") String lastName,
-//                                        @Query("identification_number") String identificationNumber,
-//                                        @Query("gender") String gender,
-//                                        @Query("birthdate") String birthDate,
-//                                        @Query("telephone_number") String telephoneNumber,
-//                                        @Query("house_village") String houseVillage,
-//                                        @Query("sub_district") String subDistrict,
-//                                        @Query("district") String district,
-//                                        @Query("province") String province,
-//                                        @Query("created_at") String createdAt,
-//                                        @Query("updated_at") String updatedAt);
-
     @GET("member/none/create")
-    Call<StatusDao>     InsertMemberList(
-            @QueryMap Map<String, String> options
-            );
+    Call<StatusDao>    InsertMemberList(
+            @Query("firstname") String firstName,
+            @Query("lastname") String lastName,
+            @Query("identification_number") String identificationNumber,
+            @Query("gender") String gender,
+            @Query("birthdate") String birthDate,
+            @Query("telephone_number") String telephoneNumber,
+            @Query("house_village") String houseVillage,
+            @Query("sub_district") String subDistrict,
+            @Query("district") String district,
+            @Query("province") String province,
+            @Query("created_at") String createdAt,
+            @Query("updated_at") String updatedAt
+    );
+
 }
