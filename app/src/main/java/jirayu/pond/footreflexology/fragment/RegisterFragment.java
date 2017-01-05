@@ -11,14 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -27,8 +22,6 @@ import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static jirayu.pond.footreflexology.R.string.address;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -196,7 +189,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
             if (firstName.trim().length() == 0 || lastName.trim().length() == 0 || identificationNumber.trim().length() == 0 || telephoneNumber.trim().length() == 0
                     || houseVillage.trim().length() == 0 || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
-
                 Toast.makeText(getActivity(),
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
@@ -230,6 +222,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                     // เข้าสู่หน้าหลัก
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
+                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity
                 } else if (dao.getSuccess() == 0) { // ลงทะเบียนไม่สำเร็จ
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(),
@@ -269,10 +262,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             province = spinnerProvince.getItemAtPosition(position).toString();
         } else {
             birthDate = spinnerYears.getItemAtPosition(position).toString() + "-"
-                    + spinnerMonths.getItemAtPosition(position).toString() + "-"
+                    + spinnerMonths.getItemIdAtPosition(position) + "-"
                     + spinnerDays.getItemAtPosition(position).toString();
         }
-
 
     }
 
