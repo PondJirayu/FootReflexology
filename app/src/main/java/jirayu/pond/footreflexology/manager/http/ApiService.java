@@ -23,19 +23,34 @@ import retrofit2.http.QueryMap;
 public interface ApiService {
 
     @GET("{tableName}/{key}")
-    Call<MemberItemCollectionDao>   loadMemberList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<MemberItemCollectionDao>   loadMemberList(
+            @Path("tableName") String tableName,
+            @Path("key") String key
+    );
 
     @GET("{tableName}/{key}")
-    Call<DetailItemCollectionDao>   loadDetailList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<DetailItemCollectionDao>   loadDetailList(
+            @Path("tableName") String tableName,
+            @Path("key") String key
+    );
 
     @GET("{tableName}/{key}")
-    Call<DiseaseItemCollectionDao>  loadDiseaseList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<DiseaseItemCollectionDao>  loadDiseaseList(
+            @Path("tableName") String tableName,
+            @Path("key") String key
+    );
 
     @GET("{tableName}/{key}")
-    Call<OrganItemCollectionDao>    loadOrganList(@Path("tableName") String tableName, @Path("key") String key);
+    Call<OrganItemCollectionDao>    loadOrganList(
+            @Path("tableName") String tableName,
+            @Path("key") String key
+    );
 
     @GET("{tableName}/{key}")
-    Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(@Path("tableName") String tableName, @Path("key") int key);
+    Call<MedicalHistoryItemCollectionDao>     loadMedicalHistory(
+            @Path("tableName") String tableName,
+            @Path("key") int key
+    );
 
     @GET("member/none/create")
     Call<StatusDao>    InsertMemberList(
