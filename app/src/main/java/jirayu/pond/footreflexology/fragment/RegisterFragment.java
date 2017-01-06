@@ -33,12 +33,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
      ************/
 
     Button btnSignUp;
-    Spinner spinnerProvince, spinnerDays, spinnerMonths, spinnerYears;
-    ArrayAdapter<CharSequence> adapterProvince, adapterDays, adapterMonths, adapterYears;
-    EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
-    ProgressDialog progressDialog;
-    String firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
     RadioGroup radioGroup;
+    Spinner spinnerProvince;
+    ProgressDialog progressDialog;
+    ArrayAdapter<CharSequence> adapterProvince;
+    EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict, editDay, editMonth, editYear;
+    String firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
 
     /************
      * Functions
@@ -66,10 +66,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
+        radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
-        spinnerDays = (Spinner) rootView.findViewById(R.id.spinnerDays);
-        spinnerMonths = (Spinner) rootView.findViewById(R.id.spinnerMonths);
-        spinnerYears = (Spinner) rootView.findViewById(R.id.spinnerYears);
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
         editIdentificationNumber = (EditText) rootView.findViewById(R.id.edit_identification_number);
@@ -77,7 +75,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
-        radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
+        editDay = (EditText) rootView.findViewById(R.id.edit_day);
+        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
+        editYear = (EditText) rootView.findViewById(R.id.edit_year);
 
         createSpinner();
 
@@ -92,27 +92,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProvince.setAdapter(adapterProvince); // สั่งให้ spinner ทำงานคู่กับ adapter
         spinnerProvince.setOnItemSelectedListener(this); // Handle Click Spinner
-
-        // Create Adapter of Spinner (Day)
-        adapterDays = ArrayAdapter.createFromResource(getActivity(),
-                R.array.array_days, android.R.layout.simple_spinner_item);
-        adapterDays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDays.setAdapter(adapterDays);
-        spinnerDays.setOnItemSelectedListener(this);
-
-        // Create Adapter of Spinner (Month)
-        adapterMonths = ArrayAdapter.createFromResource(getActivity(),
-                R.array.array_months, android.R.layout.simple_spinner_item);
-        adapterMonths.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonths.setAdapter(adapterMonths);
-        spinnerMonths.setOnItemSelectedListener(this);
-
-        // Create Adapter of Spinner (Year)
-        adapterYears = ArrayAdapter.createFromResource(getActivity(),
-                R.array.array_years, android.R.layout.simple_spinner_item);
-        adapterYears.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerYears.setAdapter(adapterYears);
-        spinnerYears.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -158,6 +137,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
+        birthDate = editYear.getText().toString()
+                + "-" + editMonth.getText().toString()
+                + "-" + editDay.getText().toString();
 
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
@@ -237,7 +219,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         Toast.LENGTH_SHORT)
                         .show();
             }
-
         }
 
         @Override
@@ -255,17 +236,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        Spinner spinner = (Spinner) parent;
-
-        if (spinner.getId() == R.id.spinnerProvince) {
-            province = spinnerProvince.getItemAtPosition(position).toString();
-        } else {
-            birthDate = spinnerYears.getItemAtPosition(position).toString() + "-"
-                    + spinnerMonths.getItemIdAtPosition(position) + "-"
-                    + spinnerDays.getItemAtPosition(position).toString();
-        }
-
+        // spinner Province
+        province = spinnerProvince.getItemAtPosition(position).toString();
     }
 
     /**************

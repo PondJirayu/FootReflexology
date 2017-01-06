@@ -36,4 +36,7 @@
     <string name="detail">รายละเอียด</string>
     <string name="treatment">การรักษา</string>
     <string name="recommend">คำแนะนำ</string>
+    <string name="date">วันที่</string>
+    <string name="month">เดือน</string>
+    <string name="years">ปี พ.ศ.</string>
 </resources>
