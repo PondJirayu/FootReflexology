@@ -114,7 +114,7 @@
 
                     <EditText
                         android:id="@+id/edit_day"
-                        android:layout_width="45dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/date"
                         android:imeOptions="actionNext"
@@ -131,7 +131,7 @@
 
                     <EditText
                         android:id="@+id/edit_month"
-                        android:layout_width="50dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/month"
                         android:imeOptions="actionNext"

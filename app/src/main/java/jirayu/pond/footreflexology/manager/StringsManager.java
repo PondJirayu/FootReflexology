@@ -9,6 +9,7 @@ public class StringsManager {
     /************
      * Variables
      ************/
+
     private String word;
 
     /************

@@ -152,6 +152,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    private boolean checkDay() {
+        int day = Integer.parseInt(editDay.getText().toString());
+        if (day <= 0 || day > 31)
+            return true;
+        return false;
+    }
+
+    private boolean checkMonth() {
+        int month = Integer.parseInt(editMonth.getText().toString());
+        if (month <= 0 || month > 12)
+            return true;
+        return false;
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -169,14 +183,32 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             // getText to variable
             getTextToVariables();
 
-            if (firstName.trim().length() == 0 || lastName.trim().length() == 0 || identificationNumber.trim().length() == 0 || telephoneNumber.trim().length() == 0
-                    || houseVillage.trim().length() == 0 || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
+            if (firstName.trim().length() == 0
+                    || lastName.trim().length() == 0
+                    || identificationNumber.trim().length() == 0
+                    || telephoneNumber.trim().length() == 0
+                    || editYear.getText().toString().trim().length() == 0
+                    || editMonth.getText().toString().trim().length() == 0
+                    || editDay.getText().toString().trim().length() == 0
+                    || houseVillage.trim().length() == 0
+                    || subDistrict.trim().length() == 0
+                    || district.trim().length() == 0) {
                 Toast.makeText(getActivity(),
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
                         .show();
+            } else if (checkDay()) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนวันที่ให้ถูกต้อง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else if (checkMonth()) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนเดือนให้ถูกต้อง",
+                        Toast.LENGTH_SHORT)
+                        .show();
             } else {
-                progressDialog.show();
+                progressDialog.show(); // show progressDialog
                 Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList(
                         firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber,
                         houseVillage, subDistrict, district, province, createdAt, updatedAt
