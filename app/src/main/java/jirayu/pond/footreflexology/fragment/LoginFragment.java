@@ -166,6 +166,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
                                     startActivity(intent);
+                                    getActivity().finish();
                                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
                                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
                                     progressDialog.dismiss();   // ยกเลิก Dialog
