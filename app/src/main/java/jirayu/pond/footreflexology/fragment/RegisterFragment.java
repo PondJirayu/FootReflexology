@@ -3,6 +3,7 @@ package jirayu.pond.footreflexology.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     Spinner spinnerProvince;
     ProgressDialog progressDialog;
     ArrayAdapter<CharSequence> adapterProvince;
-    EditText editFirstName, editLastName, editIdentificationNumber, editTelephoneNumber, editAddress, editSubDistrict, editDistrict, editDay, editMonth, editYear;
-    String firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
+    EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
+            editSubDistrict, editDistrict, editDay, editMonth, editYear;
+    String firstName, lastName, identificationNumber, gender, birthDate,
+            telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
 
     /************
      * Functions
@@ -49,11 +52,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         super();
     }
 
-    public static RegisterFragment newInstance() {
+    public static RegisterFragment newInstance(String identificationNumber) {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
+        args.putString("identificationNumber", identificationNumber); // เอาตัวแปร identificationNumber เก็บใน Arguments
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Read from Arguments / อ่านค่าจาก Arguments ใส่ Member Variable
+        identificationNumber = getArguments().getString("query");
     }
 
     @Override
@@ -71,7 +82,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
-        editIdentificationNumber = (EditText) rootView.findViewById(R.id.edit_identification_number);
         editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
@@ -133,7 +143,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private void getTextToVariables() {
         firstName = editFirstName.getText().toString();
         lastName = editLastName.getText().toString();
-        identificationNumber = editIdentificationNumber.getText().toString();
         telephoneNumber = editTelephoneNumber.getText().toString();
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
@@ -186,7 +195,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
             if (firstName.trim().length() == 0
                     || lastName.trim().length() == 0
-                    || identificationNumber.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
                     || editYear.getText().toString().trim().length() == 0
                     || editMonth.getText().toString().trim().length() == 0
@@ -211,8 +219,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             } else {
                 progressDialog.show(); // show progressDialog
                 Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
-                        firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber,
-                        houseVillage, subDistrict, district, province, createdAt, updatedAt
+                        firstName,
+                        lastName,
+                        identificationNumber,
+                        gender,
+                        birthDate,
+                        telephoneNumber,
+                        houseVillage,
+                        subDistrict,
+                        district,
+                        province,
+                        createdAt,
+                        updatedAt
                 );
                 call.enqueue(insertMemberList);
             }
