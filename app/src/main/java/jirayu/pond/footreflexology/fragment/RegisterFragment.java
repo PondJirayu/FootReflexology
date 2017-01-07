@@ -17,7 +17,8 @@ import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
-import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -209,7 +210,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         .show();
             } else {
                 progressDialog.show(); // show progressDialog
-                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMemberList(
+                Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
                         firstName, lastName, identificationNumber, gender, birthDate, telephoneNumber,
                         houseVillage, subDistrict, district, province, createdAt, updatedAt
                 );
@@ -218,13 +219,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    Callback<StatusDao> insertMemberList = new Callback<StatusDao>() {
+    Callback<MemberItemCollectionDao> insertMemberList = new Callback<MemberItemCollectionDao>() {
         @Override
-        public void onResponse(Call<StatusDao> call,
-                               Response<StatusDao> response) {
+        public void onResponse(Call<MemberItemCollectionDao> call,
+                               Response<MemberItemCollectionDao> response) {
 
             if (response.isSuccessful()) {
-                StatusDao dao = response.body();
+                MemberItemCollectionDao dao = response.body();
                 if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(),
@@ -232,7 +233,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                             Toast.LENGTH_SHORT)
                             .show();
                     // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-
+                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0));
                     // เข้าสู่หน้าหลัก
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
@@ -254,7 +255,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
 
         @Override
-        public void onFailure(Call<StatusDao> call,
+        public void onFailure(Call<MemberItemCollectionDao> call,
                               Throwable t) {
 
             progressDialog.dismiss();

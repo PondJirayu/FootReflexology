@@ -1,20 +1,14 @@
 package jirayu.pond.footreflexology.manager.http;
 
-import java.util.Map;
-
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.OrganItemCollectionDao;
-import jirayu.pond.footreflexology.dao.StatusDao;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by lp700 on 9/12/2559.
@@ -53,7 +47,7 @@ public interface ApiService {
     );
 
     @GET("member/none/create")
-    Call<StatusDao>    InsertMemberList(
+    Call<MemberItemCollectionDao>    InsertMemberList(
             @Query("firstname") String firstName,
             @Query("lastname") String lastName,
             @Query("identification_number") String identificationNumber,
