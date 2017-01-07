@@ -48,6 +48,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     Animation anim;
     RelativeLayout rootLayout;
     ProgressDialog progressDialog;
+    String identificationNumber;
 
     /************
      * Functions
@@ -146,6 +147,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
 
+        identificationNumber = editName.getText().toString();
+
         if (v == btnSignUp) {
             if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
                 if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
@@ -154,7 +157,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก", Snackbar.LENGTH_LONG).show();
                 } else {
                     progressDialog.show();
-                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", editName.getText().toString());
+                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", identificationNumber);
                     call.enqueue(new Callback<MemberItemCollectionDao>() {
                         @Override
                         public void onResponse(Call<MemberItemCollectionDao> call,
@@ -165,12 +168,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                                    intent.putExtra("identificationNumber", identificationNumber);
                                     startActivity(intent);
                                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
                                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
                                     progressDialog.dismiss();   // ยกเลิก Dialog
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    intent.putExtra("identificationNumber", editName.getText().toString());
                                     startActivity(intent);
                                     getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
                                 }

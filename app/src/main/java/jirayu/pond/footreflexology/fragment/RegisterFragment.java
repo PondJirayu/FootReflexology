@@ -64,7 +64,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Read from Arguments / อ่านค่าจาก Arguments ใส่ Member Variable
-        identificationNumber = getArguments().getString("query");
+        identificationNumber = getArguments().getString("identificationNumber");
     }
 
     @Override

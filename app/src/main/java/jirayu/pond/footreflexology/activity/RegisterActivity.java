@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.RegisterFragment;
@@ -18,7 +19,6 @@ public class RegisterActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    String identificationNumber;
 
     /************
      * Functions
@@ -30,13 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         // เปิดซองจดหมาย (intent)
         Intent intent = getIntent();
-        identificationNumber = intent.getStringExtra("identificationNumber");
+        String identificationNumber = intent.getStringExtra("identificationNumber");
 
         setContentView(R.layout.activity_register);
 
         initToolbar();
         initInstances();
-        initFragments(savedInstanceState);
+        initFragments(savedInstanceState, identificationNumber);
     }
 
     private void initToolbar() {
@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void initFragments(Bundle savedInstanceState) {
+    private void initFragments(Bundle savedInstanceState, String identificationNumber) {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
