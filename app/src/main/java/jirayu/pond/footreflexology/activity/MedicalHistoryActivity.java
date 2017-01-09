@@ -99,8 +99,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
             case R.id.action_logout:
                 return true;
             case android.R.id.home: // Handle on BackPress
