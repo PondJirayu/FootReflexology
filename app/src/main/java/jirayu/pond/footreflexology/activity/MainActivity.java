@@ -176,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
         }
         // Handle Click Options Menu
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
             case R.id.action_logout:
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);

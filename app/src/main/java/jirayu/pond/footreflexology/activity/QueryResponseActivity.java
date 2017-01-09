@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.QueryResponseFragment;
@@ -92,6 +93,18 @@ public class QueryResponseActivity extends AppCompatActivity {
     /****************
      * Listener Zone
      ****************/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle click Option Menu
+        switch (item.getItemId()) {
+            case android.R.id.home: // Handle on BackPress
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /***************
      * Inner Class
