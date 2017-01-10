@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.EditProfileFragment;
 import jirayu.pond.footreflexology.fragment.ProfileFragment;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -100,6 +101,10 @@ public class ProfileActivity extends AppCompatActivity {
         // Handle click Option Menu
         switch (item.getItemId()) {
             case R.id.action_edit:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, EditProfileFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
