@@ -6,9 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
+import java.util.Date;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static jirayu.pond.footreflexology.R.string.age;
 
 
 /**
@@ -20,17 +33,8 @@ public class ProfileFragment extends Fragment {
      * Variables
      ************/
 
-    TextView tvFirstName;
-    TextView tvLastName;
-    TextView tvGender;
-    TextView tvBirthDate;
-    TextView tvAge;
-    TextView tvIdentificationNumber;
-    TextView tvTelephoneNumber;
-    TextView tvHouseVillage;
-    TextView tvSubDistrict;
-    TextView tvDistrict;
-    TextView tvProvince;
+    TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
+            tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince;
 
     /************
      * Functions
@@ -68,23 +72,35 @@ public class ProfileFragment extends Fragment {
         tvSubDistrict = (TextView)  rootView.findViewById(R.id.tvSubDistrict);
         tvDistrict = (TextView) rootView.findViewById(R.id.tvDistrict);
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
-
-        tvFirstName.setText(DataMemberManager.getInstance().getMemberItemDao().getFirstName());
-        tvLastName.setText(DataMemberManager.getInstance().getMemberItemDao().getLastName());
-        tvGender.setText(DataMemberManager.getInstance().getMemberItemDao().getGender());
-        tvBirthDate.setText(DataMemberManager.getInstance().getMemberItemDao().getBirthDate());
-        tvAge.setText("0");
-        tvIdentificationNumber.setText(DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber());
-        tvTelephoneNumber.setText(DataMemberManager.getInstance().getMemberItemDao().getTelephoneNumber());
-        tvHouseVillage.setText(DataMemberManager.getInstance().getMemberItemDao().getHouseVillage());
-        tvSubDistrict.setText(DataMemberManager.getInstance().getMemberItemDao().getSubDistrict());
-        tvDistrict.setText(DataMemberManager.getInstance().getMemberItemDao().getDistrict());
-        tvProvince.setText(DataMemberManager.getInstance().getMemberItemDao().getProvince());
     }
 
     @Override
     public void onStart() {
+        loadProfile();
         super.onStart();
+    }
+
+    private String calAge(MemberItemCollectionDao dao) {
+        String birthDate = dao.getData().get(0).getBirthDate();
+        int year = Integer.parseInt(birthDate.substring(0, 4)) - 543; // แปลง พ.ศ. เป็น ค.ศ.
+        int month = Integer.parseInt(birthDate.substring(5, 7));
+        int day = Integer.parseInt(birthDate.substring(8));
+
+        // คำนวณอายุ
+        LocalDate Bd = new LocalDate(year, month, day);
+        LocalDate now = new LocalDate();
+        Years age = Years.yearsBetween(Bd, now);
+
+        return Integer.toString(age.getYears());
+    }
+
+
+    private void loadProfile() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+        );
+        call.enqueue(loadProfile);
     }
 
     @Override
@@ -116,6 +132,45 @@ public class ProfileFragment extends Fragment {
      * Listener Zone
      ****************/
 
+    Callback<MemberItemCollectionDao> loadProfile = new Callback<MemberItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MemberItemCollectionDao> call, Response<MemberItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                MemberItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย
+                    Toast.makeText(getActivity(),
+                            "ไม่พบข้อมูลผู้ป่วย",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                } else { // พบข้อมูลผู้ป่วย
+                    tvFirstName.setText(dao.getData().get(0).getFirstName());
+                    tvLastName.setText(dao.getData().get(0).getLastName());
+                    tvGender.setText(dao.getData().get(0).getGender());
+                    tvBirthDate.setText(dao.getData().get(0).getBirthDate());
+                    tvAge.setText(calAge(dao));
+                    tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
+                    tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
+                    tvHouseVillage.setText(dao.getData().get(0).getHouseVillage());
+                    tvSubDistrict.setText(dao.getData().get(0).getSubDistrict());
+                    tvDistrict.setText(dao.getData().get(0).getDistrict());
+                    tvProvince.setText(dao.getData().get(0).getProvince());
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+    };
 
     /***************
      * Inner Class
