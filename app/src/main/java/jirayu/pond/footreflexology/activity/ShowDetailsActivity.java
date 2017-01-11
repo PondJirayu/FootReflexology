@@ -59,13 +59,6 @@ public class ShowDetailsActivity extends AppCompatActivity {
         }
     }
 
-    // Inflate Options Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_show_details, menu);
-        return true;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
