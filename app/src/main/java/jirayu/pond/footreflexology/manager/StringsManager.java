@@ -33,6 +33,6 @@ public class StringsManager {
     }
 
     public String getChangeBirthDate() {
-        return  word.substring(8) + "-" + word.substring(5, 7) + "-" + word.substring(0, 4);
+        return  getWord().substring(8) + "-" + getWord().substring(5, 7) + "-" + getWord().substring(0, 4);
     }
 }
