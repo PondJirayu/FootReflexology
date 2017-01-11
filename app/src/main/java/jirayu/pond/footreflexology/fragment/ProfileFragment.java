@@ -17,6 +17,7 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
+import jirayu.pond.footreflexology.manager.StringsManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,6 +36,7 @@ public class ProfileFragment extends Fragment {
 
     TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
             tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince;
+    StringsManager stringsManager;
 
     /************
      * Functions
@@ -72,6 +74,7 @@ public class ProfileFragment extends Fragment {
         tvSubDistrict = (TextView)  rootView.findViewById(R.id.tvSubDistrict);
         tvDistrict = (TextView) rootView.findViewById(R.id.tvDistrict);
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
+        stringsManager = new StringsManager();
     }
 
     @Override
@@ -146,7 +149,8 @@ public class ProfileFragment extends Fragment {
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());
-                    tvBirthDate.setText(dao.getData().get(0).getBirthDate());
+                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
+                    tvBirthDate.setText(stringsManager.getChangeBirthDate());
                     tvAge.setText(calAge(dao));
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
                     tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());

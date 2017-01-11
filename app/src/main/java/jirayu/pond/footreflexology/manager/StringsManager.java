@@ -29,6 +29,10 @@ public class StringsManager {
     }
 
     public String getWordNoneNumberAndNoneWhiteSpace() {
-        return word.substring(3).trim();
+        return getWord().substring(3).trim();
+    }
+
+    public String getChangeBirthDate() {
+        return  word.substring(8) + "-" + word.substring(5, 7) + "-" + word.substring(0, 4);
     }
 }
