@@ -28,4 +28,5 @@ public class MemberItemCollectionDao {
     public void setData(List<MemberItemDao> data) {
         this.data = data;
     }
+
 }

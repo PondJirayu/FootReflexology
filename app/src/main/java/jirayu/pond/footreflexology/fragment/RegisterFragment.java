@@ -135,11 +135,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     private void getTextToVariables() {
         firstName = editFirstName.getText().toString();
         lastName = editLastName.getText().toString();
@@ -289,6 +284,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // spinner Province
         province = spinnerProvince.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     /**************

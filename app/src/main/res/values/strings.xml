@@ -28,7 +28,7 @@
     <string name="year">ปี</string>
     <string name="action_search">ค้นหาโรค..</string>
     <string name="foot_right">foot_right</string>
-    <string name="ok">ยืนยันการลงทะเบียน</string>
+    <string name="save">บันทึก</string>
     <string name="action_save">Save</string>
     <string name="write_something">เขียนอะไรบางอย่าง..</string>
     <string name="do_details">แสดงรายละเอียด</string>

@@ -267,16 +267,14 @@
 
             <Button
                 android:id="@+id/btnSignUp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/selector_btn_sign_up_register_page"
+                android:padding="15dp"
                 android:paddingBottom="14dp"
-                android:paddingTop="15dp"
-                android:text="@string/ok"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:text="@string/save"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
