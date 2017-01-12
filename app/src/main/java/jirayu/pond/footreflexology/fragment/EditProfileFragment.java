@@ -144,7 +144,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
+            // UpdateMember Here
 
+            getFragmentManager().popBackStack();
         }
     }
 

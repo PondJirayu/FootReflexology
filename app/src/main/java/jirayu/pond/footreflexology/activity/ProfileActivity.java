@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -101,11 +102,19 @@ public class ProfileActivity extends AppCompatActivity {
         // Handle click Option Menu
         switch (item.getItemId()) {
             case R.id.action_edit:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentContainer,
-                                EditProfileFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+
+                // ค้นหา Fragment ที่วางอยู่บน contentContainer
+                Fragment fragment = getSupportFragmentManager()
+                        .findFragmentById(R.id.contentContainer);
+
+                // check ว่าใช่ EditProfileFragment รึเปล่า (เพื่อป้อนกันการว่าง Fragment ตัวเดียวกัน ทับกัน)
+                if (fragment instanceof EditProfileFragment == false) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.contentContainer,
+                                    EditProfileFragment.newInstance())
+                            .addToBackStack(null)
+                            .commit();
+                }
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
