@@ -102,7 +102,8 @@ public class ProfileActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentContainer, EditProfileFragment.newInstance())
+                        .replace(R.id.contentContainer,
+                                EditProfileFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
                 return true;

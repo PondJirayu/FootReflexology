@@ -79,9 +79,22 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
 
         createSpinner();
+        createContent();
 
         // Handle Click Button
         btnSave.setOnClickListener(this);
+    }
+
+    private void createContent() {
+        editFirstName.setText("");
+        editLastName.setText("");
+        editDay.setText("");
+        editMonth.setText("");
+        editYear.setText("");
+        editTelephoneNumber.setText("");
+        editAddress.setText("");
+        editSubDistrict.setText("");
+        editDistrict.setText("");
     }
 
     private void createSpinner() {
