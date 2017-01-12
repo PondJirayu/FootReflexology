@@ -35,4 +35,16 @@ public class StringsManager {
     public String getChangeBirthDate() {
         return  getWord().substring(8) + "-" + getWord().substring(5, 7) + "-" + getWord().substring(0, 4);
     }
+
+    public String getDay() {
+        return getWord().substring(8);
+    }
+
+    public String getMonth() {
+        return getWord().substring(5, 7);
+    }
+
+    public String getYear() {
+        return getWord().substring(0, 4);
+    }
 }

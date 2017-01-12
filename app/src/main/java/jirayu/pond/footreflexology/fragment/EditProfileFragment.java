@@ -13,8 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
+import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import jirayu.pond.footreflexology.manager.StringsManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.Path;
 
 /**
@@ -34,6 +43,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     Button btnSave;
     ArrayAdapter<CharSequence> adapterProvince;
     String province;
+    StringsManager stringsManager;
 
     /************
      * Functions
@@ -77,12 +87,22 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         btnSave = (Button) rootView.findViewById(R.id.btnSignUp);
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
+        stringsManager = new StringsManager();
 
         createSpinner();
+        loadMemberList();
         createContent();
 
         // Handle Click Button
         btnSave.setOnClickListener(this);
+    }
+
+    private void loadMemberList() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+        );
+        call.enqueue(loadMemberList);
     }
 
     private void createContent() {
@@ -145,7 +165,15 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     public void onClick(View v) {
         if (v == btnSave) {
             // UpdateMember Here
-
+//            Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
+//                    DataMemberManager.getInstance().getMemberItemDao().getId(),
+//                    editFirstName.getText().toString(),
+//                    editLastName.getText().toString(),
+//                    editTelephoneNumber.getText().toString(),
+//                    editAddress.getText().toString(),
+//                    editSubDistrict.getText().toString(),
+//                    editDistrict.getText().toString()
+//            );
             getFragmentManager().popBackStack();
         }
     }
@@ -161,6 +189,50 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    Callback<MemberItemCollectionDao> loadMemberList = new Callback<MemberItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MemberItemCollectionDao> call, Response<MemberItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                MemberItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) {
+                    Toast.makeText(getActivity(),
+                            "ไม่พบข้อมูลผู้ป่วย",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    editFirstName.setText(dao.getData().get(0).getFirstName());
+                    editLastName.setText(dao.getData().get(0).getLastName());
+                    if (dao.getData().get(0).getGender().equals("ชาย")) {
+                        radioGroup.check(R.id.rbMale);
+                    } else {
+                       radioGroup.check(R.id.rbFemale);
+                    }
+                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
+                    editDay.setText(stringsManager.getDay());
+                    editMonth.setText(stringsManager.getMonth());
+                    editYear.setText(stringsManager.getYear());
+                    editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
+                    editAddress.setText(dao.getData().get(0).getHouseVillage());
+                    editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
+                    editDistrict.setText(dao.getData().get(0).getDistrict());
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+    };
 
 
     /**************
