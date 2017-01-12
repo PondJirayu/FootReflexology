@@ -203,8 +203,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
                     editDistrict.setText(dao.getData().get(0).getDistrict());
-                    // set Spinner here
-
+                    stringsManager.setWord(dao.getData().get(0).getProvince());
+                    spinnerProvince.setSelection(stringsManager.getProvinceId());
                 }
             } else {
                 Toast.makeText(getActivity(),
