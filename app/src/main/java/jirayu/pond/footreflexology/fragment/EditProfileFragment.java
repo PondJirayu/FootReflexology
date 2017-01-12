@@ -91,7 +91,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
 
         createSpinner();
         loadMemberList();
-        createContent();
 
         // Handle Click Button
         btnSave.setOnClickListener(this);
@@ -103,18 +102,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                 DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
         );
         call.enqueue(loadMemberList);
-    }
-
-    private void createContent() {
-        editFirstName.setText("");
-        editLastName.setText("");
-        editDay.setText("");
-        editMonth.setText("");
-        editYear.setText("");
-        editTelephoneNumber.setText("");
-        editAddress.setText("");
-        editSubDistrict.setText("");
-        editDistrict.setText("");
     }
 
     private void createSpinner() {
@@ -216,6 +203,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
                     editDistrict.setText(dao.getData().get(0).getDistrict());
+                    // set Spinner here
+
                 }
             } else {
                 Toast.makeText(getActivity(),
