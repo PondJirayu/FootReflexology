@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.activity;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -110,6 +111,10 @@ public class ProfileActivity extends AppCompatActivity {
                 // check ว่าใช่ EditProfileFragment รึเปล่า (เพื่อป้อนกันการว่าง Fragment ตัวเดียวกัน ทับกัน)
                 if (fragment instanceof EditProfileFragment == false) {
                     getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.from_right, R.anim.to_left,
+                                    R.anim.from_left, R.anim.to_right
+                            )
                             .replace(R.id.contentContainer,
                                     EditProfileFragment.newInstance())
                             .addToBackStack(null)
