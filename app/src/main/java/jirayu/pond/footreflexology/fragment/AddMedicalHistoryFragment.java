@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
 
@@ -48,7 +51,14 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
+        createSpinner();
+
         btnSave.setOnClickListener(this);
+    }
+
+    private void createSpinner() {
+        // Create Adapter of Spinner
+
     }
 
     @Override
