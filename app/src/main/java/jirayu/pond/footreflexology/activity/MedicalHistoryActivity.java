@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.fragment.AddMedicalHistoryFragment;
 import jirayu.pond.footreflexology.fragment.MedicalHistoryFragment;
 
 public class MedicalHistoryActivity extends AppCompatActivity {
@@ -100,6 +102,21 @@ public class MedicalHistoryActivity extends AppCompatActivity {
         // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_add:
+
+                Fragment fragment = getSupportFragmentManager()
+                        .findFragmentById(R.id.contentContainer);
+
+                if (fragment instanceof AddMedicalHistoryFragment == false) {
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.from_right, R.anim.to_left,
+                                    R.anim.from_left, R.anim.to_right
+                            )
+                            .replace(R.id.contentContainer,
+                                    AddMedicalHistoryFragment.newInstance())
+                            .addToBackStack(null)
+                            .commit();
+                }
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
