@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Path;
 
+import static jirayu.pond.footreflexology.R.string.district;
+import static jirayu.pond.footreflexology.R.string.gender;
+
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -42,8 +46,10 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     Spinner spinnerProvince;
     Button btnSave;
     ArrayAdapter<CharSequence> adapterProvince;
-    String province;
     StringsManager stringsManager;
+    ProgressDialog progressDialog;
+    String firstName, lastName, gender, birthDate,
+            telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
 
     /************
      * Functions
@@ -143,6 +149,42 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     }
 
+    private void getTextToVariables() {
+        firstName = editFirstName.getText().toString();
+        lastName = editLastName.getText().toString();
+        telephoneNumber = editTelephoneNumber.getText().toString();
+        houseVillage = editAddress.getText().toString();
+        subDistrict = editSubDistrict.getText().toString();
+        district = editDistrict.getText().toString();
+        birthDate = editYear.getText().toString()
+                + "-" + editMonth.getText().toString()
+                + "-" + editDay.getText().toString();
+
+        // check operator
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbMale:
+                gender = "ชาย";
+                break;
+            case R.id.rbFemale:
+                gender = "หญิง";
+                break;
+        }
+    }
+
+    private boolean checkDay() {
+        int day = Integer.parseInt(editDay.getText().toString());
+        if (day <= 0 || day > 31)
+            return true;
+        return false;
+    }
+
+    private boolean checkMonth() {
+        int month = Integer.parseInt(editMonth.getText().toString());
+        if (month <= 0 || month > 12)
+            return true;
+        return false;
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -150,18 +192,59 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     // Handle Click Button
     @Override
     public void onClick(View v) {
+        // create Dialog
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(true);
+        progressDialog.setTitle("รอสักครู่...");
+        progressDialog.setMessage("กำลังบันทึกข้อมูล");
+
         if (v == btnSave) {
-            // UpdateMember Here
-//            Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
-//                    DataMemberManager.getInstance().getMemberItemDao().getId(),
-//                    editFirstName.getText().toString(),
-//                    editLastName.getText().toString(),
-//                    editTelephoneNumber.getText().toString(),
-//                    editAddress.getText().toString(),
-//                    editSubDistrict.getText().toString(),
-//                    editDistrict.getText().toString()
-//            );
-            getFragmentManager().popBackStack();
+            // getText to variable
+            getTextToVariables();
+
+            if (firstName.trim().length() == 0
+                    || lastName.trim().length() == 0
+                    || telephoneNumber.trim().length() == 0
+                    || editYear.getText().toString().trim().length() == 0
+                    || editMonth.getText().toString().trim().length() == 0
+                    || editDay.getText().toString().trim().length() == 0
+                    || houseVillage.trim().length() == 0
+                    || subDistrict.trim().length() == 0
+                    || district.trim().length() == 0) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนข้อมูลให้ครบถ้วน",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else if (checkDay()) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนวันที่ให้ถูกต้อง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else if (checkMonth()) {
+                Toast.makeText(getActivity(),
+                        "กรุณาป้อนเดือนให้ถูกต้อง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                progressDialog.show();
+                // UpdateMember Here
+                Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
+                        DataMemberManager.getInstance().getMemberItemDao().getId(),
+                        firstName,
+                        lastName,
+                        DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber(),
+                        gender,
+                        birthDate,
+                        telephoneNumber,
+                        houseVillage,
+                        subDistrict,
+                        district,
+                        province,
+                        createdAt,
+                        updatedAt
+                );
+                call.enqueue(insertMemberList);
+            }
         }
     }
 
@@ -216,6 +299,48 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
 
         @Override
         public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+    };
+
+    Callback<StatusDao> insertMemberList = new Callback<StatusDao>() {
+        @Override
+        public void onResponse(Call<StatusDao> call,
+                               Response<StatusDao> response) {
+
+            if (response.isSuccessful()) {
+                StatusDao dao = response.body();
+                if (dao.getSuccess() != 1) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(),
+                            "ขออภัยแก้ไขข้อมูลไม่สำเร็จ",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(),
+                            "แก้ไขข้อมูลแล้ว",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                    getFragmentManager().popBackStack();
+                }
+            } else { // 404
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<StatusDao> call,
+                              Throwable t) {
+
+            progressDialog.dismiss();
             Toast.makeText(getActivity(),
                     "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
                     Toast.LENGTH_SHORT)
