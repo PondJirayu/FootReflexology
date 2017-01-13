@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import jirayu.pond.footreflexology.R;
 
@@ -12,11 +13,13 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class AddMedicalHistoryFragment extends Fragment {
+public class AddMedicalHistoryFragment extends Fragment implements View.OnClickListener {
 
     /************
      * Variables
      ************/
+
+    Button btnSave;
 
     /************
      * Functions
@@ -43,6 +46,9 @@ public class AddMedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnSave = (Button) rootView.findViewById(R.id.btnSave);
+
+        btnSave.setOnClickListener(this);
     }
 
     @Override
@@ -75,9 +81,17 @@ public class AddMedicalHistoryFragment extends Fragment {
         }
     }
 
+
     /****************
      * Listener Zone
      ****************/
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnSave) {
+            getFragmentManager().popBackStack();
+        }
+    }
 
     /**************
      * Inner Class
