@@ -5,7 +5,7 @@
         <item
             android:id="@+id/action_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="ข้อมูลส่วนตัว" />
+            android:title="ประวัติส่วนตัว" />
         <item
             android:id="@+id/action_medical_history"
             android:icon="@drawable/ic_accessible_black_24dp"

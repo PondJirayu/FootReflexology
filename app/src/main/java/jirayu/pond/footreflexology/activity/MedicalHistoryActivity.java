@@ -26,7 +26,7 @@ public class MedicalHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_history);
+        setContentView(R.layout.activity_medical_history); // inflate
 
         initToolbar();
         initInstances();
@@ -116,6 +116,9 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                                     AddMedicalHistoryFragment.newInstance())
                             .addToBackStack(null)
                             .commit();
+
+                    // Edit Title
+                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
                 }
                 return true;
             case android.R.id.home: // Handle on BackPress
