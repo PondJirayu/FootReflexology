@@ -57,9 +57,14 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
+        loadData();
         createSpinner();
 
         btnSave.setOnClickListener(this);
+    }
+
+    private void loadData() {
+
     }
 
     private void createSpinner() {
