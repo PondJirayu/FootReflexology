@@ -11,7 +11,12 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -101,10 +106,27 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         if (v == btnSave) {
             // Insert MedicalHistory Here
-
+            Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                    DataMemberManager.getInstance().getMemberItemDao().getId(),
+                    1,
+                    1
+            );
+            call.enqueue(insertMedicalHistory);
             getFragmentManager().popBackStack();
         }
     }
+
+    Callback<StatusDao> insertMedicalHistory = new Callback<StatusDao>() {
+        @Override
+        public void onResponse(Call<StatusDao> call, Response<StatusDao> response) {
+
+        }
+
+        @Override
+        public void onFailure(Call<StatusDao> call, Throwable t) {
+
+        }
+    };
 
     /**************
      * Inner Class
