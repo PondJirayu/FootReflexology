@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="24dp"
                         android:text="อาการ"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -64,7 +64,7 @@
                         style="@style/Base.Widget.AppCompat.Spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="24dp"
                         android:spinnerMode="dialog" />
 
                 </LinearLayout>

@@ -63,6 +63,13 @@ public interface ApiService {
             @Query("updated_at") String updatedAt
     );
 
+    @GET("medicalhistory/none/create")
+    Call<StatusDao>     InsertMedicalHistory(
+                  @Query("member_id")   String memberId,
+                  @Query("disease_id")  String diseaseId,
+                  @Query("behavior_id") String behaviorId
+    );
+
     @GET("member/{key}/edit")
     Call<StatusDao>    UpdateMember(
             @Path("key") int key,

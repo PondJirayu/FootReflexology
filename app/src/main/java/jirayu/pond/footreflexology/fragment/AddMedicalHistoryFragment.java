@@ -11,6 +11,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.manager.HttpManager;
 
 
 /**
@@ -99,6 +100,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
+            // Insert MedicalHistory Here
+
             getFragmentManager().popBackStack();
         }
     }
