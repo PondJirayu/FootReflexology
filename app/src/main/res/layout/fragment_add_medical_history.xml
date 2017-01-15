@@ -15,10 +15,10 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -32,15 +32,17 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="โรค"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginTop="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
                         android:text="อาการ"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -55,16 +57,14 @@
                         style="@style/Base.Widget.AppCompat.Spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:spinnerMode="dialog" />
 
                     <android.support.v7.widget.AppCompatSpinner
-                        android:layout_marginTop="16dp"
                         android:id="@+id/spinnerBehavior"
                         style="@style/Base.Widget.AppCompat.Spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
                         android:spinnerMode="dialog" />
 
                 </LinearLayout>
@@ -76,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
                 android:text="บันทึก"
                 android:textSize="14sp" />
 
