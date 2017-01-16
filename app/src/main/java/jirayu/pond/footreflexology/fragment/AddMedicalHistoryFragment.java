@@ -113,6 +113,12 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
     }
 
+    private void showToast(String text) {
+        Toast.makeText(getActivity(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
 
     /****************
      * Listener Zone
@@ -138,30 +144,18 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             if (response.isSuccessful()) {
                 StatusDao dao = response.body();
                 if (dao.getSuccess() == 1) {
-                    Toast.makeText(getActivity(),
-                            "เพิ่มประวัติการรักษาแล้ว",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("เพิ่มประวัติการรักษาแล้ว");
                 } else {
-                    Toast.makeText(getActivity(),
-                            "เพิ่มประวัติการรักษาไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("เพิ่มประวัติการรักษาไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง");
                 }
             } else {
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<StatusDao> call, Throwable t) {
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
@@ -169,26 +163,20 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         @Override
         public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
             if (response.isSuccessful()){
-                diseaseItemCollectionDao = response.body();
-                if (diseaseItemCollectionDao.getData().isEmpty()) {
+                DiseaseItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
 
-                } else {
-
+                } else { // พบข้อมูล
+                    diseaseItemCollectionDao = dao;
                 }
             } else {
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
@@ -196,26 +184,20 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         @Override
         public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
             if (response.isSuccessful()){
-                behaviorCollectionDao = response.body();
-                if (behaviorCollectionDao.getData().isEmpty()) {
+                BehaviorCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
 
-                } else {
-
+                } else { // พบข้อมูล
+                    behaviorCollectionDao = dao;
                 }
             } else {
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<BehaviorCollectionDao> call, Throwable t) {
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
