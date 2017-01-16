@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
@@ -28,6 +29,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      ************/
 
     Button btnSave;
+    DiseaseItemCollectionDao diseaseItemCollectionDao;
+    BehaviorCollectionDao behaviorCollectionDao;
 
     /************
      * Functions
@@ -132,36 +135,87 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Callback<StatusDao> insertMedicalHistory = new Callback<StatusDao>() {
         @Override
         public void onResponse(Call<StatusDao> call, Response<StatusDao> response) {
-
+            if (response.isSuccessful()) {
+                StatusDao dao = response.body();
+                if (dao.getSuccess() == 1) {
+                    Toast.makeText(getActivity(),
+                            "เพิ่มประวัติการรักษาแล้ว",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    Toast.makeText(getActivity(),
+                            "เพิ่มประวัติการรักษาไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
 
         @Override
         public void onFailure(Call<StatusDao> call, Throwable t) {
-
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
         }
     };
 
     Callback<DiseaseItemCollectionDao> loadDisease = new Callback<DiseaseItemCollectionDao>() {
         @Override
         public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
+            if (response.isSuccessful()){
+                diseaseItemCollectionDao = response.body();
+                if (diseaseItemCollectionDao.getData().isEmpty()) {
 
+                } else {
+
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
-
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
         }
     };
 
     Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
         @Override
         public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
+            if (response.isSuccessful()){
+                behaviorCollectionDao = response.body();
+                if (behaviorCollectionDao.getData().isEmpty()) {
 
+                } else {
+
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
 
         @Override
         public void onFailure(Call<BehaviorCollectionDao> call, Throwable t) {
-
+            Toast.makeText(getActivity(),
+                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
+                    Toast.LENGTH_SHORT)
+                    .show();
         }
     };
 
