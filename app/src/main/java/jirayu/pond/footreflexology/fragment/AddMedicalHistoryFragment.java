@@ -5,12 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
+import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
@@ -57,13 +56,22 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
-        loadData();
+        loadDisease();
+        loadBehavior();
         createSpinner();
 
         btnSave.setOnClickListener(this);
     }
 
-    private void loadData() {
+    private void loadBehavior() {
+        Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior("behaviors");
+        call.enqueue(loadBehavior);
+
+    }
+
+    private void loadDisease() {
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", null);
+        call.enqueue(loadDisease);
 
     }
 
@@ -129,6 +137,30 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
         @Override
         public void onFailure(Call<StatusDao> call, Throwable t) {
+
+        }
+    };
+
+    Callback<DiseaseItemCollectionDao> loadDisease = new Callback<DiseaseItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
+
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
+
+        }
+    };
+
+    Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
+        @Override
+        public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
+
+        }
+
+        @Override
+        public void onFailure(Call<BehaviorCollectionDao> call, Throwable t) {
 
         }
     };

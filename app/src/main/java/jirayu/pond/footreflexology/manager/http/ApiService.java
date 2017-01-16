@@ -50,10 +50,9 @@ public interface ApiService {
             @Path("key") int key
     );
 
-    @GET("{tableName}/{key}")
+    @GET("{tableName}")
     Call<BehaviorCollectionDao> loadBehavior(
-            @Path("tableName") String tableName,
-            @Path("key") int key
+            @Path("tableName") String tableName
     );
 
     // Insert
