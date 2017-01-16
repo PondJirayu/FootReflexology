@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.dao.DiseaseItemDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
@@ -31,6 +35,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Button btnSave;
     DiseaseItemCollectionDao diseaseItemCollectionDao;
     BehaviorCollectionDao behaviorCollectionDao;
+    List<String> disease = new ArrayList<>();
+    List<String> behavior = new ArrayList<>();
 
     /************
      * Functions
@@ -59,6 +65,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
+        // โหลดข้อมูลโรคกับอาการจาก Server
         loadDisease();
         loadBehavior();
         createSpinner();
@@ -69,18 +76,23 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     private void loadBehavior() {
         Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior("behaviors");
         call.enqueue(loadBehavior);
-
     }
 
     private void loadDisease() {
-        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", null);
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", "");
         call.enqueue(loadDisease);
-
     }
 
     private void createSpinner() {
-        // Create Adapter of Spinner
+        // Add Json to ArrayList
+//        for (int i = 0 ; i < diseaseItemCollectionDao.getData().size() ; i++){
+//            disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
+//        }
+//        for (int i = 0 ; i < behaviorCollectionDao.getData().size() ; i++){
+//            behavior.add(behaviorCollectionDao.getData().get(i).getList());
+//        }
 
+        // Create Adapter of Spinner
     }
 
     @Override
@@ -162,12 +174,16 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Callback<DiseaseItemCollectionDao> loadDisease = new Callback<DiseaseItemCollectionDao>() {
         @Override
         public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
-            if (response.isSuccessful()){
+            if (response.isSuccessful()) {
                 DiseaseItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
 
                 } else { // พบข้อมูล
                     diseaseItemCollectionDao = dao;
+                    for (int i = 0; i < diseaseItemCollectionDao.getData().size(); i++) {
+                        disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
+                    }
+                    showToast("D Found");
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -176,19 +192,23 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ 2");
         }
     };
 
     Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
         @Override
         public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
-            if (response.isSuccessful()){
+            if (response.isSuccessful()) {
                 BehaviorCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
 
                 } else { // พบข้อมูล
                     behaviorCollectionDao = dao;
+                    for (int i = 0; i < behaviorCollectionDao.getData().size(); i++) {
+                        behavior.add(behaviorCollectionDao.getData().get(i).getList());
+                    }
+                    showToast("B Found");
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
