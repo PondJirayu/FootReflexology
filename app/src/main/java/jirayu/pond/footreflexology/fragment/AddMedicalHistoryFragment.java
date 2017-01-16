@@ -84,13 +84,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     }
 
     private void createSpinner() {
-        // Add Json to ArrayList
-//        for (int i = 0 ; i < diseaseItemCollectionDao.getData().size() ; i++){
-//            disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
-//        }
-//        for (int i = 0 ; i < behaviorCollectionDao.getData().size() ; i++){
-//            behavior.add(behaviorCollectionDao.getData().get(i).getList());
-//        }
+
 
         // Create Adapter of Spinner
     }
@@ -180,10 +174,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
                 } else { // พบข้อมูล
                     diseaseItemCollectionDao = dao;
+                    // add json to list
                     for (int i = 0; i < diseaseItemCollectionDao.getData().size(); i++) {
                         disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
                     }
-                    showToast("D Found");
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -205,10 +199,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
                 } else { // พบข้อมูล
                     behaviorCollectionDao = dao;
+                    // add json to list
                     for (int i = 0; i < behaviorCollectionDao.getData().size(); i++) {
                         behavior.add(behaviorCollectionDao.getData().get(i).getList());
                     }
-                    showToast("B Found");
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
