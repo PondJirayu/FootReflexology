@@ -68,6 +68,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // โหลดข้อมูลโรคกับอาการจาก Server
         loadDisease();
         loadBehavior();
+
         createSpinner();
 
         btnSave.setOnClickListener(this);
