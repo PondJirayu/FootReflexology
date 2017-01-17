@@ -71,11 +71,29 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
 
+//        createSpinner();
+//        disease.add("ไม่มี");
+//        behavior.add("ไม่มี");
+
         // load disease with behavior from Server
         loadDisease();
         loadBehavior();
 
         btnSave.setOnClickListener(this);
+    }
+
+    private void createSpinner() {
+        adapterBehavior = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, behavior);
+        adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBehavior.setAdapter(adapterBehavior);
+        spinnerBehavior.setOnItemSelectedListener(this);
+
+        adapterDisease = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, disease);
+        adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDisease.setAdapter(adapterDisease);
+        spinnerDisease.setOnItemSelectedListener(this);
     }
 
     private void loadBehavior() {
@@ -188,7 +206,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             if (response.isSuccessful()) {
                 DiseaseItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-
+                    showToast("ไม่พบข้อมูล");
                 } else { // พบข้อมูล
                     diseaseItemCollectionDao = dao;
                     disease = new ArrayList<>();
@@ -215,7 +233,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             if (response.isSuccessful()) {
                 BehaviorCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-
+                    showToast("ไม่พบข้อมูล");
                 } else { // พบข้อมูล
                     behaviorCollectionDao = dao;
                     behavior = new ArrayList<>();
@@ -240,9 +258,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // spinner behavior
+        showToast(spinnerBehavior.getItemAtPosition(position).toString());
 
         // spinner disease
-
+        showToast(spinnerDisease.getItemAtPosition(position).toString());
     }
 
     @Override
