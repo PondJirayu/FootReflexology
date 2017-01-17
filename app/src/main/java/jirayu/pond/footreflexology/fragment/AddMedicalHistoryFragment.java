@@ -5,7 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class AddMedicalHistoryFragment extends Fragment implements View.OnClickListener {
+public class AddMedicalHistoryFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     /************
      * Variables
@@ -35,8 +39,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Button btnSave;
     DiseaseItemCollectionDao diseaseItemCollectionDao;
     BehaviorCollectionDao behaviorCollectionDao;
-    List<String> disease = new ArrayList<>();
-    List<String> behavior = new ArrayList<>();
+    List<String> disease;
+    List<String> behavior;
+    ArrayAdapter<String> adapterBehavior, adapterDisease;
+    Spinner spinnerBehavior, spinnerDisease;
 
     /************
      * Functions
@@ -64,6 +70,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
+        spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
+        spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
 
         // โหลดข้อมูลโรคกับอาการจาก Server
         loadDisease();
@@ -85,9 +93,16 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     }
 
     private void createSpinner() {
-
-
         // Create Adapter of Spinner
+        // Behavior
+        adapterBehavior = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, behavior);
+        adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBehavior.setAdapter(adapterBehavior);
+        spinnerBehavior.setOnItemSelectedListener(this);
+
+        // Disease
+
     }
 
     @Override
@@ -175,8 +190,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
                 } else { // พบข้อมูล
                     diseaseItemCollectionDao = dao;
-                    // add json to list
-                    for (int i = 0; i < diseaseItemCollectionDao.getData().size(); i++) {
+                    disease = new ArrayList<>();
+                    // add json to array list
+                    for (int i = 0; i < dao.getData().size(); i++) {
                         disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
                     }
                 }
@@ -200,8 +216,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
                 } else { // พบข้อมูล
                     behaviorCollectionDao = dao;
-                    // add json to list
-                    for (int i = 0; i < behaviorCollectionDao.getData().size(); i++) {
+                    behavior = new ArrayList<>();
+                    // add json to array list
+                    for (int i = 0; i < dao.getData().size(); i++) {
                         behavior.add(behaviorCollectionDao.getData().get(i).getList());
                     }
                 }
@@ -215,6 +232,18 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
+
+    // Handle Click Spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // spinner behavior
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
     /**************
      * Inner Class
