@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import java.util.List;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
-import jirayu.pond.footreflexology.dao.DiseaseItemDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
@@ -73,11 +71,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
 
-        // โหลดข้อมูลโรคกับอาการจาก Server
+        // load disease with behavior from Server
         loadDisease();
         loadBehavior();
-
-        createSpinner();
 
         btnSave.setOnClickListener(this);
     }
@@ -92,17 +88,22 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         call.enqueue(loadDisease);
     }
 
-    private void createSpinner() {
-        // Create Adapter of Spinner
+    private void createSpinnerBehavior() {
         // Behavior
         adapterBehavior = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, behavior);
         adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBehavior.setAdapter(adapterBehavior);
         spinnerBehavior.setOnItemSelectedListener(this);
+    }
 
+    private void createSpinnerDisease() {
         // Disease
-
+        adapterDisease = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, disease);
+        adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDisease.setAdapter(adapterDisease);
+        spinnerDisease.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -195,6 +196,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     for (int i = 0; i < dao.getData().size(); i++) {
                         disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
                     }
+                    createSpinnerDisease();
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -221,6 +223,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     for (int i = 0; i < dao.getData().size(); i++) {
                         behavior.add(behaviorCollectionDao.getData().get(i).getList());
                     }
+                    createSpinnerBehavior();
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -237,6 +240,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // spinner behavior
+
+        // spinner disease
 
     }
 
