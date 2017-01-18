@@ -17,6 +17,7 @@ import java.util.List;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.BehaviorManager;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
@@ -45,8 +46,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Spinner spinnerBehavior, spinnerDisease;
     Boolean successBehavior = false, successDisease = false;
     int diseaseId = -1, behaviorId = -1;
+    String diseaseName;
     DiseaseManager diseaseManager;
     BehaviorManager behaviorManager;
+    MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
 
     /************
      * Functions
@@ -80,8 +83,17 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         // load disease with behavior from Server
         loadDisease();
         loadBehavior();
+        loadMedicalHistory();
 
         btnSave.setOnClickListener(this);
+    }
+
+    private void loadMedicalHistory() {
+        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
+                "medicalhistorys",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadMedicalHistory);
     }
 
     private void loadBehavior() {
@@ -149,6 +161,20 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 .show();
     }
 
+    private boolean checkMedicalHistory() {
+
+        if (medicalHistoryItemCollectionDao.getData().isEmpty()) {
+            return false;
+        } else {
+            for (int i = 0 ; i < medicalHistoryItemCollectionDao.getData().size() ; i++){
+                if (medicalHistoryItemCollectionDao.getData().get(i).getDiseaseName().equals(diseaseName))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -158,6 +184,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         if (v == btnSave) {
             if (diseaseId == -1 || behaviorId == -1) {
                 showToast("กรุณาเลือกข้อมูลให้ครบถ้วน");
+            } else if (checkMedicalHistory()) {
+                showToast("มีประวัติการรักษาอยู่แล้ว");
             } else {
                 // Insert MedicalHistory Here
                 Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
@@ -252,6 +280,22 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
     };
 
+    Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                medicalHistoryItemCollectionDao = response.body();
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
     // Handle Click Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -260,8 +304,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             behaviorId = behaviorManager.getBehaviorId(); // return Id of String
         }
         if (parent.getId() == R.id.spinnerDisease && successDisease) {
+            diseaseName = spinnerDisease.getItemAtPosition(position).toString(); // เอาชื่อโรคไปเก็บในตัวแปร เพื่อเอาไปใช้งานใน func checkMedicalHistory
             diseaseManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
-            diseaseId = diseaseManager.getDiseaseId(); // return Id of String
+            diseaseId = diseaseManager.getDiseaseId();
         }
     }
 

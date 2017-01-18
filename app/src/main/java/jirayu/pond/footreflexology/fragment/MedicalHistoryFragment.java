@@ -66,28 +66,11 @@ public class MedicalHistoryFragment extends Fragment {
     }
 
     private void reloadData() {
-        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory("medicalhistorys", DataMemberManager.getInstance().getMemberItemDao().getId());
-        call.enqueue(new Callback<MedicalHistoryItemCollectionDao>() {
-            @Override
-            public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
-                if (response.isSuccessful()) {
-                    MedicalHistoryItemCollectionDao dao = response.body();
-                    if (dao.getData().isEmpty()) {
-                        Toast.makeText(getContext(), "ไม่พบประวัติการรักษา", Toast.LENGTH_SHORT).show();
-                    } else { // พบข้อมูล
-                        listAdapter.setDao(dao); // โยน dao ให้ Adapter
-                        listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
-                    }
-                } else { // 404 NOT FOUND
-                    Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
-                Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
+                "medicalhistorys",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadMedicalHistory);
     }
 
     @Override
@@ -120,10 +103,38 @@ public class MedicalHistoryFragment extends Fragment {
         }
     }
 
+    public void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
 
+    Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                MedicalHistoryItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) {
+                    showToast("ไม่พบประวัติการรักษา");
+                } else { // พบข้อมูล
+                    listAdapter.setDao(dao); // โยน dao ให้ Adapter
+                    listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
+                }
+            } else { // 404 NOT FOUND
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
 
     /**************
      * Inner Class
