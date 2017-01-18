@@ -41,7 +41,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     List<String> behavior;
     ArrayAdapter<String> adapterBehavior, adapterDisease;
     Spinner spinnerBehavior, spinnerDisease;
-    Boolean successBehavior = false, successDisease;
+    Boolean successBehavior = false, successDisease = false;
 
     /************
      * Functions
