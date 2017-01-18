@@ -153,7 +153,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         if (v == btnSave) {
             if (diseaseId == -1 || behaviorId == -1) {
-
+                showToast("กรุณาเลือกข้อมูลให้ครบถ้วน");
             } else {
                 // Insert MedicalHistory Here
                 Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
