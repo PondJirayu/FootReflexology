@@ -18,7 +18,9 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.manager.BehaviorManager;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.DiseaseManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +45,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     Spinner spinnerBehavior, spinnerDisease;
     Boolean successBehavior = false, successDisease = false;
     int diseaseId = -1, behaviorId = -1;
+    DiseaseManager diseaseManager;
+    BehaviorManager behaviorManager;
 
     /************
      * Functions
@@ -204,6 +208,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     }
                     successDisease = true;
                     createSpinnerDisease();
+                    // เอาข้อมูลไปฝากท่ DiseaseManager
+                    diseaseManager = new DiseaseManager(dao);
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -232,6 +238,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     }
                     successBehavior = true;
                     createSpinnerBehavior();
+                    // เอาข้อมูลไปฝากที่ BehaviorManager
+                    behaviorManager = new BehaviorManager(dao);
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -249,9 +257,13 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerBehavior && successBehavior) {
 //            showToast(spinnerBehavior.getItemAtPosition(position).toString());
+            behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString()); // โยน String เข้าไปที่ Manager เพื่อหา ID ของ String ดังกล่าว
+            behaviorId = behaviorManager.getBehaviorId(); // return Id of String
         }
         if (parent.getId() == R.id.spinnerDisease && successDisease) {
 //            showToast(spinnerDisease.getItemAtPosition(position).toString());
+            diseaseManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
+            diseaseId = diseaseManager.getDiseaseId(); // return Id of String
         }
     }
 
