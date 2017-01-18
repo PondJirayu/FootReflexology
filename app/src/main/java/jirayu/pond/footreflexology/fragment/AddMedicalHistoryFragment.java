@@ -42,6 +42,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     ArrayAdapter<String> adapterBehavior, adapterDisease;
     Spinner spinnerBehavior, spinnerDisease;
     Boolean successBehavior = false, successDisease = false;
+    int diseaseId = -1, behaviorId = -1;
 
     /************
      * Functions
@@ -151,14 +152,18 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            // Insert MedicalHistory Here
-            Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
-                    DataMemberManager.getInstance().getMemberItemDao().getId(),
-                    1,
-                    1
-            );
-            call.enqueue(insertMedicalHistory);
-            getFragmentManager().popBackStack();
+            if (diseaseId == -1 || behaviorId == -1) {
+
+            } else {
+                // Insert MedicalHistory Here
+                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                        DataMemberManager.getInstance().getMemberItemDao().getId(),
+                        diseaseId,
+                        behaviorId
+                );
+                call.enqueue(insertMedicalHistory);
+                getFragmentManager().popBackStack();
+            }
         }
     }
 
@@ -243,10 +248,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerBehavior && successBehavior) {
-            showToast(spinnerBehavior.getItemAtPosition(position).toString());
+//            showToast(spinnerBehavior.getItemAtPosition(position).toString());
         }
         if (parent.getId() == R.id.spinnerDisease && successDisease) {
-            showToast(spinnerDisease.getItemAtPosition(position).toString());
+//            showToast(spinnerDisease.getItemAtPosition(position).toString());
         }
     }
 
