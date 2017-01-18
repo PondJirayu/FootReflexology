@@ -166,7 +166,6 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                         behaviorId
                 );
                 call.enqueue(insertMedicalHistory);
-                getFragmentManager().popBackStack();
             }
         }
     }
@@ -178,6 +177,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 StatusDao dao = response.body();
                 if (dao.getSuccess() == 1) {
                     showToast("เพิ่มประวัติการรักษาแล้ว");
+                    getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบันทิ้ง
                 } else {
                     showToast("เพิ่มประวัติการรักษาไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง");
                 }
