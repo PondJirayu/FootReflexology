@@ -256,12 +256,10 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerBehavior && successBehavior) {
-//            showToast(spinnerBehavior.getItemAtPosition(position).toString());
             behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString()); // โยน String เข้าไปที่ Manager เพื่อหา ID ของ String ดังกล่าว
             behaviorId = behaviorManager.getBehaviorId(); // return Id of String
         }
         if (parent.getId() == R.id.spinnerDisease && successDisease) {
-//            showToast(spinnerDisease.getItemAtPosition(position).toString());
             diseaseManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
             diseaseId = diseaseManager.getDiseaseId(); // return Id of String
         }
