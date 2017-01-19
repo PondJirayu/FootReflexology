@@ -118,7 +118,7 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                             .commit();
 
                     // Edit Title
-//                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
+                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
                 }
                 return true;
             case R.id.action_edit_medical:
@@ -137,7 +137,7 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                           .commit();
 
                     // Edit Title
-//                    getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+                    getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
                 }
                 return true;
             case android.R.id.home: // Handle on BackPress

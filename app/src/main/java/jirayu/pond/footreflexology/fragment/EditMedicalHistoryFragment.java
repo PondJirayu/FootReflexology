@@ -43,6 +43,7 @@ public class EditMedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+
     }
 
     @Override
