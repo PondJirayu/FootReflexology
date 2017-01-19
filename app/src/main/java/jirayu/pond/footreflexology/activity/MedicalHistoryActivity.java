@@ -121,6 +121,9 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
                 }
                 return true;
+            case R.id.action_edit_medical:
+
+                return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
                 return true;

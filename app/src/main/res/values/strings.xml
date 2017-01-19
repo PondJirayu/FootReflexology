@@ -12,6 +12,7 @@
     <string name="action_logout">Logout</string>
     <string name="select_the_response">เลือกเขตตอบสนอง :</string>
     <string name="action_edit">Edit Profile</string>
+    <string name="action_edit_medical">Edit Medical History</string>
     <string name="first_name">ชื่อ</string>
     <string name="last_name">นามสกุล</string>
     <string name="gender">เพศ</string>
