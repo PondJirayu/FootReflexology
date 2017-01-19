@@ -63,7 +63,7 @@ public class MedicalHistoryFragment extends Fragment {
         listView.setAdapter(listAdapter);   // listView with Adapter ทำงานร่วมกัน
 
         // Edit Title in Toolbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
 
         // ติดต่อกับ server
         reloadData();

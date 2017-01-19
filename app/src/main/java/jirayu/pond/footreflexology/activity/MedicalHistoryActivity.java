@@ -43,7 +43,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-//        getSupportActionBar().setTitle("ประวัติการรักษา");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -116,9 +115,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                                     AddMedicalHistoryFragment.newInstance())
                             .addToBackStack(null)
                             .commit();
-
-                    // Edit Title
-//                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
                 }
                 return true;
             case R.id.action_edit_medical:
@@ -135,9 +131,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                                   EditMedicalHistoryFragment.newInstance())
                           .addToBackStack(null)
                           .commit();
-
-                    // Edit Title
-//                    getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
                 }
                 return true;
             case android.R.id.home: // Handle on BackPress

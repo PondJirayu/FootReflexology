@@ -50,7 +50,7 @@ public class EditMedicalHistoryFragment extends Fragment {
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
         // Edit Title in Toolbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
     }
 
     @Override
