@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.AddMedicalHistoryFragment;
+import jirayu.pond.footreflexology.fragment.EditMedicalHistoryFragment;
 import jirayu.pond.footreflexology.fragment.MedicalHistoryFragment;
 
 public class MedicalHistoryActivity extends AppCompatActivity {
@@ -102,7 +103,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
         // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_add:
-
                 Fragment fragment = getSupportFragmentManager()
                         .findFragmentById(R.id.contentContainer);
 
@@ -118,11 +118,27 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                             .commit();
 
                     // Edit Title
-                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
+//                    getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
                 }
                 return true;
             case R.id.action_edit_medical:
+                Fragment fragment1 = getSupportFragmentManager()
+                        .findFragmentById(R.id.contentContainer);
 
+                if (fragment1 instanceof EditMedicalHistoryFragment == false) {
+                  getSupportFragmentManager().beginTransaction()
+                          .setCustomAnimations(
+                                  R.anim.from_right, R.anim.to_left,
+                                  R.anim.from_left, R.anim.to_right
+                          )
+                          .replace(R.id.contentContainer,
+                                  EditMedicalHistoryFragment.newInstance())
+                          .addToBackStack(null)
+                          .commit();
+
+                    // Edit Title
+//                    getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+                }
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();
