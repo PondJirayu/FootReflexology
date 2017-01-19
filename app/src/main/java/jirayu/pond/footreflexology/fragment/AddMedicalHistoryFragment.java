@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
+
+        // Edit Title in Toolbar
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
 
         // load disease with behavior from Server
         loadDisease();

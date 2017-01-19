@@ -2,9 +2,11 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import jirayu.pond.footreflexology.R;
 
@@ -17,6 +19,8 @@ public class EditMedicalHistoryFragment extends Fragment {
     /************
      * Variables
      ************/
+
+    Button btnSave;
 
     /************
      * Functions
@@ -43,7 +47,10 @@ public class EditMedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnSave = (Button) rootView.findViewById(R.id.btnSave);
 
+        // Edit Title in Toolbar
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
     }
 
     @Override

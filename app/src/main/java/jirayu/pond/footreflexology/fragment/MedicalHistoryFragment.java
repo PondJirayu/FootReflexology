@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,9 @@ public class MedicalHistoryFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
         listView.setAdapter(listAdapter);   // listView with Adapter ทำงานร่วมกัน
+
+        // Edit Title in Toolbar
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
 
         // ติดต่อกับ server
         reloadData();
