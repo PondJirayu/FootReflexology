@@ -99,6 +99,12 @@ public interface ApiService {
             @Query("updated_at") String updatedAt
     );
 
+    @GET("medicalhistory/{key}/edit")
+    Call<StatusDao> UpdateMedicalHistory(
+            @Path("key") int key,
+            @Query("behavior_id") int behaviorId
+    );
+
     // Delete
 
 }

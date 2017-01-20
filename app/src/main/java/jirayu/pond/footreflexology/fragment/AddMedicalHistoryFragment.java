@@ -39,10 +39,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      ************/
 
     Button btnSave;
-    DiseaseItemCollectionDao diseaseItemCollectionDao;
-    BehaviorCollectionDao behaviorCollectionDao;
-    List<String> disease;
-    List<String> behavior;
+    List<String> disease, behavior;
     ArrayAdapter<String> adapterBehavior, adapterDisease;
     Spinner spinnerBehavior, spinnerDisease;
     Boolean successBehavior = false, successDisease = false;
@@ -100,12 +97,17 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     }
 
     private void loadBehavior() {
-        Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior("behaviors");
+        Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior(
+                "behaviors"
+        );
         call.enqueue(loadBehavior);
     }
 
     private void loadDisease() {
-        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", "");
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList(
+                "diseases",
+                ""
+        );
         call.enqueue(loadDisease);
     }
 
@@ -228,20 +230,15 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
             if (response.isSuccessful()) {
                 DiseaseItemCollectionDao dao = response.body();
-                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-
-                } else { // พบข้อมูล
-                    diseaseItemCollectionDao = dao;
-                    disease = new ArrayList<>();
-                    // add json to array list
-                    for (int i = 0; i < dao.getData().size(); i++) {
-                        disease.add(diseaseItemCollectionDao.getData().get(i).getDiseaseName());
-                    }
-                    successDisease = true;
-                    createSpinnerDisease();
-                    // เอาข้อมูลไปฝากท่ DiseaseManager
-                    diseaseManager = new DiseaseManager(dao);
+                disease = new ArrayList<>();
+                // add json to array list
+                for (int i = 0; i < dao.getData().size(); i++) {
+                    disease.add(dao.getData().get(i).getDiseaseName());
                 }
+                successDisease = true;
+                createSpinnerDisease();
+                // เอาข้อมูลไปฝากท่ DiseaseManager
+                diseaseManager = new DiseaseManager(dao);
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
@@ -258,20 +255,15 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
             if (response.isSuccessful()) {
                 BehaviorCollectionDao dao = response.body();
-                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-
-                } else { // พบข้อมูล
-                    behaviorCollectionDao = dao;
-                    behavior = new ArrayList<>();
-                    // add json to array list
-                    for (int i = 0; i < dao.getData().size(); i++) {
-                        behavior.add(behaviorCollectionDao.getData().get(i).getList());
-                    }
-                    successBehavior = true;
-                    createSpinnerBehavior();
-                    // เอาข้อมูลไปฝากที่ BehaviorManager
-                    behaviorManager = new BehaviorManager(dao);
+                behavior = new ArrayList<>();
+                // add json to array list
+                for (int i = 0; i < dao.getData().size(); i++) {
+                    behavior.add(dao.getData().get(i).getList());
                 }
+                successBehavior = true;
+                createSpinnerBehavior();
+                // เอาข้อมูลไปฝากที่ BehaviorManager
+                behaviorManager = new BehaviorManager(dao);
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
