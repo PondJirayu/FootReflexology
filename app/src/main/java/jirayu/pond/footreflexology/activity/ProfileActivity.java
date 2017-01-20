@@ -119,9 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
                                     EditProfileFragment.newInstance())
                             .addToBackStack(null)
                             .commit();
-
-                    // Edit Title
-                    getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
                 }
                 return true;
             case android.R.id.home: // Handle on BackPress

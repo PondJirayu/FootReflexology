@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
+        // Edit Title in Toolbar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
         // Init 'View' instance(s) with rootView.findViewById here
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);

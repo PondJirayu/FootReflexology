@@ -57,13 +57,12 @@ public class MedicalHistoryFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
+        // Edit Title in Toolbar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
         listView.setAdapter(listAdapter);   // listView with Adapter ทำงานร่วมกัน
-
-        // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
 
         // ติดต่อกับ server
         reloadData();

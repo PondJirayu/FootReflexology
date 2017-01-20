@@ -46,11 +46,10 @@ public class EditMedicalHistoryFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
-        // Init 'View' instance(s) with rootView.findViewById here
-        btnSave = (Button) rootView.findViewById(R.id.btnSave);
-
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+        // Init 'View' instance(s) with rootView.findViewById here
+        btnSave = (Button) rootView.findViewById(R.id.btnSave);
     }
 
     @Override

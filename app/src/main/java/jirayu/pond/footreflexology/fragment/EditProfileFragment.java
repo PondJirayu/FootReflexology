@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,6 +81,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     }
 
     private void initInstances(View rootView) {
+        // Edit Title in Toolbar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
         // Init 'View' instance(s) with rootView.findViewById here
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);

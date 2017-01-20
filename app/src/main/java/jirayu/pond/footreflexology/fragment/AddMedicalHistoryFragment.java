@@ -76,13 +76,12 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     }
 
     private void initInstances(View rootView) {
+        // Edit Title in Toolbar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
-
-        // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
 
         // load disease with behavior from Server
         loadDisease();
