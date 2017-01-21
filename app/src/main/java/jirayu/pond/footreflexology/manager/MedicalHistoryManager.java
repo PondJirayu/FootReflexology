@@ -1,26 +1,25 @@
 package jirayu.pond.footreflexology.manager;
 
-import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
-import jirayu.pond.footreflexology.dao.DiseaseItemDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 
 /**
- * Created by lp700 on 18/1/2560.
+ * Created by lp700 on 21/1/2560.
  */
 
-public class DiseaseManager {
+public class MedicalHistoryManager {
 
-    private DiseaseItemCollectionDao dao;
+    private MedicalHistoryItemCollectionDao dao;
     private String disease;
 
-    public DiseaseManager(DiseaseItemCollectionDao dao) {
-        setDao(dao);
+    public MedicalHistoryManager(MedicalHistoryItemCollectionDao dao) {
+        this.dao = dao;
     }
 
-    public DiseaseItemCollectionDao getDao() {
+    public MedicalHistoryItemCollectionDao getDao() {
         return dao;
     }
 
-    public void setDao(DiseaseItemCollectionDao dao) {
+    public void setDao(MedicalHistoryItemCollectionDao dao) {
         this.dao = dao;
     }
 
@@ -32,9 +31,9 @@ public class DiseaseManager {
         this.disease = disease;
     }
 
-    public int getDiseaseId() {
+    public int getMedicalHistoryId() {
         if (disease != null) {
-            for (int i = 0 ; i < dao.getData().size() ; i++) {
+            for (int i = 0; i < dao.getData().size(); i++) {
                 if (dao.getData().get(i).getDiseaseName().equals(disease))
                     return dao.getData().get(i).getId();
             }

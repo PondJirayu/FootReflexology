@@ -8,10 +8,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class MedicalHistoryItemDao {
 
+    @SerializedName("id")                           private int id;
     @SerializedName("firstname")                    private String firstName;
     @SerializedName("lastname")                     private String lastName;
     @SerializedName("disease_name")                 private String diseaseName;
     @SerializedName("list")                         private String list;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
