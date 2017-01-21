@@ -18,6 +18,7 @@ import java.util.List;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
+import jirayu.pond.footreflexology.dao.StatusDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -75,7 +76,6 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         loadDisease();
         loadBehavior();
 
-
         btnSave.setOnClickListener(this);
     }
 
@@ -111,6 +111,14 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDisease.setAdapter(adapterDisease);
         spinnerDisease.setOnItemSelectedListener(this);
+    }
+
+    private void updateMedicalHistory() {
+        Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMedicalHistory(
+                rowId,
+                behaviorId
+        );
+        call.enqueue(updateMedicalHistory);
     }
 
     @Override
@@ -157,7 +165,8 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-
+            // update data
+            updateMedicalHistory();
         }
     }
 
@@ -205,6 +214,29 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
         @Override
         public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
+    Callback<StatusDao> updateMedicalHistory = new Callback<StatusDao>() {
+        @Override
+        public void onResponse(Call<StatusDao> call, Response<StatusDao> response) {
+            if (response.isSuccessful()) {
+                StatusDao dao = response.body();
+                if (dao.getSuccess() == 1) {
+                    showToast("แก้ไขประวัติการรักษาสำเร็จ");
+                    getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบัน
+                }
+                else {
+                    showToast("แก้ไขประวัติการรักษาไม่สำเร็จ");
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<StatusDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
