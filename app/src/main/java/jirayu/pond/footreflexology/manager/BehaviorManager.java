@@ -1,7 +1,6 @@
 package jirayu.pond.footreflexology.manager;
 
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
-import jirayu.pond.footreflexology.dao.BehaviorDao;
 
 /**
  * Created by lp700 on 18/1/2560.
@@ -33,9 +32,11 @@ public class BehaviorManager {
     }
 
     public int getBehaviorId() {
-        for (int i = 0 ; i < dao.getData().size() ; i++) {
-            if (dao.getData().get(i).getList().equals(behavior))
-                return dao.getData().get(i).getId();
+        if (behavior != null) {
+            for (int i = 0 ; i < dao.getData().size() ; i++) {
+                if (dao.getData().get(i).getList().equals(behavior))
+                    return dao.getData().get(i).getId();
+            }
         }
         return -1;
     }

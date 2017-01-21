@@ -43,7 +43,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     ArrayAdapter<String> adapterBehavior, adapterDisease;
     Spinner spinnerBehavior, spinnerDisease;
     Boolean successBehavior = false, successDisease = false;
-    int diseaseId = -1, behaviorId = -1;
+    int diseaseId, behaviorId;
     String diseaseName;
     DiseaseManager diseaseManager;
     BehaviorManager behaviorManager;
@@ -187,9 +187,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            if (diseaseId == -1 || behaviorId == -1) {
-                showToast("กรุณาเลือกข้อมูลให้ครบถ้วน");
-            } else if (checkMedicalHistory()) {
+            if (checkMedicalHistory()) {
                 showToast("มีประวัติการรักษาอยู่แล้ว");
             } else {
                 // Insert MedicalHistory Here

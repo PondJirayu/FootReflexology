@@ -19,6 +19,7 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.manager.BehaviorManager;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -40,6 +41,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     List<String> disease, behavior;
     ArrayAdapter<String> adapterDisease, adapterBehavior;
     int rowId, behaviorId;
+    BehaviorManager behaviorManager;
 
     /************
      * Functions
@@ -181,6 +183,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
                     behavior.add(dao.getData().get(i).getList());
                 }
                 createSpinnerBehavior();
+                behaviorManager = new BehaviorManager(dao);
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
@@ -248,7 +251,9 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         }
 
         if (parent.getId() == R.id.spinnerBehavior) {
-
+            // โยนค่าที่ user เลือกเข้าไปที่ manager
+            behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString());
+            behaviorId = behaviorManager.getBehaviorId();
         }
     }
 
