@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.dao;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,8 +16,8 @@ public class MedicalHistoryItemDao {
     @SerializedName("lastname")                     private String lastName;
     @SerializedName("disease_name")                 private String diseaseName;
     @SerializedName("list")                         private String list;
-    @SerializedName("created_at")                   private Date createdAt;
-    @SerializedName("updated_at")                   private Date updatedAt;
+    @SerializedName("created_at")                   private Timestamp createdAt;
+    @SerializedName("updated_at")                   private Timestamp updatedAt;
 
     public int getId() {
         return id;
@@ -58,19 +59,19 @@ public class MedicalHistoryItemDao {
         this.list = list;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
