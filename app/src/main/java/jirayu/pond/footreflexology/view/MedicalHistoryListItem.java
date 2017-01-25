@@ -25,7 +25,7 @@ import jirayu.pond.footreflexology.R;
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
 
     public MedicalHistoryListItem(Context context) {
         super(context);
