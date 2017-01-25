@@ -119,7 +119,8 @@ public class MedicalHistoryFragment extends Fragment {
 
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
-        public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
+        public void onResponse(Call<MedicalHistoryItemCollectionDao> call,
+                               Response<MedicalHistoryItemCollectionDao> response) {
             if (response.isSuccessful()) {
                 MedicalHistoryItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) {
@@ -134,7 +135,8 @@ public class MedicalHistoryFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+        public void onFailure(Call<MedicalHistoryItemCollectionDao> call,
+                              Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };

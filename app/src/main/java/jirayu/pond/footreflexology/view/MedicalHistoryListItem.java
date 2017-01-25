@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
 import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
 
+import java.util.Date;
+
 import jirayu.pond.footreflexology.R;
 
 /**
@@ -17,7 +19,7 @@ import jirayu.pond.footreflexology.R;
  */
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
-    TextView tvDiseaseName, tvBehavior;
+    TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
 
     public MedicalHistoryListItem(Context context) {
         super(context);
@@ -55,6 +57,8 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
         // findViewById here
         tvDiseaseName = (TextView) findViewById(R.id.tvDiseaseName);
         tvBehavior = (TextView) findViewById(R.id.tvBehavior);
+        tvCreatedAt = (TextView) findViewById(R.id.tvCreatedAt);
+        tvUpdatedAt = (TextView) findViewById(R.id.tvUpdatedAt);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -99,6 +103,14 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     public void setBehavior(String text) {
         tvBehavior.setText(text);
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        tvCreatedAt.setText((CharSequence) createdAt);
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        tvUpdatedAt.setText((CharSequence) updatedAt);
     }
 
 }
