@@ -210,10 +210,10 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(MainActivity.this, MedicalHistoryActivity.class);
                     startActivity(intent);
                     return true;
-                case R.id.action_major_term:
-                    intent = new Intent(MainActivity.this, MajorTermActivity.class);
-                    startActivity(intent);
-                    return true;
+//                case R.id.action_major_term:
+//                    intent = new Intent(MainActivity.this, MajorTermActivity.class);
+//                    startActivity(intent);
+//                    return true;
 //                case R.id.action_memo:
 //                    intent = new Intent(MainActivity.this, MemoActivity.class);
 //                    startActivity(intent);

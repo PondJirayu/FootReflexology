@@ -10,25 +10,32 @@
             android:id="@+id/action_medical_history"
             android:icon="@drawable/ic_accessible_black_24dp"
             android:title="ประวัติการรักษา" />
-        <item
-            android:id="@+id/action_major_term"
-            android:icon="@drawable/ic_title_black_24dp"
-            android:title="คำสำคัญ" />
 
         <!--<item-->
-        <!--android:id="@+id/action_memo"-->
-        <!--android:icon="@drawable/ic_insert_comment_black_24dp"-->
-        <!--android:title="บันทึกช่วยจำ" />-->
+            <!--android:id="@+id/action_major_term"-->
+            <!--android:icon="@drawable/ic_title_black_24dp"-->
+            <!--android:title="คำสำคัญ" />-->
 
         <!--<item-->
-        <!--android:id="@+id/action_settings"-->
-        <!--android:icon="@drawable/ic_settings_black_24dp"-->
-        <!--android:title="@string/action_settings" />-->
+            <!--android:id="@+id/action_memo"-->
+            <!--android:icon="@drawable/ic_insert_comment_black_24dp"-->
+            <!--android:title="บันทึกช่วยจำ" />-->
 
-        <item
-            android:id="@+id/action_about"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="@string/action_about" />
+        <!--<item-->
+            <!--android:id="@+id/action_settings"-->
+            <!--android:icon="@drawable/ic_settings_black_24dp"-->
+            <!--android:title="@string/action_settings" />-->
+
+        <item android:title="@string/sub_item">
+            <menu>
+                <group android:checkableBehavior="all">
+                    <item
+                        android:id="@+id/action_about"
+                        android:icon="@drawable/ic_info_black_24dp"
+                        android:title="@string/action_about" />
+                </group>
+            </menu>
+        </item>
 
     </group>
 
