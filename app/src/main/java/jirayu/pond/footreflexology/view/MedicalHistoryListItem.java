@@ -16,6 +16,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import jirayu.pond.footreflexology.R;
 
@@ -25,7 +26,7 @@ import jirayu.pond.footreflexology.R;
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", new Locale("th", "TH"));
 
     public MedicalHistoryListItem(Context context) {
         super(context);
@@ -112,11 +113,13 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     }
 
     public void setCreatedAt(Timestamp createdAt) {
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         String date = simpleDateFormat.format(createdAt);
         tvCreatedAt.setText(date);
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         String date = simpleDateFormat.format(updatedAt);
         tvUpdatedAt.setText(date);
     }
