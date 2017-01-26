@@ -114,7 +114,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     public void setCreatedAt(Timestamp createdAt) {
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String date = simpleDateFormat.format(createdAt);
+        String date = simpleDateFormat.format(2556-12-1);
         tvCreatedAt.setText(date);
     }
 
