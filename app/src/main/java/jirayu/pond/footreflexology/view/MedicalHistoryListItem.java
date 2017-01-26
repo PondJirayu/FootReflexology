@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
 import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
@@ -26,7 +28,7 @@ import jirayu.pond.footreflexology.R;
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", new Locale("th", "TH"));
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
 
     public MedicalHistoryListItem(Context context) {
         super(context);
@@ -113,15 +115,13 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     }
 
     public void setCreatedAt(Timestamp createdAt) {
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String date = simpleDateFormat.format(createdAt);
-        tvCreatedAt.setText(date);
+        String createAt = simpleDateFormat.format(createdAt);
+        tvCreatedAt.setText(createAt);
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String date = simpleDateFormat.format(updatedAt);
-        tvUpdatedAt.setText(date);
+        String updateAt = simpleDateFormat.format(updatedAt);
+        tvUpdatedAt.setText(updateAt);
     }
 
 }
