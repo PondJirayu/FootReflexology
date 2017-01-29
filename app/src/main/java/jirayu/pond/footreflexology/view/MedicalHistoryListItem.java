@@ -116,6 +116,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     public void setCreatedAt(Timestamp createdAt) {
         String createAt = simpleDateFormat.format(createdAt);
+        // TODO: แปลง ค.ศ. เป็น พ.ศ. ด้วย
         tvCreatedAt.setText(createAt);
     }
 

@@ -1,9 +1,15 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -32,6 +38,8 @@ public class QueryResponseFragment extends Fragment {
     String query;
     ListView listView;
     DiseaseListAdapter listAdapter;
+    DiseaseItemCollectionDao dao;
+    MenuItem menuItem;
 
     /************
      * Functions
@@ -60,8 +68,14 @@ public class QueryResponseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_query_response, container, false);
+        init();
         initInstances(rootView);
         return rootView;
+    }
+
+    private void init() {
+        // show option menu
+        setHasOptionsMenu(true);
     }
 
     private void initInstances(View rootView) {
@@ -118,12 +132,15 @@ public class QueryResponseFragment extends Fragment {
         public void onResponse(Call<DiseaseItemCollectionDao> call,
                                Response<DiseaseItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                DiseaseItemCollectionDao dao = response.body();
+                dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
                     Toast.makeText(getContext(), "ไม่พบโรคที่ค้นหา", Toast.LENGTH_SHORT).show();
                 } else { // พบช้อมูล
+                    // Share Button
+                    ShareActionProvider shareActionProvider =  (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+                    shareActionProvider.setShareIntent(getShareIntent());
                     listAdapter.setDao(dao); // โยน dao ให้ adapter
-                    listAdapter.notifyDataSetChanged();
+                    listAdapter.notifyDataSetChanged(); // สั่ง refresh list view
                 }
             } else { // 404 NOT FOUND
                 Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
@@ -136,6 +153,25 @@ public class QueryResponseFragment extends Fragment {
             Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
         }
     };
+
+    // inflate option menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_more_info, menu);
+        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม share
+    }
+
+    private Intent getShareIntent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "โรค" + dao.getData().get(0).getDiseaseName());
+        intent.putExtra(Intent.EXTRA_TEXT,
+                    "รายละเอียด" + dao.getData().get(0).getDetail() +
+                    "การรักษา" + dao.getData().get(0).getTreatment() +
+                    "คำแนะนำ" + dao.getData().get(0).getRecommend());
+        return intent;
+    }
 
     /**************
      * Inner Class

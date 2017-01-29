@@ -56,13 +56,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
         }
     }
 
-    // Inflate Options Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_medical_history, menu);
-        return true;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -97,15 +90,11 @@ public class MedicalHistoryActivity extends AppCompatActivity {
      * Listener Zone
      ****************/
 
+    // Handle Click Options Menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_add:
-                Fragment fragment = getSupportFragmentManager()
-                        .findFragmentById(R.id.contentContainer);
-
-                if (fragment instanceof AddMedicalHistoryFragment == false) {
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(
                                     R.anim.from_right, R.anim.to_left,
@@ -115,13 +104,8 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                                     AddMedicalHistoryFragment.newInstance())
                             .addToBackStack(null)
                             .commit();
-                }
                 return true;
             case R.id.action_edit_medical:
-                Fragment fragment1 = getSupportFragmentManager()
-                        .findFragmentById(R.id.contentContainer);
-
-                if (fragment1 instanceof EditMedicalHistoryFragment == false) {
                   getSupportFragmentManager().beginTransaction()
                           .setCustomAnimations(
                                   R.anim.from_right, R.anim.to_left,
@@ -131,7 +115,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
                                   EditMedicalHistoryFragment.newInstance())
                           .addToBackStack(null)
                           .commit();
-                }
                 return true;
             case android.R.id.home: // Handle on BackPress
                 finish();

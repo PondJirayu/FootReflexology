@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -52,8 +54,15 @@ public class MedicalHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
+        init();
         initInstances(rootView);
         return rootView;
+    }
+
+    private void init() {
+        // Init Fragment level's variable(s) here
+        // สั่งให้ Fragment โชว์ option menu ของตัวเอง
+        setHasOptionsMenu(true);
     }
 
     private void initInstances(View rootView) {
@@ -140,6 +149,13 @@ public class MedicalHistoryFragment extends Fragment {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
+
+    // Inflate Options Menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_medical_history, menu);
+    }
 
     /**************
      * Inner Class

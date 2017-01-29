@@ -16,6 +16,6 @@
         android:id="@+id/action_save"
         android:icon="@drawable/ic_save_white_24dp"
         android:title="@string/action_save"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 </menu>
