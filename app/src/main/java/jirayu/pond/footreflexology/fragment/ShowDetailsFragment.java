@@ -164,8 +164,8 @@ public class ShowDetailsFragment extends Fragment {
     private Intent getShareIntent() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
         for (int i = 0; i < dao.getData().size(); i++) {
-            intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
             intent.putExtra(Intent.EXTRA_TEXT,
                         "โรค" + "\n"
                                 + dao.getData().get(i).getDiseaseName() + "\n\n" +
