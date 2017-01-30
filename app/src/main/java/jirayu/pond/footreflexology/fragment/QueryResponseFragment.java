@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -23,7 +22,6 @@ import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Path;
 
 
 /**
@@ -68,12 +66,12 @@ public class QueryResponseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_query_response, container, false);
-        init();
+        initOptionMenu();
         initInstances(rootView);
         return rootView;
     }
 
-    private void init() {
+    private void initOptionMenu() {
         // show option menu
         setHasOptionsMenu(true);
     }
@@ -137,7 +135,8 @@ public class QueryResponseFragment extends Fragment {
                     Toast.makeText(getContext(), "ไม่พบโรคที่ค้นหา", Toast.LENGTH_SHORT).show();
                 } else { // พบช้อมูล
                     // Share Button
-                    ShareActionProvider shareActionProvider =  (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+                    ShareActionProvider shareActionProvider =  (ShareActionProvider)
+                            MenuItemCompat.getActionProvider(menuItem);
                     shareActionProvider.setShareIntent(getShareIntent());
                     listAdapter.setDao(dao); // โยน dao ให้ adapter
                     listAdapter.notifyDataSetChanged(); // สั่ง refresh list view
