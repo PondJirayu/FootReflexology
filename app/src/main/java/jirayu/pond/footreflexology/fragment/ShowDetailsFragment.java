@@ -164,8 +164,19 @@ public class ShowDetailsFragment extends Fragment {
     private Intent getShareIntent() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "โรค");
-        intent.putExtra(Intent.EXTRA_TEXT, "");
+        for (int i = 0; i < dao.getData().size(); i++) {
+            intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
+            intent.putExtra(Intent.EXTRA_TEXT,
+                        "โรค" + "\n"
+                                + dao.getData().get(i).getDiseaseName() + "\n\n" +
+                                "รายละเอียด" + "\n"
+                                + dao.getData().get(i).getDetail() + "\n\n" +
+                                "การรักษา" + "\n"
+                                + dao.getData().get(i).getTreatMent() + "\n\n" +
+                                "คำแนะนำ" + "\n"
+                                + dao.getData().get(i).getRecommend() + "\n\n"
+            );
+        }
         return intent;
     }
 

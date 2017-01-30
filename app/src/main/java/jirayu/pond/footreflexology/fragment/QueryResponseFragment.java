@@ -171,7 +171,8 @@ public class QueryResponseFragment extends Fragment {
                     "การรักษา" + "\n"
                             + dao.getData().get(0).getTreatment() + "\n\n" +
                     "คำแนะนำ" + "\n"
-                            + dao.getData().get(0).getRecommend());
+                            + dao.getData().get(0).getRecommend()
+        );
         return intent;
     }
 
