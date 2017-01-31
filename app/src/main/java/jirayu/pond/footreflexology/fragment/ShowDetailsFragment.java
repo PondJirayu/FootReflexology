@@ -170,20 +170,20 @@ public class ShowDetailsFragment extends Fragment {
             if (i == 0) {
                 moreContent = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
                         "รายละเอียด" + "\n"
-                        + dao.getData().get(i).getDetail() + "\n\n" +
+                        + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
-                        + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
                         "คำแนะนำ" + "\n"
-                        + dao.getData().get(i).getRecommend() + "\n\n";
+                        + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
             }
             if (i != 0) {
                 content2 = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
                         "รายละเอียด" + "\n"
-                        + dao.getData().get(i).getDetail() + "\n\n" +
+                        + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
-                        + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
                         "คำแนะนำ" + "\n"
-                        + dao.getData().get(i).getRecommend() + "\n\n";
+                        + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
                 moreContent = moreContent.concat(content2);
             }
         }

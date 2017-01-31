@@ -167,11 +167,11 @@ public class QueryResponseFragment extends Fragment {
         intent.putExtra(Intent.EXTRA_SUBJECT, "โรค" + dao.getData().get(0).getDiseaseName());
         intent.putExtra(Intent.EXTRA_TEXT,
                     "รายละเอียด" + "\n"
-                            + dao.getData().get(0).getDetail() + "\n\n" +
+                            + "\t\t" + dao.getData().get(0).getDetail() + "\n\n" +
                     "การรักษา" + "\n"
-                            + dao.getData().get(0).getTreatment() + "\n\n" +
+                            + "\t\t" + dao.getData().get(0).getTreatment() + "\n\n" +
                     "คำแนะนำ" + "\n"
-                            + dao.getData().get(0).getRecommend()
+                            + "\t\t" + dao.getData().get(0).getRecommend()
         );
         return intent;
     }
