@@ -162,21 +162,32 @@ public class ShowDetailsFragment extends Fragment {
     }
 
     private Intent getShareIntent() {
+        String moreContent = null, content2;
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
         for (int i = 0; i < dao.getData().size(); i++) {
-            intent.putExtra(Intent.EXTRA_TEXT,
-                        "โรค" + "\n"
-                                + dao.getData().get(i).getDiseaseName() + "\n\n" +
-                                "รายละเอียด" + "\n"
-                                + dao.getData().get(i).getDetail() + "\n\n" +
-                                "การรักษา" + "\n"
-                                + dao.getData().get(i).getTreatMent() + "\n\n" +
-                                "คำแนะนำ" + "\n"
-                                + dao.getData().get(i).getRecommend() + "\n\n"
-            );
+            if (i == 0) {
+                moreContent = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
+                        "รายละเอียด" + "\n"
+                        + dao.getData().get(i).getDetail() + "\n\n" +
+                        "การรักษา" + "\n"
+                        + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        "คำแนะนำ" + "\n"
+                        + dao.getData().get(i).getRecommend() + "\n\n";
+            }
+            if (i != 0) {
+                content2 = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
+                        "รายละเอียด" + "\n"
+                        + dao.getData().get(i).getDetail() + "\n\n" +
+                        "การรักษา" + "\n"
+                        + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        "คำแนะนำ" + "\n"
+                        + dao.getData().get(i).getRecommend() + "\n\n";
+                moreContent = moreContent.concat(content2);
+            }
         }
+        intent.putExtra(Intent.EXTRA_TEXT, moreContent);
         return intent;
     }
 
