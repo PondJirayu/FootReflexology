@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -27,8 +28,16 @@ import jirayu.pond.footreflexology.R;
  */
 public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
+    /************
+     * Variables
+     ************/
+
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
+
+    /************
+     * Functions
+     ************/
 
     public MedicalHistoryListItem(Context context) {
         super(context);
@@ -116,13 +125,25 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     public void setCreatedAt(Timestamp createdAt) {
         String createAt = simpleDateFormat.format(createdAt);
-        // TODO: แปลง ค.ศ. เป็น พ.ศ. ด้วย
-        tvCreatedAt.setText(createAt);
+        tvCreatedAt.setText(convertADtoBE(createAt));
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
         String updateAt = simpleDateFormat.format(updatedAt);
-        tvUpdatedAt.setText(updateAt);
+        tvUpdatedAt.setText(convertADtoBE(updateAt));
     }
+
+    private String convertADtoBE(String date) {
+        // แปลง ค.ศ. เป็น พ.ศ. โดยการนำ 543 ไปบวก
+        return date.substring(0, 2) + "-" + date.substring(3, 5) + "-" + String.valueOf(Integer.parseInt(date.substring(6)) + 543);
+    }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    /***************
+     * Inner Class
+     **************/
 
 }
