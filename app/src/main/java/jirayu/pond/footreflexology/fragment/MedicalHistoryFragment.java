@@ -68,6 +68,10 @@ public class MedicalHistoryFragment extends Fragment {
     private void initInstances(View rootView) {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("ของ" +
+                DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
+                DataMemberManager.getInstance().getMemberItemDao().getLastName());
+
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
