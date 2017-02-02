@@ -58,6 +58,16 @@ public class MedicalHistoryAdapter extends BaseAdapter {
         item.setBehavior(dao.getList());
         item.setCreatedAt(dao.getCreatedAt());
         item.setUpdatedAt(dao.getUpdatedAt());
+        // กำหนดสีหัวข้อตามอาการ
+        if (dao.getList().equals("แย่ลง")) {
+            item.setViewColourItemMedicalHistory(1);
+        } else if (dao.getList().equals("ทรงตัว")) {
+            item.setViewColourItemMedicalHistory(2);
+        } else if (dao.getList().equals("ดีขึ้น")) {
+            item.setViewColourItemMedicalHistory(3);
+        } else {
+            item.setViewColourItemMedicalHistory(4);
+        }
 
         return item;
     }

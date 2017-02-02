@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
      ************/
 
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt;
+    View viewColourItemMedicalHistory;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
 
     /************
@@ -77,6 +80,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
         tvBehavior = (TextView) findViewById(R.id.tvBehavior);
         tvCreatedAt = (TextView) findViewById(R.id.tvCreatedAt);
         tvUpdatedAt = (TextView) findViewById(R.id.tvUpdatedAt);
+        viewColourItemMedicalHistory = findViewById(R.id.viewColourItemMedicalHistory);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -136,6 +140,30 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     private String convertADtoBE(String date) {
         // แปลง ค.ศ. เป็น พ.ศ. โดยการนำ 543 ไปบวก
         return date.substring(0, 2) + "-" + date.substring(3, 5) + "-" + String.valueOf(Integer.parseInt(date.substring(6)) + 543);
+    }
+
+    public void setViewColourItemMedicalHistory(int colourCode){
+        // แย่ลง [สีแดง]
+        if (colourCode == 1) {
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWorse));
+            viewColourItemMedicalHistory.invalidate();
+        }
+        // ทรงตัว [สีเหลือง]
+        if (colourCode == 2) {
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPoise));
+            viewColourItemMedicalHistory.invalidate();
+        }
+        // ดีขึ้น [สีเขียว]
+        if (colourCode == 3) {
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorBetter));
+            viewColourItemMedicalHistory.invalidate();
+        }
+        // หายเป็นปกติ [สีฟ้า]
+        if (colourCode == 4) {
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorNormal));
+            viewColourItemMedicalHistory.invalidate();
+        }
+
     }
 
     /****************
