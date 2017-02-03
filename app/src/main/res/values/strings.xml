@@ -42,4 +42,8 @@
     <string name="years">ปี พ.ศ.</string>
     <string name="action_add">เพิ่มประวัติการรักษา</string>
     <string name="sub_item">เพิ่มเติม</string>
+    <string name="rank">ลำดับที่</string>
+    <string name="behavior">อาการ</string>
+    <string name="createdAt">วันที่เข้ารับการรักษา</string>
+    <string name="updatedAt">วันที่แก้ไขล่าสุด</string>
 </resources>
