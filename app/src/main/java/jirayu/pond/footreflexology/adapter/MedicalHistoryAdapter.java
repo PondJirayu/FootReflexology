@@ -54,6 +54,7 @@ public class MedicalHistoryAdapter extends BaseAdapter {
         }
         MedicalHistoryItemDao dao = (MedicalHistoryItemDao) getItem(position);
         // set ค่าให้ view ของ customViewGroup
+        item.setRank(0);
         item.setDiseaseName(dao.getDiseaseName());
         item.setBehavior(dao.getList());
         item.setCreatedAt(dao.getCreatedAt());
