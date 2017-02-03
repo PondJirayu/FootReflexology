@@ -15,7 +15,6 @@ import jirayu.pond.footreflexology.view.MedicalHistoryListItem;
 public class MedicalHistoryAdapter extends BaseAdapter {
 
     private MedicalHistoryItemCollectionDao dao;
-    private int number = 1;
 
     public void setDao(MedicalHistoryItemCollectionDao dao) {
         this.dao = dao;
@@ -57,7 +56,7 @@ public class MedicalHistoryAdapter extends BaseAdapter {
         MedicalHistoryItemDao dao = (MedicalHistoryItemDao) getItem(position);
 
         // set ค่าให้ view ของ customViewGroup
-        item.setRank(number);
+        item.setRank(position + 1);
         item.setDiseaseName(dao.getDiseaseName());
         item.setBehavior(dao.getList());
         item.setCreatedAt(dao.getCreatedAt());
@@ -74,7 +73,6 @@ public class MedicalHistoryAdapter extends BaseAdapter {
             item.setViewColourItemMedicalHistory(4);
         }
 
-        number++;
         return item;
     }
 }
