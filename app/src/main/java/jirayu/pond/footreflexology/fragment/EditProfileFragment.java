@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -41,8 +42,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
      ************/
 
 //   EditText editDay, editMonth, editYear,
-    EditText editFirstName, editLastName, editTelephoneNumber, editAddress, editSubDistrict,
-            editDistrict;
+    EditText editFirstName, editLastName, editTelephoneNumber,
+            editAddress, editSubDistrict, editDistrict;
     RadioGroup radioGroup;
     Spinner spinnerProvince;
     Button btnSave;
@@ -50,7 +51,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     StringsManager stringsManager;
     ProgressDialog progressDialog;
     String firstName, lastName, gender, birthDate,
-            telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
+            telephoneNumber, houseVillage, subDistrict,
+            district, province, createdAt = null, updatedAt = null;
+    TextView tvBirthDate;
 
     /************
      * Functions
@@ -96,6 +99,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         btnSave = (Button) rootView.findViewById(R.id.btnSignUp);
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
+        tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
         stringsManager = new StringsManager();
 
         createSpinner();
@@ -281,10 +285,11 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     } else {
                        radioGroup.check(R.id.rbFemale);
                     }
+                    // ส่งวันเกิดไปแยก วัน/เดือน/ปี ใน stringsManager
                     stringsManager.setWord(dao.getData().get(0).getBirthDate());
-//                    editDay.setText(stringsManager.getDay());
-//                    editMonth.setText(stringsManager.getMonth());
-//                    editYear.setText(stringsManager.getYear());
+                    tvBirthDate.setText(stringsManager.getDay() + "/"
+                            + stringsManager.getMonth() + "/"
+                            + stringsManager.getYear());
                     editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
