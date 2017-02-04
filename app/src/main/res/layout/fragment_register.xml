@@ -114,8 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="14dp"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/btnDatePicker"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="14dp">
+                android:layout_marginTop="12dp">
 
                 <EditText
                     android:id="@+id/edit_telephone_number"
