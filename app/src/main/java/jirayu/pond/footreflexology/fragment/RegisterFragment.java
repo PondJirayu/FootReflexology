@@ -40,7 +40,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     ProgressDialog progressDialog;
     ArrayAdapter<CharSequence> adapterProvince;
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
-            editSubDistrict, editDistrict, editDay, editMonth, editYear;
+            editSubDistrict, editDistrict;
+//    EditText editDay, editMonth, editYear;
     String firstName, lastName, identificationNumber, gender, birthDate,
             telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
 
@@ -86,9 +87,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
-        editDay = (EditText) rootView.findViewById(R.id.edit_day);
-        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
-        editYear = (EditText) rootView.findViewById(R.id.edit_year);
+//        editDay = (EditText) rootView.findViewById(R.id.edit_day);
+//        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
+//        editYear = (EditText) rootView.findViewById(R.id.edit_year);
 
         createSpinner();
 
@@ -142,9 +143,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-        birthDate = editYear.getText().toString()
-                + "-" + editMonth.getText().toString()
-                + "-" + editDay.getText().toString();
+//        birthDate = editYear.getText().toString()
+//                + "-" + editMonth.getText().toString()
+//                + "-" + editDay.getText().toString();
 
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
@@ -157,19 +158,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    private boolean checkDay() {
-        int day = Integer.parseInt(editDay.getText().toString());
-        if (day <= 0 || day > 31)
-            return true;
-        return false;
-    }
-
-    private boolean checkMonth() {
-        int month = Integer.parseInt(editMonth.getText().toString());
-        if (month <= 0 || month > 12)
-            return true;
-        return false;
-    }
+//    private boolean checkDay() {
+//        int day = Integer.parseInt(editDay.getText().toString());
+//        if (day <= 0 || day > 31)
+//            return true;
+//        return false;
+//    }
+//
+//    private boolean checkMonth() {
+//        int month = Integer.parseInt(editMonth.getText().toString());
+//        if (month <= 0 || month > 12)
+//            return true;
+//        return false;
+//    }
 
     /****************
      * Listener Zone
@@ -191,9 +192,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             if (firstName.trim().length() == 0
                     || lastName.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
-                    || editYear.getText().toString().trim().length() == 0
-                    || editMonth.getText().toString().trim().length() == 0
-                    || editDay.getText().toString().trim().length() == 0
+//                    || editYear.getText().toString().trim().length() == 0
+//                    || editMonth.getText().toString().trim().length() == 0
+//                    || editDay.getText().toString().trim().length() == 0
                     || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
@@ -201,16 +202,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
                         .show();
-            } else if (checkDay()) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนวันที่ให้ถูกต้อง",
-                        Toast.LENGTH_SHORT)
-                        .show();
-            } else if (checkMonth()) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนเดือนให้ถูกต้อง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+//            } else if (checkDay()) {
+//                Toast.makeText(getActivity(),
+//                        "กรุณาป้อนวันที่ให้ถูกต้อง",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
+//            } else if (checkMonth()) {
+//                Toast.makeText(getActivity(),
+//                        "กรุณาป้อนเดือนให้ถูกต้อง",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             } else {
                 progressDialog.show(); // show progressDialog
                 Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
