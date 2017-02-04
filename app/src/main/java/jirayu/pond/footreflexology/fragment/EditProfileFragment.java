@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,10 +27,7 @@ import jirayu.pond.footreflexology.manager.StringsManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Path;
 
-import static jirayu.pond.footreflexology.R.string.district;
-import static jirayu.pond.footreflexology.R.string.gender;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -41,19 +38,16 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
      * Variables
      ************/
 
-//   EditText editDay, editMonth, editYear,
-    EditText editFirstName, editLastName, editTelephoneNumber,
-            editAddress, editSubDistrict, editDistrict;
+    EditText editFirstName, editLastName, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
     RadioGroup radioGroup;
     Spinner spinnerProvince;
     Button btnSave;
     ArrayAdapter<CharSequence> adapterProvince;
     StringsManager stringsManager;
     ProgressDialog progressDialog;
-    String firstName, lastName, gender, birthDate,
-            telephoneNumber, houseVillage, subDistrict,
-            district, province, createdAt = null, updatedAt = null;
+    String firstName, lastName, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
     TextView tvBirthDate;
+    ImageButton btnDatePicker;
 
     /************
      * Functions
@@ -89,9 +83,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         // Init 'View' instance(s) with rootView.findViewById here
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
-//        editDay = (EditText) rootView.findViewById(R.id.edit_day);
-//        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
-//        editYear = (EditText) rootView.findViewById(R.id.edit_year);
         editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
@@ -100,6 +91,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
+        btnDatePicker = (ImageButton) rootView.findViewById(R.id.btnDatePicker);
         stringsManager = new StringsManager();
 
         createSpinner();
@@ -178,20 +170,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     }
 
-//    private boolean checkDay() {
-//        int day = Integer.parseInt(editDay.getText().toString());
-//        if (day <= 0 || day > 31)
-//            return true;
-//        return false;
-//    }
-//
-//    private boolean checkMonth() {
-//        int month = Integer.parseInt(editMonth.getText().toString());
-//        if (month <= 0 || month > 12)
-//            return true;
-//        return false;
-//    }
-
     /****************
      * Listener Zone
      ****************/
@@ -212,9 +190,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
             if (firstName.trim().length() == 0
                     || lastName.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
-//                    || editYear.getText().toString().trim().length() == 0
-//                    || editMonth.getText().toString().trim().length() == 0
-//                    || editDay.getText().toString().trim().length() == 0
                     || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
@@ -222,16 +197,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
                         .show();
-//            } else if (checkDay()) {
-//                Toast.makeText(getActivity(),
-//                        "กรุณาป้อนวันที่ให้ถูกต้อง",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
-//            } else if (checkMonth()) {
-//                Toast.makeText(getActivity(),
-//                        "กรุณาป้อนเดือนให้ถูกต้อง",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
             } else {
                 progressDialog.show();
                 // UpdateMember Here
@@ -252,6 +217,13 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                 );
                 call.enqueue(insertMemberList);
             }
+        }
+        // Handle DatePicker
+        if (v == btnDatePicker) {
+            Toast.makeText(getActivity(),
+                    "Show DatePicker",
+                    Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
