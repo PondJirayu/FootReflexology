@@ -94,24 +94,38 @@
             </RadioGroup>
 
             <LinearLayout
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/day_of_birth"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
-                <Button
-                    android:layout_marginLeft="16dp"
+                <TextView
+                    android:id="@+id/tvBirthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="14dp"
+                    android:text="26/12/2536"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
                     android:id="@+id/btnDatePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/pick_date"
+                    android:src="@drawable/ic_edit_black_24dp"
                     android:text="@string/pick_date" />
 
             </LinearLayout>
@@ -121,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="14dp">
 
                 <EditText
                     android:id="@+id/edit_telephone_number"
