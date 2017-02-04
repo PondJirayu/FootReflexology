@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import com.fourmob.datetimepicker.date.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.joda.time.format.DateTimeFormat;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusDao;
@@ -32,22 +39,31 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class EditProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class EditProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     /************
      * Variables
      ************/
 
-    EditText editFirstName, editLastName, editTelephoneNumber, editAddress, editSubDistrict, editDistrict;
+    EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
+            editSubDistrict, editDistrict;
     RadioGroup radioGroup;
-    Spinner spinnerProvince;
-    Button btnSave;
-    ArrayAdapter<CharSequence> adapterProvince;
-    StringsManager stringsManager;
-    ProgressDialog progressDialog;
-    String firstName, lastName, gender, birthDate, telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
     TextView tvBirthDate;
     ImageButton btnDatePicker;
+    Button btnSave;
+    Spinner spinnerProvince;
+    ProgressDialog progressDialog;
+
+    ArrayAdapter<CharSequence> adapterProvince;
+
+    StringsManager stringsManager;
+
+    String firstName, lastName, gender, birthDate, telephoneNumber, houseVillage, subDistrict,
+            district, province, createdAt = null, updatedAt = null;
+
+    DatePickerDialog datePickerDialog;
+
+    Calendar calendar;
 
     /************
      * Functions
@@ -94,11 +110,24 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         btnDatePicker = (ImageButton) rootView.findViewById(R.id.btnDatePicker);
         stringsManager = new StringsManager();
 
+        setDate(); // จัดการเรื่องวันที่
         createSpinner();
         loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
 
         // Handle Click Button
         btnSave.setOnClickListener(this);
+        btnDatePicker.setOnClickListener(this);
+    }
+
+    private void setDate() {
+        // แสดงเวลาปัจจุบัน
+        calendar = Calendar.getInstance();
+
+        datePickerDialog = DatePickerDialog.newInstance(this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                true);
     }
 
     private void loadMemberList() {
@@ -170,6 +199,13 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     }
 
+    public void showToast(String text) {
+        Toast.makeText(getActivity(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -193,10 +229,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนข้อมูลให้ครบถ้วน",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
             } else {
                 progressDialog.show();
                 // UpdateMember Here
@@ -220,10 +253,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
         // Handle DatePicker
         if (v == btnDatePicker) {
-            Toast.makeText(getActivity(),
-                    "Show DatePicker",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            datePickerDialog.setYearRange(1910, 2020);
+            datePickerDialog.show(getFragmentManager(), "datePicker");
         }
     }
 
@@ -245,10 +276,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
             if (response.isSuccessful()) {
                 MemberItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) {
-                    Toast.makeText(getActivity(),
-                            "ไม่พบข้อมูลผู้ป่วย",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("ไม่พบข้อมูลผู้ป่วย");
                 } else {
                     editFirstName.setText(dao.getData().get(0).getFirstName());
                     editLastName.setText(dao.getData().get(0).getLastName());
@@ -270,19 +298,13 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     spinnerProvince.setSelection(stringsManager.getProvinceId());
                 }
             } else {
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
@@ -295,24 +317,15 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                 StatusDao dao = response.body();
                 if (dao.getSuccess() != 1) {
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity(),
-                            "ขออภัยแก้ไขข้อมูลไม่สำเร็จ",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("ขออภัยแก้ไขข้อมูลไม่สำเร็จ");
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity(),
-                            "แก้ไขข้อมูลแล้ว",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("แก้ไขข้อมูลแล้ว");
                     getFragmentManager().popBackStack();
                 }
             } else { // 404
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
@@ -321,13 +334,18 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                               Throwable t) {
 
             progressDialog.dismiss();
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
+        calendar.set(year, month, day);
+        Date date = calendar.getTime();
+        // set Date ที่เลือกใส่ TextView
+        tvBirthDate.setText(dateFormat.format(date));
+    }
 
     /**************
      * Inner Class
