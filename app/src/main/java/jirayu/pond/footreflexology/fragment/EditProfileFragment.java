@@ -127,15 +127,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH),
-                true);
-    }
-
-    private void loadMemberList() {
-        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
-                "members",
-                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
-        );
-        call.enqueue(loadMemberList);
+                false);
     }
 
     private void createSpinner() {
@@ -145,6 +137,14 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProvince.setAdapter(adapterProvince); // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
         spinnerProvince.setOnItemSelectedListener(this); // Handle Click Spinner
+    }
+
+    private void loadMemberList() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+        );
+        call.enqueue(loadMemberList);
     }
 
     @Override
@@ -223,12 +223,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
             // getText to variable
             getTextToVariables();
 
-            if (firstName.trim().length() == 0
-                    || lastName.trim().length() == 0
-                    || telephoneNumber.trim().length() == 0
-                    || houseVillage.trim().length() == 0
-                    || subDistrict.trim().length() == 0
-                    || district.trim().length() == 0) {
+            if (firstName.trim().length() == 0 || lastName.trim().length() == 0
+                    || telephoneNumber.trim().length() == 0 || houseVillage.trim().length() == 0
+                    || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
                 showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
             } else {
                 progressDialog.show();
@@ -338,6 +335,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     };
 
+    // Handle DatePicker
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
