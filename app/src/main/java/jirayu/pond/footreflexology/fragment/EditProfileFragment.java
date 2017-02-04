@@ -40,8 +40,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
      * Variables
      ************/
 
-    EditText editFirstName, editLastName, editDay, editMonth,
-            editYear, editTelephoneNumber, editAddress, editSubDistrict,
+//   EditText editDay, editMonth, editYear,
+    EditText editFirstName, editLastName, editTelephoneNumber, editAddress, editSubDistrict,
             editDistrict;
     RadioGroup radioGroup;
     Spinner spinnerProvince;
@@ -86,9 +86,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         // Init 'View' instance(s) with rootView.findViewById here
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
-        editDay = (EditText) rootView.findViewById(R.id.edit_day);
-        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
-        editYear = (EditText) rootView.findViewById(R.id.edit_year);
+//        editDay = (EditText) rootView.findViewById(R.id.edit_day);
+//        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
+//        editYear = (EditText) rootView.findViewById(R.id.edit_year);
         editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
@@ -99,7 +99,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         stringsManager = new StringsManager();
 
         createSpinner();
-        loadMemberList();
+        loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
 
         // Handle Click Button
         btnSave.setOnClickListener(this);
@@ -159,9 +159,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-        birthDate = editYear.getText().toString()
-                + "-" + editMonth.getText().toString()
-                + "-" + editDay.getText().toString();
+//        birthDate = editYear.getText().toString()
+//                + "-" + editMonth.getText().toString()
+//                + "-" + editDay.getText().toString();
 
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
@@ -174,19 +174,19 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     }
 
-    private boolean checkDay() {
-        int day = Integer.parseInt(editDay.getText().toString());
-        if (day <= 0 || day > 31)
-            return true;
-        return false;
-    }
-
-    private boolean checkMonth() {
-        int month = Integer.parseInt(editMonth.getText().toString());
-        if (month <= 0 || month > 12)
-            return true;
-        return false;
-    }
+//    private boolean checkDay() {
+//        int day = Integer.parseInt(editDay.getText().toString());
+//        if (day <= 0 || day > 31)
+//            return true;
+//        return false;
+//    }
+//
+//    private boolean checkMonth() {
+//        int month = Integer.parseInt(editMonth.getText().toString());
+//        if (month <= 0 || month > 12)
+//            return true;
+//        return false;
+//    }
 
     /****************
      * Listener Zone
@@ -208,9 +208,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
             if (firstName.trim().length() == 0
                     || lastName.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
-                    || editYear.getText().toString().trim().length() == 0
-                    || editMonth.getText().toString().trim().length() == 0
-                    || editDay.getText().toString().trim().length() == 0
+//                    || editYear.getText().toString().trim().length() == 0
+//                    || editMonth.getText().toString().trim().length() == 0
+//                    || editDay.getText().toString().trim().length() == 0
                     || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
@@ -218,16 +218,16 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                         "กรุณาป้อนข้อมูลให้ครบถ้วน",
                         Toast.LENGTH_SHORT)
                         .show();
-            } else if (checkDay()) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนวันที่ให้ถูกต้อง",
-                        Toast.LENGTH_SHORT)
-                        .show();
-            } else if (checkMonth()) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนเดือนให้ถูกต้อง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+//            } else if (checkDay()) {
+//                Toast.makeText(getActivity(),
+//                        "กรุณาป้อนวันที่ให้ถูกต้อง",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
+//            } else if (checkMonth()) {
+//                Toast.makeText(getActivity(),
+//                        "กรุณาป้อนเดือนให้ถูกต้อง",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             } else {
                 progressDialog.show();
                 // UpdateMember Here
@@ -282,9 +282,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                        radioGroup.check(R.id.rbFemale);
                     }
                     stringsManager.setWord(dao.getData().get(0).getBirthDate());
-                    editDay.setText(stringsManager.getDay());
-                    editMonth.setText(stringsManager.getMonth());
-                    editYear.setText(stringsManager.getYear());
+//                    editDay.setText(stringsManager.getDay());
+//                    editMonth.setText(stringsManager.getMonth());
+//                    editYear.setText(stringsManager.getYear());
                     editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());

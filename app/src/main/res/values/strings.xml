@@ -46,4 +46,5 @@
     <string name="behavior">อาการ</string>
     <string name="createdAt">วันที่เข้ารับการรักษา</string>
     <string name="updatedAt">วันที่แก้ไขล่าสุด</string>
+    <string name="pick_date">เลือกวันเกิด</string>
 </resources>
