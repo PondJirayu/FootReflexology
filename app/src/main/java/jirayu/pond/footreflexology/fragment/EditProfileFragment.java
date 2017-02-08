@@ -19,8 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.joda.time.format.DateTimeFormat;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -89,12 +87,12 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
-        init();
+        initOptionsMenu();
         initInstances(rootView);
         return rootView;
     }
 
-    private void init() {
+    private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
     }

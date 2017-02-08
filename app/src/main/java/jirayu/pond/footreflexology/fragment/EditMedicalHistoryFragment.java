@@ -64,13 +64,17 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_medical_history, container, false);
+        initOptionsMenu();
         initInstances(rootView);
         return rootView;
     }
 
-    private void initInstances(View rootView) {
+    private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+    }
+
+    private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);

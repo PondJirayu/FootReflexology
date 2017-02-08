@@ -14,8 +14,6 @@ import android.widget.Toast;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
-import java.util.Date;
-
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
@@ -24,8 +22,6 @@ import jirayu.pond.footreflexology.manager.StringsManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static jirayu.pond.footreflexology.R.string.age;
 
 
 /**
@@ -60,12 +56,12 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        init();
+        initOptionsMenu();
         initInstances(rootView);
         return rootView;
     }
 
-    private void init() {
+    private void initOptionsMenu() {
         // สั่งให้ Fragment แสดง Option Menu ของตัวเอง
         setHasOptionsMenu(true);
 

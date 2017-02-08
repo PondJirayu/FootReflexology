@@ -14,8 +14,6 @@ import android.widget.Toast;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.MedicalHistoryAdapter;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
-import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -54,12 +52,12 @@ public class MedicalHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
-        init();
+        initOptionsMenu();
         initInstances(rootView);
         return rootView;
     }
 
-    private void init() {
+    private void initOptionsMenu() {
         // สั่งให้ Fragment แสดง option menu ของตัวเอง
         setHasOptionsMenu(true);
 
