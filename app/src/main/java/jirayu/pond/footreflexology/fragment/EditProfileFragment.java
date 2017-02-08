@@ -89,13 +89,17 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
+        init();
         initInstances(rootView);
         return rootView;
     }
 
-    private void initInstances(View rootView) {
+    private void init() {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
+    }
+
+    private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);

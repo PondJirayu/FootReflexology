@@ -243,7 +243,7 @@
                 android:padding="15dp"
                 android:paddingBottom="14dp"
                 android:text="@string/save"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 

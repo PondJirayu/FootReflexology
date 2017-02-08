@@ -43,25 +43,17 @@ public class ProfileActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
-        getSupportActionBar().setTitle("ประวัติส่วนตัว");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initFragments(Bundle savedInstanceState) {
         // Place Fragment here
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, ProfileFragment.newInstance())
                     .commit();
         }
-    }
-
-    // Inflate Options Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return true;
     }
 
     @Override
@@ -103,33 +95,25 @@ public class ProfileActivity extends AppCompatActivity {
         // Handle click Option Menu
         switch (item.getItemId()) {
             case R.id.action_edit:
-
-                // ค้นหา Fragment ที่วางอยู่บน contentContainer
-                Fragment fragment = getSupportFragmentManager()
-                        .findFragmentById(R.id.contentContainer);
-
-                // check ว่าใช่ EditProfileFragment รึเปล่า (เพื่อป้อนกันการว่าง Fragment ตัวเดียวกัน ทับกัน)
-                if (fragment instanceof EditProfileFragment == false) {
-                    getSupportFragmentManager().beginTransaction()
-                            .setCustomAnimations(
-                                    R.anim.from_right, R.anim.to_left,
-                                    R.anim.from_left, R.anim.to_right
-                            )
-                            .replace(R.id.contentContainer,
-                                    EditProfileFragment.newInstance())
-                            .addToBackStack(null)
-                            .commit();
-                }
-                return true;
-            case android.R.id.home: // Handle on BackPress
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.from_right, R.anim.to_left,
+                                R.anim.from_left, R.anim.to_right
+                        )
+                        .replace(R.id.contentContainer,
+                                EditProfileFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            return true;
+        case android.R.id.home: // Handle on BackPress
+            finish();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
     }
+}
 
-    /**************
-     * Inner Class
-     **************/
+/**************
+ * Inner Class
+ **************/
 }

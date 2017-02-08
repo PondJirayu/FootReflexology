@@ -60,19 +60,19 @@ public class MedicalHistoryFragment extends Fragment {
     }
 
     private void init() {
-        // Init Fragment level's variable(s) here
-        // สั่งให้ Fragment โชว์ option menu ของตัวเอง
+        // สั่งให้ Fragment แสดง option menu ของตัวเอง
         setHasOptionsMenu(true);
-    }
 
-    private void initInstances(View rootView) {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
+
         // Edit Subtitle in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("ของ" +
                 DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
                 DataMemberManager.getInstance().getMemberItemDao().getLastName());
+    }
 
+    private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter

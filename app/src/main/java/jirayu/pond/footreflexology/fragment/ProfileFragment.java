@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -58,8 +60,17 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        init();
         initInstances(rootView);
         return rootView;
+    }
+
+    private void init() {
+        // สั่งให้ Fragment แสดง Option Menu ของตัวเอง
+        setHasOptionsMenu(true);
+
+        // Edit Title in Toolbar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
     }
 
     private void initInstances(View rootView) {
@@ -134,6 +145,13 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    public void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -144,10 +162,7 @@ public class ProfileFragment extends Fragment {
             if (response.isSuccessful()) {
                 MemberItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย
-                    Toast.makeText(getActivity(),
-                            "ไม่พบข้อมูลผู้ป่วย",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("ไม่พบข้อมูลผู้ป่วย");
                 } else { // พบข้อมูลผู้ป่วย
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
@@ -163,21 +178,22 @@ public class ProfileFragment extends Fragment {
                     tvProvince.setText(dao.getData().get(0).getProvince());
                 }
             } else {
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
+
+    // Inflate Options Menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_profile, menu);
+    }
 
     /***************
      * Inner Class
