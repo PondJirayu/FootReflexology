@@ -2,7 +2,8 @@ package jirayu.pond.footreflexology.dao;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by lp700 on 10/12/2559.
@@ -15,14 +16,14 @@ public class MemberItemDao {
     @SerializedName("lastname")                 private String lastName;
     @SerializedName("identification_number")    private String identificationNumber;
     @SerializedName("gender")                   private String gender;
-    @SerializedName("birthdate")                private String birthDate;
+    @SerializedName("birthdate")                private Date birthDate;
     @SerializedName("telephone_number")         private String telephoneNumber;
     @SerializedName("house_village")            private String houseVillage;
     @SerializedName("sub_district")             private String subDistrict;
     @SerializedName("district")                 private String district;
     @SerializedName("province")                 private String province;
-    @SerializedName("created_at")               private String createdAt;
-    @SerializedName("updated_at")               private String updatedAt;
+    @SerializedName("created_at")               private Timestamp createdAt;
+    @SerializedName("updated_at")               private Timestamp updatedAt;
 
     public int getId() {
         return id;
@@ -64,11 +65,11 @@ public class MemberItemDao {
         this.gender = gender;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -112,19 +113,19 @@ public class MemberItemDao {
         this.province = province;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,11 +38,16 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class EditProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class EditProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener,
+        View.OnClickListener,
+        DatePickerDialog.OnDateSetListener {
 
     /************
      * Variables
      ************/
+
+    java.sql.Date birthDate;
+    Timestamp createdAt, updatedAt;
 
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
             editSubDistrict, editDistrict;
@@ -56,8 +62,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
 
     StringsManager stringsManager;
 
-    String firstName, lastName, gender, birthDate, telephoneNumber, houseVillage, subDistrict,
-            district, province, createdAt = null, updatedAt = null;
+    String firstName, lastName, gender, telephoneNumber, houseVillage, subDistrict,
+            district, province;
 
     DatePickerDialog datePickerDialog;
 
@@ -186,9 +192,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-//        birthDate = editYear.getText().toString()
-//                + "-" + editMonth.getText().toString()
-//                + "-" + editDay.getText().toString();
+//        birthDate = stringsManager.getYear() + "-" + stringsManager.getMonth() + "-" + stringsManager.getDay();
 
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
@@ -252,7 +256,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
         // Handle DatePicker
         if (v == btnDatePicker) {
-            datePickerDialog.setYearRange(1910, 2020);
+            datePickerDialog.setYearRange(1910, 2017);
             datePickerDialog.show(getFragmentManager(), "datePicker");
         }
     }
@@ -284,11 +288,11 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     } else {
                        radioGroup.check(R.id.rbFemale);
                     }
-                    // ส่งวันเกิดไปแยก วัน/เดือน/ปี ใน stringsManager
+                    // ส่งวันเกิดไปแยก วัน-เดือน-ปี ใน stringsManager
                     stringsManager.setWord(dao.getData().get(0).getBirthDate());
-                    tvBirthDate.setText(stringsManager.getDay() + "/"
-                            + stringsManager.getMonth() + "/"
-                            + stringsManager.getYear());
+                    tvBirthDate.setText(stringsManager.getDay() + "-" + stringsManager.getMonth() + "-" + stringsManager.getYear());
+                    // ถ้าหาก User ไม่ได้แก้ไขวันเกิดใหม่ ให้ใช้วันเกิดเดิม
+                    birthDate = stringsManager.getYear() + "-" + stringsManager.getMonth() + "-" + stringsManager.getDay();
                     editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
@@ -340,11 +344,12 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     // Handle DatePicker
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);   // กำหนดให้แสดงวันที่แบบไหน เช่น 00/00/0000
         calendar.set(year, month, day);
         Date date = calendar.getTime();
-        // set Date ที่เลือกใส่ TextView
-        tvBirthDate.setText(dateFormat.format(date));
+        birthDate = dateFormat.format(date); // เอาวันเกิดไปเก็บในตัวแปร พร้อมส่งไปอัพเดทใน Server
+//        stringsManager.setWord(dateFormat.format(date));
+        tvBirthDate.setText(dateFormat.format(date));   // แสดงวันเกิดที่เลือกใน TextView
     }
 
     /**************

@@ -3,7 +3,6 @@ package jirayu.pond.footreflexology.dao;
 import com.google.gson.annotations.SerializedName;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Created by lp700 on 13/12/2559.

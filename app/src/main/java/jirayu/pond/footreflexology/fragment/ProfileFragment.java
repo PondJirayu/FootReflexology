@@ -94,10 +94,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private String calAge(MemberItemCollectionDao dao) {
-        String birthDate = dao.getData().get(0).getBirthDate();
-        int year = Integer.parseInt(birthDate.substring(0, 4)) - 543; // แปลง พ.ศ. เป็น ค.ศ.
-        int month = Integer.parseInt(birthDate.substring(5, 7));
-        int day = Integer.parseInt(birthDate.substring(8));
+//        String birthDate = dao.getData().get(0).getBirthDate();
+//        int year = Integer.parseInt(birthDate.substring(0, 4));
+//        int month = Integer.parseInt(birthDate.substring(5, 7));
+//        int day = Integer.parseInt(birthDate.substring(8));
 
         // คำนวณอายุ
         LocalDate Bd = new LocalDate(year, month, day);
@@ -163,9 +163,9 @@ public class ProfileFragment extends Fragment {
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());
-                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
-                    tvBirthDate.setText(stringsManager.getChangeBirthDate());
-                    tvAge.setText(calAge(dao));
+//                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
+//                    tvBirthDate.setText(stringsManager.getChangeBirthDate());
+//                    tvAge.setText(calAge(dao));
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
                     tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     tvHouseVillage.setText(dao.getData().get(0).getHouseVillage());

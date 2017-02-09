@@ -1,5 +1,8 @@
 package jirayu.pond.footreflexology.manager.http;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
@@ -63,14 +66,14 @@ public interface ApiService {
             @Query("lastname") String lastName,
             @Query("identification_number") String identificationNumber,
             @Query("gender") String gender,
-            @Query("birthdate") String birthDate,
+            @Query("birthdate") Date birthDate,
             @Query("telephone_number") String telephoneNumber,
             @Query("house_village") String houseVillage,
             @Query("sub_district") String subDistrict,
             @Query("district") String district,
             @Query("province") String province,
-            @Query("created_at") String createdAt,
-            @Query("updated_at") String updatedAt
+            @Query("created_at") Timestamp createdAt,
+            @Query("updated_at") Timestamp updatedAt
     );
 
     @GET("medicalhistory/none/create")
@@ -89,14 +92,14 @@ public interface ApiService {
             @Query("lastname") String lastName,
             @Query("identification_number") String identificationNumber,
             @Query("gender") String gender,
-            @Query("birthdate") String birthDate,
+            @Query("birthdate") Date birthDate,
             @Query("telephone_number") String telephoneNumber,
             @Query("house_village") String houseVillage,
             @Query("sub_district") String subDistrict,
             @Query("district") String district,
             @Query("province") String province,
-            @Query("created_at") String createdAt,
-            @Query("updated_at") String updatedAt
+            @Query("created_at") Timestamp createdAt,
+            @Query("updated_at") Timestamp updatedAt
     );
 
     @GET("medicalhistory/{key}/edit")
