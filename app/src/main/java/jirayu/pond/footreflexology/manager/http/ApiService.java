@@ -98,7 +98,6 @@ public interface ApiService {
             @Query("sub_district") String subDistrict,
             @Query("district") String district,
             @Query("province") String province,
-            @Query("created_at") Timestamp createdAt,
             @Query("updated_at") Timestamp updatedAt
     );
 
