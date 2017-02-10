@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -68,6 +69,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     DatePickerDialog datePickerDialog;
 
     Calendar calendar;
+
+    SimpleDateFormat simpleDateFormat;
 
     /************
      * Functions
@@ -192,8 +195,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-//        birthDate = stringsManager.getYear() + "-" + stringsManager.getMonth() + "-" + stringsManager.getDay();
-
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.rbMale:
@@ -288,11 +289,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     } else {
                        radioGroup.check(R.id.rbFemale);
                     }
-                    // ส่งวันเกิดไปแยก วัน-เดือน-ปี ใน stringsManager
-                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
-                    tvBirthDate.setText(stringsManager.getDay() + "-" + stringsManager.getMonth() + "-" + stringsManager.getYear());
-                    // ถ้าหาก User ไม่ได้แก้ไขวันเกิดใหม่ ให้ใช้วันเกิดเดิม
-                    birthDate = stringsManager.getYear() + "-" + stringsManager.getMonth() + "-" + stringsManager.getDay();
+                    birthDate = dao.getData().get(0).getBirthDate();            // ส่ง Date ไปเก็บไว้ในตัวแปร กรณีที่ User ไม่ได้เปลี่ยนแปลงวันเกิด
+                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");      // กำหนด Date Format
+                    tvBirthDate.setText(simpleDateFormat.format(birthDate));    // แปลง Date เป็น String
                     editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
                     editSubDistrict.setText(dao.getData().get(0).getSubDistrict());
@@ -344,12 +343,14 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     // Handle DatePicker
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);   // กำหนดให้แสดงวันที่แบบไหน เช่น 00/00/0000
         calendar.set(year, month, day);
         Date date = calendar.getTime();
-        birthDate = dateFormat.format(date); // เอาวันเกิดไปเก็บในตัวแปร พร้อมส่งไปอัพเดทใน Server
-//        stringsManager.setWord(dateFormat.format(date));
-        tvBirthDate.setText(dateFormat.format(date));   // แสดงวันเกิดที่เลือกใน TextView
+
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");  // กำหนด Date Format
+        tvBirthDate.setText(simpleDateFormat.format(date));     // แปลง Date เป็น String และแสดงใน TextView
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");  // กำหนด Date Format ให้ตรงกับ Format in Server
+        birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // กำหนด Date ที่ User เลือก ใส่ตัวแปรเพื่อส่งไปอัพเดทใน Server
     }
 
     /**************

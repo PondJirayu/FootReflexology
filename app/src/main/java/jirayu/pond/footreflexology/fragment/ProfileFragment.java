@@ -100,11 +100,12 @@ public class ProfileFragment extends Fragment {
 //        int day = Integer.parseInt(birthDate.substring(8));
 
         // คำนวณอายุ
-        LocalDate Bd = new LocalDate(year, month, day);
-        LocalDate now = new LocalDate();
-        Years age = Years.yearsBetween(Bd, now);
+//        LocalDate Bd = new LocalDate(year, month, day);
+//        LocalDate now = new LocalDate();
+//        Years age = Years.yearsBetween(Bd, now);
 
-        return Integer.toString(age.getYears());
+//        return Integer.toString(age.getYears());
+        return null;
     }
 
 

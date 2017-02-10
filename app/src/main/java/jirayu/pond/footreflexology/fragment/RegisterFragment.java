@@ -16,6 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
@@ -36,14 +39,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     Button btnSignUp;
     RadioGroup radioGroup;
-    Spinner spinnerProvince;
-    ProgressDialog progressDialog;
-    ArrayAdapter<CharSequence> adapterProvince;
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
             editSubDistrict, editDistrict;
-//    EditText editDay, editMonth, editYear;
-    String firstName, lastName, identificationNumber, gender, birthDate,
-            telephoneNumber, houseVillage, subDistrict, district, province, createdAt = null, updatedAt = null;
+    Spinner spinnerProvince;
+
+    ProgressDialog progressDialog;
+
+    ArrayAdapter<CharSequence> adapterProvince;
+
+    String firstName, lastName, identificationNumber, gender,
+            telephoneNumber, houseVillage, subDistrict, district, province;
+
+    Date birthDate;
+    Timestamp createdAt, updatedAt;
 
     /************
      * Functions
