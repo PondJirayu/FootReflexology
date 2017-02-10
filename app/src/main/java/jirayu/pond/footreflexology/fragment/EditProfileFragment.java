@@ -146,8 +146,8 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         adapterProvince = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
         adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProvince.setAdapter(adapterProvince); // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
-        spinnerProvince.setOnItemSelectedListener(this); // Handle Click Spinner
+        spinnerProvince.setAdapter(adapterProvince);        // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
+        spinnerProvince.setOnItemSelectedListener(this);    // Handle Click Spinner
     }
 
     private void loadMemberList() {
@@ -195,6 +195,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
+        // Update Timestamp here
+
+
         // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.rbMale:
@@ -229,7 +232,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         if (v == btnSave) {
             // getText to variable
             getTextToVariables();
-
             if (firstName.trim().length() == 0 || lastName.trim().length() == 0
                     || telephoneNumber.trim().length() == 0 || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
@@ -349,7 +351,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");  // กำหนด Date Format
         tvBirthDate.setText(simpleDateFormat.format(date));     // แปลง Date เป็น String และแสดงใน TextView
 
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");  // กำหนด Date Format ให้ตรงกับ Format in Server
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");              // กำหนด Date Format ให้ตรงกับ Format in Server
         birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // แปลง Date เป็น String และส่งให้ฟังก์ชัน valueOf แปลงเป็น Date Sql ไปเก็บไว้ในตัวแปร birthDate เพื่อเตรียมส่งให้ Server
     }
 
