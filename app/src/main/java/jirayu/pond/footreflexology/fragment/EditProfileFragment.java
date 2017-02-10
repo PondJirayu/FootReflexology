@@ -350,7 +350,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         tvBirthDate.setText(simpleDateFormat.format(date));     // แปลง Date เป็น String และแสดงใน TextView
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");  // กำหนด Date Format ให้ตรงกับ Format in Server
-        birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // กำหนด Date ที่ User เลือก ใส่ตัวแปรเพื่อส่งไปอัพเดทใน Server
+        birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // แปลง Date เป็น String และส่งให้ฟังก์ชัน valueOf แปลงเป็น Date Sql ไปเก็บไว้ในตัวแปร birthDate เพื่อเตรียมส่งให้ Server
     }
 
     /**************
