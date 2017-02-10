@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment {
 
     private String calAge(MemberItemCollectionDao dao) {
         Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()), new LocalDate());
-        return "" + years.getYears();
+        return years.getYears() + "";
     }
 
     private void loadProfile() {
@@ -161,7 +161,7 @@ public class ProfileFragment extends Fragment {
                     tvGender.setText(dao.getData().get(0).getGender());
                     simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");                                  // กำหนด Date Format
                     tvBirthDate.setText(simpleDateFormat.format(dao.getData().get(0).getBirthDate()));      // แปลง Date เป็น String
-                    tvAge.setText(calAge(dao));                                                             // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน
+                    tvAge.setText(calAge(dao));                                                             // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน calAge()
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
                     tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     tvHouseVillage.setText(dao.getData().get(0).getHouseVillage());
