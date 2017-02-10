@@ -195,10 +195,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-        // Update Timestamp here
-
-
-        // check operator
+        updatedAt = new Timestamp(System.currentTimeMillis()); // GET เวลาปัจจุบันเพื่ออัพเดทตัวแปร updatedAt
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.rbMale:
                 gender = "ชาย";
