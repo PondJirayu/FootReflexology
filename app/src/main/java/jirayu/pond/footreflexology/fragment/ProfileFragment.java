@@ -14,6 +14,8 @@ import android.widget.Toast;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import java.text.SimpleDateFormat;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
@@ -35,7 +37,10 @@ public class ProfileFragment extends Fragment {
 
     TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
             tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince;
+
     StringsManager stringsManager;
+
+    SimpleDateFormat simpleDateFormat;
 
     /************
      * Functions
@@ -72,6 +77,7 @@ public class ProfileFragment extends Fragment {
     private void initInstances(View rootView) {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
+
         // Init 'View' instance(s) with rootView.findViewById here
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);
@@ -94,20 +100,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private String calAge(MemberItemCollectionDao dao) {
-//        String birthDate = dao.getData().get(0).getBirthDate();
-//        int year = Integer.parseInt(birthDate.substring(0, 4));
-//        int month = Integer.parseInt(birthDate.substring(5, 7));
-//        int day = Integer.parseInt(birthDate.substring(8));
-
-        // คำนวณอายุ
-//        LocalDate Bd = new LocalDate(year, month, day);
-//        LocalDate now = new LocalDate();
-//        Years age = Years.yearsBetween(Bd, now);
-
-//        return Integer.toString(age.getYears());
-        return null;
+        Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()), new LocalDate());
+        return "" + years.getYears();
     }
-
 
     private void loadProfile() {
         Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
@@ -164,9 +159,9 @@ public class ProfileFragment extends Fragment {
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());
-//                    stringsManager.setWord(dao.getData().get(0).getBirthDate());
-//                    tvBirthDate.setText(stringsManager.getChangeBirthDate());
-//                    tvAge.setText(calAge(dao));
+                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");                                  // กำหนด Date Format
+                    tvBirthDate.setText(simpleDateFormat.format(dao.getData().get(0).getBirthDate()));      // แปลง Date เป็น String
+                    tvAge.setText(calAge(dao));                                                             // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
                     tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     tvHouseVillage.setText(dao.getData().get(0).getHouseVillage());
