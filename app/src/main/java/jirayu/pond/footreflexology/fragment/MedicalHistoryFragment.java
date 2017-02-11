@@ -74,7 +74,7 @@ public class MedicalHistoryFragment extends Fragment {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
-        listView.setAdapter(listAdapter);   // listView with Adapter ทำงานร่วมกัน
+        listView.setAdapter(listAdapter);           // listView with Adapter ทำงานร่วมกัน
 
         // ติดต่อกับ server
         reloadData();
@@ -138,7 +138,7 @@ public class MedicalHistoryFragment extends Fragment {
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else { // พบข้อมูล
-                    listAdapter.setDao(dao); // โยน dao ให้ Adapter
+                    listAdapter.setDao(dao);            // โยน dao ให้ Adapter
                     listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
                 }
             } else { // 404 NOT FOUND
