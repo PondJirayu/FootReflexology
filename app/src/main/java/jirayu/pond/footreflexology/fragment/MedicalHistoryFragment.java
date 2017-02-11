@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +31,10 @@ public class MedicalHistoryFragment extends Fragment {
      * Variables
      ************/
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     ListView listView;
+
     MedicalHistoryAdapter listAdapter;
 
     /************
@@ -74,9 +78,11 @@ public class MedicalHistoryFragment extends Fragment {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
-        listView.setAdapter(listAdapter);           // listView with Adapter ทำงานร่วมกัน
+        listView.setAdapter(listAdapter);           // สั่งให้ listView with Adapter ทำงานร่วมกัน
 
-        // ติดต่อกับ server
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(pullToRefresh);
+
         reloadData();
     }
 
@@ -129,10 +135,12 @@ public class MedicalHistoryFragment extends Fragment {
      * Listener Zone
      ****************/
 
+    // reload Data
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
         public void onResponse(Call<MedicalHistoryItemCollectionDao> call,
                                Response<MedicalHistoryItemCollectionDao> response) {
+            swipeRefreshLayout.setRefreshing(false);    // สั่งให้ Pull to Refresh หยุดหมุน
             if (response.isSuccessful()) {
                 MedicalHistoryItemCollectionDao dao = response.body();
                 if (dao.getData().isEmpty()) {
@@ -149,6 +157,7 @@ public class MedicalHistoryFragment extends Fragment {
         @Override
         public void onFailure(Call<MedicalHistoryItemCollectionDao> call,
                               Throwable t) {
+            swipeRefreshLayout.setRefreshing(false);    // สั่งให้ Pull to Refresh หยุดหมุน
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
@@ -159,6 +168,14 @@ public class MedicalHistoryFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_medical_history, menu);
     }
+
+    // Handle Pull to Refresh
+    SwipeRefreshLayout.OnRefreshListener pullToRefresh = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            reloadData();
+        }
+    };
 
     /**************
      * Inner Class
