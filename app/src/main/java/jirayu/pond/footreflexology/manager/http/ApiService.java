@@ -80,7 +80,9 @@ public interface ApiService {
     Call<StatusDao> InsertMedicalHistory(
             @Query("member_id") int memberId,
             @Query("disease_id") int diseaseId,
-            @Query("behavior_id") int behaviorId
+            @Query("behavior_id") int behaviorId,
+            @Query("created_at") Timestamp createdAt,
+            @Query("updated_at") Timestamp updatedAt
     );
 
     // Update
@@ -104,7 +106,8 @@ public interface ApiService {
     @GET("medicalhistory/{key}/edit")
     Call<StatusDao> UpdateMedicalHistory(
             @Path("key") int key,
-            @Query("behavior_id") int behaviorId
+            @Query("behavior_id") int behaviorId,
+            @Query("updated_at") Timestamp updatedAt
     );
 
     // Delete

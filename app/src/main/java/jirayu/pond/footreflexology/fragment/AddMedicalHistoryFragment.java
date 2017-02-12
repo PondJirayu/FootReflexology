@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +40,21 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      ************/
 
     Button btnSave;
+
     List<String> disease, behavior;
+
     ArrayAdapter<String> adapterBehavior, adapterDisease;
+
     Spinner spinnerBehavior, spinnerDisease;
+
     Boolean successBehavior = false, successDisease = false;
+
     int diseaseId, behaviorId;
     String diseaseName;
+
     DiseaseManager diseaseManager;
     BehaviorManager behaviorManager;
+
     MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
 
     /************
@@ -198,7 +206,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
                         DataMemberManager.getInstance().getMemberItemDao().getId(),
                         diseaseId,
-                        behaviorId
+                        behaviorId,
+                        new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
+                        new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
                 );
                 call.enqueue(insertMedicalHistory);
             }
