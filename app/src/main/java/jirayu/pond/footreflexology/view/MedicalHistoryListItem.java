@@ -83,7 +83,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
         tvUpdatedAt = (TextView) findViewById(R.id.tvUpdatedAt);
         viewColourItemMedicalHistory = findViewById(R.id.viewColourItemMedicalHistory);
         tvNumber = (TextView) findViewById(R.id.tvNumber);
-        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy  HH:mm:ss", Locale.ROOT);
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy  HH:mm", Locale.ROOT);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
