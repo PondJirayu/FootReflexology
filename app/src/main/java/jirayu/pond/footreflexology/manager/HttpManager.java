@@ -31,7 +31,7 @@ public class HttpManager {
         mContext = Contextor.getInstance().getContext();
 
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

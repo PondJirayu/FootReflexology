@@ -36,7 +36,8 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvBehavior, tvCreatedAt, tvUpdatedAt, tvNumber;
     View viewColourItemMedicalHistory;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);
+
+    SimpleDateFormat simpleDateFormat;
 
     /************
      * Functions
@@ -82,6 +83,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
         tvUpdatedAt = (TextView) findViewById(R.id.tvUpdatedAt);
         viewColourItemMedicalHistory = findViewById(R.id.viewColourItemMedicalHistory);
         tvNumber = (TextView) findViewById(R.id.tvNumber);
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy  HH:mm:ss", Locale.ROOT);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -129,13 +131,11 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     }
 
     public void setCreatedAt(Timestamp createdAt) {
-        String createAt = simpleDateFormat.format(createdAt);
-        tvCreatedAt.setText(convertADtoBE(createAt));
+        tvCreatedAt.setText(simpleDateFormat.format(createdAt));
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
-        String updateAt = simpleDateFormat.format(updatedAt);
-        tvUpdatedAt.setText(convertADtoBE(updateAt));
+        tvUpdatedAt.setText(simpleDateFormat.format(updatedAt));
     }
 
     public void setRank(int number) {
@@ -165,11 +165,6 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
             viewColourItemMedicalHistory.invalidate();
         }
 
-    }
-
-    private String convertADtoBE(String date) {
-        // แปลง ค.ศ. เป็น พ.ศ. โดยการนำ 543 ไปบวก
-        return date.substring(0, 2) + "-" + date.substring(3, 5) + "-" + String.valueOf(Integer.parseInt(date.substring(6)) + 543);
     }
 
     /****************

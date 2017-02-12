@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
@@ -288,7 +289,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                        radioGroup.check(R.id.rbFemale);
                     }
                     birthDate = dao.getData().get(0).getBirthDate();            // ส่ง Date ไปเก็บไว้ในตัวแปร กรณีที่ User ไม่ได้เปลี่ยนแปลงวันเกิด
-                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");      // กำหนด Date Format
+                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);      // กำหนด Date Format
                     tvBirthDate.setText(simpleDateFormat.format(birthDate));    // แปลง Date เป็น String
                     editTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     editAddress.setText(dao.getData().get(0).getHouseVillage());
@@ -344,10 +345,10 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         calendar.set(year, month, day);
         Date date = calendar.getTime();
 
-        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");  // กำหนด Date Format
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);  // กำหนด Date Format
         tvBirthDate.setText(simpleDateFormat.format(date));     // แปลง Date เป็น String และแสดงใน TextView
 
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");              // กำหนด Date Format ให้ตรงกับ Format in Server
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);              // กำหนด Date Format ให้ตรงกับ Format in Server
         birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // แปลง Date เป็น String และส่งให้ฟังก์ชัน valueOf แปลงเป็น Date Sql ไปเก็บไว้ในตัวแปร birthDate เพื่อเตรียมส่งให้ Server
     }
 
