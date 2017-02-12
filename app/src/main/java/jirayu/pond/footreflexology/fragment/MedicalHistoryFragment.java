@@ -80,9 +80,10 @@ public class MedicalHistoryFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
         listView.setAdapter(listAdapter);           // สั่งให้ listView with adapter ทำงานร่วมกัน
-        listView.setOnItemClickListener(listViewItemClickListener); // เมื่อ user click ที่ listView ให้เรียกคำสั่งนี้
+        listView.setOnItemClickListener(listViewItemClickListener); // when user click ที่ listView ให้เรียกคำสั่งนี้
+
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(pullToRefresh);     // เมื่อ pull to refresh ให้เรียกคำสั่งนี้
+        swipeRefreshLayout.setOnRefreshListener(pullToRefresh);     // when pull to refresh ให้เรียกคำสั่งนี้
 
         // Load Data
         reloadData();
