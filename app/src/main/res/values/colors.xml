@@ -8,4 +8,5 @@
     <color name="colorPoise">#FFEB3B</color>
     <color name="colorBetter">#CDDC39</color>
     <color name="colorNormal">#2196F3</color>
+    <color name="overlay_color">#80000000</color>
 </resources>
