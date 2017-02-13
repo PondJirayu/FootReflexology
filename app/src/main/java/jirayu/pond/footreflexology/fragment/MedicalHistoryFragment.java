@@ -186,6 +186,7 @@ public class MedicalHistoryFragment extends Fragment {
     AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Start DetailsMedicalHistory Activity
             Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
             startActivity(intent);
         }
