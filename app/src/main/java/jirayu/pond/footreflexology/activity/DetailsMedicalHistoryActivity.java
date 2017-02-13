@@ -1,18 +1,13 @@
 package jirayu.pond.footreflexology.activity;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.fragment.AddMedicalHistoryFragment;
-import jirayu.pond.footreflexology.fragment.EditMedicalHistoryFragment;
-import jirayu.pond.footreflexology.fragment.MedicalHistoryFragment;
 
-public class MedicalHistoryActivity extends AppCompatActivity {
+public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
     /************
      * Variables
@@ -27,7 +22,7 @@ public class MedicalHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_history); // inflate
+        setContentView(R.layout.activity_details_medical_history);
 
         initToolbar();
         initInstances();
@@ -50,9 +45,7 @@ public class MedicalHistoryActivity extends AppCompatActivity {
     private void initFragments(Bundle savedInstanceState) {
         // Place Fragment here
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, MedicalHistoryFragment.newInstance())
-                    .commit();
+
         }
     }
 
@@ -90,32 +83,10 @@ public class MedicalHistoryActivity extends AppCompatActivity {
      * Listener Zone
      ****************/
 
-    // Handle Click Options Menu and Home Button
+    // Handle Click Option Menu and Home Button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add:
-                    getSupportFragmentManager().beginTransaction()
-                            .setCustomAnimations(
-                                    R.anim.from_right, R.anim.to_left,
-                                    R.anim.from_left, R.anim.to_right
-                            )
-                            .replace(R.id.contentContainer,
-                                    AddMedicalHistoryFragment.newInstance())
-                            .addToBackStack(null)
-                            .commit();
-                return true;
-            case R.id.action_edit_medical:
-                  getSupportFragmentManager().beginTransaction()
-                          .setCustomAnimations(
-                                  R.anim.from_right, R.anim.to_left,
-                                  R.anim.from_left, R.anim.to_right
-                          )
-                          .replace(R.id.contentContainer,
-                                  EditMedicalHistoryFragment.newInstance())
-                          .addToBackStack(null)
-                          .commit();
-                return true;
             case android.R.id.home: // Handle Up Button
                 finish();
                 return true;

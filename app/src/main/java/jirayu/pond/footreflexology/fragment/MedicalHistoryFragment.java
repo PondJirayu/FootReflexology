@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.activity.DetailsMedicalHistoryActivity;
 import jirayu.pond.footreflexology.adapter.MedicalHistoryAdapter;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
@@ -184,7 +186,8 @@ public class MedicalHistoryFragment extends Fragment {
     AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
+            startActivity(intent);
         }
     };
 
