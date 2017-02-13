@@ -38,6 +38,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         // findViewById here
 
         // Set Home Button
+        getSupportActionBar().setTitle("รายละเอียดประวัติการรักษา");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
