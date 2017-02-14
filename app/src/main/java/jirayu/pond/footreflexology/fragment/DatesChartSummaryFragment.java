@@ -2,35 +2,32 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import jirayu.pond.footreflexology.R;
 
+
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class DetailsMedicalHistoryFragment extends Fragment {
+public class DatesChartSummaryFragment extends Fragment {
 
     /************
      * Variables
      ************/
 
-    ViewPager viewPager;
-
     /************
      * Functions
      ************/
 
-    public DetailsMedicalHistoryFragment() {
+    public DatesChartSummaryFragment() {
         super();
     }
 
-    public static DetailsMedicalHistoryFragment newInstance() {
-        DetailsMedicalHistoryFragment fragment = new DetailsMedicalHistoryFragment();
+    public static DatesChartSummaryFragment newInstance() {
+        DatesChartSummaryFragment fragment = new DatesChartSummaryFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -39,15 +36,13 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_details_medical_history, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        viewPager.setAdapter(fragmentStatePagerAdapter);
     }
 
     @Override
@@ -83,26 +78,6 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     /****************
      * Listener Zone
      ****************/
-
-    // Handle ViewPager
-    FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return DiseaseSummaryFragment.newInstance();
-                case 1:
-                    return DatesChartSummaryFragment.newInstance();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-    };
 
     /**************
      * Inner Class
