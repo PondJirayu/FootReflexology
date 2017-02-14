@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.fragment.DetailsMedicalHistoryFragment;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
 
 public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
@@ -40,6 +41,11 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
         // Set Home Button
         getSupportActionBar().setTitle("รายละเอียดประวัติการรักษา");
+        getSupportActionBar().setSubtitle(
+                "ของ" +
+                DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " "
+                + DataMemberManager.getInstance().getMemberItemDao().getLastName()
+        );
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

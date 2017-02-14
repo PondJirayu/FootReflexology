@@ -2,12 +2,12 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import jirayu.pond.footreflexology.R;
-
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -17,6 +17,8 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     /************
      * Variables
      ************/
+
+    ViewPager viewPager;
 
     /************
      * Functions
@@ -43,6 +45,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
     }
 
     @Override

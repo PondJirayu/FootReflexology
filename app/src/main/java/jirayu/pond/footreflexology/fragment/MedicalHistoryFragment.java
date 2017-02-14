@@ -71,9 +71,11 @@ public class MedicalHistoryFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
 
         // Edit Subtitle in Toolbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("ของ" +
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
+                "ของ" +
                 DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
-                DataMemberManager.getInstance().getMemberItemDao().getLastName());
+                DataMemberManager.getInstance().getMemberItemDao().getLastName()
+        );
     }
 
     private void initInstances(View rootView) {
