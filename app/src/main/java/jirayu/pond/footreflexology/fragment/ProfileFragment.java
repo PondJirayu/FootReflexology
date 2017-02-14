@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     /************
      * Variables
@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     private void initInstances(View rootView) {
         // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
 
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
@@ -77,11 +77,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);
         tvGender = (TextView) rootView.findViewById(R.id.tvGender);
         tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
-        tvAge = (TextView)  rootView.findViewById(R.id.tvAge);
+        tvAge = (TextView) rootView.findViewById(R.id.tvAge);
         tvIdentificationNumber = (TextView) rootView.findViewById(R.id.tvIdentificationNumber);
-        tvTelephoneNumber = (TextView)  rootView.findViewById(R.id.tvTelephoneNumber);
+        tvTelephoneNumber = (TextView) rootView.findViewById(R.id.tvTelephoneNumber);
         tvHouseVillage = (TextView) rootView.findViewById(R.id.tvHouseVillage);
-        tvSubDistrict = (TextView)  rootView.findViewById(R.id.tvSubDistrict);
+        tvSubDistrict = (TextView) rootView.findViewById(R.id.tvSubDistrict);
         tvDistrict = (TextView) rootView.findViewById(R.id.tvDistrict);
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
         stringsManager = new StringsManager();
@@ -181,7 +181,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == btnFloatingAction) {
-
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.from_right, R.anim.to_left,
+                            R.anim.from_left, R.anim.to_right
+                    )
+                    .replace(R.id.contentContainer, EditProfileFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
