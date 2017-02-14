@@ -47,7 +47,25 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        viewPager.setAdapter(fragmentStatePagerAdapter);
+        // Handle ViewPager
+        viewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                switch (position) {
+                    case 0:
+                        return DiseaseSummaryFragment.newInstance();
+                    case 1:
+                        return DatesChartSummaryFragment.newInstance();
+                    default:
+                        return null;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        });
     }
 
     @Override
@@ -84,25 +102,6 @@ public class DetailsMedicalHistoryFragment extends Fragment {
      * Listener Zone
      ****************/
 
-    // Handle ViewPager
-    FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return DiseaseSummaryFragment.newInstance();
-                case 1:
-                    return DatesChartSummaryFragment.newInstance();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-    };
 
     /**************
      * Inner Class
