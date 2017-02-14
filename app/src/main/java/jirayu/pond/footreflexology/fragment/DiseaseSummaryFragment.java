@@ -115,7 +115,8 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             textToSpeech.setLanguage(new Locale("th"));
-            speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+            speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา");
+            speak("อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
         }
     }
 
