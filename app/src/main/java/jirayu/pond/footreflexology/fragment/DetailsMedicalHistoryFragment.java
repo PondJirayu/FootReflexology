@@ -50,8 +50,9 @@ public class DetailsMedicalHistoryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
+
         // Handle ViewPager
         viewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override

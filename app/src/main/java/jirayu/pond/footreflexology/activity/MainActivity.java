@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     NavigationView navigationView;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+//    ViewPagerAdapter viewPagerAdapter;
     Intent intent;
     Boolean isShowDrawerMenu;
     MenuItem menuItem;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         // findViewById here
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         assert navigationView != null;
@@ -94,14 +96,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(isShowDrawerMenu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(isShowDrawerMenu);
 
+        // Handle ViewPager
+        viewPager.setAdapter(fragmentStatePagerAdapter);
 
-        // AddFragment into ViewPager
-        viewPagerAdapter.addFragments(RightFootFragment.newInstance(), "เท้าขวา");
-        viewPagerAdapter.addFragments(LeftFootFragment.newInstance(), "เท้าซ้าย");
-        viewPagerAdapter.addFragments(InTheFootFragment.newInstance(), "ในเท้า");
-        viewPagerAdapter.addFragments(OutSideFootFragment.newInstance(), "นอกเท้า");
-        viewPagerAdapter.addFragments(OnTheBackFootFragment.newInstance(), "หลังเท้า");
-        viewPager.setAdapter(viewPagerAdapter);
+        // ViewPagerIndicator
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -241,6 +239,50 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onQueryTextChange(String newText) {
             return false;
+        }
+    };
+
+    // Handle ViewPager
+    FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return RightFootFragment.newInstance();
+                case 1:
+                    return LeftFootFragment.newInstance();
+                case 2:
+                    return InTheFootFragment.newInstance();
+                case 3:
+                    return OutSideFootFragment.newInstance();
+                case 4:
+                    return OnTheBackFootFragment.newInstance();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "เท้าขวา";
+                case 1:
+                    return "เท้าซ้าย";
+                case 2:
+                    return "ในเท้า";
+                case 3:
+                    return "นอกเท้า";
+                case 4:
+                    return "หลังเท้า";
+                default:
+                    return null;
+            }
         }
     };
 

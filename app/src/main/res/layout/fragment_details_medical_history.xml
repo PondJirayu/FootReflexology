@@ -16,9 +16,9 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
-            app:tabGravity="fill"
             app:tabTextAppearance="@style/CustomTabText"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
