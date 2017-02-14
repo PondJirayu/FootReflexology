@@ -47,4 +47,6 @@
     <string name="createdAt">วันที่เข้ารับการรักษา</string>
     <string name="updatedAt">วันที่แก้ไขล่าสุด</string>
     <string name="pick_date">เลือกวันเกิด</string>
+    <string name="should_eat">อาหารที่ควรรับประทาน</string>
+    <string name="should_not_eat">อาหารที่ควรหลีกเลี่ยง</string>
 </resources>

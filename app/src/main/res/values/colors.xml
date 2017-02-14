@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8BC34A</color>
-    <color name="colorPrimaryDark">#689F38</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorButton">#ffffff</color>
-    <color name="colorWorse">#F44336</color>
-    <color name="colorPoise">#FFEB3B</color>
-    <color name="colorBetter">#CDDC39</color>
-    <color name="colorNormal">#2196F3</color>
+    <color name="primary_color">#8BC34A</color>
+    <color name="primary_dark_color">#689F38</color>
+    <color name="accent_color">#FF4081</color>
+    <color name="button_color">#ffffff</color>
+    <color name="worse_color">#F44336</color>
+    <color name="poise_color">#FFEB3B</color>
+    <color name="better_color">#CDDC39</color>
+    <color name="normal_color">#2196F3</color>
     <color name="overlay_color">#80000000</color>
+    <color name="fab_tts_color">#E53935</color>
 </resources>

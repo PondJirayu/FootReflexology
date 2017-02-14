@@ -139,22 +139,22 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     public void setViewColourItemMedicalHistory(int colourCode){
         // แย่ลง [สีแดง]
         if (colourCode == 1) {
-            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWorse));
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.worse_color));
             viewColourItemMedicalHistory.invalidate();
         }
         // ทรงตัว [สีเหลือง]
         if (colourCode == 2) {
-            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPoise));
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.poise_color));
             viewColourItemMedicalHistory.invalidate();
         }
         // ดีขึ้น [สีเขียว]
         if (colourCode == 3) {
-            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorBetter));
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.better_color));
             viewColourItemMedicalHistory.invalidate();
         }
         // หายเป็นปกติ [สีฟ้า]
         if (colourCode == 4) {
-            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorNormal));
+            viewColourItemMedicalHistory.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.normal_color));
             viewColourItemMedicalHistory.invalidate();
         }
 
