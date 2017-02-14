@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -29,12 +30,13 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     /************
      * Variables
      ************/
 
+    FloatingActionButton btnFloatingAction;
     TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
             tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince;
 
@@ -61,17 +63,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        initOptionsMenu();
         initInstances(rootView);
         return rootView;
-    }
-
-    private void initOptionsMenu() {
-        // สั่งให้ Fragment แสดง Option Menu ของตัวเอง
-        setHasOptionsMenu(true);
-
-        // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
     }
 
     private void initInstances(View rootView) {
@@ -79,6 +72,7 @@ public class ProfileFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
 
         // Init 'View' instance(s) with rootView.findViewById here
+        btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);
         tvGender = (TextView) rootView.findViewById(R.id.tvGender);
@@ -91,6 +85,9 @@ public class ProfileFragment extends Fragment {
         tvDistrict = (TextView) rootView.findViewById(R.id.tvDistrict);
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
         stringsManager = new StringsManager();
+
+        // Handle Click
+        btnFloatingAction.setOnClickListener(this);
     }
 
     @Override
@@ -180,11 +177,12 @@ public class ProfileFragment extends Fragment {
         }
     };
 
-    // Inflate Options Menu
+    // Handle Click
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_profile, menu);
+    public void onClick(View v) {
+        if (v == btnFloatingAction) {
+
+        }
     }
 
     /***************

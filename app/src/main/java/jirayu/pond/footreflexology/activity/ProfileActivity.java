@@ -94,24 +94,13 @@ public class ProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle click Option Menu
         switch (item.getItemId()) {
-            case R.id.action_edit:
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.from_right, R.anim.to_left,
-                                R.anim.from_left, R.anim.to_right
-                        )
-                        .replace(R.id.contentContainer,
-                                EditProfileFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-            return true;
-        case android.R.id.home: // Handle on BackPress
-            finish();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case android.R.id.home: // Handle on BackPress
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
-}
 
 /**************
  * Inner Class
