@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     NavigationView navigationView;
     ViewPager viewPager;
-//    ViewPagerAdapter viewPagerAdapter;
     Intent intent;
     Boolean isShowDrawerMenu;
     MenuItem menuItem;
