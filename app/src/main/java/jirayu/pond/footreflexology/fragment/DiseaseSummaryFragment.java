@@ -1,6 +1,9 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,13 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import jirayu.pond.footreflexology.R;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class DiseaseSummaryFragment extends Fragment {
+public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnInitListener,View.OnClickListener {
 
     /************
      * Variables
@@ -23,6 +28,8 @@ public class DiseaseSummaryFragment extends Fragment {
     FloatingActionButton btnFloatingAction;
 
     TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
+
+    private TextToSpeech textToSpeech;
 
     /************
      * Functions
@@ -56,6 +63,9 @@ public class DiseaseSummaryFragment extends Fragment {
         tvShouldEat = (TextView) rootView.findViewById(R.id.tvShouldEat);
         tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
         tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
+
+        // Handle Click
+        btnFloatingAction.setOnClickListener(this);
     }
 
     @Override
@@ -88,9 +98,36 @@ public class DiseaseSummaryFragment extends Fragment {
         }
     }
 
+    private void speak(CharSequence message) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
+        } else {
+            textToSpeech.speak(message.toString(), TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
     /****************
      * Listener Zone
      ****************/
+
+    // Initialize TextToSpeech
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            textToSpeech.setLanguage(new Locale("th"));
+            speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+        }
+    }
+
+    // Handle Click
+    @Override
+    public void onClick(View v) {
+        if (v == btnFloatingAction) {
+            // TextToSpeech
+            textToSpeech = new TextToSpeech(getContext(), this);
+            btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+        }
+    }
 
     /**************
      * Inner Class
