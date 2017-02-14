@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
+
 import jirayu.pond.footreflexology.R;
 
 /**
@@ -20,6 +22,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
      ************/
 
     ViewPager viewPager;
+    SlidingTabLayout slidingTabLayout;
 
     /************
      * Functions
@@ -47,6 +50,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
+        slidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.slidingTabLayout);
         // Handle ViewPager
         viewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
@@ -65,7 +69,22 @@ public class DetailsMedicalHistoryFragment extends Fragment {
             public int getCount() {
                 return 2;
             }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                switch (position) {
+                    case 0:
+                        return "รายละเอียดของโรค";
+                    case 1:
+                        return "สถิติการรักษา";
+                    default:
+                        return "";
+                }
+            }
         });
+        
+        // ViewPagerIndicator
+        slidingTabLayout.setViewPager(viewPager);
     }
 
     @Override
