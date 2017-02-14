@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,7 +23,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
      ************/
 
     ViewPager viewPager;
-    SlidingTabLayout slidingTabLayout;
+    TabLayout tabLayout;
 
     /************
      * Functions
@@ -50,7 +51,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        slidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.slidingTabLayout);
+        tabLayout = (TabLayout) rootView.findViewById(R.id.tabLayout);
         // Handle ViewPager
         viewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
@@ -82,9 +83,10 @@ public class DetailsMedicalHistoryFragment extends Fragment {
                 }
             }
         });
-        
+
         // ViewPagerIndicator
-        slidingTabLayout.setViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
