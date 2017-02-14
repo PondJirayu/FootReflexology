@@ -1,10 +1,12 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import jirayu.pond.footreflexology.R;
 
@@ -17,6 +19,10 @@ public class DiseaseSummaryFragment extends Fragment {
     /************
      * Variables
      ************/
+
+    FloatingActionButton btnFloatingAction;
+
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
 
     /************
      * Functions
@@ -43,6 +49,13 @@ public class DiseaseSummaryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
+        tvDiseaseName = (TextView) rootView.findViewById(R.id.tvDiseaseName);
+        tvDetail = (TextView) rootView.findViewById(R.id.tvDetail);
+        tvTreatment = (TextView) rootView.findViewById(R.id.tvTreatment);
+        tvShouldEat = (TextView) rootView.findViewById(R.id.tvShouldEat);
+        tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
+        tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
     }
 
     @Override
