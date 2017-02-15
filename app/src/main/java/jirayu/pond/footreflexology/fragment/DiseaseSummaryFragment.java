@@ -19,7 +19,7 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnInitListener,View.OnClickListener {
+public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnInitListener, View.OnClickListener {
 
     /************
      * Variables
@@ -63,6 +63,9 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         tvShouldEat = (TextView) rootView.findViewById(R.id.tvShouldEat);
         tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
         tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
+
+        // TextToSpeech
+        textToSpeech = new TextToSpeech(getContext(), this);
 
         // Handle Click
         btnFloatingAction.setOnClickListener(this);
@@ -115,7 +118,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             textToSpeech.setLanguage(new Locale("th"));
-            speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+            textToSpeech.setSpeechRate(0);  // Speech rate. 1 is the normal speech.
         }
     }
 
@@ -123,9 +126,13 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     @Override
     public void onClick(View v) {
         if (v == btnFloatingAction) {
-            // TextToSpeech
-            textToSpeech = new TextToSpeech(getContext(), this);
-            btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+            if (textToSpeech.isSpeaking()) {
+                textToSpeech.stop(); // Stop talking
+                btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);
+            } else {
+                speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+                btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+            }
         }
     }
 
