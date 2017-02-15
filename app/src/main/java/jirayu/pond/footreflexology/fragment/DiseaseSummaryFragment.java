@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -30,6 +31,8 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
 
     private TextToSpeech textToSpeech;
+
+    boolean isFirstTime = true;
 
     /************
      * Functions
@@ -101,7 +104,9 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         }
     }
 
-    // Initialize TextToSpeech
+    /*
+     * Initialize TextToSpeech
+     */
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -118,14 +123,29 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         }
     }
 
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_LONG)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
 
-    // Handle Click
+    /*
+     * Handle Click
+     */
     @Override
     public void onClick(View v) {
         if (v == btnFloatingAction) {
+            if (isFirstTime) {
+                showToast("กำลังประมวลผลคำสั่งอ่านข้อความด้วยเสียง");
+                speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+                btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+                isFirstTime = false;
+            }
             if (textToSpeech.isSpeaking()) {
                 textToSpeech.stop(); // Stop talking
                 btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);

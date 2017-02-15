@@ -172,7 +172,7 @@
         android:src="@drawable/ic_volume_up_white_36dp"
         app:backgroundTint="@color/fab_tts_color"
         app:elevation="6dp"
-        app:fabSize="mini"
+        app:fabSize="normal"
         app:pressedTranslationZ="12dp" />
 
 </FrameLayout>
