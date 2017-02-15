@@ -10,5 +10,5 @@
     <color name="normal_color">#2196F3</color>
     <color name="overlay_color">#80000000</color>
     <color name="fab_tts_color">#E53935</color>
-    <color name="fab_edit_white_color">#039BE5</color>
+    <color name="fab_edit_white_color">#BA68C8</color>
 </resources>
