@@ -101,6 +101,15 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         }
     }
 
+    // Initialize TextToSpeech
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            textToSpeech.setLanguage(new Locale("th"));
+            textToSpeech.setSpeechRate(0);  // Speech rate. 1 is the normal speech.
+        }
+    }
+
     private void speak(CharSequence message) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
@@ -112,15 +121,6 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     /****************
      * Listener Zone
      ****************/
-
-    // Initialize TextToSpeech
-    @Override
-    public void onInit(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            textToSpeech.setLanguage(new Locale("th"));
-            textToSpeech.setSpeechRate(0);  // Speech rate. 1 is the normal speech.
-        }
-    }
 
     // Handle Click
     @Override
