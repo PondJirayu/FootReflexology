@@ -235,17 +235,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:padding="15dp"
-                android:paddingBottom="14dp"
-                android:text="@string/save"
-                android:textSize="16sp" />
-
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

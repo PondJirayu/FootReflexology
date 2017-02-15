@@ -4,6 +4,7 @@ import com.fourmob.datetimepicker.date.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,9 +55,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
     RadioGroup radioGroup;
     TextView tvBirthDate;
     ImageButton btnDatePicker;
-    Button btnSave;
     Spinner spinnerProvince;
     ProgressDialog progressDialog;
+    FloatingActionButton btnFloatingAction;
 
     ArrayAdapter<CharSequence> adapterProvince;
 
@@ -109,13 +108,13 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
         editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
-        btnSave = (Button) rootView.findViewById(R.id.btnSignUp);
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
@@ -127,7 +126,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
 
         // Handle Click Button
-        btnSave.setOnClickListener(this);
+        btnFloatingAction.setOnClickListener(this);
         btnDatePicker.setOnClickListener(this);
     }
 
@@ -227,7 +226,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังบันทึกข้อมูล");
 
-        if (v == btnSave) {
+        if (v == btnFloatingAction) {
             // getText to variable
             getTextToVariables();
             if (firstName.trim().length() == 0 || lastName.trim().length() == 0
