@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
+import com.fourmob.datetimepicker.date.DatePickerDialog;
+
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -31,27 +39,35 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class RegisterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class RegisterFragment extends Fragment implements View.OnClickListener,
+        AdapterView.OnItemSelectedListener,
+        DatePickerDialog.OnDateSetListener {
 
     /************
      * Variables
      ************/
 
-    Button btnSignUp;
-    RadioGroup radioGroup;
+    java.sql.Date birthDate = null;
+
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
             editSubDistrict, editDistrict;
+    RadioGroup radioGroup;
+    TextView tvBirthDate;
+    ImageButton btnDatePicker;
     Spinner spinnerProvince;
-
     ProgressDialog progressDialog;
+    FloatingActionButton btnFloatingAction;
 
     ArrayAdapter<CharSequence> adapterProvince;
 
     String firstName, lastName, identificationNumber, gender,
             telephoneNumber, houseVillage, subDistrict, district, province;
 
-    Date birthDate;
-    Timestamp createdAt, updatedAt;
+    DatePickerDialog datePickerDialog;
+
+    Calendar calendar;
+
+    SimpleDateFormat simpleDateFormat;
 
     /************
      * Functions
@@ -86,7 +102,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
+        btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
+        tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
+        btnDatePicker = (ImageButton) rootView.findViewById(R.id.btnDatePicker);
         radioGroup = (RadioGroup) rootView.findViewById(R.id.rdGroup);
         spinnerProvince = (Spinner) rootView.findViewById(R.id.spinnerProvince);
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
@@ -95,14 +113,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         editAddress = (EditText) rootView.findViewById(R.id.edit_address);
         editSubDistrict = (EditText) rootView.findViewById(R.id.edit_sub_district);
         editDistrict = (EditText) rootView.findViewById(R.id.edit_district);
-//        editDay = (EditText) rootView.findViewById(R.id.edit_day);
-//        editMonth = (EditText) rootView.findViewById(R.id.edit_month);
-//        editYear = (EditText) rootView.findViewById(R.id.edit_year);
 
+        setDate();
         createSpinner();
 
         // Handle Click Button
-        btnSignUp.setOnClickListener(this);
+        btnFloatingAction.setOnClickListener(this);
+        btnDatePicker.setOnClickListener(this);
+    }
+
+    private void setDate() {
+        // แสดงเวลาปัจจุบัน
+        calendar = Calendar.getInstance();
+
+        datePickerDialog = DatePickerDialog.newInstance(this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                false);
     }
 
     private void createSpinner() {
@@ -151,11 +179,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-//        birthDate = editYear.getText().toString()
-//                + "-" + editMonth.getText().toString()
-//                + "-" + editDay.getText().toString();
-
-        // check operator
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.rbMale:
                 gender = "ชาย";
@@ -166,19 +189,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-//    private boolean checkDay() {
-//        int day = Integer.parseInt(editDay.getText().toString());
-//        if (day <= 0 || day > 31)
-//            return true;
-//        return false;
-//    }
-//
-//    private boolean checkMonth() {
-//        int month = Integer.parseInt(editMonth.getText().toString());
-//        if (month <= 0 || month > 12)
-//            return true;
-//        return false;
-//    }
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
 
     /****************
      * Listener Zone
@@ -193,33 +209,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังบันทึกข้อมูล");
 
-        if (v == btnSignUp) {
+        if (v == btnFloatingAction) {
             // getText to variable
             getTextToVariables();
 
             if (firstName.trim().length() == 0
                     || lastName.trim().length() == 0
                     || telephoneNumber.trim().length() == 0
-//                    || editYear.getText().toString().trim().length() == 0
-//                    || editMonth.getText().toString().trim().length() == 0
-//                    || editDay.getText().toString().trim().length() == 0
                     || houseVillage.trim().length() == 0
                     || subDistrict.trim().length() == 0
                     || district.trim().length() == 0) {
-                Toast.makeText(getActivity(),
-                        "กรุณาป้อนข้อมูลให้ครบถ้วน",
-                        Toast.LENGTH_SHORT)
-                        .show();
-//            } else if (checkDay()) {
-//                Toast.makeText(getActivity(),
-//                        "กรุณาป้อนวันที่ให้ถูกต้อง",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
-//            } else if (checkMonth()) {
-//                Toast.makeText(getActivity(),
-//                        "กรุณาป้อนเดือนให้ถูกต้อง",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
+                showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
+            } else if (birthDate == null) {
+                showToast("กรุณาป้อนวันเกิดของคุณ");
             } else {
                 progressDialog.show(); // show progressDialog
                 Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
@@ -233,11 +235,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         subDistrict,
                         district,
                         province,
-                        createdAt,
-                        updatedAt
+                        new Timestamp(System.currentTimeMillis()),  // GET เวลาปัจจุบันเก็บในตัวแปร createdAt
+                        new Timestamp(System.currentTimeMillis())   // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
                 );
                 call.enqueue(insertMemberList);
             }
+        }
+
+        // Handle DatePicker
+        if (v == btnDatePicker) {
+            datePickerDialog.setYearRange(1910, 2017);
+            datePickerDialog.show(getFragmentManager(), "datePicker");
         }
     }
 
@@ -250,29 +258,21 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 MemberItemCollectionDao dao = response.body();
                 if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity(),
-                            "ลงทะเบียนสำเร็จ",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("ลงทะเบียนสำเร็จ");
                     // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0));
                     // เข้าสู่หน้าหลัก
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity
+                    // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity
+                    getActivity().finish();
                 } else if (dao.getSuccess() == 0) { // ลงทะเบียนไม่สำเร็จ
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity(),
-                            "ขออภัยลงทะเบียนไม่สำเร็จ",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showToast("ขออภัยลงทะเบียนไม่สำเร็จ");
                 }
             } else { // 404 NOT FOUND
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(),
-                        "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลงทะเบียนอีกครั้งในภายหลัง",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลงทะเบียนอีกครั้งในภายหลัง");
             }
         }
 
@@ -281,10 +281,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                               Throwable t) {
 
             progressDialog.dismiss();
-            Toast.makeText(getActivity(),
-                    "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ",
-                    Toast.LENGTH_SHORT)
-                    .show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
@@ -299,6 +296,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        calendar.set(year, month, day);
+        Date date = calendar.getTime();
+
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT); // กำหนด Date Format
+        tvBirthDate.setText(simpleDateFormat.format(date));                 // แปลง Date เป็น String และแสดงใน TextView
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT); // กำหนด Date Format ให้ตรงกับ Format in Server
+        birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // แปลง Date เป็น String และส่งให้ฟังก์ชัน valueOf แปลงเป็น Date Sql ไปเก็บไว้ในตัวแปร birthDate เพื่อเตรียมส่งให้ Server
+    }
+
 
     /**************
      * Inner Class

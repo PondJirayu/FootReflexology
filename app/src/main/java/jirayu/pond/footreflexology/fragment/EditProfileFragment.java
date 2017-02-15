@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,8 +40,8 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class EditProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener,
-        View.OnClickListener,
+public class EditProfileFragment extends Fragment implements View.OnClickListener,
+        AdapterView.OnItemSelectedListener,
         DatePickerDialog.OnDateSetListener {
 
     /************
@@ -48,7 +49,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
      ************/
 
     java.sql.Date birthDate;
-    Timestamp updatedAt;
 
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
             editSubDistrict, editDistrict;
@@ -103,7 +103,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
 
     private void initOptionsMenu() {
         // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
     }
 
     private void initInstances(View rootView) {
@@ -121,7 +121,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         btnDatePicker = (ImageButton) rootView.findViewById(R.id.btnDatePicker);
         stringsManager = new StringsManager();
 
-        setDate(); // จัดการเรื่องวันที่
+        setDate();
         createSpinner();
         loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
 
@@ -195,7 +195,6 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         houseVillage = editAddress.getText().toString();
         subDistrict = editSubDistrict.getText().toString();
         district = editDistrict.getText().toString();
-        updatedAt = new Timestamp(System.currentTimeMillis());  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.rbMale:
                 gender = "ชาย";
@@ -206,7 +205,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         }
     }
 
-    public void showToast(String text) {
+    private void showToast(String text) {
         Toast.makeText(getActivity(),
                 text,
                 Toast.LENGTH_SHORT)
@@ -248,7 +247,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                         subDistrict,
                         district,
                         province,
-                        updatedAt
+                        new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
                 );
                 call.enqueue(insertMemberList);
             }
@@ -285,7 +284,7 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
                     if (dao.getData().get(0).getGender().equals("ชาย")) {
                         radioGroup.check(R.id.rbMale);
                     } else {
-                       radioGroup.check(R.id.rbFemale);
+                        radioGroup.check(R.id.rbFemale);
                     }
                     birthDate = dao.getData().get(0).getBirthDate();            // ส่ง Date ไปเก็บไว้ในตัวแปร กรณีที่ User ไม่ได้เปลี่ยนแปลงวันเกิด
                     simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);      // กำหนด Date Format
@@ -345,9 +344,9 @@ public class EditProfileFragment extends Fragment implements AdapterView.OnItemS
         Date date = calendar.getTime();
 
         simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);  // กำหนด Date Format
-        tvBirthDate.setText(simpleDateFormat.format(date));     // แปลง Date เป็น String และแสดงใน TextView
+        tvBirthDate.setText(simpleDateFormat.format(date));                  // แปลง Date เป็น String และแสดงใน TextView
 
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);              // กำหนด Date Format ให้ตรงกับ Format in Server
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);  // กำหนด Date Format ให้ตรงกับ Format in Server
         birthDate = java.sql.Date.valueOf(simpleDateFormat.format(date));   // แปลง Date เป็น String และส่งให้ฟังก์ชัน valueOf แปลงเป็น Date Sql ไปเก็บไว้ในตัวแปร birthDate เพื่อเตรียมส่งให้ Server
     }
 
