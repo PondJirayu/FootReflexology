@@ -141,15 +141,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         }
     }
 
-    /*
-     * Inflate Options Menu
-     */
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_medical_history, menu);
-    }
-
     private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
@@ -189,6 +180,15 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
+
+    /*
+     * Inflate Options Menu
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_medical_history, menu);
+    }
 
     /*
      * Handle Pull to Refresh
