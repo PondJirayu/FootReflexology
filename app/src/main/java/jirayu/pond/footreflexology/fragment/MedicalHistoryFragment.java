@@ -254,6 +254,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                 return super.onOptionsItemSelected(item);
         }
     }
+
     /**************
      * Inner Class
      **************/
