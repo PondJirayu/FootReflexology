@@ -49,4 +49,5 @@
     <string name="pick_date">เลือกวันเกิด</string>
     <string name="should_eat">อาหารที่ควรรับประทาน</string>
     <string name="should_not_eat">อาหารที่ควรหลีกเลี่ยง</string>
+    <string name="action_sort_medical_history">เรียงลำดับ</string>
 </resources>

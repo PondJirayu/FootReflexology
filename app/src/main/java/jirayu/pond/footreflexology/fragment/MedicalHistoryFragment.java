@@ -2,12 +2,14 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +30,7 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class MedicalHistoryFragment extends Fragment {
+public class MedicalHistoryFragment extends Fragment implements View.OnClickListener {
 
     /************
      * Variables
@@ -38,6 +40,8 @@ public class MedicalHistoryFragment extends Fragment {
     ListView listView;
 
     MedicalHistoryAdapter listAdapter;
+
+    FloatingActionButton btnFloatingActionAdd, btnFloatingActionEdit;
 
     /************
      * Functions
@@ -68,18 +72,20 @@ public class MedicalHistoryFragment extends Fragment {
         setHasOptionsMenu(true);
 
         // Edit Title in Toolbar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
 
         // Edit Subtitle in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
                 "ของ" +
-                DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
-                DataMemberManager.getInstance().getMemberItemDao().getLastName()
+                        DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
+                        DataMemberManager.getInstance().getMemberItemDao().getLastName()
         );
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnFloatingActionAdd = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionAdd);
+        btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
         listView.setAdapter(listAdapter);           // สั่งให้ listView with adapter ทำงานร่วมกัน
@@ -91,6 +97,10 @@ public class MedicalHistoryFragment extends Fragment {
 
         // Load Data
         reloadData();
+
+        // Handle Click (FAB)
+        btnFloatingActionAdd.setOnClickListener(this);
+        btnFloatingActionEdit.setOnClickListener(this);
     }
 
     private void reloadData() {
@@ -142,7 +152,9 @@ public class MedicalHistoryFragment extends Fragment {
      * Listener Zone
      ****************/
 
-    // reload Data
+    /*
+     * reload Data
+     */
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
         public void onResponse(Call<MedicalHistoryItemCollectionDao> call,
@@ -169,14 +181,18 @@ public class MedicalHistoryFragment extends Fragment {
         }
     };
 
-    // Inflate Options Menu
+    /*
+     * Inflate Options Menu
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_medical_history, menu);
     }
 
-    // Handle Pull to Refresh
+    /*
+     * Handle Pull to Refresh
+     */
     SwipeRefreshLayout.OnRefreshListener pullToRefresh = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
@@ -184,7 +200,9 @@ public class MedicalHistoryFragment extends Fragment {
         }
     };
 
-    // Handle Click ListView
+    /*
+     * Handle Click ListView
+     */
     AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -194,6 +212,48 @@ public class MedicalHistoryFragment extends Fragment {
         }
     };
 
+    /*
+     * Handle Click
+     */
+    @Override
+    public void onClick(View v) {
+        if (v == btnFloatingActionAdd) {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.from_right, R.anim.to_left,
+                            R.anim.from_left, R.anim.to_right
+                    )
+                    .replace(R.id.contentContainer,
+                            AddMedicalHistoryFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
+        if (v == btnFloatingActionEdit) {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.from_right, R.anim.to_left,
+                            R.anim.from_left, R.anim.to_right
+                    )
+                    .replace(R.id.contentContainer,
+                            EditMedicalHistoryFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    /*
+     * Handle Click Options Menu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort_medical_history:
+                showToast("SORT");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     /**************
      * Inner Class
      **************/

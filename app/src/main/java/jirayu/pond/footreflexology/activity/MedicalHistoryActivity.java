@@ -94,28 +94,6 @@ public class MedicalHistoryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add:
-                    getSupportFragmentManager().beginTransaction()
-                            .setCustomAnimations(
-                                    R.anim.from_right, R.anim.to_left,
-                                    R.anim.from_left, R.anim.to_right
-                            )
-                            .replace(R.id.contentContainer,
-                                    AddMedicalHistoryFragment.newInstance())
-                            .addToBackStack(null)
-                            .commit();
-                return true;
-            case R.id.action_edit_medical:
-                  getSupportFragmentManager().beginTransaction()
-                          .setCustomAnimations(
-                                  R.anim.from_right, R.anim.to_left,
-                                  R.anim.from_left, R.anim.to_right
-                          )
-                          .replace(R.id.contentContainer,
-                                  EditMedicalHistoryFragment.newInstance())
-                          .addToBackStack(null)
-                          .commit();
-                return true;
             case android.R.id.home: // Handle Up Button
                 finish();
                 return true;
