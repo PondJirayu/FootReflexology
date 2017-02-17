@@ -153,7 +153,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      ****************/
 
     /*
-     * reload Data
+     * Reload Data
      */
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
@@ -217,27 +217,27 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnFloatingActionAdd:
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.from_right, R.anim.to_left,
-                                R.anim.from_left, R.anim.to_right
-                        )
-                        .replace(R.id.contentContainer,
-                                AddMedicalHistoryFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-            case R.id.btnFloatingActionEdit:
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.from_right, R.anim.to_left,
-                                R.anim.from_left, R.anim.to_right
-                        )
-                        .replace(R.id.contentContainer,
-                                EditMedicalHistoryFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+        if (v == btnFloatingActionAdd) {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.from_right, R.anim.to_left,
+                            R.anim.from_left, R.anim.to_right
+                    )
+                    .replace(R.id.contentContainer,
+                            AddMedicalHistoryFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
+        if (v == btnFloatingActionEdit) {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.from_right, R.anim.to_left,
+                            R.anim.from_left, R.anim.to_right
+                    )
+                    .replace(R.id.contentContainer,
+                            EditMedicalHistoryFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
