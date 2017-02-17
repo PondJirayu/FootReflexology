@@ -177,7 +177,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    // Handle Click
+    // Handle Click Button
     @Override
     public void onClick(View v) {
         if (v == btnFloatingAction) {
