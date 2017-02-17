@@ -153,7 +153,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      ****************/
 
     /*
-     * Reload Data
+     * Load Data
      */
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
