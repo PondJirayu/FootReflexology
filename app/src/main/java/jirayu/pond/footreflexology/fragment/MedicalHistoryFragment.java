@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class MedicalHistoryFragment extends Fragment implements View.OnClickListener {
+public class MedicalHistoryFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     /************
      * Variables
@@ -89,11 +89,11 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         listView = (ListView) rootView.findViewById(R.id.listView); // create listView
         listAdapter = new MedicalHistoryAdapter();  // create Adapter
         listView.setAdapter(listAdapter);           // สั่งให้ listView with adapter ทำงานร่วมกัน
-        listView.setOnItemClickListener(listViewItemClickListener);
+        listView.setOnItemClickListener(this);
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(pullToRefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         // Load Data
         reloadData();
@@ -141,7 +141,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         }
     }
 
-    public void showToast(String text) {
+    private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
                 Toast.LENGTH_SHORT)
@@ -193,27 +193,22 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     /*
      * Handle Pull to Refresh
      */
-    SwipeRefreshLayout.OnRefreshListener pullToRefresh = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            reloadData();
-        }
-    };
+    @Override
+    public void onRefresh() {
+        reloadData();
+    }
 
     /*
      * Handle Click ListView
      */
-    AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // Start DetailsMedicalHistory Activity
-            Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
-            startActivity(intent);
-        }
-    };
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
+        startActivity(intent);
+    }
 
     /*
-     * Handle Click
+     * Handle Click Button
      */
     @Override
     public void onClick(View v) {
