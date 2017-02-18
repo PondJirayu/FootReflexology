@@ -98,19 +98,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         super.onStart();
     }
 
-    private String calAge(MemberItemCollectionDao dao) {
-        Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()), new LocalDate());
-        return years.getYears() + "";
-    }
-
-    private void loadProfile() {
-        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
-                "members",
-                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
-        );
-        call.enqueue(loadProfile);
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -134,6 +121,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private String calAge(MemberItemCollectionDao dao) {
+        Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()), new LocalDate());
+        return years.getYears() + "";
+    }
+
+    private void loadProfile() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+        );
+        call.enqueue(loadProfile);
     }
 
     public void showToast(String text) {
