@@ -42,7 +42,6 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     Spinner spinnerDisease, spinnerBehavior;
 
     List<String> disease, behavior;
-
     ArrayAdapter<String> adapterDisease, adapterBehavior;
     int rowId, behaviorId;
 
@@ -84,11 +83,40 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
 
-        // load data from server
+        // Handle Click
+        btnSave.setOnClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
         loadDisease();
         loadBehavior();
+        super.onStart();
+    }
 
-        btnSave.setOnClickListener(this);
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    /*
+     * Save Instance State Here
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save Instance State here
+    }
+
+    /*
+     * Restore Instance State Here
+     */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore Instance State here
+        }
     }
 
     private void loadBehavior() {
@@ -134,37 +162,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         call.enqueue(updateMedicalHistory);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    /*
-     * Save Instance State Here
-     */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Save Instance State here
-    }
-
-    /*
-     * Restore Instance State Here
-     */
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore Instance State here
-        }
-    }
-
-    public void showToast(String text) {
+    private void showToast(String text) {
         Toast.makeText(getActivity(),
                 text,
                 Toast.LENGTH_SHORT)
@@ -174,14 +172,6 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     /****************
      * Listener Zone
      ****************/
-
-    @Override
-    public void onClick(View v) {
-        if (v == btnSave) {
-            // update data
-            updateMedicalHistory();
-        }
-    }
 
     Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
         @Override
@@ -273,6 +263,17 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    /*
+     * Handle Click Button
+     */
+    @Override
+    public void onClick(View v) {
+        if (v == btnSave) {
+            // Update Data
+            updateMedicalHistory();
+        }
     }
 
     /**************
