@@ -40,22 +40,17 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      ************/
 
     Button btnSave;
-
-    List<String> disease, behavior;
-
-    ArrayAdapter<String> adapterBehavior, adapterDisease;
-
     Spinner spinnerBehavior, spinnerDisease;
 
+    ArrayAdapter<String> adapterBehavior, adapterDisease;
+    List<String> disease, behavior;
     Boolean successBehavior = false, successDisease = false;
-
     int diseaseId, behaviorId;
     String diseaseName;
+    MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
 
     DiseaseManager diseaseManager;
     BehaviorManager behaviorManager;
-
-    MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
 
     /************
      * Functions
@@ -92,12 +87,41 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         spinnerBehavior = (Spinner) rootView.findViewById(R.id.spinnerBehavior);
         spinnerDisease = (Spinner) rootView.findViewById(R.id.spinnerDisease);
 
-        // load disease with behavior from Server
+        // Handle Click
+        btnSave.setOnClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
         loadDisease();
         loadBehavior();
         loadMedicalHistory();
+        super.onStart();
+    }
 
-        btnSave.setOnClickListener(this);
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    /*
+     * Save Instance State Here
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save Instance State here
+    }
+
+    /*
+     * Restore Instance State Here
+     */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore Instance State here
+        }
     }
 
     private void loadMedicalHistory() {
@@ -141,34 +165,16 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         spinnerDisease.setOnItemSelectedListener(this);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    /*
-     * Save Instance State Here
-     */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Save Instance State here
-    }
-
-    /*
-     * Restore Instance State Here
-     */
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore Instance State here
+    private boolean checkMedicalHistory() {
+        if (medicalHistoryItemCollectionDao.getData().isEmpty()) {
+            return false;
+        } else {
+            for (int i = 0 ; i < medicalHistoryItemCollectionDao.getData().size() ; i++){
+                if (medicalHistoryItemCollectionDao.getData().get(i).getDiseaseName().equals(diseaseName))
+                    return true;
+            }
         }
+        return false;
     }
 
     private void showToast(String text) {
@@ -178,42 +184,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 .show();
     }
 
-    private boolean checkMedicalHistory() {
-
-        if (medicalHistoryItemCollectionDao.getData().isEmpty()) {
-            return false;
-        } else {
-            for (int i = 0 ; i < medicalHistoryItemCollectionDao.getData().size() ; i++){
-                if (medicalHistoryItemCollectionDao.getData().get(i).getDiseaseName().equals(diseaseName))
-                    return true;
-            }
-        }
-
-        return false;
-    }
-
     /****************
      * Listener Zone
      ****************/
-
-    @Override
-    public void onClick(View v) {
-        if (v == btnSave) {
-            if (checkMedicalHistory()) {
-                showToast("มีประวัติการรักษาอยู่แล้ว");
-            } else {
-                // Insert MedicalHistory Here
-                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
-                        DataMemberManager.getInstance().getMemberItemDao().getId(),
-                        diseaseId,
-                        behaviorId,
-                        new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
-                        new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
-                );
-                call.enqueue(insertMedicalHistory);
-            }
-        }
-    }
 
     Callback<StatusDao> insertMedicalHistory = new Callback<StatusDao>() {
         @Override
@@ -303,7 +276,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
     };
 
-    // Handle Click Spinner
+    /*
+     * Handle Click Spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerBehavior && successBehavior) {
@@ -320,6 +295,28 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    /*
+     * Handle Click Button
+     */
+    @Override
+    public void onClick(View v) {
+        if (v == btnSave) {
+            if (checkMedicalHistory()) {
+                showToast("มีประวัติการรักษาอยู่แล้ว");
+            } else {
+                // Insert MedicalHistory Here
+                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                        DataMemberManager.getInstance().getMemberItemDao().getId(),
+                        diseaseId,
+                        behaviorId,
+                        new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
+                        new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
+                );
+                call.enqueue(insertMedicalHistory);
+            }
+        }
     }
 
     /**************

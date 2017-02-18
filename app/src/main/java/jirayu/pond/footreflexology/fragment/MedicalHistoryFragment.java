@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -64,16 +66,15 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadAnimation();    // FAB Animation
         return rootView;
     }
-    
+
     private void initOptionsMenu() {
-        // สั่งให้ Fragment แสดง option menu ของตัวเอง
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);    // สั่งให้ Fragment แสดง option menu ของตัวเอง
 
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
-
         // Edit Subtitle in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
                 "ของ" +
@@ -95,24 +96,14 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        // Load Data
-        reloadData();
-
         // Handle Click (FAB)
         btnFloatingActionAdd.setOnClickListener(this);
         btnFloatingActionEdit.setOnClickListener(this);
     }
 
-    private void reloadData() {
-        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
-                "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
-        );
-        call.enqueue(loadMedicalHistory);
-    }
-
     @Override
     public void onStart() {
+        loadMedicalHistory();
         super.onStart();
     }
 
@@ -141,6 +132,22 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         }
     }
 
+    private void loadAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingActionAdd.startAnimation(anim);
+        anim.setDuration(2000);
+        btnFloatingActionEdit.startAnimation(anim);
+    }
+
+    private void loadMedicalHistory() {
+        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
+                "medicalhistorys",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadMedicalHistory);
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
@@ -152,9 +159,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      * Listener Zone
      ****************/
 
-    /*
-     * Load Data
-     */
     Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
         public void onResponse(Call<MedicalHistoryItemCollectionDao> call,
@@ -195,7 +199,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      */
     @Override
     public void onRefresh() {
-        reloadData();
+        loadMedicalHistory();
     }
 
     /*
