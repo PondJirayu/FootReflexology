@@ -66,7 +66,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         initInstances(rootView);
         return rootView;
     }
-
+    
     private void initOptionsMenu() {
         // สั่งให้ Fragment แสดง option menu ของตัวเอง
         setHasOptionsMenu(true);

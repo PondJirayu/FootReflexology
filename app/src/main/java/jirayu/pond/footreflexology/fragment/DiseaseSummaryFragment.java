@@ -57,6 +57,11 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         return rootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        textToSpeech.shutdown();
+    }
+
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
