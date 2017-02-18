@@ -84,9 +84,6 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStart() {
-        // Start Animation btnFloatingButton
-        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.floating_action_anim);
-        btnFloatingAction.setAnimation(anim);
         super.onStart();
     }
 
