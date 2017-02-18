@@ -18,6 +18,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
@@ -98,15 +99,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         super.onStart();
     }
 
-    /*
-     * FAB Animation
-     */
-    private void loadAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
-                R.anim.fab_open);
-        btnFloatingAction.startAnimation(anim);
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -130,6 +122,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void loadAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingAction.startAnimation(anim);
     }
 
     private String calAge(MemberItemCollectionDao dao) {
@@ -167,7 +165,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());
-                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");                                  // กำหนด Date Format
+                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);                     // กำหนด Date Format
                     tvBirthDate.setText(simpleDateFormat.format(dao.getData().get(0).getBirthDate()));      // แปลง Date เป็น String
                     tvAge.setText(calAge(dao));                                                             // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน calAge()
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
