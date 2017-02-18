@@ -60,6 +60,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     @Override
     public void onDestroyView() {
         textToSpeech.shutdown();
+        super.onDestroyView();
     }
 
     private void initInstances(View rootView) {
