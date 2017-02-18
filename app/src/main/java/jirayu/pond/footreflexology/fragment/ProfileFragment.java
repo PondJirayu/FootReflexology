@@ -93,8 +93,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
+        loadAnimation();    // FAB Animation
         loadProfile();
         super.onStart();
+    }
+
+    /*
+     * FAB Animation
+     */
+    private void loadAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingAction.startAnimation(anim);
     }
 
     @Override
