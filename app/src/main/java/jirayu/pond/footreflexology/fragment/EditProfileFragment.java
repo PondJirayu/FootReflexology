@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -48,8 +50,6 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
      * Variables
      ************/
 
-    java.sql.Date birthDate;
-
     EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
             editSubDistrict, editDistrict;
     RadioGroup radioGroup;
@@ -60,16 +60,13 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     FloatingActionButton btnFloatingAction;
 
     ArrayAdapter<CharSequence> adapterProvince;
-
     StringsManager stringsManager;
-
     String firstName, lastName, gender, telephoneNumber, houseVillage, subDistrict,
             district, province;
 
+    java.sql.Date birthDate;
     DatePickerDialog datePickerDialog;
-
     Calendar calendar;
-
     SimpleDateFormat simpleDateFormat;
 
     /************
@@ -98,6 +95,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadAnimation();    // FAB Animation
         return rootView;
     }
 
@@ -120,46 +118,17 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
         btnDatePicker = (ImageButton) rootView.findViewById(R.id.btnDatePicker);
         stringsManager = new StringsManager();
-
         setDate();
         createSpinner();
-        loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
 
-        // Handle Click Button
+        // Handle Click
         btnFloatingAction.setOnClickListener(this);
         btnDatePicker.setOnClickListener(this);
     }
 
-    private void setDate() {
-        // แสดงเวลาปัจจุบัน
-        calendar = Calendar.getInstance();
-
-        datePickerDialog = DatePickerDialog.newInstance(this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
-                false);
-    }
-
-    private void createSpinner() {
-        // Create Adapter of Spinner(Province)
-        adapterProvince = ArrayAdapter.createFromResource(getActivity(),
-                R.array.province_names, android.R.layout.simple_spinner_item);
-        adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProvince.setAdapter(adapterProvince);        // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
-        spinnerProvince.setOnItemSelectedListener(this);    // Handle Click Spinner
-    }
-
-    private void loadMemberList() {
-        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
-                "members",
-                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
-        );
-        call.enqueue(loadMemberList);
-    }
-
     @Override
     public void onStart() {
+        loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
         super.onStart();
     }
 
@@ -186,6 +155,40 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void setDate() {
+        // แสดงเวลาปัจจุบัน
+        calendar = Calendar.getInstance();
+
+        datePickerDialog = DatePickerDialog.newInstance(this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                false);
+    }
+
+    private void createSpinner() {
+        // Create Adapter of Spinner(Province)
+        adapterProvince = ArrayAdapter.createFromResource(getActivity(),
+                R.array.province_names, android.R.layout.simple_spinner_item);
+        adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProvince.setAdapter(adapterProvince);        // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
+        spinnerProvince.setOnItemSelectedListener(this);    // Handle Click Spinner
+    }
+
+    private void loadAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingAction.startAnimation(anim);
+    }
+
+    private void loadMemberList() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+        );
+        call.enqueue(loadMemberList);
     }
 
     private void getTextToVariables() {

@@ -65,14 +65,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        initOptionsMenu();
         initInstances(rootView);
+        loadAnimation();   // FAB Animation
         return rootView;
     }
 
-    private void initInstances(View rootView) {
+    private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
+    }
 
+    private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
@@ -94,7 +98,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
-        loadAnimation();    // FAB Animation
         loadProfile();
         super.onStart();
     }
@@ -131,7 +134,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private String calAge(MemberItemCollectionDao dao) {
-        Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()), new LocalDate());
+        Years years = Years.yearsBetween(new LocalDate(dao.getData().get(0).getBirthDate()),
+                new LocalDate());
         return years.getYears() + "";
     }
 
@@ -143,7 +147,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         call.enqueue(loadProfile);
     }
 
-    public void showToast(String text) {
+    private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
                 Toast.LENGTH_SHORT)

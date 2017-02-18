@@ -53,6 +53,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_disease_summary, container, false);
         initInstances(rootView);
+        loadAnimation();    // FAB Animation
         return rootView;
     }
 
@@ -71,9 +72,10 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         tvShouldEat = (TextView) rootView.findViewById(R.id.tvShouldEat);
         tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
         tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
-
         textToSpeech = new TextToSpeech(getContext(), this);    // TextToSpeech
-        btnFloatingAction.setOnClickListener(this);     // Handle Click
+
+        // Handle Click
+        btnFloatingAction.setOnClickListener(this);
     }
 
     @Override
@@ -115,6 +117,12 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
             textToSpeech.setLanguage(new Locale("th"));
             textToSpeech.setSpeechRate(0);  // Speech rate. 1 is the normal speech.
         }
+    }
+
+    private void loadAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingAction.startAnimation(anim);
     }
 
     private void speak(CharSequence message) {
