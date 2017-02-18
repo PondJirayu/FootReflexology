@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +84,9 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStart() {
+        // Start Animation btnFloatingButton
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.floating_action_anim);
+        btnFloatingAction.setAnimation(anim);
         super.onStart();
     }
 
