@@ -18,7 +18,6 @@ import jirayu.pond.footreflexology.view.MedicalHistoryListItem;
 public class MedicalHistoryAdapter extends BaseAdapter {
 
     private MedicalHistoryItemCollectionDao dao;
-
     private int lastPosition = -1;
 
     public void setDao(MedicalHistoryItemCollectionDao dao) {
