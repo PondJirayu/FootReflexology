@@ -3,7 +3,6 @@ package jirayu.pond.footreflexology.fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,11 +28,9 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
      ************/
 
     FloatingActionButton btnFloatingAction;
-
     TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
 
     private TextToSpeech textToSpeech;
-
     boolean isFirstTime = true;
 
     /************
@@ -81,8 +78,6 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStart() {
-        // Start btnFloatingAction Animation
-
         super.onStart();
     }
 
