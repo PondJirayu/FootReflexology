@@ -91,7 +91,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new MedicalHistoryAdapter();  // Create Adapter
-        listView.setAdapter(listAdapter);           // สั่งให้ listView with adapter ทำงานร่วมกัน
+        listView.setAdapter(listAdapter);           // ListView + Adapter
         listView.setOnItemClickListener(this);
 
         // Pull to Refresh
