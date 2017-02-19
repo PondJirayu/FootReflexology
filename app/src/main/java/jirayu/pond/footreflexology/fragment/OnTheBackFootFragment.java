@@ -19,7 +19,7 @@ import jirayu.pond.footreflexology.manager.StringsManager;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class OnTheBackFootFragment extends Fragment {
+public class OnTheBackFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     /************
      * Variables
@@ -58,14 +58,11 @@ public class OnTheBackFootFragment extends Fragment {
         spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
 
-        btnShowDetails.setOnClickListener(buttonClickListener); // Handle Click Button
+        createAdapter();
+        spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
-        // Create Adapter of Spinner
-        adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
-        spinnerOnTheBackFoot.setOnItemSelectedListener(spinnerClickListener);   // Handle Click Spinner
+        // Handle Click
+        btnShowDetails.setOnClickListener(this);
     }
 
     @Override
@@ -98,36 +95,45 @@ public class OnTheBackFootFragment extends Fragment {
         }
     }
 
+    /*
+     * Create Adapter of Spinner
+     */
+    private void createAdapter() {
+        adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
+    }
 
     /*****************
      * Listener Zone
      ****************/
 
-    // Handle Click Spinner
-    AdapterView.OnItemSelectedListener spinnerClickListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            stringsManager = new StringsManager();
-            stringsManager.setWord(parent.getItemAtPosition(position).toString());
-        }
+    /*
+     * Handle Click Spinner
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        stringsManager = new StringsManager();
+        stringsManager.setWord(parent.getItemAtPosition(position).toString());
+    }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-        }
-    };
+    }
 
-    // Handle Click Button
-    View.OnClickListener buttonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v == btnShowDetails) {
-                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-                startActivity(intent);
-            }
+    /*
+     * Handle Click Button
+     */
+    @Override
+    public void onClick(View v) {
+        if (v == btnShowDetails) {
+            Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+            intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+            startActivity(intent);
         }
-    };
+    }
 
     /**************
      * Inner Class

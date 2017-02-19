@@ -134,7 +134,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
     }
 
     private void createSpinner() {
-        // Create Adapter of Spinner (Province)
         adapterProvince = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
         adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -200,7 +199,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
      * Listener Zone
      ****************/
 
-    // Handle Click Button
+    /*
+     * Handle Click Button
+     */
     @Override
     public void onClick(View v) {
         // create Dialog
@@ -285,7 +286,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
         }
     };
 
-    // Handle Click Spinner
+    /*
+     * Handle Click Spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // spinner Province

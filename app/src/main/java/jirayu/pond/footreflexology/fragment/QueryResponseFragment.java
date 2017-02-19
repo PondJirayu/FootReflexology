@@ -82,11 +82,10 @@ public class QueryResponseFragment extends Fragment {
         listAdapter = new DiseaseListAdapter(); // create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ listView with Adapter ทำงานร่วมกัน
 
-        // ติดต่อกับ Server
-        reloadData();
+        loadDisease();
     }
 
-    private void reloadData() {
+    private void loadDisease() {
         Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", query);
         call.enqueue(loadDiseaseListener);
     }

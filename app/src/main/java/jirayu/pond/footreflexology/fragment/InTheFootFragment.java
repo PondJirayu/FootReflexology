@@ -58,8 +58,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
 
         createAdapter();
-        // Handle Click
-        spinnerInTheFoot.setOnItemSelectedListener(this);
+        spinnerInTheFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);

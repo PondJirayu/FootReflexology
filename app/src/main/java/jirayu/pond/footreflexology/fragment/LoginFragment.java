@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         anim.setDuration(1400);
         btnIntoMainPage.startAnimation(anim);
 
-        // Handle Click Button
+        // Handle Click
         btnSignUp.setOnClickListener(this);
         btnIntoMainPage.setOnClickListener(this);
     }
@@ -138,7 +138,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * Listener Zone
      ****************/
 
-    // Handle Click Button
+    /*
+     * Handle Click Button
+     */
     @Override
     public void onClick(View v) {
         // Create Dialog

@@ -1,6 +1,5 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -83,11 +81,10 @@ public class ShowDetailsFragment extends Fragment {
         listAdapter = new DetailsListAdapter();     // create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
 
-        // ติดต่อกับ server
-        reloadData();
+        loadDetail();
     }
 
-    private void reloadData() {
+    private void loadDetail() {
         Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList("details", result);
         call.enqueue(loadDetailListener);
     }
@@ -153,7 +150,9 @@ public class ShowDetailsFragment extends Fragment {
         }
     };
 
-    // inflate option menu
+    /*
+     * inflate option menu
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
