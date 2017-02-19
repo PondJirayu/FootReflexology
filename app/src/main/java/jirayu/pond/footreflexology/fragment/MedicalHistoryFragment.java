@@ -41,11 +41,11 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      * Variables
      ************/
 
-    MedicalHistoryAdapter listAdapter;
-
     ListView listView;
     SwipeRefreshLayout swipeRefreshLayout;
     FloatingActionButton btnFloatingActionAdd, btnFloatingActionEdit;
+
+    MedicalHistoryAdapter listAdapter;
 
     /************
      * Functions
