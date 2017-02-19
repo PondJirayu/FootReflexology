@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -46,6 +47,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     FloatingActionButton btnFloatingActionAdd, btnFloatingActionEdit;
 
     MedicalHistoryAdapter listAdapter;
+    Thread thread;
 
     /************
      * Functions
@@ -68,8 +70,13 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
-        loadAnimation();    // FAB Animation
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        thread.interrupt();
+        super.onDestroyView();
     }
 
     private void initOptionsMenu() {
@@ -105,6 +112,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onStart() {
+        btnFloatingActionAdd.setVisibility(Switch.INVISIBLE);
+        btnFloatingActionEdit.setVisibility(Switch.INVISIBLE);
         loadMedicalHistory();
         super.onStart();
     }
@@ -139,6 +148,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                 R.anim.fab_open);
         btnFloatingActionAdd.startAnimation(anim);
         btnFloatingActionEdit.startAnimation(anim);
+        btnFloatingActionAdd.setVisibility(Switch.VISIBLE);
+        btnFloatingActionEdit.setVisibility(Switch.VISIBLE);
     }
 
     private void loadMedicalHistory() {
@@ -170,8 +181,29 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else { // พบข้อมูล
-                    listAdapter.setDao(dao);            // โยน dao ให้ Adapter
-                    listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
+                    listAdapter.setDao(dao);            // โยน Dao ให้ Adapter
+                    listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
+                    // Thread
+                    thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Run in Background Thread
+                            try {
+                                Thread.sleep(600);
+                            } catch (InterruptedException e) {
+                                return;
+                            }
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Run in UI Thread a.k.a. Main Thread
+                                    loadAnimation();    // FAB Animation
+                                }
+                            });
+                        }
+                    });
+                    thread.start();
                 }
             } else { // 404 NOT FOUND
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
