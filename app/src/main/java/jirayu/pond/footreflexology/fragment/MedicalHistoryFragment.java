@@ -139,7 +139,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         Animation anim = AnimationUtils.loadAnimation(getContext(),
                 R.anim.fab_open);
         btnFloatingActionAdd.startAnimation(anim);
-        anim.setDuration(2000);
         btnFloatingActionEdit.startAnimation(anim);
     }
 
@@ -206,7 +205,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     }
 
     /*
-     * Handle Click ListView
+     * Handle Click ListView Item
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
