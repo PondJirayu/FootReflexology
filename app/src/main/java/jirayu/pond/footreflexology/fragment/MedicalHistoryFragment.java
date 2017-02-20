@@ -193,7 +193,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                         public void run() {
                             // Run in Background Thread
                             try {
-                                Thread.sleep(300);
+                                Thread.sleep(500);
                             } catch (InterruptedException e) {
                                 return;
                             }
@@ -207,7 +207,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                             });
 
                             try {
-                                Thread.sleep(300);
+                                Thread.sleep(500);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
