@@ -1,6 +1,5 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -112,8 +111,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onStart() {
-        btnFloatingActionAdd.setVisibility(Switch.INVISIBLE);
-        btnFloatingActionEdit.setVisibility(Switch.INVISIBLE);
+        btnFloatingActionAdd.setVisibility(Switch.GONE);
+        btnFloatingActionEdit.setVisibility(Switch.GONE);
         loadMedicalHistory();
         super.onStart();
     }
@@ -143,12 +142,17 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private void loadAnimation() {
+    private void loadFabAddAnimation() {
         Animation anim = AnimationUtils.loadAnimation(getContext(),
                 R.anim.fab_open);
         btnFloatingActionAdd.startAnimation(anim);
-        btnFloatingActionEdit.startAnimation(anim);
         btnFloatingActionAdd.setVisibility(Switch.VISIBLE);
+    }
+
+    private void loadFabEditAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(),
+                R.anim.fab_open);
+        btnFloatingActionEdit.startAnimation(anim);
         btnFloatingActionEdit.setVisibility(Switch.VISIBLE);
     }
 
@@ -189,7 +193,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                         public void run() {
                             // Run in Background Thread
                             try {
-                                Thread.sleep(600);
+                                Thread.sleep(500);
                             } catch (InterruptedException e) {
                                 return;
                             }
@@ -198,7 +202,21 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                 @Override
                                 public void run() {
                                     // Run in UI Thread a.k.a. Main Thread
-                                    loadAnimation();    // FAB Animation
+                                    loadFabAddAnimation();    // FAB Animation
+                                }
+                            });
+
+                            try {
+                                Thread.sleep(300);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Run in UI Thread a.k.a. Main Thread
+                                    loadFabEditAnimation();   // FAB Animation
                                 }
                             });
                         }
