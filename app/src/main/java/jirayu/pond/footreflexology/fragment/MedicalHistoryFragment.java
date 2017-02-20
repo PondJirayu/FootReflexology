@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.DetailsMedicalHistoryActivity;
 import jirayu.pond.footreflexology.adapter.MedicalHistoryAdapter;
@@ -73,9 +75,9 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroy() {
         thread.interrupt();
-        super.onDestroyView();
+        super.onDestroy();
     }
 
     private void initOptionsMenu() {
@@ -143,14 +145,14 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     }
 
     private void loadFabAddAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
         btnFloatingActionAdd.startAnimation(anim);
         btnFloatingActionAdd.setVisibility(Switch.VISIBLE);
     }
 
     private void loadFabEditAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
         btnFloatingActionEdit.startAnimation(anim);
         btnFloatingActionEdit.setVisibility(Switch.VISIBLE);
@@ -165,7 +167,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     }
 
     private void showToast(String text) {
-        Toast.makeText(getContext(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();

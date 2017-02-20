@@ -17,7 +17,7 @@ public class MainApplication extends Application {
         Fabric.with(this, new Crashlytics());
 
         // Initialize thing(s) here
-        Contextor.getInstance().init(getApplicationContext()); // การเอา Application Context มาฝากที่ Contextor
+        Contextor.getInstance().init(getApplicationContext()); // เอา Application Context มาฝากที่ Contextor
     }
 
     @Override
