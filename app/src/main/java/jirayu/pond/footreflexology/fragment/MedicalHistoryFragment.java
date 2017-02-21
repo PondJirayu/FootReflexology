@@ -83,7 +83,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     private void initOptionsMenu() {
         setHasOptionsMenu(true);    // สั่งให้ Fragment แสดง option menu ของตัวเอง
-
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
         // Edit Subtitle in Toolbar
@@ -262,8 +261,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      */
     @Override
     public void onRefresh() {
-        loadMedicalHistory();
         doPullToRefresh = true;
+        loadMedicalHistory();
     }
 
     /*
