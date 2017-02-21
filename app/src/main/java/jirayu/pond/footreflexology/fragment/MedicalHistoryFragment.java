@@ -2,6 +2,9 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -77,7 +80,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onDestroy() {
-//        thread.interrupt();
+        thread.interrupt();
         super.onDestroy();
     }
 
@@ -196,7 +199,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
                     // เมื่อมีการ Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
                     if (!doPullToRefresh) {
-                        // Thread
+                        // JAVA Thread
                         thread = new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -232,7 +235,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                         });
                         thread.start();
                     }
-
                 }
             } else { // 404 NOT FOUND
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
