@@ -49,7 +49,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     MedicalHistoryAdapter listAdapter;
     Thread thread;
-    Boolean doPulltoRefresh = false;
+    Boolean doPullToRefresh;
 
     /************
      * Functions
@@ -72,7 +72,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
-        initLoadMedicalHistory();
         return rootView;
     }
 
@@ -101,6 +100,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         btnFloatingActionAdd.setVisibility(Switch.GONE);
         btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
         btnFloatingActionEdit.setVisibility(Switch.GONE);
+        doPullToRefresh = false;
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new MedicalHistoryAdapter();  // Create Adapter
         listView.setAdapter(listAdapter);           // ListView + Adapter
@@ -115,17 +115,16 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         btnFloatingActionEdit.setOnClickListener(this);
     }
 
-    private void initLoadMedicalHistory() {
-        loadMedicalHistory();
-    }
-
     @Override
     public void onStart() {
+        loadMedicalHistory();
         super.onStart();
     }
 
     @Override
     public void onStop() {
+        btnFloatingActionEdit.setVisibility(Switch.GONE);
+        btnFloatingActionAdd.setVisibility(Switch.GONE);
         super.onStop();
     }
 
@@ -196,7 +195,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
 
                     // เมื่อมีการ Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
-                    if (!doPulltoRefresh) {
+                    if (!doPullToRefresh) {
                         // Thread
                         thread = new Thread(new Runnable() {
                             @Override
@@ -263,7 +262,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onRefresh() {
         loadMedicalHistory();
-        doPulltoRefresh = true;
+        doPullToRefresh = true;
     }
 
     /*
