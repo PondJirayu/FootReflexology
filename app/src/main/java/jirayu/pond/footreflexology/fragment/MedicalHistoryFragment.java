@@ -96,7 +96,9 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingActionAdd = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionAdd);
+        btnFloatingActionAdd.setVisibility(Switch.GONE);
         btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
+        btnFloatingActionEdit.setVisibility(Switch.GONE);
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new MedicalHistoryAdapter();  // Create Adapter
         listView.setAdapter(listAdapter);           // ListView + Adapter
@@ -113,14 +115,14 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onStart() {
-        btnFloatingActionAdd.setVisibility(Switch.GONE);
-        btnFloatingActionEdit.setVisibility(Switch.GONE);
         loadMedicalHistory();
         super.onStart();
     }
 
     @Override
     public void onStop() {
+        btnFloatingActionEdit.setVisibility(Switch.GONE);
+        btnFloatingActionAdd.setVisibility(Switch.GONE);
         super.onStop();
     }
 
