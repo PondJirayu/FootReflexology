@@ -74,7 +74,6 @@ public class ShowDetailsFragment extends Fragment {
     }
 
     private void initOptionMenu() {
-        // show option menu
         setHasOptionsMenu(true);
     }
 
