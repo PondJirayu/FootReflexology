@@ -82,7 +82,6 @@ public class ShowDetailsFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new DetailsListAdapter();     // Create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
-
     }
 
     @Override
@@ -175,10 +174,11 @@ public class ShowDetailsFragment extends Fragment {
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
                     showToast("ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว");
                 } else { // พบข้อมูล
+                    // Share Button
                     ShareActionProvider shareActionProvider = (ShareActionProvider)
                             MenuItemCompat.getActionProvider(menuItem);
                     shareActionProvider.setShareIntent(getShareIntent());
-                    listAdapter.setDao(dao);    // โยน dao ให้ Adapter
+                    listAdapter.setDao(dao);            // โยน dao ให้ Adapter
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
                 }
             } else { // 404 NOT FOUND

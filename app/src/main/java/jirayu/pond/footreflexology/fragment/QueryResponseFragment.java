@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.DiseaseListAdapter;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
@@ -33,11 +35,12 @@ public class QueryResponseFragment extends Fragment {
      * Variables
      ************/
 
-    String query;
     ListView listView;
     DiseaseListAdapter listAdapter;
-    DiseaseItemCollectionDao dao;
     MenuItem menuItem;
+
+    String query;
+    DiseaseItemCollectionDao dao;
 
     /************
      * Functions
@@ -58,7 +61,7 @@ public class QueryResponseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Read from Arguments / อ่านค่าจาก Arguments ใส่ Member Variable
+        // Read from Arguments - อ่านค่าจาก Arguments ใส่ Member Variable
         query = getArguments().getString("query");
     }
 
@@ -72,26 +75,19 @@ public class QueryResponseFragment extends Fragment {
     }
 
     private void initOptionMenu() {
-        // show option menu
         setHasOptionsMenu(true);
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView = (ListView) rootView.findViewById(R.id.listView); // create listView
-        listAdapter = new DiseaseListAdapter(); // create Adapter
-        listView.setAdapter(listAdapter);   // สั่งให้ listView with Adapter ทำงานร่วมกัน
-
-        loadDisease();
-    }
-
-    private void loadDisease() {
-        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList("diseases", query);
-        call.enqueue(loadDiseaseListener);
+        listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
+        listAdapter = new DiseaseListAdapter(); // Create Adapter
+        listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
     }
 
     @Override
     public void onStart() {
+        loadDisease();
         super.onStart();
     }
 
@@ -120,6 +116,36 @@ public class QueryResponseFragment extends Fragment {
         }
     }
 
+    private void loadDisease() {
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList(
+                "diseases",
+                query
+        );
+        call.enqueue(loadDiseaseListener);
+    }
+
+    private Intent getShareIntent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "โรค" + dao.getData().get(0).getDiseaseName());
+        intent.putExtra(Intent.EXTRA_TEXT,
+                "รายละเอียด" + "\n"
+                        + "\t\t" + dao.getData().get(0).getDetail() + "\n\n" +
+                        "การรักษา" + "\n"
+                        + "\t\t" + dao.getData().get(0).getTreatment() + "\n\n" +
+                        "คำแนะนำ" + "\n"
+                        + "\t\t" + dao.getData().get(0).getRecommend()
+        );
+        return intent;
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(Contextor.getInstance().getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -131,48 +157,35 @@ public class QueryResponseFragment extends Fragment {
             if (response.isSuccessful()) {
                 dao = response.body();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-                    Toast.makeText(getContext(), "ไม่พบโรคที่ค้นหา", Toast.LENGTH_SHORT).show();
+                    showToast("ไม่พบโรคที่ค้นหา");
                 } else { // พบช้อมูล
                     // Share Button
                     ShareActionProvider shareActionProvider =  (ShareActionProvider)
                             MenuItemCompat.getActionProvider(menuItem);
                     shareActionProvider.setShareIntent(getShareIntent());
-                    listAdapter.setDao(dao); // โยน dao ให้ adapter
-                    listAdapter.notifyDataSetChanged(); // สั่ง refresh list view
+                    listAdapter.setDao(dao);            // โยน dao ให้ adapter
+                    listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
                 }
             } else { // 404 NOT FOUND
-                Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call,
                               Throwable t) {
-            Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
 
-    // inflate option menu
+    /*
+     * Inflate Options Menu
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_more_info, menu);
-        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม share
-    }
-
-    private Intent getShareIntent() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "โรค" + dao.getData().get(0).getDiseaseName());
-        intent.putExtra(Intent.EXTRA_TEXT,
-                    "รายละเอียด" + "\n"
-                            + "\t\t" + dao.getData().get(0).getDetail() + "\n\n" +
-                    "การรักษา" + "\n"
-                            + "\t\t" + dao.getData().get(0).getTreatment() + "\n\n" +
-                    "คำแนะนำ" + "\n"
-                            + "\t\t" + dao.getData().get(0).getRecommend()
-        );
-        return intent;
+        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม Share
     }
 
     /**************
