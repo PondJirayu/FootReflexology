@@ -125,6 +125,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     public void onStop() {
         btnFloatingActionEdit.setVisibility(Switch.GONE);
         btnFloatingActionAdd.setVisibility(Switch.GONE);
+        doPullToRefresh = false;
         super.onStop();
     }
 
