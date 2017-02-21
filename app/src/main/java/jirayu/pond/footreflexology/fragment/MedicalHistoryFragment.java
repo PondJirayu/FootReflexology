@@ -204,7 +204,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                 @Override
                                 public void run() {
                                     // Run in UI Thread a.k.a. Main Thread
-                                    loadFabAddAnimation();    // FAB Animation
+                                    loadFabEditAnimation();   // FAB Animation
                                 }
                             });
 
@@ -218,7 +218,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                 @Override
                                 public void run() {
                                     // Run in UI Thread a.k.a. Main Thread
-                                    loadFabEditAnimation();   // FAB Animation
+                                    loadFabAddAnimation();    // FAB Animation
                                 }
                             });
                         }
