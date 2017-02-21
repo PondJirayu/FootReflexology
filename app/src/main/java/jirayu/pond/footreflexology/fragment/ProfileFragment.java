@@ -5,12 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,7 +66,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         initOptionsMenu();
         initInstances(rootView);
-        loadAnimation();   // FAB Animation
         return rootView;
     }
 
@@ -79,6 +77,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
+        btnFloatingAction.setVisibility(Switch.GONE);
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);
         tvGender = (TextView) rootView.findViewById(R.id.tvGender);
@@ -92,7 +91,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
         stringsManager = new StringsManager();
 
-        // Handle Click
+        // Handle Click (FAB)
         btnFloatingAction.setOnClickListener(this);
     }
 
@@ -104,6 +103,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStop() {
+        btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
 
@@ -127,10 +127,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void loadAnimation() {
+    private void loadFabAnimation() {
         Animation anim = AnimationUtils.loadAnimation(getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
+        btnFloatingAction.setVisibility(Switch.VISIBLE);
     }
 
     private String calAge(MemberItemCollectionDao dao) {
@@ -178,6 +179,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     tvSubDistrict.setText(dao.getData().get(0).getSubDistrict());
                     tvDistrict.setText(dao.getData().get(0).getDistrict());
                     tvProvince.setText(dao.getData().get(0).getProvince());
+
+                    loadFabAnimation();   // FAB Animation
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
