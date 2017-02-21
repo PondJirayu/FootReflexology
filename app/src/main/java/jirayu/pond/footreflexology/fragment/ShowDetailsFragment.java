@@ -60,7 +60,7 @@ public class ShowDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Read from Arguments / อ่านค่าจาก Arguments ใส่ Member Variable
+        // Read from Arguments - อ่านค่าจาก Arguments ใส่ Member Variable
         result = getArguments().getString("result");
     }
 
@@ -194,13 +194,13 @@ public class ShowDetailsFragment extends Fragment {
     };
 
     /*
-     * Inflate Option Menu
+     * Inflate Options Menu
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_more_info, menu);
-        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม share
+        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม Share
     }
 
     /**************
