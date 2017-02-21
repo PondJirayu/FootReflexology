@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
@@ -34,8 +36,9 @@ public class ShowDetailsFragment extends Fragment {
 
     ListView listView;
     DetailsListAdapter listAdapter;
-    String result;
     MenuItem menuItem;
+
+    String result;
     DetailItemCollectionDao dao;
 
     /************
@@ -77,20 +80,15 @@ public class ShowDetailsFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView = (ListView) rootView.findViewById(R.id.listView); // create ListView
-        listAdapter = new DetailsListAdapter();     // create Adapter
+        listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
+        listAdapter = new DetailsListAdapter();     // Create Adapter
         listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
 
-        loadDetail();
-    }
-
-    private void loadDetail() {
-        Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList("details", result);
-        call.enqueue(loadDetailListener);
     }
 
     @Override
     public void onStart() {
+        loadDetailList();
         super.onStart();
     }
 
@@ -119,45 +117,12 @@ public class ShowDetailsFragment extends Fragment {
         }
     }
 
-    /****************
-     * Listener Zone
-     ****************/
-
-    Callback<DetailItemCollectionDao> loadDetailListener = new Callback<DetailItemCollectionDao>() {
-        @Override
-        public void onResponse(Call<DetailItemCollectionDao> call,
-                               Response<DetailItemCollectionDao> response) {
-            if (response.isSuccessful()) {
-                dao = response.body();
-                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
-                    Toast.makeText(getContext(), "ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว", Toast.LENGTH_SHORT).show();
-                } else { // พบข้อมูล
-                    ShareActionProvider shareActionProvider = (ShareActionProvider)
-                            MenuItemCompat.getActionProvider(menuItem);
-                    shareActionProvider.setShareIntent(getShareIntent());
-                    listAdapter.setDao(dao);    // โยน dao ให้ Adapter
-                    listAdapter.notifyDataSetChanged(); // adapter สั่งให้ listView refresh ตัวเอง
-                }
-            } else { // 404 NOT FOUND
-                Toast.makeText(getContext(), "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void onFailure(Call<DetailItemCollectionDao> call,
-                              Throwable t) {
-            Toast.makeText(getContext(), "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    /*
-     * inflate option menu
-     */
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_more_info, menu);
-        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม share
+    private void loadDetailList() {
+        Call<DetailItemCollectionDao> call = HttpManager.getInstance().getService().loadDetailList(
+                "details",
+                result
+        );
+        call.enqueue(loadDetailListener);
     }
 
     private Intent getShareIntent() {
@@ -165,6 +130,7 @@ public class ShowDetailsFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
+        // Content
         for (int i = 0; i < dao.getData().size(); i++) {
             if (i == 0) {
                 moreContent = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
@@ -188,6 +154,54 @@ public class ShowDetailsFragment extends Fragment {
         }
         intent.putExtra(Intent.EXTRA_TEXT, moreContent);
         return intent;
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(Contextor.getInstance().getContext(),
+                 text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    Callback<DetailItemCollectionDao> loadDetailListener = new Callback<DetailItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DetailItemCollectionDao> call,
+                               Response<DetailItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
+                    showToast("ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว");
+                } else { // พบข้อมูล
+                    ShareActionProvider shareActionProvider = (ShareActionProvider)
+                            MenuItemCompat.getActionProvider(menuItem);
+                    shareActionProvider.setShareIntent(getShareIntent());
+                    listAdapter.setDao(dao);    // โยน dao ให้ Adapter
+                    listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
+                }
+            } else { // 404 NOT FOUND
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DetailItemCollectionDao> call,
+                              Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
+    /*
+     * Inflate Option Menu
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_more_info, menu);
+        menuItem = menu.findItem(R.id.action_share); // เข้าถึงปุ่ม share
     }
 
     /**************
