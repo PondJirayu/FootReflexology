@@ -49,6 +49,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     MedicalHistoryAdapter listAdapter;
     Thread thread;
+    Boolean doPulltoRefresh = false;
 
     /************
      * Functions
@@ -71,12 +72,13 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        initLoadMedicalHistory();
         return rootView;
     }
 
     @Override
     public void onDestroy() {
-        thread.interrupt();
+//        thread.interrupt();
         super.onDestroy();
     }
 
@@ -113,16 +115,17 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         btnFloatingActionEdit.setOnClickListener(this);
     }
 
+    private void initLoadMedicalHistory() {
+        loadMedicalHistory();
+    }
+
     @Override
     public void onStart() {
-        loadMedicalHistory();
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        btnFloatingActionEdit.setVisibility(Switch.GONE);
-        btnFloatingActionAdd.setVisibility(Switch.GONE);
         super.onStop();
     }
 
@@ -191,41 +194,46 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                 } else { // พบข้อมูล
                     listAdapter.setDao(dao);            // โยน Dao ให้ Adapter
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
-                    // Thread
-                    thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Run in Background Thread
-                            try {
-                                Thread.sleep(400);
-                            } catch (InterruptedException e) {
-                                return;
-                            }
 
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Run in UI Thread a.k.a. Main Thread
-                                    loadFabEditAnimation();   // FAB Animation
+                    // เมื่อมีการ Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
+                    if (!doPulltoRefresh) {
+                        // Thread
+                        thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Run in Background Thread
+                                try {
+                                    Thread.sleep(400);
+                                } catch (InterruptedException e) {
+                                    return;
                                 }
-                            });
 
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Run in UI Thread a.k.a. Main Thread
+                                        loadFabEditAnimation();   // FAB Animation
+                                    }
+                                });
 
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Run in UI Thread a.k.a. Main Thread
-                                    loadFabAddAnimation();    // FAB Animation
+                                try {
+                                    Thread.sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
-                            });
-                        }
-                    });
-                    thread.start();
+
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Run in UI Thread a.k.a. Main Thread
+                                        loadFabAddAnimation();    // FAB Animation
+                                    }
+                                });
+                            }
+                        });
+                        thread.start();
+                    }
+
                 }
             } else { // 404 NOT FOUND
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -255,6 +263,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onRefresh() {
         loadMedicalHistory();
+        doPulltoRefresh = true;
     }
 
     /*
