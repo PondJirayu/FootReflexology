@@ -179,7 +179,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     tvSubDistrict.setText(dao.getData().get(0).getSubDistrict());
                     tvDistrict.setText(dao.getData().get(0).getDistrict());
                     tvProvince.setText(dao.getData().get(0).getProvince());
-
                     loadFabAnimation();   // FAB Animation
                 }
             } else {

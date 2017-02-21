@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,7 +96,6 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         initOptionsMenu();
         initInstances(rootView);
-        loadAnimation();    // FAB Animation
         return rootView;
     }
 
@@ -107,6 +107,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
+        btnFloatingAction.setVisibility(Switch.GONE);
         editFirstName = (EditText) rootView.findViewById(R.id.edit_first_name);
         editLastName = (EditText) rootView.findViewById(R.id.edit_last_name);
         editTelephoneNumber = (EditText) rootView.findViewById(R.id.edit_telephone_number);
@@ -134,6 +135,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onStop() {
+        btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
 
@@ -181,6 +183,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         Animation anim = AnimationUtils.loadAnimation(getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
+        btnFloatingAction.setVisibility(Switch.VISIBLE);
     }
 
     private void loadMemberList() {
@@ -298,6 +301,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                     editDistrict.setText(dao.getData().get(0).getDistrict());
                     stringsManager.setWord(dao.getData().get(0).getProvince());
                     spinnerProvince.setSelection(stringsManager.getProvinceId());
+                    loadAnimation();    // FAB Animation
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
