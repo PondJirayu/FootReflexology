@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
@@ -128,7 +130,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadFabAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
         btnFloatingAction.setVisibility(Switch.VISIBLE);
@@ -149,7 +151,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showToast(String text) {
-        Toast.makeText(getContext(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();

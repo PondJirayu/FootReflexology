@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -180,7 +181,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     }
 
     private void loadAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
         btnFloatingAction.setVisibility(Switch.VISIBLE);
@@ -212,7 +213,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     }
 
     private void showToast(String text) {
-        Toast.makeText(getActivity(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();
