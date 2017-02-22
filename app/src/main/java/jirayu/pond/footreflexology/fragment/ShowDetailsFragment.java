@@ -81,7 +81,7 @@ public class ShowDetailsFragment extends Fragment {
         // Init 'View' instance(s) with rootView.findViewById here
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new DetailsListAdapter();     // Create Adapter
-        listView.setAdapter(listAdapter);   // สั่งให้ ListView with Adapter ทำงานร่วมกัน
+        listView.setAdapter(listAdapter);           // สั่งให้ ListView with Adapter ทำงานร่วมกัน
     }
 
     @Override

@@ -3,8 +3,11 @@ package jirayu.pond.footreflexology.adapter;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
+import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemDao;
 import jirayu.pond.footreflexology.view.DetailsListItem;
@@ -16,6 +19,7 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 public class DetailsListAdapter extends BaseAdapter {
 
     DetailItemCollectionDao dao;
+    private int lastPosition = -1;
 
     public void setDao(DetailItemCollectionDao dao) {
         this.dao = dao;
@@ -53,6 +57,7 @@ public class DetailsListAdapter extends BaseAdapter {
             // Create
             item = new DetailsListItem(parent.getContext());
         }
+
         DetailItemDao dao = (DetailItemDao) getItem(position);
         // set ค่าให้ view ของ customViewGroup
         item.setDiseaseName(dao.getDiseaseName());
@@ -64,6 +69,15 @@ public class DetailsListAdapter extends BaseAdapter {
         } else {
             item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
         }
+
+        // Start Animation
+        if (position > lastPosition) {
+            Animation anim = AnimationUtils.loadAnimation(parent.getContext(),
+                    R.anim.up_from_bottom);
+            item.startAnimation(anim);
+            lastPosition = position;
+        }
+
         return item;
     }
 

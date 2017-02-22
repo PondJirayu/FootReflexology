@@ -60,7 +60,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         createAdapter();
         spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
-        // Handle Click
+        // Handle Click Button
         btnShowDetails.setOnClickListener(this);
     }
 
