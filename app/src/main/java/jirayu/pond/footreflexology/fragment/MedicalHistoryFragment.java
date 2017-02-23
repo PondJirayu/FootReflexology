@@ -78,12 +78,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         return rootView;
     }
 
-    @Override
-    public void onDestroy() {
-        thread.interrupt();
-        super.onDestroy();
-    }
-
     private void initOptionsMenu() {
         setHasOptionsMenu(true);    // สั่งให้ Fragment แสดง option menu ของตัวเอง
         // Edit Title in Toolbar
