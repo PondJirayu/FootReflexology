@@ -21,7 +21,7 @@ import jirayu.pond.footreflexology.R;
  */
 public class DetailsListItem extends BaseCustomViewGroup {
 
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold, tvPageNumber;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold, tvPageNumber, tvShouldEat, tvShouldNotEat;
     View viewUnderLine;
 
     public DetailsListItem(Context context) {
@@ -65,6 +65,8 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvRecommendBold = (TextView) findViewById(R.id.tvRecommendBold);
         viewUnderLine = findViewById(R.id.viewUnderLine);
         tvPageNumber = (TextView) findViewById(R.id.tvPageNumber);
+        tvShouldEat = (TextView) findViewById(R.id.tvShouldEat);
+        tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -117,6 +119,14 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
     public void setRecommend(String text) {
         tvRecommend.setText(text);
+    }
+
+    public void setShouldEat(String text) {
+        tvShouldEat.setText(text);
+    }
+
+    public void setShouldNotEat(String text) {
+        tvShouldNotEat.setText(text);
     }
 
     /*
