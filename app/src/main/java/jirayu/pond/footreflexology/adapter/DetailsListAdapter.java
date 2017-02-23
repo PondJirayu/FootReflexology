@@ -65,6 +65,8 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setDiseaseName(dao.getDiseaseName());
         item.setDetail(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getDetail());
         item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatMent());
+        // TODO : setShouldEat & ShouldNotEat
+
         // ตรวจสอบว่ามีคำแนะนำหรือไม่
         if (dao.getRecommend().isEmpty()) {
             item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี");
