@@ -58,7 +58,8 @@ public class DiseaseListAdapter extends BaseAdapter {
         }
 
         DiseaseItemDao dao = (DiseaseItemDao) getItem(position);
-        // set ค่าให้ view ของ customViewGroup
+
+        // Set ค่าให้ View of CustomViewGroup
         item.setDiseaseName(dao.getDiseaseName());
         item.setDetail(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getDetail());
         item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatment());
@@ -68,6 +69,8 @@ public class DiseaseListAdapter extends BaseAdapter {
         } else {
             item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
         }
+        // Set UnderLine Colour
+        item.setUnderLine(position);
 
         // Start Animation
         Animation anim = AnimationUtils.loadAnimation(parent.getContext(),

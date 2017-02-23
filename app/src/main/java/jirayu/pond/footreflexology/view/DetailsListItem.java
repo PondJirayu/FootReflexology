@@ -4,8 +4,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -20,6 +22,7 @@ import jirayu.pond.footreflexology.R;
 public class DetailsListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold;
+    View viewUnderLine;
 
     public DetailsListItem(Context context) {
         super(context);
@@ -60,6 +63,7 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvTreatment = (TextView) findViewById(R.id.tvTreatment);
         tvRecommend = (TextView) findViewById(R.id.tvRecommend);
         tvRecommendBold = (TextView) findViewById(R.id.tvRecommendBold);
+        viewUnderLine = findViewById(R.id.viewUnderLine);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -112,6 +116,21 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
     public void setRecommend(String text) {
         tvRecommend.setText(text);
+    }
+
+    /*
+     * กำหนดสี UnderLine โดยมีเงื่อนไขเป็นเลขคู่ - คี่
+     */
+    public void setUnderLine(int position) {
+        if ((position % 2) == 0) {
+            viewUnderLine.setBackgroundColor(ContextCompat.getColor(getContext(),
+                    R.color.view_even_color));
+            viewUnderLine.invalidate();
+        } else {
+            viewUnderLine.setBackgroundColor(ContextCompat.getColor(getContext(),
+                    R.color.view_odd_color));
+            viewUnderLine.invalidate();
+        }
     }
 
 }

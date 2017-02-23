@@ -13,4 +13,6 @@
     <color name="fab_edit_color">#BA68C8</color>
     <color name="fab_save_color">#BA68C8</color>
     <color name="fab_add_color">#CE93D8</color>
+    <color name="view_even_color">#F06292</color>
+    <color name="view_odd_color">#64B5F6</color>
 </resources>
