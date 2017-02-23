@@ -18,7 +18,7 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 
 public class DetailsListAdapter extends BaseAdapter {
 
-    DetailItemCollectionDao dao;
+    private DetailItemCollectionDao dao;
     private int lastPosition = -1;
 
     public void setDao(DetailItemCollectionDao dao) {
