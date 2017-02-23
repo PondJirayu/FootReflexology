@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -110,16 +111,7 @@ public class DetailsListItem extends BaseCustomViewGroup {
     }
 
     public void setRecommend(String text) {
-        if (text.isEmpty()) {
-            // "GONE" ซ่อน View A -> และขยับ View B แทนที่ View A
-            tvRecommendBold.setVisibility(TextView.GONE);
-            tvRecommend.setVisibility(TextView.GONE);
-        } else {
-            // "VISIBLE" แสดง View
-            tvRecommendBold.setVisibility(TextView.VISIBLE);
-            tvRecommend.setVisibility(TextView.VISIBLE);
-            tvRecommend.setText(text);
-        }
+        tvRecommend.setText(text);
     }
 
 }
