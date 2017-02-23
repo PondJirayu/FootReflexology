@@ -3,8 +3,11 @@ package jirayu.pond.footreflexology.adapter;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
+import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemDao;
 import jirayu.pond.footreflexology.view.DetailsListItem;
@@ -61,10 +64,15 @@ public class DiseaseListAdapter extends BaseAdapter {
         item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatment());
         // ตรวจสอบว่ามีคำแนะนำหรือไม่
         if (dao.getRecommend().isEmpty()) {
-            item.setRecommend("");
+            item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี");
         } else {
             item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
         }
+
+        // Start Animation
+        Animation anim = AnimationUtils.loadAnimation(parent.getContext(),
+                R.anim.up_from_bottom);
+        item.startAnimation(anim);
 
         return item;
     }
