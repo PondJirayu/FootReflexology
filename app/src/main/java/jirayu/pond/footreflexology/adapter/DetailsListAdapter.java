@@ -61,6 +61,7 @@ public class DetailsListAdapter extends BaseAdapter {
         DetailItemDao dao = (DetailItemDao) getItem(position);
 
         // Set ค่าให้ View of CustomViewGroup
+        item.setPageNumber(position);
         item.setDiseaseName(dao.getDiseaseName());
         item.setDetail(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getDetail());
         item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatMent());
