@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +139,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     private void createSpinnerBehavior() {
         // Behavior
-        adapterBehavior = new ArrayAdapter<>(getActivity(),
+        adapterBehavior = new ArrayAdapter<>(Contextor.getInstance().getContext(),
                 android.R.layout.simple_spinner_item, behavior);
         adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBehavior.setAdapter(adapterBehavior);
@@ -146,7 +148,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     private void createSpinnerDisease() {
         // Disease
-        adapterDisease = new ArrayAdapter<>(getActivity(),
+        adapterDisease = new ArrayAdapter<>(Contextor.getInstance().getContext(),
                 android.R.layout.simple_spinner_item, disease);
         adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDisease.setAdapter(adapterDisease);
@@ -163,7 +165,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     }
 
     private void showToast(String text) {
-        Toast.makeText(getActivity(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();
