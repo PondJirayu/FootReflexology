@@ -1,10 +1,12 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,10 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.DetailsMedicalHistoryActivity;
@@ -273,7 +279,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == btnFloatingActionSort) {
-            showToast("SORT");
+            // TODO : DO Dialog here
+
         }
         if (v == btnFloatingActionEdit) {
             getFragmentManager().beginTransaction()
