@@ -139,7 +139,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     private void createSpinnerBehavior() {
         // Behavior
-        adapterBehavior = new ArrayAdapter<>(Contextor.getInstance().getContext(),
+        adapterBehavior = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, behavior);
         adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBehavior.setAdapter(adapterBehavior);
@@ -148,7 +148,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     private void createSpinnerDisease() {
         // Disease
-        adapterDisease = new ArrayAdapter<>(Contextor.getInstance().getContext(),
+        adapterDisease = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, disease);
         adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDisease.setAdapter(adapterDisease);
