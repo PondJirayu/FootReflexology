@@ -2,9 +2,6 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -48,7 +45,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     ListView listView;
     SwipeRefreshLayout swipeRefreshLayout;
-    FloatingActionButton btnFloatingActionAdd, btnFloatingActionEdit;
+    FloatingActionButton btnFloatingActionSort, btnFloatingActionEdit;
 
     MedicalHistoryAdapter listAdapter;
     Thread thread;
@@ -92,8 +89,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btnFloatingActionAdd = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionAdd);
-        btnFloatingActionAdd.setVisibility(Switch.GONE);
+        btnFloatingActionSort = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionSort);
+        btnFloatingActionSort.setVisibility(Switch.GONE);
         btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
         btnFloatingActionEdit.setVisibility(Switch.GONE);
         doPullToRefresh = false;
@@ -107,7 +104,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         swipeRefreshLayout.setOnRefreshListener(this);
 
         // Handle Click (FAB)
-        btnFloatingActionAdd.setOnClickListener(this);
+        btnFloatingActionSort.setOnClickListener(this);
         btnFloatingActionEdit.setOnClickListener(this);
     }
 
@@ -120,7 +117,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onStop() {
         btnFloatingActionEdit.setVisibility(Switch.GONE);
-        btnFloatingActionAdd.setVisibility(Switch.GONE);
+        btnFloatingActionSort.setVisibility(Switch.GONE);
         doPullToRefresh = false;
         super.onStop();
     }
@@ -148,8 +145,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     private void loadFabAddAnimation() {
         Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
-        btnFloatingActionAdd.startAnimation(anim);
-        btnFloatingActionAdd.setVisibility(Switch.VISIBLE);
+        btnFloatingActionSort.startAnimation(anim);
+        btnFloatingActionSort.setVisibility(Switch.VISIBLE);
     }
 
     private void loadFabEditAnimation() {
@@ -275,16 +272,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        if (v == btnFloatingActionAdd) {
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.from_right, R.anim.to_left,
-                            R.anim.from_left, R.anim.to_right
-                    )
-                    .replace(R.id.contentContainer,
-                            AddMedicalHistoryFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit();
+        if (v == btnFloatingActionSort) {
+            showToast("SORT");
         }
         if (v == btnFloatingActionEdit) {
             getFragmentManager().beginTransaction()
@@ -305,8 +294,16 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_sort_medical_history:
-                showToast("SORT");
+            case R.id.action_add_medical_history:
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.from_right, R.anim.to_left,
+                                R.anim.from_left, R.anim.to_right
+                        )
+                        .replace(R.id.contentContainer,
+                                AddMedicalHistoryFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
