@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -279,8 +280,39 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == btnFloatingActionSort) {
-            // TODO : DO Dialog here
+            // Create Single Choice Dialog
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            CharSequence[] list = {
+//                    "อาการ : แย่ลง - ปกติ",
+//                    "อาการ : ปกติ - แย่ลง",
+//                    "วันที่เข้ารับการรักษา : ใหม่ - เก่า",
+//                    "วันที่เข้ารับการรักษา : เก่า - ใหม่",
+//                    "วันที่แก้ไข : ใหม่ - เก่า",
+//                    "วันที่แก้ไข : เก่า - ใหม่"
+//            };
+//
+//            builder.setTitle("เรียงลำดับ");
+//            builder.setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                }
+//            });
+//
+//            builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    showToast(String.valueOf(which));
+//                }
+//            });
+//
+//            builder.setNegativeButton("ยกเลิก", null);
+//
+//            builder.create();
+//            builder.show();
 
+            SortDialogFragment sortDialogFragment = new SortDialogFragment(getContext());
+            sortDialogFragment.getDialog();
         }
         if (v == btnFloatingActionEdit) {
             getFragmentManager().beginTransaction()
