@@ -27,7 +27,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        android:src="@drawable/ic_mode_edit_white_36dp"
+        android:src="@drawable/ic_mode_edit_white_24dp"
         app:backgroundTint="@color/fab_edit_color"
         app:elevation="6dp"
         app:fabSize="normal"

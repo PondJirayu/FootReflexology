@@ -248,7 +248,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        android:src="@drawable/ic_save_white_36dp"
+        android:src="@drawable/ic_save_white_24dp"
         app:backgroundTint="@color/fab_save_color"
         app:elevation="6dp"
         app:fabSize="normal"
