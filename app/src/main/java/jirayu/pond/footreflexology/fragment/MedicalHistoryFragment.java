@@ -311,8 +311,9 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 //            builder.create();
 //            builder.show();
 
-            SortDialogFragment sortDialogFragment = new SortDialogFragment(getContext());
+            SortDialogFragment sortDialogFragment = new SortDialogFragment(getContext(), "เรียงลำดับ");
             sortDialogFragment.getDialog();
+            showToast(String.valueOf(sortDialogFragment.getWhich()));
         }
         if (v == btnFloatingActionEdit) {
             getFragmentManager().beginTransaction()
