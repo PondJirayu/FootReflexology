@@ -57,6 +57,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     MedicalHistoryAdapter listAdapter;
     Thread thread;
     Boolean doPullToRefresh;
+    int selected = 0;
 
     /************
      * Functions
@@ -171,6 +172,39 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         call.enqueue(loadMedicalHistory);
     }
 
+    /*
+     * CreateSingleChoiceDialog
+     */
+    private void createSingleChoiceDialog() {
+        CharSequence[] list = {
+                "อาการ : แย่ลง - ปกติ",
+                "อาการ : ปกติ - แย่ลง",
+                "วันที่เข้ารับการรักษา : ใหม่ - เก่า",
+                "วันที่เข้ารับการรักษา : เก่า - ใหม่",
+                "วันที่แก้ไข : ใหม่ - เก่า",
+                "วันที่แก้ไข : เก่า - ใหม่"
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("เรียงลำดับ");
+        builder.setSingleChoiceItems(list, selected, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selected = which; // Set ค่าที่ User เลือกใส่ตัวแปร Selected
+            }
+        });
+        builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == -1) {
+                    showToast(String.valueOf(selected));
+                }
+            }
+        });
+        builder.setNegativeButton("ยกเลิก", null).create();
+        builder.show();
+    }
+
     private void showToast(String text) {
         Toast.makeText(Contextor.getInstance().getContext(),
                 text,
@@ -281,39 +315,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         if (v == btnFloatingActionSort) {
             // Create Single Choice Dialog
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//            CharSequence[] list = {
-//                    "อาการ : แย่ลง - ปกติ",
-//                    "อาการ : ปกติ - แย่ลง",
-//                    "วันที่เข้ารับการรักษา : ใหม่ - เก่า",
-//                    "วันที่เข้ารับการรักษา : เก่า - ใหม่",
-//                    "วันที่แก้ไข : ใหม่ - เก่า",
-//                    "วันที่แก้ไข : เก่า - ใหม่"
-//            };
-//
-//            builder.setTitle("เรียงลำดับ");
-//            builder.setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//
-//                }
-//            });
-//
-//            builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    showToast(String.valueOf(which));
-//                }
-//            });
-//
-//            builder.setNegativeButton("ยกเลิก", null);
-//
-//            builder.create();
-//            builder.show();
-
-            SortDialogFragment sortDialogFragment = new SortDialogFragment(getContext(), "เรียงลำดับ");
-            sortDialogFragment.getDialog();
-            showToast(String.valueOf(sortDialogFragment.getWhich()));
+            createSingleChoiceDialog();
         }
         if (v == btnFloatingActionEdit) {
             getFragmentManager().beginTransaction()
