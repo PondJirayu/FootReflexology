@@ -33,7 +33,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     private TextToSpeech textToSpeech;
     boolean isFirstTime = true;
-    int position;
+    String diseaseName;
 
     /************
      * Functions
@@ -43,10 +43,10 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         super();
     }
 
-    public static DiseaseSummaryFragment newInstance(int position) {
+    public static DiseaseSummaryFragment newInstance(String diseaseName) {
         DiseaseSummaryFragment fragment = new DiseaseSummaryFragment();
         Bundle args = new Bundle();
-        args.putInt("position", position);
+        args.putString("diseaseName", diseaseName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +55,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Read from Arguments
-        position = getArguments().getInt("position");
+        diseaseName = getArguments().getString("diseaseName");
     }
 
     @Override
@@ -63,7 +63,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_disease_summary, container, false);
         initInstances(rootView);
-        loadAnimation();    // FAB Animation
+//        loadAnimation();    // FAB Animation
         return rootView;
     }
 

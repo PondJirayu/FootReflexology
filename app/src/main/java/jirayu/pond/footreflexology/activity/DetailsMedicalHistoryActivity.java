@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.fragment.DetailsMedicalHistoryFragment;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 
@@ -17,7 +18,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    int position;
+    String diseaseName;
 
     /************
      * Functions
@@ -29,7 +30,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details_medical_history);
 
         Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
-        position = intent.getIntExtra("position", -1); // หยิบของออกมา (result)
+        diseaseName = intent.getStringExtra("diseaseName"); // หยิบของออกมา (result)
 
         initToolbar();
         initInstances();
@@ -59,7 +60,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(position))
+                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(diseaseName))
                     .commit();
         }
     }
