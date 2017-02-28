@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -24,6 +25,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
 
     ViewPager viewPager;
     TabLayout tabLayout;
+    int position;
 
     /************
      * Functions
@@ -33,11 +35,19 @@ public class DetailsMedicalHistoryFragment extends Fragment {
         super();
     }
 
-    public static DetailsMedicalHistoryFragment newInstance() {
+    public static DetailsMedicalHistoryFragment newInstance(int position) {
         DetailsMedicalHistoryFragment fragment = new DetailsMedicalHistoryFragment();
         Bundle args = new Bundle();
+        args.putInt("position", position);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Read from Arguments
+        position = getArguments().getInt("position");
     }
 
     @Override
@@ -59,7 +69,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        return DiseaseSummaryFragment.newInstance();
+                        return DiseaseSummaryFragment.newInstance(position);
                     case 1:
                         return DatesChartSummaryFragment.newInstance();
                     default:

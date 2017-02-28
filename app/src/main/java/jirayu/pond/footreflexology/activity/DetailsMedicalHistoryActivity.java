@@ -1,5 +1,6 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
+    int position;
 
     /************
      * Functions
@@ -25,6 +27,9 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_medical_history);
+
+        Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
+        position = intent.getIntExtra("position", -1); // หยิบของออกมา (result)
 
         initToolbar();
         initInstances();
@@ -54,7 +59,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance())
+                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(position))
                     .commit();
         }
     }

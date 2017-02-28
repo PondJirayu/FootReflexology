@@ -312,6 +312,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
+        intent.putExtra("position", position); // ฝาก position
         startActivity(intent);
     }
 

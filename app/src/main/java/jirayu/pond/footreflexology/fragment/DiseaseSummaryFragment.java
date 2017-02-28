@@ -3,6 +3,7 @@ package jirayu.pond.footreflexology.fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     private TextToSpeech textToSpeech;
     boolean isFirstTime = true;
+    int position;
 
     /************
      * Functions
@@ -41,11 +43,19 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         super();
     }
 
-    public static DiseaseSummaryFragment newInstance() {
+    public static DiseaseSummaryFragment newInstance(int position) {
         DiseaseSummaryFragment fragment = new DiseaseSummaryFragment();
         Bundle args = new Bundle();
+        args.putInt("position", position);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Read from Arguments
+        position = getArguments().getInt("position");
     }
 
     @Override
