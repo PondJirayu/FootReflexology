@@ -177,12 +177,12 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
      */
     private void createSingleChoiceDialog() {
         CharSequence[] list = {
-                "อาการ : แย่ลง - ปกติ",
-                "อาการ : ปกติ - แย่ลง",
-                "วันที่เข้ารับการรักษา : ใหม่ - เก่า",
-                "วันที่เข้ารับการรักษา : เก่า - ใหม่",
-                "วันที่แก้ไข : ใหม่ - เก่า",
-                "วันที่แก้ไข : เก่า - ใหม่"
+                "อาการ: แย่-ปกติ",
+                "อาการ: ปกติ-แย่",
+                "วันที่เข้ารับการรักษา: ล่าสุด",
+                "วันที่เข้ารับการรักษา: หลังสุด",
+                "วันที่แก้ไข: ล่าสุด",
+                "วันที่แก้ไข: หลังสุด"
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
