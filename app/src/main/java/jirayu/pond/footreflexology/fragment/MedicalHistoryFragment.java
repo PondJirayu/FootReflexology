@@ -242,6 +242,10 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                     return;
                                 }
 
+                                // if Activity เป็น null ให้จบการทำงาน
+                                if (getActivity() == null)
+                                    return;
+
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -255,6 +259,9 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+
+                                if (getActivity() == null)
+                                    return;
 
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
