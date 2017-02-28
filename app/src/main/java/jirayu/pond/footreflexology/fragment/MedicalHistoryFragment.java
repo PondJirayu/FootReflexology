@@ -58,7 +58,6 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     Thread thread;
     Boolean doPullToRefresh;
     int selected = 0;
-    MedicalHistoryItemCollectionDao dao;
 
     /************
      * Functions
@@ -223,7 +222,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                Response<MedicalHistoryItemCollectionDao> response) {
             swipeRefreshLayout.setRefreshing(false);    // สั่งให้ Pull to Refresh หยุดหมุน
             if (response.isSuccessful()) {
-                dao = response.body();
+                MedicalHistoryItemCollectionDao dao= response.body();
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else { // พบข้อมูล
