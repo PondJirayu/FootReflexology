@@ -18,6 +18,7 @@
         android:background="#FFFFFF">
 
         <TextView
+            android:textColor="@color/font_black_color"
             android:id="@+id/tvPageNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/disease_name"
@@ -50,6 +52,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvDiseaseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,6 +68,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -73,6 +77,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,6 +92,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -95,6 +101,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvTreatment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,6 +116,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -117,6 +125,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvShouldEat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,6 +140,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -139,6 +149,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvShouldNotEat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,6 +164,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvRecommendBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,6 +174,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/font_black_color"
                     android:id="@+id/tvRecommend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

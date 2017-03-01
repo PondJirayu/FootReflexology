@@ -193,16 +193,16 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบข้อมูลโรค");
                 } else {
-                    setDao(response.body());
+                    setDao(response.body()); // dao ไว้ใช้สำหรับคำสั่งเสียง [TTS]
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
-                    tvDetail.setText(dao.getData().get(0).getDetail());
-                    tvTreatment.setText(dao.getData().get(0).getTreatment());
+                    tvDetail.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getDetail()));
+                    tvTreatment.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getTreatment()));
                     // TODO : tvShouldEat & tvShouldNotEat
 
                     if (dao.getData().get(0).getRecommend().isEmpty()) {
-                        tvRecommend.setText("ไม่มี");
+                        tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
                     } else {
-                        tvRecommend.setText(dao.getData().get(0).getRecommend());
+                        tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getRecommend()));
                     }
                     loadAnimation();    // FAB Animation
                 }

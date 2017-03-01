@@ -15,4 +15,5 @@
     <color name="fab_sort_color">#CE93D8</color>
     <color name="view_even_color">#F06292</color>
     <color name="view_odd_color">#64B5F6</color>
+    <color name="font_black_color">#c8000000</color>
 </resources>
