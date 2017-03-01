@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +39,9 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
 
     private TextToSpeech textToSpeech;
-    boolean isFirstTime = true;
-    String diseaseName;
+    private boolean isFirstTime = true;
+    private String diseaseName;
+    private DiseaseItemCollectionDao dao;
 
     /************
      * Functions
@@ -69,7 +71,6 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_disease_summary, container, false);
         initInstances(rootView);
-//        loadAnimation();    // FAB Animation
         return rootView;
     }
 
@@ -82,6 +83,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
+        btnFloatingAction.setVisibility(Switch.GONE);
         tvDiseaseName = (TextView) rootView.findViewById(R.id.tvDiseaseName);
         tvDetail = (TextView) rootView.findViewById(R.id.tvDetail);
         tvTreatment = (TextView) rootView.findViewById(R.id.tvTreatment);
@@ -102,6 +104,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStop() {
+        btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
 
@@ -148,6 +151,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         Animation anim = AnimationUtils.loadAnimation(getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
+        btnFloatingAction.setVisibility(Switch.VISIBLE);
     }
 
     private void speak(CharSequence message) {
@@ -156,6 +160,14 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         } else {
             textToSpeech.speak(message.toString(), TextToSpeech.QUEUE_FLUSH, null);
         }
+    }
+
+    public DiseaseItemCollectionDao getDao() {
+        return dao;
+    }
+
+    public void setDao(DiseaseItemCollectionDao dao) {
+        this.dao = dao;
     }
 
     private void showToast(String text) {
@@ -177,6 +189,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบข้อมูลโรค");
                 } else {
+                    setDao(response.body());
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
                     tvDetail.setText(dao.getData().get(0).getDetail());
                     tvTreatment.setText(dao.getData().get(0).getTreatment());
@@ -187,6 +200,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                     } else {
                         tvRecommend.setText(dao.getData().get(0).getRecommend());
                     }
+                    loadAnimation();    // FAB Animation
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -207,7 +221,16 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         if (v == btnFloatingAction) {
             if (isFirstTime) {
                 showToast("กำลังประมวลผลคำสั่งอ่านข้อความด้วยเสียง");
-                speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+                speak(
+                        "โรค"
+                                + getDao().getData().get(0).getDiseaseName()
+                                + "รายละเอียดและสาเหตุ"
+                                + getDao().getData().get(0).getDetail()
+                                + "การรักษา"
+                                + getDao().getData().get(0).getTreatment()
+                                + "คำแนะนำ"
+                                + getDao().getData().get(0).getRecommend()
+                );
                 btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
                 isFirstTime = false;
             }
@@ -215,7 +238,16 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 textToSpeech.stop(); // Stop talking
                 btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);
             } else {
-                speak("โรคอ้วน รายละเอียดและสาเหตุ การรักษา อาหารที่ควรรับประทาน อาหารที่ควรหลีกเลี่ยง คำแนะนำ");
+                speak(
+                        "โรค"
+                                + getDao().getData().get(0).getDiseaseName()
+                                + "รายละเอียดและสาเหตุ"
+                                + getDao().getData().get(0).getDetail()
+                                + "การรักษา"
+                                + getDao().getData().get(0).getTreatment()
+                                + "คำแนะนำ"
+                                + getDao().getData().get(0).getRecommend()
+                );
                 btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
             }
         }
