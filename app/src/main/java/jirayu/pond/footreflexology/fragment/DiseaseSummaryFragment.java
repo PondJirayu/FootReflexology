@@ -104,6 +104,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStop() {
+        textToSpeech.shutdown();
         btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
@@ -162,11 +163,14 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         }
     }
 
-    public DiseaseItemCollectionDao getDao() {
-        return dao;
+    private CharSequence getDao() {
+        return "โรค" + dao.getData().get(0).getDiseaseName() +
+                "รายละเอียดและสาเหตุ" + dao.getData().get(0).getDetail() +
+                "การรักษา" + dao.getData().get(0).getTreatment() +
+                "ตำแนะนำ" + dao.getData().get(0).getRecommend();
     }
 
-    public void setDao(DiseaseItemCollectionDao dao) {
+    private void setDao(DiseaseItemCollectionDao dao) {
         this.dao = dao;
     }
 
@@ -221,16 +225,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         if (v == btnFloatingAction) {
             if (isFirstTime) {
                 showToast("กำลังประมวลผลคำสั่งอ่านข้อความด้วยเสียง");
-                speak(
-                        "โรค"
-                                + getDao().getData().get(0).getDiseaseName()
-                                + "รายละเอียดและสาเหตุ"
-                                + getDao().getData().get(0).getDetail()
-                                + "การรักษา"
-                                + getDao().getData().get(0).getTreatment()
-                                + "คำแนะนำ"
-                                + getDao().getData().get(0).getRecommend()
-                );
+                speak(getDao());
                 btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
                 isFirstTime = false;
             }
@@ -238,16 +233,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 textToSpeech.stop(); // Stop talking
                 btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);
             } else {
-                speak(
-                        "โรค"
-                                + getDao().getData().get(0).getDiseaseName()
-                                + "รายละเอียดและสาเหตุ"
-                                + getDao().getData().get(0).getDetail()
-                                + "การรักษา"
-                                + getDao().getData().get(0).getTreatment()
-                                + "คำแนะนำ"
-                                + getDao().getData().get(0).getRecommend()
-                );
+                speak(getDao());
                 btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
             }
         }
