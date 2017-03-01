@@ -4,10 +4,13 @@
     <color name="primary_dark_color">#689F38</color>
     <color name="accent_color">#FF4081</color>
     <color name="button_color">#ffffff</color>
-    <color name="worse_color">#F44336</color>
-    <color name="poise_color">#FFEB3B</color>
-    <color name="better_color">#CDDC39</color>
-    <color name="normal_color">#2196F3</color>
+
+    <!-- Color Item of MedicalHistory -->
+    <color name="worse_color">#EF5350</color>
+    <color name="poise_color">#FFEE58</color>
+    <color name="better_color">#66BB6A</color>
+    <color name="normal_color">#42A5F5</color>
+
     <color name="overlay_color">#80000000</color>
     <color name="fab_tts_color">#E53935</color>
     <color name="fab_edit_color">#BA68C8</color>

@@ -16,6 +16,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
 import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
@@ -149,7 +151,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     }
 
     private void loadAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(),
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
                 R.anim.fab_open);
         btnFloatingAction.startAnimation(anim);
         btnFloatingAction.setVisibility(Switch.VISIBLE);
@@ -175,7 +177,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     }
 
     private void showToast(String text) {
-        Toast.makeText(getContext(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_LONG)
                 .show();
