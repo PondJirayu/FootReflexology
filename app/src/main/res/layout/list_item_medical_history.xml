@@ -12,6 +12,7 @@
         android:layout_marginRight="6dp"
         android:layout_marginTop="6dp"
         android:background="#FFFFFF"
+        app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
 
         <LinearLayout
