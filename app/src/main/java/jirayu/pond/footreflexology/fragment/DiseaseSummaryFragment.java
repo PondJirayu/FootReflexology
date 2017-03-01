@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -90,6 +96,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
 
     @Override
     public void onStart() {
+        loadDiseaseList();
         super.onStart();
     }
 
@@ -116,6 +123,14 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void loadDiseaseList() {
+        Call<DiseaseItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseList(
+                "diseases",
+                diseaseName
+        );
+        call.enqueue(loadDiseaseList);
     }
 
     /*
@@ -153,6 +168,36 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     /****************
      * Listener Zone
      ****************/
+
+    Callback<DiseaseItemCollectionDao> loadDiseaseList = new Callback<DiseaseItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                DiseaseItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) {
+                    showToast("ไม่พบข้อมูลโรค");
+                } else {
+                    tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
+                    tvDetail.setText(dao.getData().get(0).getDetail());
+                    tvTreatment.setText(dao.getData().get(0).getTreatment());
+                    // TODO : tvShouldEat & tvShouldNotEat
+
+                    if (dao.getData().get(0).getRecommend().isEmpty()) {
+                        tvRecommend.setText("ไม่มี");
+                    } else {
+                        tvRecommend.setText(dao.getData().get(0).getRecommend());
+                    }
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
 
     /*
      * Handle Click
