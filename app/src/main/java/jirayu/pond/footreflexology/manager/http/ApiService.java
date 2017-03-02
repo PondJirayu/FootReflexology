@@ -50,7 +50,8 @@ public interface ApiService {
     @GET("{tableName}/{key}")
     Call<MedicalHistoryItemCollectionDao> loadMedicalHistory(
             @Path("tableName") String tableName,
-            @Path("key") int key
+            @Path("key") int key,
+            @Query("sortId") int sortId
     );
 
     @GET("{tableName}")

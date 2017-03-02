@@ -129,7 +129,8 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     private void loadMedicalHistory() {
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
+                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                0
         );
         call.enqueue(loadMedicalHistory);
     }

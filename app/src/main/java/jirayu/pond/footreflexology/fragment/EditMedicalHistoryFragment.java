@@ -132,7 +132,8 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         // โหลดรายชื่อโรคจากตารางประวัติการรักษา
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
+                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                0
         );
         call.enqueue(loadDisease);
     }

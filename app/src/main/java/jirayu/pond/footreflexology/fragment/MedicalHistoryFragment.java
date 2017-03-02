@@ -168,7 +168,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     private void loadMedicalHistory() {
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
+                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                selected
         );
         call.enqueue(loadMedicalHistory);
     }
@@ -198,7 +199,9 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == -1) {
-                    showToast(String.valueOf(selected));
+                    btnFloatingActionEdit.setVisibility(Switch.GONE);
+                    btnFloatingActionSort.setVisibility(Switch.GONE);
+                    loadMedicalHistory();
                 }
             }
         });
