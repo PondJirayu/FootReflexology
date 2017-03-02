@@ -183,8 +183,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                 "อาการปกติถึงแย่",
                 "โรคที่เข้ารับการรักษาล่าสุด",
                 "โรคที่เข้ารับการรักษาครั้งแรก",
-                "ประวัติที่แก้ไขล่าสุด",
-                "ประวัติที่ไม่ได้แก้ไขนานสุด"
+                "โรคที่แก้ไขอาการล่าสุด",
+                "โรคที่ไม่ได้แก้ไขอาการนานสุด"
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
