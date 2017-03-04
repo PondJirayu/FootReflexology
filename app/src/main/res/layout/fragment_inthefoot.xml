@@ -25,35 +25,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <include layout="@layout/tv_select_the_response" />
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerInTheFoot"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    style="@style/Base.Widget.AppCompat.Spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="16dp"
                     android:spinnerMode="dropdown" />
 
-                <RelativeLayout
+                <Button
+                    android:id="@+id/btnShowDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <Button
-                        android:id="@+id/btnShowDetails"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp"
-                        android:text="@string/do_details" />
-
-                </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/do_details"
+                    android:textColor="@color/font_black_color" />
 
             </LinearLayout>
 
