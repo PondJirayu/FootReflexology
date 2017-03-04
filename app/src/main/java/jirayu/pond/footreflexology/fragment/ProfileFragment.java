@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,9 +41,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
      * Variables
      ************/
 
+    ImageView ivPerson, ivPlace;
     FloatingActionButton btnFloatingAction;
     TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
-            tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince;
+            tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince,
+            tvTitleFirstLastName, tvTitleGender, tvTitleBirthDate, tvTitleAge, tvTitleYear,
+            tvTitleIdentificationNumber, tvTitleTelephoneNumber, tvTitleHouseVillage, tvTitleSubDistrict,
+            tvTitleDistrict, tvTitleProvince;
 
     StringsManager stringsManager;
     SimpleDateFormat simpleDateFormat;
@@ -78,19 +83,34 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        ivPerson = (ImageView) rootView.findViewById(R.id.ivPerson);
+        ivPlace = (ImageView) rootView.findViewById(R.id.ivPlace);
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
         btnFloatingAction.setVisibility(Switch.GONE);
+        tvTitleFirstLastName = (TextView) rootView.findViewById(R.id.tvTitleFirstLastName);
         tvFirstName = (TextView) rootView.findViewById(R.id.tvFirstName);
         tvLastName = (TextView) rootView.findViewById(R.id.tvLastName);
+        tvTitleGender = (TextView) rootView.findViewById(R.id.tvTitleGender);
         tvGender = (TextView) rootView.findViewById(R.id.tvGender);
+        tvTitleBirthDate = (TextView) rootView.findViewById(R.id.tvTitleBirthDate);
         tvBirthDate = (TextView) rootView.findViewById(R.id.tvBirthDate);
+        tvTitleAge = (TextView) rootView.findViewById(R.id.tvTitleAge);
         tvAge = (TextView) rootView.findViewById(R.id.tvAge);
+        tvTitleYear = (TextView) rootView.findViewById(R.id.tvTitleYear);
+        tvTitleIdentificationNumber = (TextView) rootView.findViewById(R.id.tvTitleIdentificationNumber);
         tvIdentificationNumber = (TextView) rootView.findViewById(R.id.tvIdentificationNumber);
+        tvTitleTelephoneNumber = (TextView) rootView.findViewById(R.id.tvTitleTelephoneNumber);
         tvTelephoneNumber = (TextView) rootView.findViewById(R.id.tvTelephoneNumber);
+        tvTitleHouseVillage = (TextView) rootView.findViewById(R.id.tvTitleHouseVillage);
         tvHouseVillage = (TextView) rootView.findViewById(R.id.tvHouseVillage);
+        tvTitleSubDistrict = (TextView) rootView.findViewById(R.id.tvTitleSubDistrict);
         tvSubDistrict = (TextView) rootView.findViewById(R.id.tvSubDistrict);
+        tvTitleDistrict = (TextView) rootView.findViewById(R.id.tvTitleDistrict);
         tvDistrict = (TextView) rootView.findViewById(R.id.tvDistrict);
+        tvTitleProvince = (TextView) rootView.findViewById(R.id.tvTitleProvince);
         tvProvince = (TextView) rootView.findViewById(R.id.tvProvince);
+        hideView();
+
         stringsManager = new StringsManager();
 
         // Handle Click (FAB)
@@ -127,6 +147,38 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void showView() {
+        ivPerson.setVisibility(Switch.VISIBLE);
+        ivPlace.setVisibility(Switch.VISIBLE);
+        tvTitleFirstLastName.setVisibility(Switch.VISIBLE);
+        tvTitleGender.setVisibility(Switch.VISIBLE);
+        tvTitleBirthDate.setVisibility(Switch.VISIBLE);
+        tvTitleAge.setVisibility(Switch.VISIBLE);
+        tvTitleYear.setVisibility(Switch.VISIBLE);
+        tvTitleIdentificationNumber.setVisibility(Switch.VISIBLE);
+        tvTitleTelephoneNumber.setVisibility(Switch.VISIBLE);
+        tvTitleHouseVillage.setVisibility(Switch.VISIBLE);
+        tvTitleSubDistrict.setVisibility(Switch.VISIBLE);
+        tvTitleDistrict.setVisibility(Switch.VISIBLE);
+        tvTitleProvince.setVisibility(Switch.VISIBLE);
+    }
+
+    private void hideView() {
+        ivPerson.setVisibility(Switch.GONE);
+        ivPlace.setVisibility(Switch.GONE);
+        tvTitleFirstLastName.setVisibility(Switch.GONE);
+        tvTitleGender.setVisibility(Switch.GONE);
+        tvTitleBirthDate.setVisibility(Switch.GONE);
+        tvTitleAge.setVisibility(Switch.GONE);
+        tvTitleYear.setVisibility(Switch.GONE);
+        tvTitleIdentificationNumber.setVisibility(Switch.GONE);
+        tvTitleTelephoneNumber.setVisibility(Switch.GONE);
+        tvTitleHouseVillage.setVisibility(Switch.GONE);
+        tvTitleSubDistrict.setVisibility(Switch.GONE);
+        tvTitleDistrict.setVisibility(Switch.GONE);
+        tvTitleProvince.setVisibility(Switch.GONE);
     }
 
     private void loadFabAnimation() {
@@ -169,6 +221,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย
                     showToast("ไม่พบข้อมูลผู้ป่วย");
                 } else { // พบข้อมูลผู้ป่วย
+                    showView();
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());

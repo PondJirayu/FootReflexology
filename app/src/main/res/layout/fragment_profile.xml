@@ -24,6 +24,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/ivPerson"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:scaleType="centerCrop"
@@ -42,6 +43,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleFirstLastName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/first_name"
@@ -74,6 +76,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/gender"
@@ -98,6 +101,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleBirthDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/day_of_birth"
@@ -122,6 +126,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleAge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/age"
@@ -138,6 +143,7 @@
                             android:textSize="@dimen/text_size_profile_show" />
 
                         <TextView
+                            android:id="@+id/tvTitleYear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="14dp"
@@ -155,6 +161,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleIdentificationNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/identification_number"
@@ -177,6 +184,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/tvTitleTelephoneNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/phone_number"
@@ -208,6 +216,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/ivPlace"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:scaleType="centerCrop"
@@ -226,6 +235,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleHouseVillage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/address"
@@ -250,6 +260,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleSubDistrict"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/sub_district"
@@ -274,6 +285,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleDistrict"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/district"
@@ -297,6 +309,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvTitleProvince"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/province"
