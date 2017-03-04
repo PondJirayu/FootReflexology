@@ -20,6 +20,7 @@ public class DetailsListAdapter extends BaseAdapter {
 
     private DetailItemCollectionDao dao;
     private int lastPosition = -1;
+    private CharSequence paragraph = Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ");
 
     public void setDao(DetailItemCollectionDao dao) {
         this.dao = dao;
@@ -63,16 +64,11 @@ public class DetailsListAdapter extends BaseAdapter {
         // Set ค่าให้ View of CustomViewGroup
         item.setPageNumber(position);
         item.setDiseaseName(dao.getDiseaseName());
-        item.setDetail(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getDetail());
-        item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatMent());
-        // TODO : setShouldEat & ShouldNotEat
-
-        // ตรวจสอบว่ามีคำแนะนำหรือไม่
-        if (dao.getRecommend().isEmpty()) {
-            item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี");
-        } else {
-            item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
-        }
+        item.setDetail(paragraph + dao.getDetail());
+        item.setTreatment(paragraph + dao.getTreatMent());
+        item.setShouldEat((dao.getShouldEat().isEmpty() ? "ไม่มี" : dao.getShouldEat()));
+        item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? "ไม่มี" : dao.getShouldNotEat()));
+        item.setRecommend(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
         // Set UnderLine Colour
         item.setUnderLine(position);
 

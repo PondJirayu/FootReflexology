@@ -16,6 +16,8 @@ public class DetailItemDao {
     @SerializedName("disease_name")             private String diseaseName;
     @SerializedName("detail")                   private String detail;
     @SerializedName("treatment")                private String treatment;
+    @SerializedName("shouldeat")                private String shouldEat;
+    @SerializedName("shouldnoteat")             private String shouldNotEat;
     @SerializedName("recommend")                private String recommend;
 
     public int getId() {
@@ -80,6 +82,22 @@ public class DetailItemDao {
 
     public void setTreatMent(String treatment) {
         this.treatment = treatment;
+    }
+
+    public String getShouldEat() {
+        return shouldEat;
+    }
+
+    public void setShouldEat(String shouldEat) {
+        this.shouldEat = shouldEat;
+    }
+
+    public String getShouldNotEat() {
+        return shouldNotEat;
+    }
+
+    public void setShouldNotEat(String shouldNotEat) {
+        this.shouldNotEat = shouldNotEat;
     }
 
     public String getRecommend() {

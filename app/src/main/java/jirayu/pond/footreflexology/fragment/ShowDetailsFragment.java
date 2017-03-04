@@ -136,6 +136,10 @@ public class ShowDetailsFragment extends Fragment {
                         + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
                         + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        "อาหารที่ควรรับประทาน" + "\n"
+                        + "\t\t" + dao.getData().get(i).getShouldEat() + "\n\n" +
+                        "อาหารที่ควรหลีกเลี่ยง" + "\n"
+                        + "\t\t" + dao.getData().get(i).getShouldNotEat() + "\n\n" +
                         "คำแนะนำ" + "\n"
                         + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
             }
@@ -145,6 +149,10 @@ public class ShowDetailsFragment extends Fragment {
                         + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
                         + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        "อาหารที่ควรรับประทาน" + "\n"
+                        + "\t\t" + dao.getData().get(i).getShouldEat() + "\n\n" +
+                        "อาหารที่ควรหลีกเลี่ยง" + "\n"
+                        + "\t\t" + dao.getData().get(i).getShouldNotEat() + "\n\n" +
                         "คำแนะนำ" + "\n"
                         + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
                 moreContent = moreContent.concat(content2);

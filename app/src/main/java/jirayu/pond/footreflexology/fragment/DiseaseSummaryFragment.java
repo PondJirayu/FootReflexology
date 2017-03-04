@@ -44,6 +44,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     private boolean isFirstTime = true;
     private String diseaseName;
     private DiseaseItemCollectionDao dao;
+    private CharSequence paragraph = Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ");
 
     /************
      * Functions
@@ -197,24 +198,11 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 } else {
                     setDao(response.body()); // dao ไว้ใช้สำหรับคำสั่งเสียง [TTS]
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
-                    tvDetail.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getDetail()));
-                    tvTreatment.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getTreatment()));
-
-                    if (dao.getData().get(0).getShouldEat().isEmpty())
-                        tvShouldEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
-                    else
-                        tvShouldEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getShouldEat()));
-
-                    if (dao.getData().get(0).getShouldNotEat().isEmpty())
-                        tvShouldNotEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
-                    else
-                        tvShouldNotEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getShouldNotEat()));
-
-                    if (dao.getData().get(0).getRecommend().isEmpty())
-                        tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
-                    else
-                        tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getRecommend()));
-
+                    tvDetail.setText((paragraph + dao.getData().get(0).getDetail()));
+                    tvTreatment.setText((paragraph + dao.getData().get(0).getTreatment()));
+                    tvShouldEat.setText((dao.getData().get(0).getShouldEat().isEmpty()) ? paragraph + "ไม่มี" : dao.getData().get(0).getShouldEat());
+                    tvShouldNotEat.setText((dao.getData().get(0).getShouldNotEat().isEmpty()) ? paragraph + "ไม่มี" : dao.getData().get(0).getShouldNotEat());
+                    tvRecommend.setText((paragraph + ((dao.getData().get(0).getRecommend().isEmpty() ? "ไม่มี" : dao.getData().get(0).getRecommend()))));
                     loadAnimation();    // FAB Animation
                 }
             } else {
