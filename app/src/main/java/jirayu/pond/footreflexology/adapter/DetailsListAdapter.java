@@ -66,8 +66,8 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setDiseaseName(dao.getDiseaseName());
         item.setDetail(paragraph + dao.getDetail());
         item.setTreatment(paragraph + dao.getTreatMent());
-        item.setShouldEat((dao.getShouldEat().isEmpty() ? "ไม่มี" : dao.getShouldEat()));
-        item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? "ไม่มี" : dao.getShouldNotEat()));
+        item.setShouldEat((dao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldEat()));
+        item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldNotEat()));
         item.setRecommend(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
         // Set UnderLine Colour
         item.setUnderLine(position);
