@@ -38,7 +38,8 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
      ************/
 
     FloatingActionButton btnFloatingAction;
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend,
+            tvTitleDiseaseName, tvTitleDetail, tvTitleTreatment, tvTitleShouldEat, tvTitleShouldNotEat, tvTitleRecommend;
 
     private TextToSpeech textToSpeech;
     private boolean isFirstTime = true;
@@ -86,13 +87,20 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnFloatingAction = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingAction);
-        btnFloatingAction.setVisibility(Switch.GONE);
+        tvTitleDiseaseName = (TextView) rootView.findViewById(R.id.tvTitleDiseaseName);
         tvDiseaseName = (TextView) rootView.findViewById(R.id.tvDiseaseName);
+        tvTitleDetail = (TextView) rootView.findViewById(R.id.tvTitleDetail);
         tvDetail = (TextView) rootView.findViewById(R.id.tvDetail);
+        tvTitleTreatment = (TextView) rootView.findViewById(R.id.tvTitleTreatment);
         tvTreatment = (TextView) rootView.findViewById(R.id.tvTreatment);
+        tvTitleShouldEat = (TextView) rootView.findViewById(R.id.tvTitleShouldEat);
         tvShouldEat = (TextView) rootView.findViewById(R.id.tvShouldEat);
+        tvTitleShouldNotEat = (TextView) rootView.findViewById(R.id.tvTitleShouldNotEat);
         tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
+        tvTitleRecommend = (TextView) rootView.findViewById(R.id.tvTitleRecommend);
         tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
+        hideView();
+
         textToSpeech = new TextToSpeech(getContext(), this);    // TextToSpeech
 
         // Handle Click
@@ -130,6 +138,25 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void showView() {
+        tvTitleDiseaseName.setVisibility(Switch.VISIBLE);
+        tvTitleDetail.setVisibility(Switch.VISIBLE);
+        tvTitleTreatment.setVisibility(Switch.VISIBLE);
+        tvTitleShouldEat.setVisibility(Switch.VISIBLE);
+        tvTitleShouldNotEat.setVisibility(Switch.VISIBLE);
+        tvTitleRecommend.setVisibility(Switch.VISIBLE);
+    }
+
+    private void hideView() {
+        btnFloatingAction.setVisibility(Switch.GONE);
+        tvTitleDiseaseName.setVisibility(Switch.GONE);
+        tvTitleDetail.setVisibility(Switch.GONE);
+        tvTitleTreatment.setVisibility(Switch.GONE);
+        tvTitleShouldEat.setVisibility(Switch.GONE);
+        tvTitleShouldNotEat.setVisibility(Switch.GONE);
+        tvTitleRecommend.setVisibility(Switch.GONE);
     }
 
     private void loadDiseaseList() {
@@ -170,6 +197,8 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         return "โรค" + dao.getData().get(0).getDiseaseName() +
                 "รายละเอียดและสาเหตุ" + dao.getData().get(0).getDetail() +
                 "การรักษา" + dao.getData().get(0).getTreatment() +
+                "อาหารที่ควรรับประทาน" + dao.getData().get(0).getShouldEat() +
+                "อาหารที่ควรหลีกเลี่ยง" + dao.getData().get(0).getShouldNotEat() +
                 "ตำแนะนำ" + dao.getData().get(0).getRecommend();
     }
 
@@ -197,6 +226,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                     showToast("ไม่พบข้อมูลโรค");
                 } else {
                     setDao(response.body()); // dao ไว้ใช้สำหรับคำสั่งเสียง [TTS]
+                    showView();
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
                     tvDetail.setText((paragraph + dao.getData().get(0).getDetail()));
                     tvTreatment.setText((paragraph + dao.getData().get(0).getTreatment()));
