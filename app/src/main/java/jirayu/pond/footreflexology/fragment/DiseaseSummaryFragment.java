@@ -199,13 +199,22 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
                     tvDetail.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getDetail()));
                     tvTreatment.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getTreatment()));
-                    // TODO : tvShouldEat & tvShouldNotEat
 
-                    if (dao.getData().get(0).getRecommend().isEmpty()) {
+                    if (dao.getData().get(0).getShouldEat().isEmpty())
+                        tvShouldEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
+                    else
+                        tvShouldEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getShouldEat()));
+
+                    if (dao.getData().get(0).getShouldNotEat().isEmpty())
+                        tvShouldNotEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
+                    else
+                        tvShouldNotEat.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getShouldNotEat()));
+
+                    if (dao.getData().get(0).getRecommend().isEmpty())
                         tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี"));
-                    } else {
+                    else
                         tvRecommend.setText((Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getData().get(0).getRecommend()));
-                    }
+
                     loadAnimation();    // FAB Animation
                 }
             } else {
