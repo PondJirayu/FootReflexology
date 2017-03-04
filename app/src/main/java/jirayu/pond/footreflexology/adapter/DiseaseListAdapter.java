@@ -18,7 +18,8 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 
 public class DiseaseListAdapter extends BaseAdapter {
 
-    DiseaseItemCollectionDao dao;
+    private DiseaseItemCollectionDao dao;
+    private CharSequence paragraph = Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ");
 
     public void setDao(DiseaseItemCollectionDao dao) {
         this.dao = dao;
@@ -62,16 +63,11 @@ public class DiseaseListAdapter extends BaseAdapter {
         // Set ค่าให้ View of CustomViewGroup
         item.setPageNumber(position);
         item.setDiseaseName(dao.getDiseaseName());
-        item.setDetail(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getDetail());
-        item.setTreatment(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getTreatment());
-        // TODO : setShouldEat & ShouldNotEat
-
-        // ตรวจสอบว่ามีคำแนะนำหรือไม่
-        if (dao.getRecommend().isEmpty()) {
-            item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + "ไม่มี");
-        } else {
-            item.setRecommend(Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ") + dao.getRecommend());
-        }
+        item.setDetail(paragraph + dao.getDetail());
+        item.setTreatment(paragraph + dao.getTreatment());
+        item.setShouldEat((dao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldEat()));
+        item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldNotEat()));
+        item.setRecommend(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
         // Set UnderLine Colour
         item.setUnderLine(position);
 

@@ -133,6 +133,10 @@ public class QueryResponseFragment extends Fragment {
                         + "\t\t" + dao.getData().get(0).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
                         + "\t\t" + dao.getData().get(0).getTreatment() + "\n\n" +
+                        "อาหารที่ตวรรับประทาน" + "\n"
+                        + dao.getData().get(0).getShouldEat() + "\n\n" +
+                        "อาหารที่ควรหลีกเลี่ยง" + "\n"
+                        + dao.getData().get(0).getShouldNotEat() + "\n\n" +
                         "คำแนะนำ" + "\n"
                         + "\t\t" + dao.getData().get(0).getRecommend()
         );
