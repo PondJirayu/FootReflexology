@@ -65,42 +65,24 @@ public class DatesChartSummaryFragment extends Fragment {
                 "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
         };
 
-        int[] index = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] index = {1, 2, 3, 4, 5};
 
-        int[] incomeA = {4000, 5500, 2300, 2100, 2500, 2900, 3200, 2400, 1800, 2100, 3500, 5900};
-        int[] incomeB = {3600, 4500, 3200, 3600, 2800, 1800, 2100, 2900, 2200, 2500, 4000, 3500};
-        int[] incomeC = {4300, 4000, 3000, 3200, 2400, 2500, 2600, 3400, 3900, 4500, 5000, 4500};
+        int[] incomeA = {2, 0, 1, 2, 1};
 
-        XYSeries seriesA = new XYSeries("Googla");
-        XYSeries seriesB = new XYSeries("Microsa");
-        XYSeries seriesC = new XYSeries("Appla");
+        XYSeries seriesA = new XYSeries("Google");
 
         int length = index.length;
         for (int i = 0; i < length; i++) {
             seriesA.add(index[i], incomeA[i]);
-            seriesB.add(index[i], incomeB[i]);
-            seriesC.add(index[i], incomeC[i]);
         }
 
         XYSeriesRenderer rendererA = new XYSeriesRenderer();
         rendererA.setPointStyle(PointStyle.CIRCLE);
-        rendererA.setColor(Color.RED);
+        rendererA.setColor(Color.BLUE);
         rendererA.setLineWidth(2);
-
-        XYSeriesRenderer rendererB = new XYSeriesRenderer();
-        rendererB.setPointStyle(PointStyle.X);
-        rendererB.setColor(Color.BLUE);
-        rendererB.setLineWidth(2);
-
-        XYSeriesRenderer rendererC = new XYSeriesRenderer();
-        rendererC.setPointStyle(PointStyle.DIAMOND);
-        rendererC.setColor(Color.GREEN);
-        rendererC.setLineWidth(2);
 
         XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
         dataSet.addSeries(seriesA);
-        dataSet.addSeries(seriesB);
-        dataSet.addSeries(seriesC);
 
         XYMultipleSeriesRenderer multipleSeriesRenderer
                 = new XYMultipleSeriesRenderer();
@@ -108,6 +90,7 @@ public class DatesChartSummaryFragment extends Fragment {
         for (int i = 0; i < length; i++) {
             multipleSeriesRenderer.addXTextLabel(i + 1, months[i]);
         }
+
         multipleSeriesRenderer.setChartTitle("ตัวอย่างกราฟเส้น (Line Chart)");
         multipleSeriesRenderer.setYTitle("ยอดขายรวม(สตางค์)");
         multipleSeriesRenderer.setXTitle("ปี พ.ศ. 2600");
@@ -122,8 +105,6 @@ public class DatesChartSummaryFragment extends Fragment {
         multipleSeriesRenderer.setZoomButtonsVisible(true);
 
         multipleSeriesRenderer.addSeriesRenderer(rendererA);
-        multipleSeriesRenderer.addSeriesRenderer(rendererB);
-        multipleSeriesRenderer.addSeriesRenderer(rendererC);
 
         drawChart(dataSet, multipleSeriesRenderer);
     }
