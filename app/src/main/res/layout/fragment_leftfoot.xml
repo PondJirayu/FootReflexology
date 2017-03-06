@@ -49,7 +49,7 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginTop="5dp"
-                    android:text="@string/do_details"
+                    android:text="@string/click_show_details"
                     android:textColor="@color/font_black_color" />
 
             </LinearLayout>

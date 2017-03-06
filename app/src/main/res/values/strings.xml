@@ -32,7 +32,7 @@
     <string name="save">บันทึก</string>
     <string name="action_save">บันทึก</string>
     <string name="write_something">เขียนอะไรบางอย่าง..</string>
-    <string name="do_details">แสดงรายละเอียด</string>
+    <string name="click_show_details">คลิกดูรายละเอียด</string>
     <string name="disease_name">โรค</string>
     <string name="detail">รายละเอียดและสาเหตุ</string>
     <string name="treatment">การรักษา</string>
