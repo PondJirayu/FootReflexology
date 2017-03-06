@@ -1,20 +1,10 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
 
 import jirayu.pond.footreflexology.R;
 
@@ -27,8 +17,6 @@ public class DatesChartSummaryFragment extends Fragment {
     /************
      * Variables
      ************/
-
-    RelativeLayout graphContainer;
 
     /************
      * Functions
@@ -50,63 +38,11 @@ public class DatesChartSummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
-        initData();
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        graphContainer = (RelativeLayout) rootView.findViewById(R.id.graphContainer);
-    }
-
-    private void initData() {
-        String[] months = {
-                "JAB", "FEB", "MAR", "APR", "MAY", "JUN",
-                "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-        };
-
-        int[] index = {1, 2, 3, 4, 5};
-
-        int[] incomeA = {2, 0, 1, 2, 1};
-
-        XYSeries seriesA = new XYSeries("Google");
-
-        int length = index.length;
-        for (int i = 0; i < length; i++) {
-            seriesA.add(index[i], incomeA[i]);
-        }
-
-        XYSeriesRenderer rendererA = new XYSeriesRenderer();
-        rendererA.setPointStyle(PointStyle.CIRCLE);
-        rendererA.setColor(Color.BLUE);
-        rendererA.setLineWidth(2);
-
-        XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
-        dataSet.addSeries(seriesA);
-
-        XYMultipleSeriesRenderer multipleSeriesRenderer
-                = new XYMultipleSeriesRenderer();
-
-        for (int i = 0; i < length; i++) {
-            multipleSeriesRenderer.addXTextLabel(i + 1, months[i]);
-        }
-
-        multipleSeriesRenderer.setChartTitle("ตัวอย่างกราฟเส้น (Line Chart)");
-        multipleSeriesRenderer.setYTitle("ยอดขายรวม(สตางค์)");
-        multipleSeriesRenderer.setXTitle("ปี พ.ศ. 2600");
-        multipleSeriesRenderer.setXLabels(0);
-        multipleSeriesRenderer.setBackgroundColor(Color.WHITE);
-        multipleSeriesRenderer.setApplyBackgroundColor(true);
-        multipleSeriesRenderer.setMarginsColor(Color.WHITE);
-        multipleSeriesRenderer.setLabelsColor(Color.BLACK);
-        multipleSeriesRenderer.setAxesColor(Color.GRAY);
-        multipleSeriesRenderer.setYLabelsColor(0, Color.BLACK);
-        multipleSeriesRenderer.setXLabelsColor(Color.BLACK);
-        multipleSeriesRenderer.setZoomButtonsVisible(true);
-
-        multipleSeriesRenderer.addSeriesRenderer(rendererA);
-
-        drawChart(dataSet, multipleSeriesRenderer);
     }
 
     @Override
@@ -139,10 +75,6 @@ public class DatesChartSummaryFragment extends Fragment {
         }
     }
 
-    private void drawChart(XYMultipleSeriesDataset dataSet, XYMultipleSeriesRenderer multipleSeriesRenderer) {
-        GraphicalView graphView = ChartFactory.getLineChartView(getContext(), dataSet, multipleSeriesRenderer);
-        graphContainer.addView(graphView);
-    }
 
     /****************
      * Listener Zone
