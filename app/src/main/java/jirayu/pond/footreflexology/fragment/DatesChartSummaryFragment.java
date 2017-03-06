@@ -1,10 +1,23 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import jirayu.pond.footreflexology.R;
 
@@ -17,6 +30,8 @@ public class DatesChartSummaryFragment extends Fragment {
     /************
      * Variables
      ************/
+
+    GraphView graphView;
 
     /************
      * Functions
@@ -38,11 +53,48 @@ public class DatesChartSummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
+        initGraphView();
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        graphView = (GraphView) rootView.findViewById(R.id.graphView);
+    }
+
+    private void initGraphView() {
+        Calendar calender = Calendar.getInstance();
+        Date d1 = calender.getTime();
+        calender.add(Calendar.DATE, 1);
+        Date d2 = calender.getTime();
+        calender.add(Calendar.DATE, 1);
+        Date d3 = calender.getTime();
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(d1, 1),
+                new DataPoint(d2, 2),
+                new DataPoint(d3, 4)
+        });
+
+        series.setColor(Color.BLUE);
+        series.setDrawDataPoints(true);
+        series.setDataPointsRadius(6);
+        series.setThickness(3);
+
+        graphView.addSeries(series);
+
+        // set date label formatter
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+
+        // set manual x bounds to have nice steps
+        graphView.getViewport().setMinX(d1.getTime());
+        graphView.getViewport().setMaxX(d3.getTime());
+        graphView.getViewport().setXAxisBoundsManual(true);
+
+        // as we use dates as labels, the human rounding to nice readable numbers
+        // is not necessary
+        graphView.getGridLabelRenderer().setHumanRounding(false);
     }
 
     @Override
@@ -73,6 +125,13 @@ public class DatesChartSummaryFragment extends Fragment {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 
 
