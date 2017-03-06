@@ -10,6 +10,6 @@
         android:layout_marginStart="26dp"
         android:text="@string/select_the_response"
         android:textColor="@color/font_black_color"
-        android:textSize="11sp" />
+        android:textSize="13sp" />
 
 </merge>

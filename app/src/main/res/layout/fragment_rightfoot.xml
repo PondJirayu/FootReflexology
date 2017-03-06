@@ -43,14 +43,16 @@
 
                 <Button
                     android:id="@+id/btnShowDetails"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
                     android:layout_marginTop="5dp"
-                    android:text="@string/do_details"
-                    android:textColor="@color/font_black_color" />
+                    android:background="@drawable/shape_btn_show_detail"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="คลิกดูรายละเอียด"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
