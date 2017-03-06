@@ -3,25 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvTitleGraph"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="กราฟ 1" />
-
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/tvTitleGraph" />
-
-    <TextView
-        android:text="อาการ: 1.แย่ 2.ทรงตัว 3.ดีขึ้น 4.หายเป็นปกติ"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_below="@+id/graphView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="200dp" />
 
 </RelativeLayout>

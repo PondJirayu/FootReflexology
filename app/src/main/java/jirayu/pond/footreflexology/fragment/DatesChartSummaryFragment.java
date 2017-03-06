@@ -63,38 +63,17 @@ public class DatesChartSummaryFragment extends Fragment {
     }
 
     private void initGraphView() {
-        Calendar calender = Calendar.getInstance();
-        Date d1 = calender.getTime();
-        calender.add(Calendar.DATE, 1);
-        Date d2 = calender.getTime();
-        calender.add(Calendar.DATE, 1);
-        Date d3 = calender.getTime();
-
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(d1, 1),
-                new DataPoint(d2, 2),
-                new DataPoint(d3, 4)
+                new DataPoint(1, 3),
+                new DataPoint(2, 1),
+                new DataPoint(3, 2),
+                new DataPoint(4, 4)
         });
-
         series.setColor(Color.BLUE);
         series.setDrawDataPoints(true);
         series.setDataPointsRadius(6);
         series.setThickness(3);
-
         graphView.addSeries(series);
-
-        // set date label formatter
-        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-        graphView.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
-
-        // set manual x bounds to have nice steps
-        graphView.getViewport().setMinX(d1.getTime());
-        graphView.getViewport().setMaxX(d3.getTime());
-        graphView.getViewport().setXAxisBoundsManual(true);
-
-        // as we use dates as labels, the human rounding to nice readable numbers
-        // is not necessary
-        graphView.getGridLabelRenderer().setHumanRounding(false);
     }
 
     @Override
