@@ -6,10 +6,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="26dp"
-        android:layout_marginStart="26dp"
+        android:layout_gravity="center"
         android:text="@string/select_the_response"
         android:textColor="@color/font_black_color"
-        android:textSize="13sp" />
+        android:textSize="14sp" />
 
 </merge>
