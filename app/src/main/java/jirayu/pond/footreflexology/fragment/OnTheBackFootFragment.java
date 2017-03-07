@@ -1,12 +1,13 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,7 +53,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
-        initViewOverlay(rootView);
+        initViewAlert(rootView);
         return rootView;
     }
 
@@ -68,14 +69,23 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         btnShowDetails.setOnClickListener(this);
     }
 
-    private void initViewOverlay(View rootView) {
+    private void initViewAlert(View rootView) {
         FrameLayout rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
+        // Create View
         View view = new View(getContext());
-        view.setBackgroundResource(R.drawable.shape_btn_show_details);
+        view.setBackgroundResource(R.drawable.shape_view_alert);
 
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(40, 40);
+        // Creating Animation let View
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(600);
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        view.startAnimation(anim);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(50, 50);
         params.leftMargin = 270;
-        params.topMargin = 220;
+        params.topMargin = 215;
         rootLayout.addView(view, params);
     }
 
