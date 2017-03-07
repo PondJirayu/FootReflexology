@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
@@ -50,6 +52,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
+        initViewOverlay(rootView);
         return rootView;
     }
 
@@ -63,6 +66,17 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
+    }
+
+    private void initViewOverlay(View rootView) {
+        FrameLayout rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
+        View view = new View(getContext());
+        view.setBackgroundResource(R.drawable.shape_btn_show_details);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(40, 40);
+        params.leftMargin = 270;
+        params.topMargin = 220;
+        rootLayout.addView(view, params);
     }
 
     @Override
