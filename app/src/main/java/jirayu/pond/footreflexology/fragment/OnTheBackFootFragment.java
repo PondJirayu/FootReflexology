@@ -71,6 +71,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
     private void initViewAlert(View rootView) {
         FrameLayout rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
+
         // Create View
         View view = new View(getContext());
         view.setBackgroundResource(R.drawable.shape_view_alert);
