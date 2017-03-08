@@ -6,11 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -28,6 +31,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     Spinner spinnerRightFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    FrameLayout layoutAlert;
     StringsManager stringsManager;
 
     /************
@@ -50,6 +54,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
         initInstances(rootView);
+        initViewAlert();
         return rootView;
     }
 
@@ -57,12 +62,47 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerRightFoot = (Spinner) rootView.findViewById(R.id.spinnerRightFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
 
         createAdapter();
         spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click Button
         btnShowDetails.setOnClickListener(this);
+    }
+
+    private void initViewAlert() {
+        // Create View
+        View view = new View(getContext());
+        view.setBackgroundResource(R.drawable.shape_view_alert_yellow_color);
+        View view1 = new View(getContext());
+        view1.setBackgroundResource(R.drawable.shape_view_alert_green_color);
+        View view2 = new View(getContext());
+        view2.setBackgroundResource(R.drawable.shape_view_alert_red_color);
+
+        // Creating Animation let View
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(600);
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        view.startAnimation(anim);
+        view1.startAnimation(anim);
+        view2.startAnimation(anim);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(45, 45);
+        params.leftMargin = 300;
+        params.topMargin = 220;
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(45, 45);
+        params1.leftMargin = 270;
+        params1.topMargin = 50;
+        FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(45, 45);
+        params2.leftMargin = 400;
+        params2.topMargin = 500;
+
+        layoutAlert.addView(view, params);
+        layoutAlert.addView(view1, params1);
+        layoutAlert.addView(view2, params2);
     }
 
     @Override
@@ -105,6 +145,13 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         spinnerRightFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -134,6 +181,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             startActivity(intent);
         }
     }
+
 
     /**************
      * Inner Class

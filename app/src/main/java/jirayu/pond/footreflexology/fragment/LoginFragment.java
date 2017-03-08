@@ -19,13 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
-import jirayu.pond.footreflexology.dao.MemberItemDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
@@ -46,7 +43,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     EditText editName;
     Button btnSignUp, btnIntoMainPage;
     Animation anim;
-    RelativeLayout rootLayout;
     ProgressDialog progressDialog;
     String identificationNumber;
 
@@ -80,7 +76,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editName = (EditText) rootView.findViewById(R.id.editName);
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
         btnIntoMainPage = (Button) rootView.findViewById(R.id.btnIntoMainPage);
-        rootLayout = (RelativeLayout) rootView.findViewById(R.id.rootLayout);
 
         // Play Animation
         anim.setDuration(500);
@@ -134,6 +129,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -148,60 +150,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setCancelable(true);
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
-
         identificationNumber = editName.getText().toString();
 
         if (v == btnSignUp) {
             if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
                 if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
-                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก", Snackbar.LENGTH_LONG).show();
+                    showToast("กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก");
                 } else if (editName.getText().toString().trim().length() < 13){
-                    Snackbar.make(rootLayout, "กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก", Snackbar.LENGTH_LONG).show();
+                    showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
                 } else {
                     progressDialog.show();
-                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList("members", identificationNumber);
-                    call.enqueue(new Callback<MemberItemCollectionDao>() {
-                        @Override
-                        public void onResponse(Call<MemberItemCollectionDao> call,
-                                               Response<MemberItemCollectionDao> response) {
-
-                            if (response.isSuccessful()) {
-                                MemberItemCollectionDao dao = response.body();
-                                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
-                                    progressDialog.dismiss();
-                                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                                    intent.putExtra("identificationNumber", identificationNumber);
-                                    startActivity(intent);
-                                } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
-                                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-                                    progressDialog.dismiss();   // ยกเลิก Dialog
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
-                                }
-                            } else {
-//                                try {
-//                                    Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_LONG).show();
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-                                progressDialog.dismiss();
-                                Snackbar.make(rootLayout, "ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<MemberItemCollectionDao> call,
-                                              Throwable t) {
-//                            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                            Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
-                        }
-                    });
-
+                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                            "members",
+                            identificationNumber
+                    );
+                    call.enqueue(loadMemberList);
                 }
             } else {
-                Snackbar.make(rootLayout, "กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ", Snackbar.LENGTH_LONG).show();
+                showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
             }
         }
         if (v == btnIntoMainPage) {
@@ -210,6 +176,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
+
+    Callback<MemberItemCollectionDao> loadMemberList = new Callback<MemberItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MemberItemCollectionDao> call,
+                               Response<MemberItemCollectionDao> response) {
+
+            if (response.isSuccessful()) {
+                MemberItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
+                    progressDialog.dismiss();
+                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                    intent.putExtra("identificationNumber", identificationNumber);
+                    startActivity(intent);
+                } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
+                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+                    progressDialog.dismiss();   // ยกเลิก Dialog
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
+                }
+            } else {
+                progressDialog.dismiss();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MemberItemCollectionDao> call,
+                              Throwable t) {
+            progressDialog.dismiss();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
 
     /***************
      * Inner Class

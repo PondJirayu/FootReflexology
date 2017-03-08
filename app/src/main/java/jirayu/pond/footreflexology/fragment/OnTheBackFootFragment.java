@@ -31,6 +31,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     Spinner spinnerOnTheBackFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    FrameLayout rootLayout;
     StringsManager stringsManager;
 
     /************
@@ -53,7 +54,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
-        initViewAlert(rootView);
+        initViewAlert();
         return rootView;
     }
 
@@ -61,6 +62,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
 
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -69,12 +71,10 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         btnShowDetails.setOnClickListener(this);
     }
 
-    private void initViewAlert(View rootView) {
-        FrameLayout rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
-
+    private void initViewAlert() {
         // Create View
         View view = new View(getContext());
-        view.setBackgroundResource(R.drawable.shape_view_alert);
+        view.setBackgroundResource(R.drawable.shape_view_alert_red_color);
 
         // Creating Animation let View
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
@@ -84,7 +84,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         anim.setRepeatCount(Animation.INFINITE);
         view.startAnimation(anim);
 
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(50, 50);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(45, 45);
         params.leftMargin = 270;
         params.topMargin = 215;
         rootLayout.addView(view, params);
