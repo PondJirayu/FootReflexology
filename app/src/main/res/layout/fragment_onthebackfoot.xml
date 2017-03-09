@@ -14,8 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/img_btn_info_outline_main_page" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +48,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <include layout="@layout/img_btn_info_main_page" />
 
         </FrameLayout>
 

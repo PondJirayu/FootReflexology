@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -32,6 +34,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
     FrameLayout layoutAlert;
+    ImageButton imgBtnInfo;
     StringsManager stringsManager;
 
     /************
@@ -63,12 +66,14 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
+        imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
+        imgBtnInfo.setOnClickListener(this);
     }
 
     private void initViewAlert() {
@@ -130,6 +135,13 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
+    private void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /*****************
      * Listener Zone
      ****************/
@@ -157,6 +169,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
             Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
             intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
             startActivity(intent);
+        }
+        if (v == imgBtnInfo) {
+            showToast("INFO");
         }
     }
 
