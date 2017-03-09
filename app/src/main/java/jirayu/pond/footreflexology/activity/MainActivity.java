@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         // Set Home Button
-        getSupportActionBar().setTitle("หน้าหลัก");
+        getSupportActionBar().setTitle("หน้าแรก");
         getSupportActionBar().setHomeButtonEnabled(isShowDrawerMenu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(isShowDrawerMenu);
 
