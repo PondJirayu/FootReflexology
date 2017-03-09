@@ -31,7 +31,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     Spinner spinnerOnTheBackFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
-    FrameLayout rootLayout;
+    FrameLayout layoutAlert;
     StringsManager stringsManager;
 
     /************
@@ -62,7 +62,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
-        rootLayout = (FrameLayout) rootView.findViewById(R.id.rootLayout);
+        layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
 
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -87,7 +87,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(45, 45);
         params.leftMargin = 270;
         params.topMargin = 215;
-        rootLayout.addView(view, params);
+        layoutAlert.addView(view, params);
     }
 
     @Override
