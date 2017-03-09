@@ -1,8 +1,10 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
+    Bundle savedInstanceState;
 
     /************
      * Functions
@@ -56,6 +59,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
+        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         initViewAlert();
         return rootView;
@@ -135,11 +139,12 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
-    private void showToast(String text) {
-        Toast.makeText(getContext(),
-                text,
-                Toast.LENGTH_SHORT)
-                .show();
+    private void alertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
+        builder.setView(view);
+        builder.setNegativeButton("รับทราบ", alertDialogOnClick);
+        builder.show();
     }
 
     /*****************
@@ -171,9 +176,19 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
             startActivity(intent);
         }
         if (v == imgBtnInfo) {
-            showToast("INFO");
+            alertDialog();
         }
     }
+
+    /*
+     * Handle Click Button Alert Dialog
+     */
+    DialogInterface.OnClickListener alertDialogOnClick = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+        }
+    };
 
     /**************
      * Inner Class
