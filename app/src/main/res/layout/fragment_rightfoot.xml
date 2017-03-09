@@ -51,6 +51,8 @@
 
             </LinearLayout>
 
+            <include layout="@layout/img_btn_info_main_page" />
+
         </FrameLayout>
 
     </android.support.v4.widget.NestedScrollView>
