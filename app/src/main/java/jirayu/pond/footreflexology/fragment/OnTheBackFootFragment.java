@@ -64,7 +64,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
-//        initViewAlert();
         return rootView;
     }
 
@@ -78,28 +77,12 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
+        // Create ViewAlert[4.Grey Color]
+        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4), ViewAlertUtils.getParams(45, 45, 0, 0));
+
         // Handle Click
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
-    }
-
-    private void initViewAlert() {
-        // Create View
-        View view = new View(getContext());
-        view.setBackgroundResource(R.drawable.shape_view_alert_red_color);
-
-        // Creating Animation let View
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(600);
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-        view.startAnimation(anim);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(45, 45);
-        params.leftMargin = 270;
-        params.topMargin = 215;
-        layoutAlert.addView(view, params);
     }
 
     @Override
@@ -161,11 +144,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-        // Create ViewAlert[4.Grey Color]
-        layoutAlert.invalidate();
-        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
-                ViewAlertUtils.getParams(45, 45, (position * 20) + 100, 100));
-
+        // TODO : ทำไงดีวะ
     }
 
     @Override
