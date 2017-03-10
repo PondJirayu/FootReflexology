@@ -162,7 +162,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
         // Create ViewAlert[4.Grey Color]
-
         layoutAlert.invalidate();
         layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
                 ViewAlertUtils.getParams(45, 45, (position * 20) + 100, 100));
