@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -160,8 +162,11 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
         // Create ViewAlert[4.Grey Color]
+
+        layoutAlert.invalidate();
         layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
-                ViewAlertUtils.getParams(45, 45, 100, 100));
+                ViewAlertUtils.getParams(45, 45, (position * 20) + 100, 100));
+
     }
 
     @Override

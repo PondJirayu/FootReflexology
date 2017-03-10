@@ -27,8 +27,10 @@ public class ViewAlertUtils {
             case 3: // อาการดีขึ้น
                 view.setBackgroundResource(R.drawable.shape_view_alert_green_color);
                 break;
-            default: // เขตตอบสนองที่เลือก
+            case 4: // เขตตอบสนองที่เลือก
                 view.setBackgroundResource(R.drawable.shape_view_alert_grey_color);
+                break;
+            default:
                 break;
         }
 
