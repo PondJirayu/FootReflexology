@@ -1,14 +1,17 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
@@ -28,7 +31,9 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     Spinner spinnerOutSideFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    ImageButton imgBtnInfo;
     StringsManager stringsManager;
+    Bundle savedInstanceState;
 
      /***********
      * Functions
@@ -49,6 +54,7 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_outsidefoot, container, false);
+        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         return rootView;
     }
@@ -57,12 +63,14 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOutSideFoot = (Spinner) rootView.findViewById(R.id.spinnerOutSideFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
         spinnerOutSideFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
+        imgBtnInfo.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +113,14 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         spinnerOutSideFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
+    private void alertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
+        builder.setView(view);
+        builder.setNegativeButton("เข้าใจแล้ว", alertDialogOnClick);
+        builder.show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -133,7 +149,20 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
             intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
             startActivity(intent);
         }
+        if (v == imgBtnInfo) {
+            alertDialog();
+        }
     }
+
+    /*
+     * Handle Click Button Alert Dialog
+     */
+    DialogInterface.OnClickListener alertDialogOnClick = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+        }
+    };
 
     /**************
      * Inner Class

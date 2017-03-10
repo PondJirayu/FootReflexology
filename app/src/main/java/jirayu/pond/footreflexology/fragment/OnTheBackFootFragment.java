@@ -143,7 +143,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
         builder.setView(view);
-        builder.setNegativeButton("รับทราบ", alertDialogOnClick);
+        builder.setNegativeButton("เข้าใจแล้ว", alertDialogOnClick);
         builder.show();
     }
 

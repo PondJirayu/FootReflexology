@@ -1,14 +1,17 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
@@ -27,7 +30,9 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     Spinner spinnerInTheFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    ImageButton imgBtnInfo;
     StringsManager stringsManager;
+    Bundle savedInstanceState;
 
     /************
      * Functions
@@ -48,6 +53,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inthefoot, container, false);
+        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         return rootView;
     }
@@ -56,12 +62,14 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerInTheFoot = (Spinner) rootView.findViewById(R.id.spinnerInTheFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
         spinnerInTheFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
+        imgBtnInfo.setOnClickListener(this);
     }
 
     @Override
@@ -104,6 +112,14 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
     }
 
+    private void alertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
+        builder.setView(view);
+        builder.setNegativeButton("เข้าใจแล้ว", alertDialogOnClick);
+        builder.show();
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -132,7 +148,20 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
             intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
             startActivity(intent);
         }
+        if (v == imgBtnInfo) {
+            alertDialog();
+        }
     }
+
+    /*
+     * Handle Click Button Alert Dialog
+     */
+    DialogInterface.OnClickListener alertDialogOnClick = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+        }
+    };
 
     /**************
      * Inner Class
