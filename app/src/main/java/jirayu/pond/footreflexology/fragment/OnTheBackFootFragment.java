@@ -21,6 +21,7 @@ import android.widget.Toast;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.util.ViewAlertUtils;
 
 
 /**
@@ -61,7 +62,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
-        initViewAlert();
+//        initViewAlert();
         return rootView;
     }
 
@@ -158,6 +159,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
+        // Create ViewAlert[4.Grey Color]
+        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
+                ViewAlertUtils.getParams(45, 45, 100, 100));
     }
 
     @Override
