@@ -10,15 +10,7 @@ import java.util.ArrayList;
 
 public class StringsManager {
 
-    /************
-     * Variables
-     ************/
-
     private String word;
-
-    /************
-     * Functions
-     ************/
 
     public StringsManager() {
 
