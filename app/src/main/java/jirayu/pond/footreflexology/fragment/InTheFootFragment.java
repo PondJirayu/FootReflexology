@@ -33,7 +33,6 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     Button btnShowDetails;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
-    Bundle savedInstanceState;
 
     /************
      * Functions
@@ -54,7 +53,6 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inthefoot, container, false);
-        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         return rootView;
     }

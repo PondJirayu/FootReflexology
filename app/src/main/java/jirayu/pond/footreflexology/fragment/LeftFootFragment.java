@@ -34,7 +34,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     Button btnShowDetails;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
-    Bundle savedInstanceState;
 
     /************
      * Functions
@@ -55,7 +54,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_leftfoot, container, false);
-        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         return rootView;
     }

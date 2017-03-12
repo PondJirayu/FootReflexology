@@ -38,7 +38,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
-    Bundle savedInstanceState;
 
     /************
      * Functions
@@ -59,7 +58,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
-        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         initViewAlert();
         return rootView;

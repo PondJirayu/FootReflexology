@@ -34,7 +34,6 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     Button btnShowDetails;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
-    Bundle savedInstanceState;
 
      /***********
      * Functions
@@ -55,7 +54,6 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_outsidefoot, container, false);
-        this.savedInstanceState = savedInstanceState;
         initInstances(rootView);
         return rootView;
     }
