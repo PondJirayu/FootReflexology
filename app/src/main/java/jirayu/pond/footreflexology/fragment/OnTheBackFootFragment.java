@@ -78,7 +78,8 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Create ViewAlert[4.Grey Color]
-        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4), ViewAlertUtils.getParams(45, 45, 0, 0));
+        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
+                ViewAlertUtils.getParams(45, 45, 0, 0));
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);

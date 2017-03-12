@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/shape_btn_show_details"
+                android:background="@drawable/shape_btn_show_details_normal"
                 android:text="@string/save"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
