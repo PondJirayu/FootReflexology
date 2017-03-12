@@ -251,20 +251,22 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
      */
     @Override
     public void onClick(View v) {
-        if (v == btnFloatingAction) {
-            if (isFirstTime) {
-                showToast("กำลังประมวลผลคำสั่งอ่านข้อความด้วยเสียง");
-                speak(getDao());
-                btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
-                isFirstTime = false;
-            }
-            if (textToSpeech.isSpeaking()) {
-                textToSpeech.stop(); // Stop talking
-                btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);
-            } else {
-                speak(getDao());
-                btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
-            }
+        switch (v.getId()) {
+            case R.id.btnFloatingAction:
+                if (isFirstTime) {
+                    showToast("กำลังประมวลผลคำสั่งอ่านข้อความด้วยเสียง");
+                    speak(getDao());
+                    btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+                    isFirstTime = false;
+                }
+                if (textToSpeech.isSpeaking()) {
+                    textToSpeech.stop(); // Stop talking
+                    btnFloatingAction.setImageResource(R.drawable.ic_volume_up_white_36dp);
+                } else {
+                    speak(getDao());
+                    btnFloatingAction.setImageResource(R.drawable.ic_stop_white_36dp);
+                }
+                break;
         }
     }
 

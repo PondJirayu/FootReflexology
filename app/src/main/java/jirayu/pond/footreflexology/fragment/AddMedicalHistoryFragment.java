@@ -305,20 +305,22 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v == btnSave) {
-            if (checkMedicalHistory()) {
-                showToast("มีประวัติการรักษาอยู่แล้ว");
-            } else {
-                // Insert MedicalHistory Here
-                Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
-                        DataMemberManager.getInstance().getMemberItemDao().getId(),
-                        diseaseId,
-                        behaviorId,
-                        new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
-                        new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
-                );
-                call.enqueue(insertMedicalHistory);
-            }
+        switch (v.getId()) {
+            case R.id.btnSave:
+                if (checkMedicalHistory()) {
+                    showToast("มีประวัติการรักษาอยู่แล้ว");
+                } else {
+                    // Insert MedicalHistory Here
+                    Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                            DataMemberManager.getInstance().getMemberItemDao().getId(),
+                            diseaseId,
+                            behaviorId,
+                            new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
+                            new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
+                    );
+                    call.enqueue(insertMedicalHistory);
+                }
+                break;
         }
     }
 

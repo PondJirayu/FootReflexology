@@ -12,7 +12,7 @@ import jirayu.pond.footreflexology.R;
  * Created by lp700 on 10/3/2560.
  */
 
-public class ViewAlertUtils {
+public class AlertViewUtils {
 
     public static View getViewAlert(Context context, int status) {
         // Create View

@@ -210,43 +210,43 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังบันทึกข้อมูล");
 
-        if (v == btnFloatingAction) {
-            // getText to variable
-            getTextToVariables();
+        switch (v.getId()) {
+            case R.id.btnFloatingAction:
+                // getText to variable
+                getTextToVariables();
 
-            if (firstName.trim().length() == 0
-                    || lastName.trim().length() == 0
-                    || telephoneNumber.trim().length() == 0
-                    || houseVillage.trim().length() == 0
-                    || subDistrict.trim().length() == 0
-                    || district.trim().length() == 0) {
-                showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
-            } else if (birthDate == null) {
-                showToast("กรุณาป้อนวันเกิดของคุณ");
-            } else {
-                progressDialog.show(); // show progressDialog
-                Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
-                        firstName,
-                        lastName,
-                        identificationNumber,
-                        gender,
-                        birthDate,
-                        telephoneNumber,
-                        houseVillage,
-                        subDistrict,
-                        district,
-                        province,
-                        new Timestamp(System.currentTimeMillis()),  // GET เวลาปัจจุบันเก็บในตัวแปร createdAt
-                        new Timestamp(System.currentTimeMillis())   // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
-                );
-                call.enqueue(insertMemberList);
-            }
-        }
-
-        // Handle DatePicker
-        if (v == btnDatePicker) {
-            datePickerDialog.setYearRange(1910, 2017);
-            datePickerDialog.show(getFragmentManager(), "datePicker");
+                if (firstName.trim().length() == 0
+                        || lastName.trim().length() == 0
+                        || telephoneNumber.trim().length() == 0
+                        || houseVillage.trim().length() == 0
+                        || subDistrict.trim().length() == 0
+                        || district.trim().length() == 0) {
+                    showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
+                } else if (birthDate == null) {
+                    showToast("กรุณาป้อนวันเกิดของคุณ");
+                } else {
+                    progressDialog.show(); // show progressDialog
+                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().InsertMemberList(
+                            firstName,
+                            lastName,
+                            identificationNumber,
+                            gender,
+                            birthDate,
+                            telephoneNumber,
+                            houseVillage,
+                            subDistrict,
+                            district,
+                            province,
+                            new Timestamp(System.currentTimeMillis()),  // GET เวลาปัจจุบันเก็บในตัวแปร createdAt
+                            new Timestamp(System.currentTimeMillis())   // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
+                    );
+                    call.enqueue(insertMemberList);
+                }
+                break;
+            case R.id.btnDatePicker:
+                datePickerDialog.setYearRange(1910, 2017);
+                datePickerDialog.show(getFragmentManager(), "datePicker");
+                break;
         }
     }
 

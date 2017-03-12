@@ -113,7 +113,6 @@ public class DatesChartSummaryFragment extends Fragment {
                 .show();
     }
 
-
     /****************
      * Listener Zone
      ****************/

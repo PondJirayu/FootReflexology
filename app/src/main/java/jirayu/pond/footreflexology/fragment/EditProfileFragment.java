@@ -223,50 +223,55 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
      * Listener Zone
      ****************/
 
-    // Handle Click Button
+    /*
+     * Handle Click Button
+     */
     @Override
     public void onClick(View v) {
-        // create Dialog
+        // Create Dialog
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(true);
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังบันทึกข้อมูล");
 
-        if (v == btnFloatingAction) {
-            // getText to variable
-            getTextToVariables();
-            if (firstName.trim().length() == 0 || lastName.trim().length() == 0
-                    || telephoneNumber.trim().length() == 0 || houseVillage.trim().length() == 0
-                    || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
-                showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
-            } else {
-                progressDialog.show();
-                // UpdateMember Here
-                Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
-                        DataMemberManager.getInstance().getMemberItemDao().getId(),
-                        firstName,
-                        lastName,
-                        DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber(),
-                        gender,
-                        birthDate,
-                        telephoneNumber,
-                        houseVillage,
-                        subDistrict,
-                        district,
-                        province,
-                        new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
-                );
-                call.enqueue(insertMemberList);
-            }
-        }
-        // Handle DatePicker
-        if (v == btnDatePicker) {
-            datePickerDialog.setYearRange(1910, 2017);
-            datePickerDialog.show(getFragmentManager(), "datePicker");
+        switch (v.getId()) {
+            case R.id.btnFloatingAction:
+                // getText to variable
+                getTextToVariables();
+                if (firstName.trim().length() == 0 || lastName.trim().length() == 0
+                        || telephoneNumber.trim().length() == 0 || houseVillage.trim().length() == 0
+                        || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
+                    showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
+                } else {
+                    progressDialog.show();
+                    // UpdateMember Here
+                    Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
+                            DataMemberManager.getInstance().getMemberItemDao().getId(),
+                            firstName,
+                            lastName,
+                            DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber(),
+                            gender,
+                            birthDate,
+                            telephoneNumber,
+                            houseVillage,
+                            subDistrict,
+                            district,
+                            province,
+                            new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
+                    );
+                    call.enqueue(insertMemberList);
+                }
+                break;
+            case R.id.btnDatePicker:
+                datePickerDialog.setYearRange(1910, 2017);
+                datePickerDialog.show(getFragmentManager(), "datePicker");
+                break;
         }
     }
 
-    // Handle Click Spinner
+    /*
+     * Handle Click Spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // spinner Province
@@ -345,7 +350,9 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         }
     };
 
-    // Handle DatePicker
+    /*
+     * Handle DatePicker
+     */
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
         calendar.set(year, month, day);

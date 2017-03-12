@@ -252,15 +252,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v == btnFloatingAction) {
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.from_right, R.anim.to_left,
-                            R.anim.from_left, R.anim.to_right
-                    )
-                    .replace(R.id.contentContainer, EditProfileFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit();
+        switch (v.getId()) {
+            case R.id.btnFloatingAction:
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.from_right, R.anim.to_left,
+                                R.anim.from_left, R.anim.to_right
+                        )
+                        .replace(R.id.contentContainer, EditProfileFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+                break;
         }
     }
 

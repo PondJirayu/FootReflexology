@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -112,14 +113,6 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
     }
 
-    private void alertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
-        builder.setView(view);
-        builder.setNegativeButton("เข้าใจแล้ว", alertDialogOnClick);
-        builder.show();
-    }
-
     /****************
      * Listener Zone
      ****************/
@@ -143,25 +136,18 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onClick(View v) {
-        if (v == btnShowDetails) {
-            Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-            intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-            startActivity(intent);
-        }
-        if (v == imgBtnInfo) {
-            alertDialog();
+        switch (v.getId()) {
+            case R.id.btnShowDetails:
+                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+                startActivity(intent);
+                break;
+            case R.id.imgBtnInfo:
+                InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
+                infoDialog.showDialog();
+                break;
         }
     }
-
-    /*
-     * Handle Click Button Alert Dialog
-     */
-    DialogInterface.OnClickListener alertDialogOnClick = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-
-        }
-    };
 
     /**************
      * Inner Class

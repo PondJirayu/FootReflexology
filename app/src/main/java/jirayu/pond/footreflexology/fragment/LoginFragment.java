@@ -152,28 +152,30 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
         identificationNumber = editName.getText().toString();
 
-        if (v == btnSignUp) {
-            if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
-                if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
-                    showToast("กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก");
-                } else if (editName.getText().toString().trim().length() < 13){
-                    showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
+        switch (v.getId()) {
+            case R.id.btnSignUp:
+                if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
+                    if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
+                        showToast("กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก");
+                    } else if (editName.getText().toString().trim().length() < 13){
+                        showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
+                    } else {
+                        progressDialog.show();
+                        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                                "members",
+                                identificationNumber
+                        );
+                        call.enqueue(loadMemberList);
+                    }
                 } else {
-                    progressDialog.show();
-                    Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
-                            "members",
-                            identificationNumber
-                    );
-                    call.enqueue(loadMemberList);
+                    showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
                 }
-            } else {
-                showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
-            }
-        }
-        if (v == btnIntoMainPage) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.putExtra("isShowDrawerMenu", false);
-            startActivity(intent);
+                break;
+            case R.id.btnIntoMainPage:
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("isShowDrawerMenu", false);
+                startActivity(intent);
+                break;
         }
     }
 

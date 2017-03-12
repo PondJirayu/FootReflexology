@@ -273,9 +273,11 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
      */
     @Override
     public void onClick(View v) {
-        if (v == btnSave) {
-            // Update Data
-            updateMedicalHistory();
+        switch (v.getId()) {
+            case R.id.btnSave:
+                // Update Data
+                updateMedicalHistory();
+                break;
         }
     }
 

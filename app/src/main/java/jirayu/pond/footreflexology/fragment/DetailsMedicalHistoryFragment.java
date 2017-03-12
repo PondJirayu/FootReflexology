@@ -97,7 +97,6 @@ public class DetailsMedicalHistoryFragment extends Fragment {
 
         // ViewPagerIndicator
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override

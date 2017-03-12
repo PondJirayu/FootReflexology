@@ -8,22 +8,18 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
-import jirayu.pond.footreflexology.util.ViewAlertUtils;
+import jirayu.pond.footreflexology.util.AlertViewUtils;
+import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 
 /**
@@ -77,9 +73,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
-        // Create ViewAlert[4.Grey Color]
-        layoutAlert.addView(ViewAlertUtils.getViewAlert(getContext(), 4),
-                ViewAlertUtils.getParams(45, 45, 0, 0));
+        // Create AlertView[4.Grey Color]
+        layoutAlert.addView(AlertViewUtils.getViewAlert(getContext(), 4),
+                AlertViewUtils.getParams(45, 45, 0, 0));
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
@@ -126,14 +122,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
-    private void alertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater(savedInstanceState).inflate(R.layout.dialog_info_main_page, null);
-        builder.setView(view);
-        builder.setNegativeButton("เข้าใจแล้ว", alertDialogOnClick);
-        builder.show();
-    }
-
     /*****************
      * Listener Zone
      ****************/
@@ -158,25 +146,18 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        if (v == btnShowDetails) {
-            Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-            intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-            startActivity(intent);
-        }
-        if (v == imgBtnInfo) {
-            alertDialog();
+        switch (v.getId()) {
+            case R.id.btnShowDetails:
+                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+                startActivity(intent);
+                break;
+            case R.id.imgBtnInfo:
+                InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
+                infoDialog.showDialog();
+                break;
         }
     }
-
-    /*
-     * Handle Click Button Alert Dialog
-     */
-    DialogInterface.OnClickListener alertDialogOnClick = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-
-        }
-    };
 
     /**************
      * Inner Class
