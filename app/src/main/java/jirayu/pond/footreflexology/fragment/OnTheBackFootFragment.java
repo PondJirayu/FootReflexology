@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -37,6 +40,11 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
 
+    AlertViewUtils alertViewUtils;
+
+    Animation anim;
+    View alertViewOne;
+
     /************
      * Functions
      ************/
@@ -57,7 +65,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
-//        initAlertView();
+        initAlertView();
         return rootView;
     }
 
@@ -67,6 +75,15 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
+//        alertViewOne = rootView.findViewById(R.id.alertViewOne);
+
+        // Create Animation of View
+//        anim = new AlphaAnimation(0.0f, 1.0f);
+//        anim.setDuration(600);
+//        anim.setStartOffset(20);
+//        anim.setRepeatMode(Animation.REVERSE);
+//        anim.setRepeatCount(Animation.INFINITE);
+//        alertViewOne.startAnimation(anim);
 
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -77,9 +94,10 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     }
 
     private void initAlertView() {
-        // Create AlertView[4.Grey Color]
-        layoutAlert.addView(AlertViewUtils.getViewAlert(getContext(), 4),
-                AlertViewUtils.getParams(45, 45, 0, 0));
+        // Create + Add AlertView[4.Grey Color]
+        alertViewUtils = new AlertViewUtils(getContext(), 4, 45, 45, 100, 100);
+        layoutAlert.addView(alertViewUtils.getAlertView(),
+                alertViewUtils.getParams());
     }
 
     @Override
@@ -122,6 +140,13 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
+    public void showToast(String text) {
+        Toast.makeText(getContext(),
+                text,
+                Toast.LENGTH_LONG)
+                .show();
+    }
+
     /*****************
      * Listener Zone
      ****************/
@@ -134,7 +159,19 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
         // TODO : ทำไงดีวะ
-
+        switch (position) {
+            case 1:
+//                anim.setRepeatCount(0);
+//                alertViewOne.setVisibility(Switch.GONE);
+                alertViewUtils.hideAlertView();
+                break;
+            case 2:
+//                alertViewOne.setVisibility(Switch.VISIBLE);
+//                anim.setRepeatCount(Animation.INFINITE);
+//                alertViewOne.startAnimation(anim);
+                alertViewUtils.showAlertView();
+                break;
+        }
     }
 
     @Override

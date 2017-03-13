@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 
 import jirayu.pond.footreflexology.R;
 
@@ -14,9 +15,20 @@ import jirayu.pond.footreflexology.R;
 
 public class AlertViewUtils {
 
-    public static View getViewAlert(Context context, int status) {
-        // Create View
-        View view = new View(context);
+    private View view;
+    private Animation anim;
+    private int status, width, height, leftMargin, topMargin;
+
+    public AlertViewUtils(Context context, int status, int width, int height, int leftMargin, int topMargin) {
+        view = new View(context);
+        this.status = status;
+        this.width = width;
+        this.height = height;
+        this.leftMargin = leftMargin;
+        this.topMargin = topMargin;
+    }
+
+    public View getAlertView() {
         switch (status) {
             case 1: // อาการแย่
                 view.setBackgroundResource(R.drawable.shape_view_alert_red_color);
@@ -35,7 +47,7 @@ public class AlertViewUtils {
         }
 
         // Create Animation of View
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(600);
         anim.setStartOffset(20);
         anim.setRepeatMode(Animation.REVERSE);
@@ -45,11 +57,22 @@ public class AlertViewUtils {
         return view;
     }
 
-    public static FrameLayout.LayoutParams getParams(int width, int height, int leftMargin, int topMargin){
+    public FrameLayout.LayoutParams getParams() {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
         params.leftMargin = leftMargin;
         params.topMargin = topMargin;
         return params;
+    }
+
+    public void hideAlertView() {
+        anim.setRepeatCount(0);
+        view.setVisibility(Switch.GONE);
+    }
+
+    public void showAlertView() {
+        view.setVisibility(Switch.VISIBLE);
+        anim.setRepeatCount(Animation.INFINITE);
+        view.startAnimation(anim);
     }
 
 }

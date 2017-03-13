@@ -51,6 +51,14 @@
 
             <include layout="@layout/img_btn_info_main_page" />
 
+            <!-- AlertView Select Response -->
+
+            <include layout="@layout/alert_view_select_response_on_the_back_foot" />
+
+            <!-- AlertView Behavior -->
+
+            <!--<include layout="@layout/alert_view_behavior_on_the_back_foot" />-->
+
         </FrameLayout>
 
     </android.support.v4.widget.NestedScrollView>
