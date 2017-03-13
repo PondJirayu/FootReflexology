@@ -1,10 +1,8 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -58,6 +57,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
+//        initAlertView();
         return rootView;
     }
 
@@ -71,13 +71,15 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
-        // Create AlertView[4.Grey Color]
-        layoutAlert.addView(AlertViewUtils.getViewAlert(getContext(), 4),
-                AlertViewUtils.getParams(45, 45, 0, 0));
-
         // Handle Click
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
+    }
+
+    private void initAlertView() {
+        // Create AlertView[4.Grey Color]
+        layoutAlert.addView(AlertViewUtils.getViewAlert(getContext(), 4),
+                AlertViewUtils.getParams(45, 45, 0, 0));
     }
 
     @Override
@@ -132,6 +134,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
         // TODO : ทำไงดีวะ
+
     }
 
     @Override
