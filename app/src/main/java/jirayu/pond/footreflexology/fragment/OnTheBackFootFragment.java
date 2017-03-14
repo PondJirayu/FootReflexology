@@ -41,8 +41,8 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     StringsManager stringsManager;
 
     private int lastPosition = -1;
-    private final int n = 12;
-    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[n];
+    private final int alertViewLength = 12;
+    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[alertViewLength];
 
     /************
      * Functions
@@ -85,7 +85,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
     private void initAlertView() {
         // Create AlertView [4.Gray Color]
-        alertViewUtils[0] = new AlertViewUtils(getContext(), 4, 45, 45, 100, 100);
+        alertViewUtils[0] = new AlertViewUtils(getContext(), 4, 45, 45, 280, 200);
         alertViewUtils[1] = new AlertViewUtils(getContext(), 4, 45, 45, 150, 150);
         alertViewUtils[2] = new AlertViewUtils(getContext(), 4, 45, 45, 200, 200);
 
@@ -95,8 +95,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         layoutAlert.addView(alertViewUtils[2].getAlertView(), alertViewUtils[2].getParams());
 
         // Hide AlertView
-        alertViewUtils[1].hideAlertView();
-        alertViewUtils[2].hideAlertView();
+        for (int i = 0; i < 3; i++) {
+            alertViewUtils[i].hideAlertView();
+        }
     }
 
     @Override
@@ -171,6 +172,24 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
             case 2:
                 alertViewUtils[2].showAlertView();
                 lastPosition = position;
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
                 break;
         }
     }

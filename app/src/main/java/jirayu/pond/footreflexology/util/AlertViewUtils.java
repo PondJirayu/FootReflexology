@@ -20,7 +20,7 @@ public class AlertViewUtils {
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
 
-    public AlertViewUtils(Context context, int status, int width, int height, int leftMargin, int topMargin) {
+    public AlertViewUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
         view = new View(context);
         anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim);
         this.status = status;
@@ -60,14 +60,14 @@ public class AlertViewUtils {
     }
 
     public void hideAlertView() {
-        anim.setRepeatCount(0);
         view.setVisibility(Switch.GONE);
+        anim.setRepeatCount(0);
     }
 
     public void showAlertView() {
-        view.setVisibility(Switch.VISIBLE);
         anim.setRepeatCount(Animation.INFINITE);
         view.startAnimation(anim);
+        view.setVisibility(Switch.VISIBLE);
     }
 
 }
