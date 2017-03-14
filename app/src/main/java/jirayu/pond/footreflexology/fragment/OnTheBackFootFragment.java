@@ -84,12 +84,12 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     }
 
     private void initAlertView() {
-        // Create alertView [4. Gray Color]
+        // Create AlertView [4. Gray Color]
         alertViewUtils[0] = new AlertViewUtils(getContext(), 4, 45, 45, 280, 200);
         alertViewUtils[1] = new AlertViewUtils(getContext(), 4, 45, 45, 150, 150);
         alertViewUtils[2] = new AlertViewUtils(getContext(), 4, 45, 45, 200, 200);
 
-        // Add & Hide alertView
+        // Add & Hide AlertView
         for (int i = 0; i < 3; i++) {
             layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams());
             alertViewUtils[i].hideAlertView();
