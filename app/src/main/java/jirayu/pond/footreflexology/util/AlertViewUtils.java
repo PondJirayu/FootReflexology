@@ -2,7 +2,6 @@ package jirayu.pond.footreflexology.util;
 
 import android.content.Context;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -26,8 +25,8 @@ public class AlertViewUtils {
         this.status = status;
         this.width = width;
         this.height = height;
-        this.leftMargin = leftMargin;
         this.topMargin = topMargin;
+        this.leftMargin = leftMargin;
     }
 
     public View getAlertView() {
@@ -48,7 +47,6 @@ public class AlertViewUtils {
                 break;
         }
         view.startAnimation(anim);
-
         return view;
     }
 

@@ -6,15 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -41,8 +38,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     StringsManager stringsManager;
 
     private int lastPosition = -1;
-    private final int alertViewLength = 12;
-    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[alertViewLength];
+    private final int SIZE = 12, ROW = 12, COL = 2;
+    private int position[][] = new int[ROW][COL];
+    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
     /************
      * Functions
@@ -64,6 +62,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
         initInstances(rootView);
+        initAlertViewPosition();
         initAlertView();
         return rootView;
     }
@@ -83,14 +82,24 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         imgBtnInfo.setOnClickListener(this);
     }
 
+    private void initAlertViewPosition() {
+        // COL[0] = topMargin | COL[1] = leftMargin
+        position[0][0] = 308;
+        position[0][1] = 144;
+        position[1][0] = 307;
+        position[1][1] = 277;
+        position[2][0] = 215;
+        position[2][1] = 305;
+    }
+
     private void initAlertView() {
         // Create AlertView [4. Gray Color]
-        alertViewUtils[0] = new AlertViewUtils(getContext(), 4, 35, 35, 308, 144);
-        alertViewUtils[1] = new AlertViewUtils(getContext(), 4, 35, 35, 307, 277);
-        alertViewUtils[2] = new AlertViewUtils(getContext(), 4, 35, 35, 215, 300);
+        for (int i = 0; i < SIZE; i++) {
+            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 45, 45, position[i][0], position[i][1]);
+        }
 
         // Add to LayoutAlert & Hide
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < SIZE; i++) {
             layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams());
             alertViewUtils[i].hideAlertView();
         }
