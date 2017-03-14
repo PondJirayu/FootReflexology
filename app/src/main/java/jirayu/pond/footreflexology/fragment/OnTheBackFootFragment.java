@@ -83,25 +83,51 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     }
 
     private void initAlertViewPosition() {
-        // COL[0] = topMargin | COL[1] = leftMargin
+        /* COL[0 = topMargin]
+           COL[1 = leftMargin] */
+        // 1
         position[0][0] = 308;
         position[0][1] = 144;
+        // 2
         position[1][0] = 307;
         position[1][1] = 277;
+        // 3
         position[2][0] = 215;
         position[2][1] = 305;
+        // 4
+        position[3][0] = 90;
+        position[3][1] = 172;
+        // 5
+        position[4][0] = 120;
+        position[4][1] = 455;
+        // 6
+        position[5][0] = 329;
+        position[5][1] = 508;
+        // 7
+        position[6][0] = 380;
+        position[6][1] = 500;
+        // 8
+        position[7][0] = 430;
+        position[7][1] = 486;
+        // 9
+        position[8][0] = 466;
+        position[8][1] = 302;
+        // 10
+        position[9][0] = 274;
+        position[9][1] = 348;
+        // 11
+        position[10][0] = 349;
+        position[10][1] = 349;
+        // 12
+        position[11][0] = 295;
+        position[11][1] = 487;
     }
 
     private void initAlertView() {
-        // Create AlertView [4. Gray Color]
         for (int i = 0; i < SIZE; i++) {
-            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 45, 45, position[i][0], position[i][1]);
-        }
-
-        // Add to LayoutAlert & Hide
-        for (int i = 0; i < SIZE; i++) {
-            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams());
-            alertViewUtils[i].hideAlertView();
+            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 45, 45, position[i][0], position[i][1]); // Create
+            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams());   // Add
+            alertViewUtils[i].hideAlertView();  // Hide
         }
     }
 
@@ -179,22 +205,40 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
                 lastPosition = position;
                 break;
             case 3:
+                alertViewUtils[3].showAlertView();
+                lastPosition = position;
                 break;
             case 4:
+                alertViewUtils[4].showAlertView();
+                lastPosition = position;
                 break;
             case 5:
+                alertViewUtils[5].showAlertView();
+                lastPosition = position;
                 break;
             case 6:
+                alertViewUtils[6].showAlertView();
+                lastPosition = position;
                 break;
             case 7:
+                alertViewUtils[7].showAlertView();
+                lastPosition = position;
                 break;
             case 8:
+                alertViewUtils[8].showAlertView();
+                lastPosition = position;
                 break;
             case 9:
+                alertViewUtils[9].showAlertView();
+                lastPosition = position;
                 break;
             case 10:
+                alertViewUtils[10].showAlertView();
+                lastPosition = position;
                 break;
             case 11:
+                alertViewUtils[11].showAlertView();
+                lastPosition = position;
                 break;
         }
     }
