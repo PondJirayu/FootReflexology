@@ -40,10 +40,9 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
 
-    AlertViewUtils alertViewUtils;
-
-    Animation anim;
-    View alertViewOne;
+    private int lastPosition = -1;
+    private final int n = 12;
+    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[n];
 
     /************
      * Functions
@@ -75,15 +74,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
-//        alertViewOne = rootView.findViewById(R.id.alertViewOne);
-
-        // Create Animation of View
-//        anim = new AlphaAnimation(0.0f, 1.0f);
-//        anim.setDuration(600);
-//        anim.setStartOffset(20);
-//        anim.setRepeatMode(Animation.REVERSE);
-//        anim.setRepeatCount(Animation.INFINITE);
-//        alertViewOne.startAnimation(anim);
 
         createAdapter();
         spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -94,10 +84,19 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     }
 
     private void initAlertView() {
-        // Create + Add AlertView[4.Grey Color]
-        alertViewUtils = new AlertViewUtils(getContext(), 4, 45, 45, 100, 100);
-        layoutAlert.addView(alertViewUtils.getAlertView(),
-                alertViewUtils.getParams());
+        // Create AlertView [4.Gray Color]
+        alertViewUtils[0] = new AlertViewUtils(getContext(), 4, 45, 45, 100, 100);
+        alertViewUtils[1] = new AlertViewUtils(getContext(), 4, 45, 45, 150, 150);
+        alertViewUtils[2] = new AlertViewUtils(getContext(), 4, 45, 45, 200, 200);
+
+        // Add AlertView
+        layoutAlert.addView(alertViewUtils[0].getAlertView(), alertViewUtils[0].getParams());
+        layoutAlert.addView(alertViewUtils[1].getAlertView(), alertViewUtils[1].getParams());
+        layoutAlert.addView(alertViewUtils[2].getAlertView(), alertViewUtils[2].getParams());
+
+        // Hide AlertView
+        alertViewUtils[1].hideAlertView();
+        alertViewUtils[2].hideAlertView();
     }
 
     @Override
@@ -158,18 +157,20 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-        // TODO : ทำไงดีวะ
+
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
         switch (position) {
+            case 0:
+                alertViewUtils[0].showAlertView();
+                lastPosition = position;
+                break;
             case 1:
-//                anim.setRepeatCount(0);
-//                alertViewOne.setVisibility(Switch.GONE);
-                alertViewUtils.hideAlertView();
+                alertViewUtils[1].showAlertView();
+                lastPosition = position;
                 break;
             case 2:
-//                alertViewOne.setVisibility(Switch.VISIBLE);
-//                anim.setRepeatCount(Animation.INFINITE);
-//                alertViewOne.startAnimation(anim);
-                alertViewUtils.showAlertView();
+                alertViewUtils[2].showAlertView();
+                lastPosition = position;
                 break;
         }
     }
