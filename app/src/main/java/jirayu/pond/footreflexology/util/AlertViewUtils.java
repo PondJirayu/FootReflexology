@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.Switch;
 
@@ -21,6 +22,7 @@ public class AlertViewUtils {
 
     public AlertViewUtils(Context context, int status, int width, int height, int leftMargin, int topMargin) {
         view = new View(context);
+        anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim);
         this.status = status;
         this.width = width;
         this.height = height;
@@ -45,13 +47,6 @@ public class AlertViewUtils {
             default:
                 break;
         }
-
-        // Create Animation of View
-        anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(600);
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
         view.startAnimation(anim);
 
         return view;
