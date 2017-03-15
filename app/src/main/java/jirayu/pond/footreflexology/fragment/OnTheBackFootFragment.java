@@ -184,7 +184,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
 
         if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
-        for (int i = 0 ; i < SIZE ; i++) {
+        for (int i = 0; i < SIZE; i++) {
             if (i == position) {
                 alertViewUtils[i].showAlertView();
                 lastPosition = position;

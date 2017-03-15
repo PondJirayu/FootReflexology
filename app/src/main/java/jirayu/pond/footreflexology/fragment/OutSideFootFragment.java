@@ -87,12 +87,60 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         /* COL[0 = topMargin]
            COL[1 = leftMargin] */
         // 1
-
+        position[0][0] = 100;
+        position[0][1] = 100;
+        // 2
+        position[1][0] = 100;
+        position[1][1] = 100;
+        // 3
+        position[2][0] = 100;
+        position[2][1] = 100;
+        // 4
+        position[3][0] = 100;
+        position[3][1] = 100;
+        // 5
+        position[4][0] = 100;
+        position[4][1] = 100;
+        // 6
+        position[5][0] = 100;
+        position[5][1] = 100;
+        // 7
+        position[6][0] = 100;
+        position[6][1] = 100;
+        // 8
+        position[7][0] = 100;
+        position[7][1] = 100;
+        // 9
+        position[8][0] = 100;
+        position[8][1] = 100;
+        // 10
+        position[9][0] = 100;
+        position[9][1] = 100;
+        // 11
+        position[10][0] = 100;
+        position[10][1] = 100;
+        // 12
+        position[11][0] = 100;
+        position[11][1] = 100;
+        // 13
+        position[12][0] = 100;
+        position[12][1] = 100;
+        // 14
+        position[13][0] = 100;
+        position[13][1] = 100;
+        // 15
+        position[14][0] = 100;
+        position[14][1] = 100;
+        // 16
+        position[15][0] = 100;
+        position[15][1] = 100;
     }
 
     private void initAlertView() {
         for (int i = 0; i < SIZE; i++) {
-
+            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 45, 45, position[i][0], position[i][1]); // Create
+            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams());    // Add
+            alertViewUtils[i].hideAlertView();    // Hide
         }
     }
 
@@ -148,7 +196,14 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
 
-
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
+        for (int i = 0; i < SIZE; i++) {
+            if (i == position) {
+                alertViewUtils[i].showAlertView();
+                lastPosition = position;
+                break;
+            }
+        }
     }
 
     @Override
