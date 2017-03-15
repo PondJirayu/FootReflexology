@@ -87,29 +87,29 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         /* COL[0 = topMargin]
            COL[1 = leftMargin] */
         // 1
-        position[0][0] = 100;
-        position[0][1] = 100;
+        position[0][0] = 94;
+        position[0][1] = 121;
         // 2
-        position[1][0] = 100;
-        position[1][1] = 100;
+        position[1][0] = 107;
+        position[1][1] = 90;
         // 3
-        position[2][0] = 100;
-        position[2][1] = 100;
+        position[2][0] = 58;
+        position[2][1] = 287;
         // 4
-        position[3][0] = 100;
-        position[3][1] = 100;
+        position[3][0] = 288;
+        position[3][1] = 131;
         // 5
-        position[4][0] = 100;
-        position[4][1] = 100;
+        position[4][0] = 290;
+        position[4][1] = 32;
         // 6
-        position[5][0] = 100;
-        position[5][1] = 100;
+        position[5][0] = 426;
+        position[5][1] = 106;
         // 7
-        position[6][0] = 100;
-        position[6][1] = 100;
+        position[6][0] = 414;
+        position[6][1] = 153;
         // 8
-        position[7][0] = 100;
-        position[7][1] = 100;
+        position[7][0] = 350;
+        position[7][1] = 200;
         // 9
         position[8][0] = 100;
         position[8][1] = 100;
