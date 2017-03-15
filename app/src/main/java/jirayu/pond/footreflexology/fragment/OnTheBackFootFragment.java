@@ -171,13 +171,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
-    public void showToast(String text) {
-        Toast.makeText(getContext(),
-                text,
-                Toast.LENGTH_LONG)
-                .show();
-    }
-
     /*****************
      * Listener Zone
      ****************/

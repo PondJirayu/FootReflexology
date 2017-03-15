@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.util.AlertViewUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 
@@ -32,8 +34,14 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     Spinner spinnerOutSideFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
+
+    private int lastPosition = -1;
+    private final int SIZE = 16, ROW = 16, COL = 2;
+    private int position[][] = new int[ROW][COL];
+    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
      /***********
      * Functions
@@ -55,6 +63,8 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_outsidefoot, container, false);
         initInstances(rootView);
+        initAlertViewPosition();
+        initAlertView();
         return rootView;
     }
 
@@ -62,6 +72,7 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerOutSideFoot = (Spinner) rootView.findViewById(R.id.spinnerOutSideFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
@@ -70,6 +81,19 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         // Handle Click
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
+    }
+
+    private void initAlertViewPosition() {
+        /* COL[0 = topMargin]
+           COL[1 = leftMargin] */
+        // 1
+
+    }
+
+    private void initAlertView() {
+        for (int i = 0; i < SIZE; i++) {
+
+        }
     }
 
     @Override
@@ -123,6 +147,8 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
+
+
     }
 
     @Override
