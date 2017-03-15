@@ -191,55 +191,12 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
 
         if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
-        switch (position) {
-            case 0:
-                alertViewUtils[0].showAlertView();
+        for (int i = 0 ; i < SIZE ; i++) {
+            if (i == position) {
+                alertViewUtils[i].showAlertView();
                 lastPosition = position;
                 break;
-            case 1:
-                alertViewUtils[1].showAlertView();
-                lastPosition = position;
-                break;
-            case 2:
-                alertViewUtils[2].showAlertView();
-                lastPosition = position;
-                break;
-            case 3:
-                alertViewUtils[3].showAlertView();
-                lastPosition = position;
-                break;
-            case 4:
-                alertViewUtils[4].showAlertView();
-                lastPosition = position;
-                break;
-            case 5:
-                alertViewUtils[5].showAlertView();
-                lastPosition = position;
-                break;
-            case 6:
-                alertViewUtils[6].showAlertView();
-                lastPosition = position;
-                break;
-            case 7:
-                alertViewUtils[7].showAlertView();
-                lastPosition = position;
-                break;
-            case 8:
-                alertViewUtils[8].showAlertView();
-                lastPosition = position;
-                break;
-            case 9:
-                alertViewUtils[9].showAlertView();
-                lastPosition = position;
-                break;
-            case 10:
-                alertViewUtils[10].showAlertView();
-                lastPosition = position;
-                break;
-            case 11:
-                alertViewUtils[11].showAlertView();
-                lastPosition = position;
-                break;
+            }
         }
     }
 
