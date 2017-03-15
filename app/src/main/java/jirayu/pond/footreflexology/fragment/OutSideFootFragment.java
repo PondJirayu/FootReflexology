@@ -39,7 +39,7 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     StringsManager stringsManager;
 
     private int lastPosition = -1;
-    private final int SIZE = 16, ROW = 16, COL = 2;
+    private final int SIZE = 16 + 1, ROW = 16 + 1, COL = 2;
     private int position[][] = new int[ROW][COL];
     private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
@@ -100,7 +100,7 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         position[3][1] = 131;
         // 5
         position[4][0] = 290;
-        position[4][1] = 32;
+        position[4][1] = 33;
         // 6
         position[5][0] = 426;
         position[5][1] = 106;
@@ -134,6 +134,9 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         // 16
         position[15][0] = 219;
         position[15][1] = 272;
+        // 8 Double
+        position[15+1][0] = 66;
+        position[15+1][1] = 184;
     }
 
     private void initAlertView() {
@@ -197,10 +200,12 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
 
         if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
+        if (lastPosition == 7) alertViewUtils[15+1].hideAlertView();
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
                 alertViewUtils[i].showAlertView();
                 lastPosition = position;
+                if (position == 7) alertViewUtils[15+1].showAlertView();
                 break;
             }
         }
