@@ -123,17 +123,17 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         position[11][0] = 265;
         position[11][1] = 445;
         // 13
-        position[12][0] = 100;
-        position[12][1] = 100;
+        position[12][0] = 200;
+        position[12][1] = 565;
         // 14
-        position[13][0] = 100;
-        position[13][1] = 100;
+        position[13][0] = 155;
+        position[13][1] = 436;
         // 15
-        position[14][0] = 100;
-        position[14][1] = 100;
+        position[14][0] = 275;
+        position[14][1] = 336;
         // 16
-        position[15][0] = 100;
-        position[15][1] = 100;
+        position[15][0] = 219;
+        position[15][1] = 272;
     }
 
     private void initAlertView() {
