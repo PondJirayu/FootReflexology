@@ -117,8 +117,8 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         position[9][0] = 425;
         position[9][1] = 415;
         // 11
-        position[10][0] = 100;
-        position[10][1] = 100;
+        position[10][0] = 310;
+        position[10][1] = 448;
         // 12
         position[11][0] = 100;
         position[11][1] = 100;
