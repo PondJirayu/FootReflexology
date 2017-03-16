@@ -27,64 +27,50 @@ public class AlertViewPositionUtils {
         int position[][] = new int[14+1][2]; // เขตตอบสนองหลัก 14 จุด ซ้ำ 1 จุด
 
         // 1
-        position[0][0] = 100;
-        position[0][1] = 100;
-
+        position[0][0] = 96;
+        position[0][1] = 106;
         // 2
-        position[1][0] = 100;
-        position[1][1] = 100;
-
+        position[1][0] = 130;
+        position[1][1] = 87;
         // 3
-        position[2][0] = 100;
-        position[2][1] = 100;
-
+        position[2][0] = 229;
+        position[2][1] = 18;
         // 4
-        position[3][0] = 100;
-        position[3][1] = 100;
-
+        position[3][0] = 255;
+        position[3][1] = 96;
         // 5
-        position[4][0] = 100;
-        position[4][1] = 100;
-
+        position[4][0] = 293;
+        position[4][1] = 57;
         // 6
-        position[5][0] = 100;
-        position[5][1] = 100;
-
+        position[5][0] = 415;
+        position[5][1] = 171;
         // 7
-        position[6][0] = 100;
-        position[6][1] = 100;
-
+        position[6][0] = 389;
+        position[6][1] = 279;
         // 8
-        position[7][0] = 100;
-        position[7][1] = 100;
-
+        position[7][0] = 319;
+        position[7][1] = 334;
         // 9
-        position[8][0] = 100;
-        position[8][1] = 100;
-
+        position[8][0] = 356;
+        position[8][1] = 490;
         // 10
-        position[9][0] = 100;
-        position[9][1] = 100;
-
+        position[9][0] = 415;
+        position[9][1] = 575;
         // 11
-        position[10][0] = 100;
-        position[10][1] = 100;
-
+        position[10][0] = 415;
+        position[10][1] = 623;
         // 12
-        position[11][0] = 100;
-        position[11][1] = 100;
-
+        position[11][0] = 213;
+        position[11][1] = 528;
         // 13
-        position[12][0] = 100;
-        position[12][1] = 100;
-
+        position[12][0] = 119;
+        position[12][1] = 370;
         // 14
-        position[13][0] = 100;
-        position[13][1] = 100;
-
+        position[13][0] = 80;
+        position[13][1] = 339;
         // 5 Double
-        position[13+1][0] = 100;
-        position[13+1][1] = 100;
+        position[13+1][0] = 349;
+        position[13+1][1] = 153;
 
         return position;
     }
