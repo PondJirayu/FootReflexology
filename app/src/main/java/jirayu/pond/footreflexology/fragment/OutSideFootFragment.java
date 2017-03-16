@@ -20,7 +20,6 @@ import jirayu.pond.footreflexology.util.AlertViewPositionUtils;
 import jirayu.pond.footreflexology.util.AlertViewUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
-
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -141,8 +140,8 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
 
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView();
-        if (lastPosition == 7) alertViewUtils[15+1].hideAlertView();
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        if (lastPosition == 7) alertViewUtils[15+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
                 alertViewUtils[i].showAlertView();
