@@ -57,7 +57,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     MedicalHistoryAdapter listAdapter;
     Thread thread;
     Boolean doPullToRefresh;
-    int selected = 0;
+    private int selected = 0;
     MedicalHistoryItemCollectionDao dao;
 
     /************
@@ -198,7 +198,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == -1) {
+                if (which == -1) { // ถ้ากดตกลงจะโยน which -1
                     btnFloatingActionEdit.setVisibility(Switch.GONE);
                     btnFloatingActionSort.setVisibility(Switch.GONE);
                     loadMedicalHistory();

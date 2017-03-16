@@ -1,10 +1,8 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,7 @@ import android.widget.Spinner;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.util.AlertViewPositionUtils;
 import jirayu.pond.footreflexology.util.AlertViewUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
@@ -39,8 +38,8 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
     StringsManager stringsManager;
 
     private int lastPosition = -1;
-    private final int SIZE = 16 + 1, ROW = 16 + 1, COL = 2;
-    private int position[][] = new int[ROW][COL];
+    private final int SIZE = 16 + 1;
+    private int position[][] = AlertViewPositionUtils.getAlertViewOutSideFootPosition();
     private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
      /***********
@@ -63,7 +62,6 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_outsidefoot, container, false);
         initInstances(rootView);
-        initAlertViewPosition();
         initAlertView();
         return rootView;
     }
@@ -81,62 +79,6 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         // Handle Click
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
-    }
-
-    private void initAlertViewPosition() {
-        /* COL[0 = topMargin]
-           COL[1 = leftMargin] */
-        // 1
-        position[0][0] = 94;
-        position[0][1] = 121;
-        // 2
-        position[1][0] = 107;
-        position[1][1] = 90;
-        // 3
-        position[2][0] = 58;
-        position[2][1] = 287;
-        // 4
-        position[3][0] = 288;
-        position[3][1] = 131;
-        // 5
-        position[4][0] = 290;
-        position[4][1] = 33;
-        // 6
-        position[5][0] = 426;
-        position[5][1] = 106;
-        // 7
-        position[6][0] = 414;
-        position[6][1] = 153;
-        // 8
-        position[7][0] = 324;
-        position[7][1] = 223;
-        // 9
-        position[8][0] = 399;
-        position[8][1] = 316;
-        // 10
-        position[9][0] = 425;
-        position[9][1] = 415;
-        // 11
-        position[10][0] = 310;
-        position[10][1] = 448;
-        // 12
-        position[11][0] = 265;
-        position[11][1] = 445;
-        // 13
-        position[12][0] = 200;
-        position[12][1] = 565;
-        // 14
-        position[13][0] = 155;
-        position[13][1] = 436;
-        // 15
-        position[14][0] = 275;
-        position[14][1] = 336;
-        // 16
-        position[15][0] = 219;
-        position[15][1] = 272;
-        // 8 Double
-        position[15+1][0] = 66;
-        position[15+1][1] = 184;
     }
 
     private void initAlertView() {
