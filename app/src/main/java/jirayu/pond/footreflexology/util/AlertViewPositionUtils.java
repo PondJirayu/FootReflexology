@@ -11,23 +11,23 @@ public class AlertViewPositionUtils {
        COL[1 = leftMargin]
     */
 
-    public static int[][] getAlertViewRightFootPosition() {
-        int position[][] = new int[][];
-
-        return position;
-    }
-
-    public static int[][] getAlertViewLeftFootPosition() {
-        int position[][] = new int[][];
-
-        return position;
-    }
-
-    public static int[][] getAlertViewInTheFootPosition() {
-        int position[][] = new int[][];
-
-        return position;
-    }
+//    public static int[][] getAlertViewRightFootPosition() {
+//        int position[][] = new int[][];
+//
+//        return position;
+//    }
+//
+//    public static int[][] getAlertViewLeftFootPosition() {
+//        int position[][] = new int[][];
+//
+//        return position;
+//    }
+//
+//    public static int[][] getAlertViewInTheFootPosition() {
+//        int position[][] = new int[][];
+//
+//        return position;
+//    }
 
     public static int[][] getAlertViewOutSideFootPosition() {
         int position[][] = new int[16+1][2]; // เขตตอบสนองหลัก 16 จุด ซ้ำ 1 จุด
@@ -90,7 +90,42 @@ public class AlertViewPositionUtils {
     public static int[][] getAlertViewOnTheBackFootPosition() {
         int position[][] = new int[12][2];
 
-
+        // 1
+        position[0][0] = 308;
+        position[0][1] = 144;
+        // 2
+        position[1][0] = 307;
+        position[1][1] = 277;
+        // 3
+        position[2][0] = 215;
+        position[2][1] = 305;
+        // 4
+        position[3][0] = 90;
+        position[3][1] = 172;
+        // 5
+        position[4][0] = 120;
+        position[4][1] = 455;
+        // 6
+        position[5][0] = 329;
+        position[5][1] = 508;
+        // 7
+        position[6][0] = 380;
+        position[6][1] = 500;
+        // 8
+        position[7][0] = 430;
+        position[7][1] = 486;
+        // 9
+        position[8][0] = 466;
+        position[8][1] = 302;
+        // 10
+        position[9][0] = 274;
+        position[9][1] = 348;
+        // 11
+        position[10][0] = 349;
+        position[10][1] = 349;
+        // 12
+        position[11][0] = 295;
+        position[11][1] = 487;
 
         return position;
     }
