@@ -22,12 +22,72 @@ public class AlertViewPositionUtils {
 //
 //        return position;
 //    }
-//
-//    public static int[][] getAlertViewInTheFootPosition() {
-//        int position[][] = new int[][];
-//
-//        return position;
-//    }
+
+    public static int[][] getAlertViewInTheFootPosition() {
+        int position[][] = new int[14+1][2]; // เขตตอบสนองหลัก 14 จุด ซ้ำ 1 จุด
+
+        // 1
+        position[0][0] = 100;
+        position[0][1] = 100;
+
+        // 2
+        position[1][0] = 100;
+        position[1][1] = 100;
+
+        // 3
+        position[2][0] = 100;
+        position[2][1] = 100;
+
+        // 4
+        position[3][0] = 100;
+        position[3][1] = 100;
+
+        // 5
+        position[4][0] = 100;
+        position[4][1] = 100;
+
+        // 6
+        position[5][0] = 100;
+        position[5][1] = 100;
+
+        // 7
+        position[6][0] = 100;
+        position[6][1] = 100;
+
+        // 8
+        position[7][0] = 100;
+        position[7][1] = 100;
+
+        // 9
+        position[8][0] = 100;
+        position[8][1] = 100;
+
+        // 10
+        position[9][0] = 100;
+        position[9][1] = 100;
+
+        // 11
+        position[10][0] = 100;
+        position[10][1] = 100;
+
+        // 12
+        position[11][0] = 100;
+        position[11][1] = 100;
+
+        // 13
+        position[12][0] = 100;
+        position[12][1] = 100;
+
+        // 14
+        position[13][0] = 100;
+        position[13][1] = 100;
+
+        // 5 Double
+        position[13+1][0] = 100;
+        position[13+1][1] = 100;
+
+        return position;
+    }
 
     public static int[][] getAlertViewOutSideFootPosition() {
         int position[][] = new int[16+1][2]; // เขตตอบสนองหลัก 16 จุด ซ้ำ 1 จุด
