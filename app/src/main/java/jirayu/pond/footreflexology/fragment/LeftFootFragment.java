@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.util.AlertViewPositionUtils;
+import jirayu.pond.footreflexology.util.AlertViewUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 
@@ -32,8 +35,14 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     Spinner spinnerLeftFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
+    FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
+
+    private int lastPosition = -1;
+    private final int SIZE = 38 + 13;
+    private int position[][] = AlertViewPositionUtils.getAlertViewLeftFootPosition();
+    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
     /************
      * Functions
@@ -55,6 +64,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_leftfoot, container, false);
         initInstances(rootView);
+        initAlertView();
         return rootView;
     }
 
@@ -70,6 +80,14 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
+    }
+
+    private void initAlertView() {
+        for (int i = 0; i < SIZE; i++) {
+            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 45, 45, position[i][0], position[i][1]); // Create
+            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams()); // Add
+            alertViewUtils[i].hideAlertView(); // Hide
+        }
     }
 
     @Override
@@ -123,6 +141,14 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
+
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
+        for (int i = 0; i < SIZE; i++) {
+            if (i == position) {
+
+                break;
+            }
+        }
     }
 
     @Override

@@ -16,12 +16,14 @@ public class AlertViewPositionUtils {
 //
 //        return position;
 //    }
-//
-//    public static int[][] getAlertViewLeftFootPosition() {
-//        int position[][] = new int[][];
-//
-//        return position;
-//    }
+
+    public static int[][] getAlertViewLeftFootPosition() {
+        int position[][] = new int[38+13][2];
+
+
+
+        return position;
+    }
 
     public static int[][] getAlertViewInTheFootPosition() {
         int position[][] = new int[14+1][2]; // เขตตอบสนองหลัก 14 จุด ซ้ำ 1 จุด
