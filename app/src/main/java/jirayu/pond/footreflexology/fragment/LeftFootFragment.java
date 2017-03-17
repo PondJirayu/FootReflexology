@@ -148,6 +148,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
             if (i == position) {
                 alertViewUtils[i].showAlertView();
                 lastPosition = position;
+                if (position == 0) ;
                 break;
             }
         }
