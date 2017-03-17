@@ -20,7 +20,157 @@ public class AlertViewPositionUtils {
     public static int[][] getAlertViewLeftFootPosition() {
         int position[][] = new int[38+13][2];
 
+        // 1
+        position[0][0] = 100;
+        position[0][1] = 100;
 
+        // 2
+        position[1][0] = 100;
+        position[1][1] = 100;
+
+        // 3
+        position[2][0] = 100;
+        position[2][1] = 100;
+
+        // 4
+        position[3][0] = 100;
+        position[3][1] = 100;
+
+        // 5
+        position[4][0] = 100;
+        position[4][1] = 100;
+
+        // 6
+        position[5][0] = 100;
+        position[5][1] = 100;
+
+        // 7
+        position[6][0] = 100;
+        position[6][1] = 100;
+
+        // 8
+        position[7][0] = 100;
+        position[7][1] = 100;
+
+        // 9
+        position[8][0] = 100;
+        position[8][1] = 100;
+
+        // 10
+        position[9][0] = 100;
+        position[9][1] = 100;
+
+        // 11
+        position[10][0] = 100;
+        position[10][1] = 100;
+
+        // 12
+        position[11][0] = 100;
+        position[11][1] = 100;
+
+        // 13
+        position[12][0] = 100;
+        position[12][1] = 100;
+
+        // 14
+        position[13][0] = 100;
+        position[13][1] = 100;
+
+        // 15
+        position[14][0] = 100;
+        position[14][1] = 100;
+
+        // 16
+        position[15][0] = 100;
+        position[15][1] = 100;
+
+        // 17
+        position[16][0] = 100;
+        position[16][1] = 100;
+
+        // 18
+        position[17][0] = 100;
+        position[17][1] = 100;
+
+        // 19
+        position[18][0] = 100;
+        position[18][1] = 100;
+
+        // 20
+        position[19][0] = 100;
+        position[19][1] = 100;
+
+        // 21
+        position[20][0] = 100;
+        position[20][1] = 100;
+
+        // 22
+        position[21][0] = 100;
+        position[21][1] = 100;
+
+        // 23
+        position[22][0] = 100;
+        position[22][1] = 100;
+
+        // 24
+        position[23][0] = 100;
+        position[23][1] = 100;
+
+        // 25
+        position[24][0] = 100;
+        position[24][1] = 100;
+
+        // 26
+        position[25][0] = 100;
+        position[25][1] = 100;
+
+        // 27
+        position[26][0] = 100;
+        position[26][1] = 100;
+
+        // 28
+        position[27][0] = 100;
+        position[27][1] = 100;
+
+        // 29
+        position[28][0] = 100;
+        position[28][1] = 100;
+
+        // 30
+        position[29][0] = 100;
+        position[29][1] = 100;
+
+        // 31
+        position[30][0] = 100;
+        position[30][1] = 100;
+
+        // 32
+        position[31][0] = 100;
+        position[31][1] = 100;
+
+        // 33
+        position[32][0] = 100;
+        position[32][1] = 100;
+
+        // 34
+        position[33][0] = 100;
+        position[33][1] = 100;
+
+        // 35
+        position[34][0] = 100;
+        position[34][1] = 100;
+
+        // 36
+        position[35][0] = 100;
+        position[35][1] = 100;
+
+        // 37
+        position[36][0] = 100;
+        position[36][1] = 100;
+
+        // 38
+        position[37][0] = 100;
+        position[37][1] = 100;
 
         return position;
     }

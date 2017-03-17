@@ -145,7 +145,8 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-
+                alertViewUtils[i].showAlertView();
+                lastPosition = position;
                 break;
             }
         }
