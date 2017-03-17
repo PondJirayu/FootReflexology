@@ -29,8 +29,8 @@ public class AlertViewPositionUtils {
         position[1][1] = 415;
 
         // 3
-        position[2][0] = 100;
-        position[2][1] = 100;
+        position[2][0] = 160;
+        position[2][1] = 315;
 
         // 4
         position[3][0] = 100;
@@ -173,60 +173,60 @@ public class AlertViewPositionUtils {
         position[37][1] = 100;
 
         // 1 Double
-        position[38][0] = 100;
-        position[38][1] = 100;
+        position[37+1][0] = 100;
+        position[37+1][1] = 100;
 
         // 1 Double
-        position[39][0] = 100;
-        position[39][1] = 100;
+        position[37+2][0] = 100;
+        position[37+2][1] = 100;
 
         // 1 Double
-        position[40][0] = 100;
-        position[40][1] = 100;
+        position[37+3][0] = 100;
+        position[37+3][1] = 100;
 
         // 1 Double
-        position[41][0] = 100;
-        position[41][1] = 100;
+        position[37+4][0] = 100;
+        position[37+4][1] = 100;
 
         // 1 Double
-        position[42][0] = 100;
-        position[42][1] = 100;
+        position[37+5][0] = 100;
+        position[37+5][1] = 100;
 
         // 1 Double
-        position[43][0] = 100;
-        position[43][1] = 100;
+        position[37+6][0] = 100;
+        position[37+6][1] = 100;
 
         // 1 Double
-        position[44][0] = 100;
-        position[44][1] = 100;
+        position[37+7][0] = 100;
+        position[37+7][1] = 100;
 
         // 1 Double
-        position[45][0] = 100;
-        position[45][1] = 100;
+        position[37+8][0] = 100;
+        position[37+8][1] = 100;
 
         // 3 Double
-        position[46][0] = 100;
-        position[46][1] = 100;
+        position[37+9][0] = 100;
+        position[37+9][1] = 100;
 
         // 4 Double
-        position[47][0] = 100;
-        position[47][1] = 100;
+        position[37+10][0] = 100;
+        position[37+10][1] = 100;
 
         // 6 Double
-        position[48][0] = 100;
-        position[48][1] = 100;
+        position[37+11][0] = 100;
+        position[37+11][1] = 100;
 
         // 6 Double
-        position[49][0] = 100;
-        position[49][1] = 100;
+        position[37+12][0] = 100;
+        position[37+12][1] = 100;
 
         // 6 Double
-        position[50][0] = 100;
-        position[50][1] = 100;
+        position[37+13][0] = 100;
+        position[37+13][1] = 100;
 
         // 6 Double
-        position[51][0] = 100;
-        position[51][1] = 100;
+        position[37+14][0] = 100;
+        position[37+14][1] = 100;
 
         return position;
     }
