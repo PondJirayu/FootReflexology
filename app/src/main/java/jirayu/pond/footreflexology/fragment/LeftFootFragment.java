@@ -1,10 +1,8 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,6 +129,12 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         spinnerLeftFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
+    private void showAlertViewNumberOneExtend() {
+        for (int i = 1; i <= 8; i++) {
+            alertViewUtils[37 + i].showAlertView();
+        }
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -150,14 +154,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
                 lastPosition = position;
                 switch (position) {
                     case 0:
-                        alertViewUtils[37+1].showAlertView();
-                        alertViewUtils[37+2].showAlertView();
-                        alertViewUtils[37+3].showAlertView();
-                        alertViewUtils[37+4].showAlertView();
-                        alertViewUtils[37+5].showAlertView();
-                        alertViewUtils[37+6].showAlertView();
-                        alertViewUtils[37+7].showAlertView();
-                        alertViewUtils[37+8].showAlertView();
+                        showAlertViewNumberOneExtend();
                         break;
                     case 3:
                         alertViewUtils[37+9].showAlertView();
