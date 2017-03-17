@@ -18,7 +18,7 @@ public class AlertViewPositionUtils {
 //    }
 
     public static int[][] getAlertViewLeftFootPosition() {
-        int position[][] = new int[38+13][2];
+        int position[][] = new int[38+14][2];
 
         // 1
         position[0][0] = 100;
@@ -85,8 +85,8 @@ public class AlertViewPositionUtils {
         position[15][1] = 100;
 
         // 17
-        position[16][0] = 100;
-        position[16][1] = 100;
+        position[16][0] = 93;
+        position[16][1] = 140;
 
         // 18
         position[17][0] = 100;
@@ -171,6 +171,62 @@ public class AlertViewPositionUtils {
         // 38
         position[37][0] = 100;
         position[37][1] = 100;
+
+        // 1 Double
+        position[38][0] = 100;
+        position[38][1] = 100;
+
+        // 1 Double
+        position[39][0] = 100;
+        position[39][1] = 100;
+
+        // 1 Double
+        position[40][0] = 100;
+        position[40][1] = 100;
+
+        // 1 Double
+        position[41][0] = 100;
+        position[41][1] = 100;
+
+        // 1 Double
+        position[42][0] = 100;
+        position[42][1] = 100;
+
+        // 1 Double
+        position[43][0] = 100;
+        position[43][1] = 100;
+
+        // 1 Double
+        position[44][0] = 100;
+        position[44][1] = 100;
+
+        // 1 Double
+        position[45][0] = 100;
+        position[45][1] = 100;
+
+        // 3 Double
+        position[46][0] = 100;
+        position[46][1] = 100;
+
+        // 4 Double
+        position[47][0] = 100;
+        position[47][1] = 100;
+
+        // 6 Double
+        position[48][0] = 100;
+        position[48][1] = 100;
+
+        // 6 Double
+        position[49][0] = 100;
+        position[49][1] = 100;
+
+        // 6 Double
+        position[50][0] = 100;
+        position[50][1] = 100;
+
+        // 6 Double
+        position[51][0] = 100;
+        position[51][1] = 100;
 
         return position;
     }

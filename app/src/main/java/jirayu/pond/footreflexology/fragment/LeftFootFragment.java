@@ -40,7 +40,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     StringsManager stringsManager;
 
     private int lastPosition = -1;
-    private final int SIZE = 38 + 13;
+    private final int SIZE = 38 + 14;
     private int position[][] = AlertViewPositionUtils.getAlertViewLeftFootPosition();
     private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
 
@@ -72,6 +72,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerLeftFoot = (Spinner) rootView.findViewById(R.id.spinnerLeftFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
+        layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
