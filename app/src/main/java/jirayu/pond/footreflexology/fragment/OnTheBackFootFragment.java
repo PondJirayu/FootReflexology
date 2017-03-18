@@ -129,6 +129,17 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
+    private void showAlertView(int position) {
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        for (int i = 0; i < SIZE; i++) {
+            if (i == position) {
+                alertViewUtils[i].showAlertView();
+                lastPosition = position;
+                break;
+            }
+        }
+    }
+
     /*****************
      * Listener Zone
      ****************/
@@ -140,15 +151,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
-        for (int i = 0; i < SIZE; i++) {
-            if (i == position) {
-                alertViewUtils[i].showAlertView();
-                lastPosition = position;
-                break;
-            }
-        }
+        showAlertView(position);
     }
 
     @Override

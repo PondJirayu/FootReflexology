@@ -129,9 +129,67 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         spinnerLeftFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
+    private void showAlertView(int position) {
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
+        // ซ่อน AlertView ตัวซ้ำ
+        switch (lastPosition) {
+            case 0:
+                hideAlertViewNumberOneExtend();
+                break;
+            case 2:
+                alertViewUtils[37+9].hideAlertView();
+                break;
+            case 3:
+                alertViewUtils[37+10].hideAlertView();
+                break;
+            case 5:
+                hideAlertViewNumberSixExtend();
+                break;
+        }
+        for (int i = 0; i < SIZE; i++) {
+            if (i == position) {
+                alertViewUtils[i].showAlertView();
+                switch (position) {
+                    case 0:
+                        showAlertViewNumberOneExtend();
+                        break;
+                    case 2:
+                        alertViewUtils[37+9].showAlertView();
+                        break;
+                    case 3:
+                        alertViewUtils[37+10].showAlertView();
+                        break;
+                    case 5:
+                        showAlertViewNumberSixExtend();
+                        break;
+                }
+                lastPosition = position;
+                break;
+            }
+        }
+    }
+
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
             alertViewUtils[37 + i].showAlertView();
+        }
+    }
+
+    private void hideAlertViewNumberOneExtend() {
+        for (int i = 1; i <= 8; i++) {
+            alertViewUtils[37 + i].hideAlertView();
+        }
+    }
+
+    private void showAlertViewNumberSixExtend() {
+        for (int i = 11; i <= 14; i++) {
+            alertViewUtils[37 + i].showAlertView();
+        }
+    }
+
+    private void hideAlertViewNumberSixExtend() {
+        for (int i = 11; i <= 14; i++) {
+            alertViewUtils[37 + i].hideAlertView();
         }
     }
 
@@ -146,32 +204,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
-        for (int i = 0; i < SIZE; i++) {
-            if (i == position) {
-                alertViewUtils[i].showAlertView();
-                lastPosition = position;
-                switch (position) {
-                    case 0:
-                        showAlertViewNumberOneExtend();
-                        break;
-                    case 3:
-                        alertViewUtils[37+9].showAlertView();
-                        break;
-                    case 4:
-                        alertViewUtils[37+10].showAlertView();
-                        break;
-                    case 6:
-                        alertViewUtils[37+11].showAlertView();
-                        alertViewUtils[37+12].showAlertView();
-                        alertViewUtils[37+13].showAlertView();
-                        alertViewUtils[37+14].showAlertView();
-                        break;
-                }
-                break;
-            }
-        }
+        showAlertView(position);
     }
 
     @Override

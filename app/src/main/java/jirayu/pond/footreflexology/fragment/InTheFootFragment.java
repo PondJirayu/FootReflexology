@@ -128,6 +128,19 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
     }
 
+    private void showAlertView(int position) {
+        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        if (lastPosition == 4) alertViewUtils[13+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
+        for (int i = 0; i < SIZE; i++) {
+            if (i == position) {
+                alertViewUtils[i].showAlertView();
+                if (position == 4) alertViewUtils[13+1].showAlertView();
+                lastPosition = position;
+                break;
+            }
+        }
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -139,17 +152,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
-        if (lastPosition == 4) alertViewUtils[13+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
-        for (int i = 0; i < SIZE; i++) {
-            if (i == position) {
-                alertViewUtils[i].showAlertView();
-                lastPosition = position;
-                if (position == 4) alertViewUtils[13+1].showAlertView();
-                break;
-            }
-        }
+        showAlertView(position);
     }
 
     @Override
