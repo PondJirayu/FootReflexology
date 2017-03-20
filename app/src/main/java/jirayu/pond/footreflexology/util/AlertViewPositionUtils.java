@@ -143,14 +143,12 @@ public class AlertViewPositionUtils {
         // 1 Extend
         position[37+3][0] = 143;
         position[37+3][1] = 443;
-
         // 1 Extend
         position[37+4][0] = 188;
         position[37+4][1] = 508;
-
         // 1 Extend
-        position[37+5][0] = 100;
-        position[37+5][1] = 100;
+        position[37+5][0] = 205;
+        position[37+5][1] = 311;
 
         // 1 Extend
         position[37+6][0] = 100;
