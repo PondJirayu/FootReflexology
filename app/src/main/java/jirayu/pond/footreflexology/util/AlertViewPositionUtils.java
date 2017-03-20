@@ -135,28 +135,26 @@ public class AlertViewPositionUtils {
         position[37][0] = 952;
         position[37][1] = 373;
         // 1 Extend
-        position[37+1][0] = 73;
-        position[37+1][1] = 312;
+        position[37+1][0] = 76;
+        position[37+1][1] = 316;
         // 1 Extend
-        position[37+2][0] = 101;
-        position[37+2][1] = 383;
+        position[37+2][0] = 104;
+        position[37+2][1] = 386;
         // 1 Extend
-        position[37+3][0] = 143;
-        position[37+3][1] = 443;
+        position[37+3][0] = 147;
+        position[37+3][1] = 447;
         // 1 Extend
-        position[37+4][0] = 188;
-        position[37+4][1] = 508;
+        position[37+4][0] = 192;
+        position[37+4][1] = 511;
         // 1 Extend
-        position[37+5][0] = 205;
-        position[37+5][1] = 311;
-
+        position[37+5][0] = 209;
+        position[37+5][1] = 315;
         // 1 Extend
-        position[37+6][0] = 100;
-        position[37+6][1] = 100;
-
+        position[37+6][0] = 223;
+        position[37+6][1] = 380;
         // 1 Extend
-        position[37+7][0] = 100;
-        position[37+7][1] = 100;
+        position[37+7][0] = 260;
+        position[37+7][1] = 446;
 
         // 1 Extend
         position[37+8][0] = 100;
