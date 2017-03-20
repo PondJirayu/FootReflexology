@@ -184,50 +184,50 @@ public class AlertViewPositionUtils {
         int position[][] = new int[14+1][2]; // เขตตอบสนองหลัก 14 จุด ซ้ำ 1 จุด
 
         // 1
-        position[0][0] = 96;
-        position[0][1] = 106;
+        position[0][0] = 98;
+        position[0][1] = 110;
         // 2
-        position[1][0] = 130;
-        position[1][1] = 87;
+        position[1][0] = 133;
+        position[1][1] = 91;
         // 3
-        position[2][0] = 229;
-        position[2][1] = 18;
+        position[2][0] = 233;
+        position[2][1] = 21;
         // 4
-        position[3][0] = 255;
-        position[3][1] = 96;
+        position[3][0] = 259;
+        position[3][1] = 99;
         // 5
-        position[4][0] = 293;
-        position[4][1] = 57;
+        position[4][0] = 296;
+        position[4][1] = 59;
         // 6
-        position[5][0] = 415;
-        position[5][1] = 171;
+        position[5][0] = 419;
+        position[5][1] = 173;
         // 7
-        position[6][0] = 389;
-        position[6][1] = 279;
+        position[6][0] = 392;
+        position[6][1] = 282;
         // 8
-        position[7][0] = 319;
-        position[7][1] = 334;
+        position[7][0] = 323;
+        position[7][1] = 337;
         // 9
-        position[8][0] = 356;
-        position[8][1] = 490;
+        position[8][0] = 359;
+        position[8][1] = 494;
         // 10
-        position[9][0] = 415;
-        position[9][1] = 575;
+        position[9][0] = 418;
+        position[9][1] = 578;
         // 11
-        position[10][0] = 415;
-        position[10][1] = 623;
+        position[10][0] = 418;
+        position[10][1] = 627;
         // 12
-        position[11][0] = 213;
-        position[11][1] = 528;
+        position[11][0] = 216;
+        position[11][1] = 532;
         // 13
-        position[12][0] = 119;
-        position[12][1] = 370;
+        position[12][0] = 123;
+        position[12][1] = 374;
         // 14
-        position[13][0] = 80;
-        position[13][1] = 339;
+        position[13][0] = 84;
+        position[13][1] = 343;
         // 5 Extend
-        position[13+1][0] = 349;
-        position[13+1][1] = 152;
+        position[13+1][0] = 352;
+        position[13+1][1] = 156;
 
         return position;
     }
