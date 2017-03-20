@@ -44,95 +44,109 @@ public class AlertViewPositionUtils {
         // 8
         position[7][0] = 810;
         position[7][1] = 349;
-
-        // TODO : Start
         // 9
-        position[8][0] = 799;
-        position[8][1] = 402;
+        position[8][0] = 802;
+        position[8][1] = 406;
         // 10
-        position[9][0] = 437;
-        position[9][1] = 348;
+        position[9][0] = 440;
+        position[9][1] = 352;
         // 11
-        position[10][0] = 679;
-        position[10][1] = 455;
+        position[10][0] = 683;
+        position[10][1] = 459;
         // 12
-        position[11][0] = 438;
-        position[11][1] = 408;
+        position[11][0] = 442;
+        position[11][1] = 412;
         // 13
-        position[12][0] = 776;
-        position[12][1] = 522;
+        position[12][0] = 780;
+        position[12][1] = 525;
         // 14
-        position[13][0] = 517;
-        position[13][1] = 435;
+        position[13][0] = 520;
+        position[13][1] = 439;
         // 15
-        position[14][0] = 1;
-        position[14][1] = 178;
+        position[14][0] = 2;
+        position[14][1] = 182;
         // 16
-        position[15][0] = 38;
-        position[15][1] = 157;
+        position[15][0] = 41;
+        position[15][1] = 161;
         // 17
-        position[16][0] = 93;
-        position[16][1] = 140;
+        position[16][0] = 96;
+        position[16][1] = 144;
         // 18
-        position[17][0] = 109;
-        position[17][1] = 261;
+        position[17][0] = 112;
+        position[17][1] = 264;
         // 19
-        position[18][0] = 111;
-        position[18][1] = 202;
+        position[18][0] = 114;
+        position[18][1] = 206;
         // 20
-        position[19][0] = 140;
-        position[19][1] = 235;
+        position[19][0] = 143;
+        position[19][1] = 238;
         // 21
-        position[20][0] = 171;
-        position[20][1] = 247;
+        position[20][0] = 174;
+        position[20][1] = 250;
         // 22
-        position[21][0] = 233;
-        position[21][1] = 207;
+        position[21][0] = 236;
+        position[21][1] = 211;
+
         // 23
         position[22][0] = 283;
         position[22][1] = 119;
+
         // 24
         position[23][0] = 291;
         position[23][1] = 300;
+
         // 25
         position[24][0] = 340;
         position[24][1] = 337;
+
         // 26
         position[25][0] = 395;
         position[25][1] = 224;
+
         // 27
         position[26][0] = 349;
         position[26][1] = 275;
+
         // 28
         position[27][0] = 395;
         position[27][1] = 340;
+
         // 29
         position[28][0] = 490;
         position[28][1] = 240;
+
         // 30
         position[29][0] = 541;
         position[29][1] = 177;
+
         // 31
         position[30][0] = 584;
         position[30][1] = 369;
+
         // 32
         position[31][0] = 492;
         position[31][1] = 332;
+
         // 33
         position[32][0] = 639;
         position[32][1] = 190;
+
         // 34
         position[33][0] = 696;
         position[33][1] = 348;
+
         // 35
         position[34][0] = 742;
         position[34][1] = 184;
+
         // 36
         position[35][0] = 885;
         position[35][1] = 340;
+
         // 37
         position[36][0] = 919;
         position[36][1] = 483;
+
         // 38
         position[37][0] = 952;
         position[37][1] = 373;
