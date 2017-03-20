@@ -45,6 +45,7 @@ public class AlertViewPositionUtils {
         position[7][0] = 810;
         position[7][1] = 349;
 
+        // TODO : Start
         // 9
         position[8][0] = 799;
         position[8][1] = 402;
