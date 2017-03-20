@@ -21,8 +21,8 @@ public class AlertViewPositionUtils {
         int position[][] = new int[38+14][2];
 
         // 1
-        position[0][0] = 58;
-        position[0][1] = 256;
+        position[0][0] = 61;
+        position[0][1] = 260;
         // 2
         position[1][0] = 7;
         position[1][1] = 415;
