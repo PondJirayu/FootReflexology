@@ -196,11 +196,11 @@ public class AlertViewPositionUtils {
         position[3][0] = 259;
         position[3][1] = 99;
         // 5
-        position[4][0] = 296;
-        position[4][1] = 59;
+        position[4][0] = 297;
+        position[4][1] = 60;
         // 6
         position[5][0] = 419;
-        position[5][1] = 173;
+        position[5][1] = 174;
         // 7
         position[6][0] = 392;
         position[6][1] = 282;
@@ -226,7 +226,7 @@ public class AlertViewPositionUtils {
         position[13][0] = 84;
         position[13][1] = 343;
         // 5 Extend
-        position[13+1][0] = 352;
+        position[13+1][0] = 353;
         position[13+1][1] = 156;
 
         return position;
@@ -236,56 +236,61 @@ public class AlertViewPositionUtils {
         int position[][] = new int[16+1][2]; // เขตตอบสนองหลัก 16 จุด ซ้ำ 1 จุด
 
         // 1
-        position[0][0] = 94;
-        position[0][1] = 121;
+        position[0][0] = 97;
+        position[0][1] = 124;
         // 2
-        position[1][0] = 107;
-        position[1][1] = 90;
+        position[1][0] = 110;
+        position[1][1] = 94;
         // 3
-        position[2][0] = 58;
-        position[2][1] = 287;
+        position[2][0] = 62;
+        position[2][1] = 290;
         // 4
-        position[3][0] = 288;
-        position[3][1] = 131;
+        position[3][0] = 291;
+        position[3][1] = 134;
         // 5
-        position[4][0] = 290;
-        position[4][1] = 33;
+        position[4][0] = 294;
+        position[4][1] = 37;
         // 6
-        position[5][0] = 426;
-        position[5][1] = 106;
+        position[5][0] = 428;
+        position[5][1] = 110;
         // 7
-        position[6][0] = 414;
-        position[6][1] = 153;
+        position[6][0] = 417;
+        position[6][1] = 157;
         // 8
-        position[7][0] = 324;
-        position[7][1] = 223;
+        position[7][0] = 328;
+        position[7][1] = 227;
         // 9
-        position[8][0] = 399;
-        position[8][1] = 316;
+        position[8][0] = 402;
+        position[8][1] = 319;
         // 10
-        position[9][0] = 425;
-        position[9][1] = 415;
+        position[9][0] = 428;
+        position[9][1] = 418;
         // 11
-        position[10][0] = 310;
-        position[10][1] = 448;
+        position[10][0] = 314;
+        position[10][1] = 451;
         // 12
-        position[11][0] = 265;
-        position[11][1] = 445;
+        position[11][0] = 269;
+        position[11][1] = 449;
+
         // 13
         position[12][0] = 200;
         position[12][1] = 565;
+
         // 14
         position[13][0] = 155;
         position[13][1] = 436;
+
         // 15
         position[14][0] = 275;
         position[14][1] = 336;
+
         // 16
         position[15][0] = 219;
         position[15][1] = 272;
+
         // 8 Double
-        position[15+1][0] = 66;
-        position[15+1][1] = 184;
+        position[15+1][0] = 70;
+        position[15+1][1] = 187;
 
         return position;
     }
