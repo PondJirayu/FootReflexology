@@ -293,6 +293,8 @@ public class AlertViewPositionUtils {
     public static int[][] getAlertViewOnTheBackFootPosition() {
         int position[][] = new int[12][2];
 
+        // TODO : START HERE
+
         // 1
         position[0][0] = 308;
         position[0][1] = 144;

@@ -4,5 +4,5 @@
     android:fromAlpha="0.0"
     android:repeatCount="infinite"
     android:repeatMode="reverse"
-    android:startOffset="200"
+    android:startOffset="300"
     android:toAlpha="1.0" />
