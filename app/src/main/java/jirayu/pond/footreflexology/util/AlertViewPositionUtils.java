@@ -293,44 +293,42 @@ public class AlertViewPositionUtils {
     public static int[][] getAlertViewOnTheBackFootPosition() {
         int position[][] = new int[12][2];
 
-        // TODO : START HERE
-
         // 1
-        position[0][0] = 308;
-        position[0][1] = 144;
+        position[0][0] = 312;
+        position[0][1] = 147;
         // 2
-        position[1][0] = 307;
-        position[1][1] = 277;
+        position[1][0] = 311;
+        position[1][1] = 280;
         // 3
-        position[2][0] = 215;
-        position[2][1] = 305;
+        position[2][0] = 221;
+        position[2][1] = 309;
         // 4
-        position[3][0] = 90;
-        position[3][1] = 172;
+        position[3][0] = 93;
+        position[3][1] = 177;
         // 5
-        position[4][0] = 120;
-        position[4][1] = 455;
+        position[4][0] = 123;
+        position[4][1] = 458;
         // 6
-        position[5][0] = 329;
-        position[5][1] = 508;
+        position[5][0] = 333;
+        position[5][1] = 512;
         // 7
-        position[6][0] = 380;
-        position[6][1] = 500;
+        position[6][0] = 385;
+        position[6][1] = 504;
         // 8
-        position[7][0] = 430;
-        position[7][1] = 486;
+        position[7][0] = 434;
+        position[7][1] = 489;
         // 9
-        position[8][0] = 466;
-        position[8][1] = 302;
+        position[8][0] = 470;
+        position[8][1] = 306;
         // 10
-        position[9][0] = 274;
-        position[9][1] = 348;
+        position[9][0] = 276;
+        position[9][1] = 351;
         // 11
-        position[10][0] = 349;
-        position[10][1] = 349;
+        position[10][0] = 353;
+        position[10][1] = 353;
         // 12
-        position[11][0] = 295;
-        position[11][1] = 487;
+        position[11][0] = 300;
+        position[11][1] = 491;
 
         return position;
     }
