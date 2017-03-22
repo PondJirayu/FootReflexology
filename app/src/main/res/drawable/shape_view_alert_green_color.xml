@@ -4,4 +4,9 @@
 
     <solid android:color="@color/better_color" />
 
+    <stroke
+        android:width="1dp"
+        android:color="@color/green_color_500"
+        />
+
 </shape>
