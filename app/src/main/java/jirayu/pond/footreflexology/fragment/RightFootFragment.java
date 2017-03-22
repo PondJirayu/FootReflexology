@@ -175,25 +175,25 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            alertViewUtils[37 + i].showAlertView();
+            alertViewUtils[37+i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            alertViewUtils[37 + i].hideAlertView();
+            alertViewUtils[37+i].hideAlertView();
         }
     }
 
     private void showAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            alertViewUtils[37 + i].showAlertView();
+            alertViewUtils[37+i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            alertViewUtils[37 + i].hideAlertView();
+            alertViewUtils[37+i].hideAlertView();
         }
     }
 
