@@ -15,155 +15,177 @@ public class AlertViewPositionUtils {
         int position[][] = new int[38+14][2];
 
         // 1
-        position[0][0] = 0;
-        position[0][1] = 0;
+        position[0][0] = 185;
+        position[0][1] = 185;
         // 2
         position[1][0] = 0;
         position[1][1] = 0;
+
         // 3
         position[2][0] = 0;
         position[2][1] = 0;
         // 4
         position[3][0] = 0;
         position[3][1] = 0;
+
         // 5
         position[4][0] = 0;
         position[4][1] = 0;
         // 6
         position[5][0] = 0;
         position[5][1] = 0;
+
         // 7
         position[6][0] = 0;
         position[6][1] = 0;
         // 8
         position[7][0] = 0;
         position[7][1] = 0;
+
         // 9
         position[8][0] = 0;
         position[8][1] = 0;
         // 10
         position[9][0] = 0;
         position[9][1] = 0;
+
         // 11
         position[10][0] = 0;
         position[10][1] = 0;
         // 12
         position[11][0] = 0;
         position[11][1] = 0;
+
         // 13
         position[12][0] = 0;
         position[12][1] = 0;
         // 14
         position[13][0] = 0;
         position[13][1] = 0;
+
         // 15
         position[14][0] = 0;
         position[14][1] = 0;
         // 16
         position[15][0] = 0;
         position[15][1] = 0;
+
         // 17
         position[16][0] = 0;
         position[16][1] = 0;
         // 18
         position[17][0] = 0;
         position[17][1] = 0;
+
         // 19
         position[18][0] = 0;
         position[18][1] = 0;
         // 20
         position[19][0] = 0;
         position[19][1] = 0;
+
         // 21
         position[20][0] = 0;
         position[20][1] = 0;
         // 22
         position[21][0] = 0;
         position[21][1] = 0;
+
         // 23
         position[22][0] = 0;
         position[22][1] = 0;
         // 24
         position[23][0] = 0;
         position[23][1] = 0;
+
         // 25
         position[24][0] = 0;
         position[24][1] = 0;
         // 26
         position[25][0] = 0;
         position[25][1] = 0;
+
         // 27
         position[26][0] = 0;
         position[26][1] = 0;
         // 28
         position[27][0] = 0;
         position[27][1] = 0;
+
         // 29
         position[28][0] = 0;
         position[28][1] = 0;
         // 30
         position[29][0] = 0;
         position[29][1] = 0;
+
         // 31
         position[30][0] = 0;
         position[30][1] = 0;
         // 32
         position[31][0] = 0;
         position[31][1] = 0;
+
         // 33
         position[32][0] = 0;
         position[32][1] = 0;
         // 34
         position[33][0] = 0;
         position[33][1] = 0;
+
         // 35
         position[34][0] = 0;
         position[34][1] = 0;
         // 36
         position[35][0] = 0;
         position[35][1] = 0;
+
         // 37
         position[36][0] = 0;
         position[36][1] = 0;
         // 38
         position[37][0] = 0;
         position[37][1] = 0;
+
         // 1 Extend
-        position[37+1][0] = 0;
-        position[37+1][1] = 0;
+        position[37+1][0] = 139;
+        position[37+1][1] = 247;
         // 1 Extend
-        position[37+2][0] = 0;
-        position[37+2][1] = 0;
+        position[37+2][0] = 104;
+        position[37+2][1] = 308;
         // 1 Extend
-        position[37+3][0] = 0;
-        position[37+3][1] = 0;
+        position[37+3][0] = 75;
+        position[37+3][1] = 378;
         // 1 Extend
-        position[37+4][0] = 0;
-        position[37+4][1] = 0;
+        position[37+4][0] = 61;
+        position[37+4][1] = 441;
         // 1 Extend
-        position[37+5][0] = 0;
-        position[37+5][1] = 0;
+        position[37+5][0] = 292;
+        position[37+5][1] = 189;
         // 1 Extend
-        position[37+6][0] = 0;
-        position[37+6][1] = 0;
+        position[37+6][0] = 269;
+        position[37+6][1] = 249;
         // 1 Extend
-        position[37+7][0] = 0;
-        position[37+7][1] = 0;
+        position[37+7][0] = 220;
+        position[37+7][1] = 315;
         // 1 Extend
-        position[37+8][0] = 0;
-        position[37+8][1] = 0;
+        position[37+8][0] = 200;
+        position[37+8][1] = 376;
+
         // 3 Extend
         position[37+9][0] = 0;
         position[37+9][1] = 0;
         // 4 Extend
         position[37+10][0] = 0;
         position[37+10][1] = 0;
+
         // 6 Extend
         position[37+11][0] = 0;
         position[37+11][1] = 0;
         // 6 Extend
         position[37+12][0] = 0;
         position[37+12][1] = 0;
+
         // 6 Extend
         position[37+13][0] = 0;
         position[37+13][1] = 0;
