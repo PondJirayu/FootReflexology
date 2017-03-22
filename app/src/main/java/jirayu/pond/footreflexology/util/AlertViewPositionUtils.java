@@ -11,11 +11,11 @@ public class AlertViewPositionUtils {
        COL[1 = leftMargin]
     */
 
-//    public static int[][] getAlertViewRightFootPosition() {
-//        int position[][] = new int[][];
-//
-//        return position;
-//    }
+    public static int[][] getAlertViewRightFootPosition() {
+        int position[][] = new int[38+14][2];
+
+        return position;
+    }
 
     public static int[][] getAlertViewLeftFootPosition() {
         int position[][] = new int[38+14][2];
