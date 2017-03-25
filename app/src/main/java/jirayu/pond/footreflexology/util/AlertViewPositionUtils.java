@@ -89,14 +89,12 @@ public class AlertViewPositionUtils {
         // 25
         position[24][0] = 354;
         position[24][1] = 356;
-
         // 26
-        position[25][0] = 0;
-        position[25][1] = 0;
-
+        position[25][0] = 403;
+        position[25][1] = 445;
         // 27
-        position[26][0] = 0;
-        position[26][1] = 0;
+        position[26][0] = 360;
+        position[26][1] = 557;
 
         // 28
         position[27][0] = 0;
