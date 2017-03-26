@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
@@ -40,6 +41,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
     SwitchCompat switchAlert;
+    TextView tvSelectTheResponse;
 
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
@@ -77,6 +79,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
         switchAlert = (SwitchCompat) rootView.findViewById(R.id.switchAlert);
+        tvSelectTheResponse = (TextView) rootView.findViewById(R.id.tvSelectTheResponse);
 
         createAdapter();
         spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -243,8 +246,13 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             btnShowDetails.setVisibility(Switch.GONE);
+            tvSelectTheResponse.setVisibility(Switch.GONE);
+            spinnerRightFoot.setVisibility(Switch.GONE);
+
         } else {
             btnShowDetails.setVisibility(Switch.VISIBLE);
+            tvSelectTheResponse.setVisibility(Switch.VISIBLE);
+            spinnerRightFoot.setVisibility(Switch.VISIBLE);
         }
     }
 
