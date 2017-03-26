@@ -22,7 +22,6 @@ import jirayu.pond.footreflexology.R;
 public class DetailsListItem extends BaseCustomViewGroup {
 
     TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold, tvPageNumber, tvShouldEat, tvShouldNotEat;
-    View viewUnderLine;
 
     public DetailsListItem(Context context) {
         super(context);
@@ -63,7 +62,6 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvTreatment = (TextView) findViewById(R.id.tvTreatment);
         tvRecommend = (TextView) findViewById(R.id.tvRecommend);
         tvRecommendBold = (TextView) findViewById(R.id.tvRecommendBold);
-        viewUnderLine = findViewById(R.id.viewUnderLine);
         tvPageNumber = (TextView) findViewById(R.id.tvPageNumber);
         tvShouldEat = (TextView) findViewById(R.id.tvShouldEat);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
@@ -127,21 +125,6 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
     public void setShouldNotEat(String text) {
         tvShouldNotEat.setText(text);
-    }
-
-    /*
-     * กำหนดสี UnderLine โดยมีเงื่อนไขเป็นเลขคู่ - คี่
-     */
-    public void setUnderLine(int position) {
-        if ((position % 2) == 0) {
-            viewUnderLine.setBackgroundColor(ContextCompat.getColor(getContext(),
-                    R.color.view_even_color));
-            viewUnderLine.invalidate();
-        } else {
-            viewUnderLine.setBackgroundColor(ContextCompat.getColor(getContext(),
-                    R.color.view_odd_color));
-            viewUnderLine.invalidate();
-        }
     }
 
     public void setPageNumber(int pageNumber) {
