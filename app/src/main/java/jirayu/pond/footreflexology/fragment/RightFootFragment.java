@@ -3,15 +3,19 @@ package jirayu.pond.footreflexology.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -23,7 +27,7 @@ import jirayu.pond.footreflexology.util.InfoDialogUtils;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class RightFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class RightFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     /************
     * Variables
@@ -35,6 +39,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
+    SwitchCompat switchAlert;
 
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
@@ -71,6 +76,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
+        switchAlert = (SwitchCompat) rootView.findViewById(R.id.switchAlert);
 
         createAdapter();
         spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -78,6 +84,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         // Handle Click Button
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
+        switchAlert.setOnCheckedChangeListener(this);
     }
 
     private void initAlertView() {
@@ -226,6 +233,18 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
                 break;
+        }
+    }
+
+    /*
+     * Handle Switch On/Off
+     */
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            btnShowDetails.setVisibility(Switch.GONE);
+        } else {
+            btnShowDetails.setVisibility(Switch.VISIBLE);
         }
     }
 
