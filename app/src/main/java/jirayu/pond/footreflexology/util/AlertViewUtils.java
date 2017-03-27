@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Switch;
 
 import jirayu.pond.footreflexology.R;
@@ -15,7 +17,7 @@ import jirayu.pond.footreflexology.R;
 
 public class AlertViewUtils {
 
-    private View alertView;
+    private Button alertView;
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
     private Context context;
@@ -31,7 +33,7 @@ public class AlertViewUtils {
     }
 
     private void initInstance() {
-        alertView = new View(getContext());
+        alertView = new Button(getContext());
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim);
     }
 
