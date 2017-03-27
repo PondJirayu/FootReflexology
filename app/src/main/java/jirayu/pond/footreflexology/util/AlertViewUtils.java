@@ -41,7 +41,7 @@ public class AlertViewUtils {
                 view.setBackgroundResource(R.drawable.shape_view_alert_green_color);
                 break;
             case 4: // เขตตอบสนองที่เลือก
-                view.setBackgroundResource(R.drawable.shape_view_alert_teal_color);
+                view.setBackgroundResource(R.drawable.shape_view_alert_grey_color);
                 break;
             default:
                 break;
