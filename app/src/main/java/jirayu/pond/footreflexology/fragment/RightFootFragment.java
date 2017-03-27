@@ -96,6 +96,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams()); // Add
             alertViewUtils[i].hideAlertView(); // Hide
         }
+//        alertViewUtils[0].getAlertView().setOnClickListener(this);
     }
 
     @Override

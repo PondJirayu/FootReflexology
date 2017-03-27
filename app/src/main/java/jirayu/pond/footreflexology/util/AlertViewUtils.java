@@ -53,7 +53,6 @@ public class AlertViewUtils {
                 break;
         }
         alertView.startAnimation(anim);
-
         return alertView;
     }
 
