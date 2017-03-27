@@ -18,6 +18,7 @@ public class AlertViewUtils {
     private View alertView;
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
+    private Context context;
 
     public AlertViewUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
         setStatus(status);
@@ -25,16 +26,17 @@ public class AlertViewUtils {
         setHeight(height);
         setTopMargin(topMargin);
         setLeftMargin(leftMargin);
-        initInstance(context);
+        setContext(context);
+        initInstance();
     }
 
-    private void initInstance(Context context) {
-        alertView = new View(context);
-        anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim);
+    private void initInstance() {
+        alertView = new View(getContext());
+        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim);
     }
 
     public View getAlertView() {
-        switch (status) {
+        switch (getStatus()) {
             case 1: // อาการแย่
                 alertView.setBackgroundResource(R.drawable.shape_view_alert_red_color);
                 break;
@@ -51,6 +53,7 @@ public class AlertViewUtils {
                 break;
         }
         alertView.startAnimation(anim);
+
         return alertView;
     }
 
@@ -92,6 +95,10 @@ public class AlertViewUtils {
         return topMargin;
     }
 
+    private Context getContext() {
+        return context;
+    }
+
     private void setStatus(int status) {
         this.status = status;
     }
@@ -110,5 +117,9 @@ public class AlertViewUtils {
 
     private void setTopMargin(int topMargin) {
         this.topMargin = topMargin;
+    }
+
+    private void setContext(Context context) {
+        this.context = context;
     }
 }
