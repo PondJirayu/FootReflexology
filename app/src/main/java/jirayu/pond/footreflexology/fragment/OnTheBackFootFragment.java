@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -30,7 +29,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
      * Variables
      ************/
 
-    Spinner spinnerOnTheBackFoot;
+    Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
     FrameLayout layoutAlert;
@@ -68,13 +67,13 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        spinnerOnTheBackFoot = (Spinner) rootView.findViewById(R.id.spinnerOnTheBackFoot);
+        spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
-        spinnerOnTheBackFoot.setOnItemSelectedListener(this); // Handle Click Spinner
+        spinnerFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
@@ -126,7 +125,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOnTheBackFoot.setAdapter(adapter);   // Spinner + Adapter
+        spinnerFoot.setAdapter(adapter);   // Spinner + Adapter
     }
 
     private void showAlertView(int position) {

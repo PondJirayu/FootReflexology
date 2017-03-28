@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="@android:color/transparent"
-        android:padding="10dp"
+        android:padding="8dp"
         android:src="@drawable/ic_info_outline_black_18dp" />
 
 </merge>

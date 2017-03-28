@@ -34,16 +34,7 @@
 
                     <include layout="@layout/tv_select_the_response" />
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/spinnerInTheFoot"
-                        style="@style/Base.Widget.AppCompat.Spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="14dp"
-                        android:layout_marginRight="14dp"
-                        android:layout_marginTop="10dp"
-                        android:spinnerMode="dropdown" />
+                    <include layout="@layout/spinner_foot" />
 
                     <include layout="@layout/btn_show_details" />
 

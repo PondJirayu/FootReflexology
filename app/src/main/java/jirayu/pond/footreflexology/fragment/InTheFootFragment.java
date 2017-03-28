@@ -29,7 +29,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
      * Variables
      ************/
 
-    Spinner spinnerInTheFoot;
+    Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
     FrameLayout layoutAlert;
@@ -67,13 +67,13 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        spinnerInTheFoot = (Spinner) rootView.findViewById(R.id.spinnerInTheFoot);
+        spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
-        spinnerInTheFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
+        spinnerFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
@@ -125,7 +125,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.in_the_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerInTheFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
+        spinnerFoot.setAdapter(adapter); // สั่งให้ spinner ทำงานคู่กับ adapter
     }
 
     private void showAlertView(int position) {

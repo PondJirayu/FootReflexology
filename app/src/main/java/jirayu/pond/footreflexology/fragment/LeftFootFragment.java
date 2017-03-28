@@ -30,7 +30,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
      * Variables
      ************/
 
-    Spinner spinnerLeftFoot;
+    Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
     FrameLayout layoutAlert;
@@ -68,13 +68,13 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        spinnerLeftFoot = (Spinner) rootView.findViewById(R.id.spinnerLeftFoot);
+        spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
-        spinnerLeftFoot.setOnItemSelectedListener(this); // Handle Click Spinner
+        spinnerFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click
         btnShowDetails.setOnClickListener(this);
@@ -126,7 +126,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.left_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLeftFoot.setAdapter(adapter); // Spinner + Adapter
+        spinnerFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
     private void showAlertView(int position) {

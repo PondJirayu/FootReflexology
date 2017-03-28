@@ -3,20 +3,15 @@ package jirayu.pond.footreflexology.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -34,7 +29,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     * Variables
      ***********/
 
-    Spinner spinnerRightFoot;
+    Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
     Button btnShowDetails;
     FrameLayout layoutAlert;
@@ -72,13 +67,13 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        spinnerRightFoot = (Spinner) rootView.findViewById(R.id.spinnerRightFoot);
+        spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
         createAdapter();
-        spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
+        spinnerFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click Button
         btnShowDetails.setOnClickListener(this);
@@ -132,7 +127,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.right_foot_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerRightFoot.setAdapter(adapter); // Spinner + Adapter
+        spinnerFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
     private void showAlertView(int position) {
