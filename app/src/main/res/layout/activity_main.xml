@@ -32,7 +32,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <include layout="@layout/toolbar_drop_shadow" />
+        <include layout="@layout/toolbar_elevation" />
 
         <!--Content-->
 
