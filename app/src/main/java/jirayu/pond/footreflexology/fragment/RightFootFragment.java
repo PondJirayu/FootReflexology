@@ -90,8 +90,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         // TODO : Start
         alertViewUtils[8].getAlertView().setId(R.id.one);
         alertViewUtils[8].getAlertView().setOnClickListener(this);
-        alertViewUtils[9].getAlertView().setId(R.id.two);
-        alertViewUtils[9].getAlertView().setOnClickListener(this);
     }
 
     @Override
@@ -236,12 +234,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 Intent intent2 = new Intent(getContext(), ShowDetailsActivity.class);
                 intent2.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
                 startActivity(intent2);
-                break;
-            case R.id.two:
-                Toast.makeText(getContext(),
-                        "Two",
-                        Toast.LENGTH_SHORT)
-                        .show();
                 break;
         }
     }
