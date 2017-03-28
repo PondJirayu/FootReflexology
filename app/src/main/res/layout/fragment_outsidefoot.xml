@@ -32,7 +32,7 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <include layout="@layout/tv_select_the_response" />
+                    <include layout="@layout/tv_display_response_zone" />
 
                     <include layout="@layout/spinner_foot" />
 
