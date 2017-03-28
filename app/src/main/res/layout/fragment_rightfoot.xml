@@ -31,35 +31,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="6dp">
+                    android:padding="20dp">
 
-                    <include layout="@layout/switch_alert_view" />
+                    <include layout="@layout/tv_select_the_response" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/tvSelectTheResponse"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="@string/select_the_response"
-                            android:textSize="14sp" />
-
-                        <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/spinnerRightFoot"
-                            style="@style/Base.Widget.AppCompat.Spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_toEndOf="@+id/tvSelectTheResponse"
-                            android:layout_toRightOf="@+id/tvSelectTheResponse"
-                            android:padding="10dp"
-                            android:spinnerMode="dropdown" />
-
-                    </RelativeLayout>
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinnerRightFoot"
+                        style="@style/Base.Widget.AppCompat.Spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:spinnerMode="dropdown" />
 
                     <include layout="@layout/btn_show_details" />
 
