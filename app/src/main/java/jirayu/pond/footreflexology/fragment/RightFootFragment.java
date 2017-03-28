@@ -233,10 +233,9 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 infoDialog.showDialog();
                 break;
             case R.id.one:
-                Toast.makeText(getContext(),
-                        "One",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                Intent intent2 = new Intent(getContext(), ShowDetailsActivity.class);
+                intent2.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+                startActivity(intent2);
                 break;
             case R.id.two:
                 Toast.makeText(getContext(),
