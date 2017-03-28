@@ -241,7 +241,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     }
 
     /*
-     * Handle Switch On/Off
+     * Handle Switch on/off
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

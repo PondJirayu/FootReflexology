@@ -17,10 +17,18 @@ import jirayu.pond.footreflexology.R;
 
 public class AlertViewUtils {
 
+    /************
+     * Variables
+     ***********/
+
     private Button alertView;
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
     private Context context;
+
+    /************
+     * Functions
+     ************/
 
     public AlertViewUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
         setStatus(status);
@@ -35,9 +43,6 @@ public class AlertViewUtils {
     private void initInstance() {
         alertView = new Button(getContext());
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim);
-    }
-
-    public View getAlertView() {
         switch (getStatus()) {
             case 1: // อาการแย่
                 alertView.setBackgroundResource(R.drawable.shape_view_alert_red_color);
@@ -55,7 +60,6 @@ public class AlertViewUtils {
                 break;
         }
         alertView.startAnimation(anim);
-        return alertView;
     }
 
     public FrameLayout.LayoutParams getParams() {
@@ -74,6 +78,10 @@ public class AlertViewUtils {
         anim.setRepeatCount(Animation.INFINITE);
         alertView.startAnimation(anim);
         alertView.setVisibility(Switch.VISIBLE);
+    }
+
+    public View getAlertView() {
+        return alertView;
     }
 
     private int getStatus() {
@@ -123,4 +131,12 @@ public class AlertViewUtils {
     private void setContext(Context context) {
         this.context = context;
     }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    /**************
+     * Inner Class
+     **************/
 }
