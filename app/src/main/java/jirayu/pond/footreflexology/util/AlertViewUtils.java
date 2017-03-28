@@ -133,11 +133,4 @@ public class AlertViewUtils {
         this.context = context;
     }
 
-    /****************
-     * Listener Zone
-     ****************/
-
-    /**************
-     * Inner Class
-     **************/
 }

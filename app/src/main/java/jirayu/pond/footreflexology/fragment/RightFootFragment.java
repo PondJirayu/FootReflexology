@@ -28,7 +28,7 @@ import jirayu.pond.footreflexology.util.InfoDialogUtils;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class RightFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
+public class RightFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     /************
     * Variables
@@ -40,8 +40,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
-    SwitchCompat switchAlert;
-    TextView tvSelectTheResponse;
 
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
@@ -78,8 +76,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
-        switchAlert = (SwitchCompat) rootView.findViewById(R.id.switchAlert);
-        tvSelectTheResponse = (TextView) rootView.findViewById(R.id.tvSelectTheResponse);
 
         createAdapter();
         spinnerRightFoot.setOnItemSelectedListener(this); // Handle Click Spinner
@@ -87,7 +83,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         // Handle Click Button
         btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
-        switchAlert.setOnCheckedChangeListener(this);
     }
 
     private void initAlertView() {
@@ -96,7 +91,8 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams()); // Add
             alertViewUtils[i].hideAlertView(); // Hide
         }
-        alertViewUtils[0].getAlertView().setOnClickListener(this);
+        // TODO : Start
+
     }
 
     @Override
@@ -237,23 +233,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
                 break;
-        }
-    }
-
-    /*
-     * Handle Switch on/off
-     */
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            btnShowDetails.setVisibility(Switch.GONE);
-            tvSelectTheResponse.setVisibility(Switch.GONE);
-            spinnerRightFoot.setVisibility(Switch.GONE);
-
-        } else {
-            btnShowDetails.setVisibility(Switch.VISIBLE);
-            tvSelectTheResponse.setVisibility(Switch.VISIBLE);
-            spinnerRightFoot.setVisibility(Switch.VISIBLE);
         }
     }
 
