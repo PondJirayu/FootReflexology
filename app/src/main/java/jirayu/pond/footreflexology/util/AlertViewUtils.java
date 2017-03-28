@@ -41,8 +41,8 @@ public class AlertViewUtils {
     }
 
     private void initInstance() {
-        alertView = new Button(getContext());
-        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim);
+        alertView = new Button(getContext());   // Create View
+        // Set Background View
         switch (getStatus()) {
             case 1: // อาการแย่
                 alertView.setBackgroundResource(R.drawable.shape_view_alert_red_color);
@@ -59,7 +59,8 @@ public class AlertViewUtils {
             default:
                 break;
         }
-        alertView.startAnimation(anim);
+        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
+        alertView.startAnimation(anim); // Start View Animation
     }
 
     public FrameLayout.LayoutParams getParams() {
