@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -87,7 +88,10 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             alertViewUtils[i].hideAlertView(); // Hide
         }
         // TODO : Start
-
+        alertViewUtils[8].getAlertView().setId(R.id.one);
+        alertViewUtils[8].getAlertView().setOnClickListener(this);
+        alertViewUtils[9].getAlertView().setId(R.id.two);
+        alertViewUtils[9].getAlertView().setOnClickListener(this);
     }
 
     @Override
@@ -227,6 +231,18 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
+                break;
+            case R.id.one:
+                Toast.makeText(getContext(),
+                        "One",
+                        Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case R.id.two:
+                Toast.makeText(getContext(),
+                        "Two",
+                        Toast.LENGTH_SHORT)
+                        .show();
                 break;
         }
     }
