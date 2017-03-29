@@ -1,12 +1,10 @@
 package jirayu.pond.footreflexology.util;
 
 import android.content.Context;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.Switch;
 
 import jirayu.pond.footreflexology.R;
@@ -21,7 +19,7 @@ public class AlertViewUtils {
      * Variables
      ***********/
 
-    private Button alertView;
+    private Button btnAlert;
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
     private Context context;
@@ -41,26 +39,27 @@ public class AlertViewUtils {
     }
 
     private void initInstance() {
-        alertView = new Button(getContext());   // Create View
+        btnAlert = new Button(getContext());   // Create View
+        btnAlert.setId(R.id.btnAlert); // Set Id
         // Set Background View
         switch (getStatus()) {
             case 1: // อาการแย่
-                alertView.setBackgroundResource(R.drawable.shape_view_alert_red_color);
+                btnAlert.setBackgroundResource(R.drawable.shape_view_alert_red_color);
                 break;
             case 2: // อาการทรงตัว
-                alertView.setBackgroundResource(R.drawable.shape_view_alert_yellow_color);
+                btnAlert.setBackgroundResource(R.drawable.shape_view_alert_yellow_color);
                 break;
             case 3: // อาการดีขึ้น
-                alertView.setBackgroundResource(R.drawable.shape_view_alert_green_color);
+                btnAlert.setBackgroundResource(R.drawable.shape_view_alert_green_color);
                 break;
             case 4: // เขตตอบสนองที่เลือก
-                alertView.setBackgroundResource(R.drawable.shape_view_alert_grey_color);
+                btnAlert.setBackgroundResource(R.drawable.shape_view_alert_grey_color);
                 break;
             default:
                 break;
         }
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
-        alertView.startAnimation(anim); // Start View Animation
+        btnAlert.startAnimation(anim); // Start View Animation
     }
 
     public FrameLayout.LayoutParams getParams() {
@@ -71,18 +70,18 @@ public class AlertViewUtils {
     }
 
     public void hideAlertView() {
-        alertView.setVisibility(Switch.GONE);
+        btnAlert.setVisibility(Switch.GONE);
         anim.setRepeatCount(0);
     }
 
     public void showAlertView() {
         anim.setRepeatCount(Animation.INFINITE);
-        alertView.startAnimation(anim);
-        alertView.setVisibility(Switch.VISIBLE);
+        btnAlert.startAnimation(anim);
+        btnAlert.setVisibility(Switch.VISIBLE);
     }
 
-    public View getAlertView() {
-        return alertView;
+    public Button getBtnAlert() {
+        return btnAlert;
     }
 
     private int getStatus() {

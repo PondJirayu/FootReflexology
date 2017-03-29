@@ -83,7 +83,7 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     private void initAlertView() {
         for (int i = 0; i < SIZE; i++) {
             alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams()); // Add
+            layoutAlert.addView(alertViewUtils[i].getBtnAlert(), alertViewUtils[i].getParams()); // Add
             alertViewUtils[i].hideAlertView(); // Hide
         }
      }

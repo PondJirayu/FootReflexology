@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
@@ -62,7 +61,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
         initInstances(rootView);
-        initAlertView();
+        initBtnAlert();
         return rootView;
     }
 
@@ -81,15 +80,17 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         imgBtnInfo.setOnClickListener(this);
     }
 
-    private void initAlertView() {
+    private void initBtnAlert() {
+        // Create btnAlert
         for (int i = 0; i < SIZE; i++) {
             alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            layoutAlert.addView(alertViewUtils[i].getAlertView(), alertViewUtils[i].getParams()); // Add
+            layoutAlert.addView(alertViewUtils[i].getBtnAlert(), alertViewUtils[i].getParams()); // Add to Layout
             alertViewUtils[i].hideAlertView(); // Hide
         }
-        // TODO : Start
-        alertViewUtils[8].getAlertView().setId(R.id.one);
-        alertViewUtils[8].getAlertView().setOnClickListener(this);
+        // Handle Click btnAlert
+        for (int i = 0; i < SIZE; i++) {
+            alertViewUtils[i].getBtnAlert().setOnClickListener(this);
+        }
     }
 
     @Override
@@ -230,12 +231,12 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             case R.id.btnShowDetails:
                 startActivity();
                 break;
+            case R.id.btnAlert:
+                startActivity();
+                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
-                break;
-            case R.id.one:
-                startActivity();
                 break;
         }
     }
