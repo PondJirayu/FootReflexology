@@ -37,6 +37,8 @@
 
                     <include layout="@layout/spinner_foot" />
 
+                    <include layout="@layout/btn_show_details" />
+
                 </LinearLayout>
 
             </LinearLayout>

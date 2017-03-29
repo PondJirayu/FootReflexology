@@ -30,6 +30,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
      ***********/
 
     Spinner spinnerFoot;
+    Button btnShowDetails;
     ArrayAdapter<CharSequence> adapter;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
@@ -66,6 +67,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
@@ -75,6 +77,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
         // Handle Click Button
         imgBtnInfo.setOnClickListener(this);
+        btnShowDetails.setOnClickListener(this);
     }
 
     private void initBtnAlert() {
@@ -194,6 +197,12 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    private void startActivity() {
+        Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+        intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+        startActivity(intent);
+    }
+
     /****************
      * Listener Zone
      ****************/
@@ -219,10 +228,11 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnShowDetails:
+                startActivity();
+                break;
             case R.id.btnAlert:
-                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-                startActivity(intent);
+                startActivity();
                 break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
