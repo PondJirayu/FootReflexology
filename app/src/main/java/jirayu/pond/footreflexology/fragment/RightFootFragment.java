@@ -31,7 +31,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
-    Button btnShowDetails;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
     StringsManager stringsManager;
@@ -68,7 +67,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
-        btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
@@ -76,7 +74,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         spinnerFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click Button
-        btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
     }
 
