@@ -67,7 +67,7 @@ public class DiseaseListAdapter extends BaseAdapter {
         item.setTreatment(paragraph + dao.getTreatment());
         item.setShouldEat((dao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldEat()));
         item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldNotEat()));
-        item.setRecommend(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
+        item.setRecommendation(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
 
         // Start Animation
         Animation anim = AnimationUtils.loadAnimation(parent.getContext(),

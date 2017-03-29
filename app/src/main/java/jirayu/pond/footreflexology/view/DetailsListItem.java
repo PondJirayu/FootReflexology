@@ -4,10 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.content.ContextCompat;
-import android.text.Html;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 
@@ -21,7 +18,7 @@ import jirayu.pond.footreflexology.R;
  */
 public class DetailsListItem extends BaseCustomViewGroup {
 
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommend, tvRecommendBold, tvPageNumber, tvShouldEat, tvShouldNotEat;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommendation, tvRecommendationTitle, tvPageNumber, tvShouldEat, tvShouldNotEat;
 
     public DetailsListItem(Context context) {
         super(context);
@@ -60,8 +57,8 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvDiseaseName = (TextView) findViewById(R.id.tvDiseaseName);
         tvDetail = (TextView) findViewById(R.id.tvDetail);
         tvTreatment = (TextView) findViewById(R.id.tvTreatment);
-        tvRecommend = (TextView) findViewById(R.id.tvRecommend);
-        tvRecommendBold = (TextView) findViewById(R.id.tvRecommendBold);
+        tvRecommendation = (TextView) findViewById(R.id.tvRecommendation);
+        tvRecommendationTitle = (TextView) findViewById(R.id.tvRecommendationTitle);
         tvPageNumber = (TextView) findViewById(R.id.tvPageNumber);
         tvShouldEat = (TextView) findViewById(R.id.tvShouldEat);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
@@ -115,8 +112,8 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvTreatment.setText(text);
     }
 
-    public void setRecommend(String text) {
-        tvRecommend.setText(text);
+    public void setRecommendation(String text) {
+        tvRecommendation.setText(text);
     }
 
     public void setShouldEat(String text) {

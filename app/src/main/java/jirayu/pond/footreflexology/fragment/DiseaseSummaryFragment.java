@@ -98,7 +98,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
         tvTitleShouldNotEat = (TextView) rootView.findViewById(R.id.tvTitleShouldNotEat);
         tvShouldNotEat = (TextView) rootView.findViewById(R.id.tvShouldNotEat);
         tvTitleRecommend = (TextView) rootView.findViewById(R.id.tvTitleRecommend);
-        tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommend);
+        tvRecommend = (TextView) rootView.findViewById(R.id.tvRecommendation);
         hideView();
 
         textToSpeech = new TextToSpeech(getContext(), this);    // TextToSpeech

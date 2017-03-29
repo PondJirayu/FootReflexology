@@ -32,6 +32,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvDiseaseNameTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/disease_name"
@@ -56,6 +57,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvDetailTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -80,6 +82,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvTreatmentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -104,6 +107,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvShouldEatTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -128,6 +132,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvShouldNotEatTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -152,7 +157,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvRecommendBold"
+                    android:id="@+id/tvRecommendationTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -162,7 +167,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvRecommend"
+                    android:id="@+id/tvRecommendation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_black_color"
