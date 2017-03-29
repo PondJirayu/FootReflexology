@@ -197,12 +197,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void startActivity() {
-        Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-        intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-        startActivity(intent);
-    }
-
     /****************
      * Listener Zone
      ****************/
@@ -228,11 +222,10 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnShowDetails:
-                startActivity();
-                break;
             case R.id.btnAlert:
-                startActivity();
+                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
+                startActivity(intent);
                 break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
