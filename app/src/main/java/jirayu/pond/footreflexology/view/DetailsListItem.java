@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
      * Variables
      ************/
 
-    AdjustableImageButton imgBtnHideView;
+    AdjustableImageButton imgBtnExpandView;
     TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle,
             tvRecommendation, tvRecommendationTitle,
             tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat,
@@ -82,10 +81,10 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldEatTitle = (TextView) findViewById(R.id.tvShouldEatTitle);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
         tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
-        imgBtnHideView = (AdjustableImageButton) findViewById(R.id.imgBtnHideView);
+        imgBtnExpandView = (AdjustableImageButton) findViewById(R.id.imgBtnExpandView);
 
         // Handle Click Button
-        imgBtnHideView.setOnClickListener(this);
+        imgBtnExpandView.setOnClickListener(this);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -152,7 +151,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvPageNumber.setText(String.valueOf(pageNumber + 1));
     }
 
-    private void hideTextView() {
+    private void expandLess() {
         tvTreatment.setVisibility(Switch.GONE);
         tvTreatmentTitle.setVisibility(Switch.GONE);
         tvRecommendation.setVisibility(Switch.GONE);
@@ -163,7 +162,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldNotEatTitle.setVisibility(Switch.GONE);
     }
 
-    private void showTextView() {
+    private void expandMore() {
         tvTreatment.setVisibility(Switch.VISIBLE);
         tvTreatmentTitle.setVisibility(Switch.VISIBLE);
         tvRecommendation.setVisibility(Switch.VISIBLE);
@@ -181,12 +180,12 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imgBtnHideView:
+            case R.id.imgBtnExpandView:
                 if (tvVisible) {
-                    hideTextView();
+                    expandLess();
                     tvVisible = false;
                 } else {
-                    showTextView();
+                    expandMore();
                     tvVisible = true;
                 }
                 break;

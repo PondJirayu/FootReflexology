@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content">
 
                     <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageButton
-                        android:id="@+id/imgBtnHideView"
+                        android:id="@+id/imgBtnExpandView"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
 
