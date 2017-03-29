@@ -25,7 +25,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
      * Variables
      ************/
 
-    AdjustableImageButton imgBtnExpandView;
+    AdjustableImageButton imgButtonExpandView;
     TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle,
             tvRecommendation, tvRecommendationTitle,
             tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat,
@@ -81,10 +81,10 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldEatTitle = (TextView) findViewById(R.id.tvShouldEatTitle);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
         tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
-        imgBtnExpandView = (AdjustableImageButton) findViewById(R.id.imgBtnExpandView);
+        imgButtonExpandView = (AdjustableImageButton) findViewById(R.id.imgButtonExpandView);
 
         // Handle Click Button
-        imgBtnExpandView.setOnClickListener(this);
+        imgButtonExpandView.setOnClickListener(this);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -180,7 +180,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imgBtnExpandView:
+            case R.id.imgButtonExpandView:
                 if (tvVisible) {
                     expandLess();
                     tvVisible = false;
