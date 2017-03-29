@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
 import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
+import com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageButton;
 
 import jirayu.pond.footreflexology.R;
 
@@ -25,9 +26,11 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
      * Variables
      ************/
 
-    ImageButton imgBtnHideView;
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle, tvRecommendation, tvRecommendationTitle,
-            tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat, tvShouldNotEatTitle;
+    AdjustableImageButton imgBtnHideView;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle,
+            tvRecommendation, tvRecommendationTitle,
+            tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat,
+            tvShouldNotEatTitle;
     Boolean tvVisible = true;
 
     /************
@@ -79,7 +82,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldEatTitle = (TextView) findViewById(R.id.tvShouldEatTitle);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
         tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
-        imgBtnHideView = (ImageButton) findViewById(R.id.imgBtnHideView);
+        imgBtnHideView = (AdjustableImageButton) findViewById(R.id.imgBtnHideView);
 
         // Handle Click Button
         imgBtnHideView.setOnClickListener(this);
