@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -16,9 +19,20 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class DetailsListItem extends BaseCustomViewGroup {
+public class DetailsListItem extends BaseCustomViewGroup implements View.OnClickListener {
 
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvRecommendation, tvRecommendationTitle, tvPageNumber, tvShouldEat, tvShouldNotEat;
+    /************
+     * Variables
+     ************/
+
+    ImageButton imgBtnHideView;
+    TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle, tvRecommendation, tvRecommendationTitle,
+            tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat, tvShouldNotEatTitle;
+    Boolean tvVisible = true;
+
+    /************
+     * Functions
+     ************/
 
     public DetailsListItem(Context context) {
         super(context);
@@ -57,11 +71,18 @@ public class DetailsListItem extends BaseCustomViewGroup {
         tvDiseaseName = (TextView) findViewById(R.id.tvDiseaseName);
         tvDetail = (TextView) findViewById(R.id.tvDetail);
         tvTreatment = (TextView) findViewById(R.id.tvTreatment);
+        tvTreatmentTitle = (TextView) findViewById(R.id.tvTreatmentTitle);
         tvRecommendation = (TextView) findViewById(R.id.tvRecommendation);
         tvRecommendationTitle = (TextView) findViewById(R.id.tvRecommendationTitle);
         tvPageNumber = (TextView) findViewById(R.id.tvPageNumber);
         tvShouldEat = (TextView) findViewById(R.id.tvShouldEat);
+        tvShouldEatTitle = (TextView) findViewById(R.id.tvShouldEatTitle);
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
+        tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
+        imgBtnHideView = (ImageButton) findViewById(R.id.imgBtnHideView);
+
+        // Handle Click Button
+        imgBtnHideView.setOnClickListener(this);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -126,6 +147,47 @@ public class DetailsListItem extends BaseCustomViewGroup {
 
     public void setPageNumber(int pageNumber) {
         tvPageNumber.setText(String.valueOf(pageNumber + 1));
+    }
+
+    private void hideTextView() {
+        tvTreatment.setVisibility(Switch.GONE);
+        tvTreatmentTitle.setVisibility(Switch.GONE);
+        tvRecommendation.setVisibility(Switch.GONE);
+        tvRecommendationTitle.setVisibility(Switch.GONE);
+        tvShouldEat.setVisibility(Switch.GONE);
+        tvShouldEatTitle.setVisibility(Switch.GONE);
+        tvShouldNotEat.setVisibility(Switch.GONE);
+        tvShouldNotEatTitle.setVisibility(Switch.GONE);
+    }
+
+    private void showTextView() {
+        tvTreatment.setVisibility(Switch.VISIBLE);
+        tvTreatmentTitle.setVisibility(Switch.VISIBLE);
+        tvRecommendation.setVisibility(Switch.VISIBLE);
+        tvRecommendationTitle.setVisibility(Switch.VISIBLE);
+        tvShouldEat.setVisibility(Switch.VISIBLE);
+        tvShouldEatTitle.setVisibility(Switch.VISIBLE);
+        tvShouldNotEat.setVisibility(Switch.VISIBLE);
+        tvShouldNotEatTitle.setVisibility(Switch.VISIBLE);
+    }
+
+    /****************
+     * Listener Zone
+     ****************/
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgBtnHideView:
+                if (tvVisible) {
+                    hideTextView();
+                    tvVisible = false;
+                } else {
+                    showTextView();
+                    tvVisible = true;
+                }
+                break;
+        }
     }
 
 }
