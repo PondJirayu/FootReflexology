@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
-import jirayu.pond.footreflexology.util.AlertViewPositionUtils;
-import jirayu.pond.footreflexology.util.AlertViewUtils;
+import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
+import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 /**
@@ -38,8 +38,8 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
 
     private int lastPosition = -1;
     private final int SIZE = 14 + 1;
-    private int position[][] = AlertViewPositionUtils.getAlertViewInTheFootPosition();
-    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
+    private int position[][] = ButtonAlertPositionUtils.getAlertViewInTheFootPosition();
+    private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
 
     /************
      * Functions
@@ -82,9 +82,9 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
 
     private void initAlertView() {
         for (int i = 0; i < SIZE; i++) {
-            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            layoutAlert.addView(alertViewUtils[i].getBtnAlert(), alertViewUtils[i].getParams()); // Add
-            alertViewUtils[i].hideAlertView(); // Hide
+            buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
+            layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add
+            buttonAlertUtils[i].hideAlertView(); // Hide
         }
      }
 
@@ -129,12 +129,12 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     }
 
     private void showAlertView(int position) {
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
-        if (lastPosition == 4) alertViewUtils[13+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
+        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        if (lastPosition == 4) buttonAlertUtils[13+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                alertViewUtils[i].showAlertView();
-                if (position == 4) alertViewUtils[13+1].showAlertView();
+                buttonAlertUtils[i].showAlertView();
+                if (position == 4) buttonAlertUtils[13+1].showAlertView();
                 lastPosition = position;
                 break;
             }

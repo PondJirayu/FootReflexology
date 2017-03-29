@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.manager.StringsManager;
-import jirayu.pond.footreflexology.util.AlertViewPositionUtils;
-import jirayu.pond.footreflexology.util.AlertViewUtils;
+import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
+import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
 
 /**
@@ -38,8 +38,8 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
-    private int position[][] = AlertViewPositionUtils.getAlertViewRightFootPosition();
-    private AlertViewUtils alertViewUtils[] = new AlertViewUtils[SIZE];
+    private int position[][] = ButtonAlertPositionUtils.getAlertViewRightFootPosition();
+    private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
 
     /************
      * Functions
@@ -83,13 +83,13 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     private void initBtnAlert() {
         // Create btnAlert
         for (int i = 0; i < SIZE; i++) {
-            alertViewUtils[i] = new AlertViewUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            layoutAlert.addView(alertViewUtils[i].getBtnAlert(), alertViewUtils[i].getParams()); // Add to Layout
-            alertViewUtils[i].hideAlertView(); // Hide
+            buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
+            layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add to Layout
+            buttonAlertUtils[i].hideAlertView(); // Hide
         }
         // Handle Click btnAlert
         for (int i = 0; i < SIZE; i++) {
-            alertViewUtils[i].getBtnAlert().setOnClickListener(this);
+            buttonAlertUtils[i].getBtnAlert().setOnClickListener(this);
         }
     }
 
@@ -133,18 +133,18 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         spinnerFoot.setAdapter(adapter); // Spinner + Adapter
     }
 
-    private void showAlertView(int position) {
-        if (lastPosition != -1) alertViewUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
+    private void showBtnAlert(int position) {
+        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
         // ซ่อน AlertView ตัวซ้ำ
         switch (lastPosition) {
             case 0:
                 hideAlertViewNumberOneExtend();
                 break;
             case 2:
-                alertViewUtils[37+9].hideAlertView();
+                buttonAlertUtils[37+9].hideAlertView();
                 break;
             case 3:
-                alertViewUtils[37+10].hideAlertView();
+                buttonAlertUtils[37+10].hideAlertView();
                 break;
             case 5:
                 hideAlertViewNumberSixExtend();
@@ -152,16 +152,16 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                alertViewUtils[i].showAlertView();
+                buttonAlertUtils[i].showAlertView();
                 switch (position) {
                     case 0:
                         showAlertViewNumberOneExtend();
                         break;
                     case 2:
-                        alertViewUtils[37+9].showAlertView();
+                        buttonAlertUtils[37+9].showAlertView();
                         break;
                     case 3:
-                        alertViewUtils[37+10].showAlertView();
+                        buttonAlertUtils[37+10].showAlertView();
                         break;
                     case 5:
                         showAlertViewNumberSixExtend();
@@ -175,25 +175,25 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            alertViewUtils[37+i].showAlertView();
+            buttonAlertUtils[37+i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            alertViewUtils[37+i].hideAlertView();
+            buttonAlertUtils[37+i].hideAlertView();
         }
     }
 
     private void showAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            alertViewUtils[37+i].showAlertView();
+            buttonAlertUtils[37+i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            alertViewUtils[37+i].hideAlertView();
+            buttonAlertUtils[37+i].hideAlertView();
         }
     }
 
@@ -214,9 +214,8 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         stringsManager = new StringsManager();
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
-        showAlertView(position);
+        showBtnAlert(position);
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 

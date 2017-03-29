@@ -13,7 +13,7 @@ import jirayu.pond.footreflexology.R;
  * Created by lp700 on 10/3/2560.
  */
 
-public class AlertViewUtils {
+public class ButtonAlertUtils {
 
     /************
      * Variables
@@ -28,7 +28,7 @@ public class AlertViewUtils {
      * Functions
      ************/
 
-    public AlertViewUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
+    public ButtonAlertUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
         setStatus(status);
         setWidth(width);
         setHeight(height);
