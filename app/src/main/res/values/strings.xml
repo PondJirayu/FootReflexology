@@ -52,4 +52,6 @@
     <string name="action_sort_medical_history">เรียงลำดับ</string>
     <string name="notification_description">คำอธิบายการแจ้งเตือน</string>
     <string name="show_alert">แสดงการแจ้งเตือนอาการ</string>
+    <string name="expand_more">แสดงมากขึ้น</string>
+    <string name="expand_less">แสดงน้อยลง</string>
 </resources>

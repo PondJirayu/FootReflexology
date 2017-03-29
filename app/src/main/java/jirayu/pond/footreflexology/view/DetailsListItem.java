@@ -29,8 +29,8 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
     TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle,
             tvRecommendation, tvRecommendationTitle,
             tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat,
-            tvShouldNotEatTitle;
-    Boolean tvVisible = true;
+            tvShouldNotEatTitle, tvExpandView;
+    Boolean tvVisible = false;
 
     /************
      * Functions
@@ -82,6 +82,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldNotEat = (TextView) findViewById(R.id.tvShouldNotEat);
         tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
         imgButtonExpandView = (AdjustableImageButton) findViewById(R.id.imgButtonExpandView);
+        tvExpandView = (TextView) findViewById(R.id.tvExpandView);
 
         // Handle Click Button
         imgButtonExpandView.setOnClickListener(this);
@@ -151,6 +152,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvPageNumber.setText(String.valueOf(pageNumber + 1));
     }
 
+    // แสดงวิวย่อ
     private void expandLess() {
         tvTreatment.setVisibility(Switch.GONE);
         tvTreatmentTitle.setVisibility(Switch.GONE);
@@ -160,8 +162,11 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldEatTitle.setVisibility(Switch.GONE);
         tvShouldNotEat.setVisibility(Switch.GONE);
         tvShouldNotEatTitle.setVisibility(Switch.GONE);
+        tvExpandView.setText(R.string.expand_more);
+        imgButtonExpandView.setImageResource(R.drawable.ic_expand_more_black_24dp);
     }
 
+    // แสดงวิวเต็ม
     private void expandMore() {
         tvTreatment.setVisibility(Switch.VISIBLE);
         tvTreatmentTitle.setVisibility(Switch.VISIBLE);
@@ -171,6 +176,8 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldEatTitle.setVisibility(Switch.VISIBLE);
         tvShouldNotEat.setVisibility(Switch.VISIBLE);
         tvShouldNotEatTitle.setVisibility(Switch.VISIBLE);
+        tvExpandView.setText(R.string.expand_less);
+        imgButtonExpandView.setImageResource(R.drawable.ic_expand_less_black_24dp);
     }
 
     /****************
