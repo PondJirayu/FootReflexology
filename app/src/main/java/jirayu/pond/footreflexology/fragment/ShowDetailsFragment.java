@@ -186,6 +186,8 @@ public class ShowDetailsFragment extends Fragment {
      * Listener Zone
      ****************/
 
+    // TODO : โจทย์แบบนี้จะใช้ Rx ดีมั้ยยยย
+
     Callback<DetailItemCollectionDao> loadDetailList = new Callback<DetailItemCollectionDao>() {
         @Override
         public void onResponse(Call<DetailItemCollectionDao> call,
