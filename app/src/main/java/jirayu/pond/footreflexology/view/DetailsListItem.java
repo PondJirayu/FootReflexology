@@ -29,7 +29,7 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
     TextView tvDiseaseName, tvDetail, tvTreatment, tvTreatmentTitle,
             tvRecommendation, tvRecommendationTitle,
             tvPageNumber, tvShouldEat, tvShouldEatTitle, tvShouldNotEat,
-            tvShouldNotEatTitle, tvExpandView;
+            tvShouldNotEatTitle, tvExpandView, tvBehaviorTitle, tvBehavior;
     Boolean tvVisible = false;
 
     /************
@@ -83,6 +83,8 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         tvShouldNotEatTitle = (TextView) findViewById(R.id.tvShouldNotEatTitle);
         imgButtonExpandView = (AdjustableImageButton) findViewById(R.id.imgButtonExpandView);
         tvExpandView = (TextView) findViewById(R.id.tvExpandView);
+        tvBehaviorTitle = (TextView) findViewById(R.id.tvBehaviorTitle);
+        tvBehavior = (TextView) findViewById(R.id.tvBehavior);
 
         // Handle Click Button
         imgButtonExpandView.setOnClickListener(this);
@@ -150,6 +152,31 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
 
     public void setPageNumber(int pageNumber) {
         tvPageNumber.setText(String.valueOf(pageNumber + 1));
+    }
+
+    public void setBehavior(String behavior) {
+        switch (behavior) {
+            case "แย่":
+                tvBehavior.setText("แย่");
+                displayBehavior();
+                break;
+            case "ทรงตัว":
+                tvBehavior.setText("ทรงตัว");
+                displayBehavior();
+                break;
+            case "ดีขึ้น":
+                tvBehavior.setText("ดีขึ้น");
+                displayBehavior();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // แสดงอาการ
+    private void displayBehavior() {
+        tvBehaviorTitle.setVisibility(Switch.VISIBLE);
+        tvBehavior.setVisibility(Switch.VISIBLE);
     }
 
     // แสดงวิวย่อ
