@@ -225,7 +225,7 @@ public class DiseaseSummaryFragment extends Fragment implements TextToSpeech.OnI
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบข้อมูลโรค");
                 } else {
-                    setDao(response.body()); // dao ไว้ใช้สำหรับคำสั่งเสียง [TTS]
+                    setDao(response.body()); // detailItemCollectionDao ไว้ใช้สำหรับคำสั่งเสียง [TTS]
                     showView();
                     tvDiseaseName.setText(dao.getData().get(0).getDiseaseName());
                     tvDetail.setText((paragraph + dao.getData().get(0).getDetail()));

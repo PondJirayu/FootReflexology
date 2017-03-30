@@ -20,6 +20,8 @@ import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +41,8 @@ public class ShowDetailsFragment extends Fragment {
     MenuItem menuItem;
 
     String result;
-    DetailItemCollectionDao dao;
+    DetailItemCollectionDao detailItemCollectionDao;
+    MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
 
     /************
      * Functions
@@ -87,6 +90,7 @@ public class ShowDetailsFragment extends Fragment {
     @Override
     public void onStart() {
         loadDetailList();
+        loadMedicalHistoryList();
         super.onStart();
     }
 
@@ -120,7 +124,16 @@ public class ShowDetailsFragment extends Fragment {
                 "details",
                 result
         );
-        call.enqueue(loadDetailListener);
+        call.enqueue(loadDetailList);
+    }
+
+    private void loadMedicalHistoryList() {
+        Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
+                "medicalhistorys",
+                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                0
+        );
+        call.enqueue(loadMedicalHistory);
     }
 
     private Intent getShareIntent() {
@@ -129,32 +142,32 @@ public class ShowDetailsFragment extends Fragment {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "เขตตอบสนองของ" + result);
         // Content
-        for (int i = 0; i < dao.getData().size(); i++) {
+        for (int i = 0; i < detailItemCollectionDao.getData().size(); i++) {
             if (i == 0) {
-                moreContent = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
+                moreContent = "โรค" + detailItemCollectionDao.getData().get(i).getDiseaseName() + "\n\n" +
                         "รายละเอียด" + "\n"
-                        + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
-                        + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getTreatMent() + "\n\n" +
                         "อาหารที่ควรรับประทาน" + "\n"
-                        + dao.getData().get(i).getShouldEat() + "\n\n" +
+                        + detailItemCollectionDao.getData().get(i).getShouldEat() + "\n\n" +
                         "อาหารที่ควรหลีกเลี่ยง" + "\n"
-                        + dao.getData().get(i).getShouldNotEat() + "\n\n" +
+                        + detailItemCollectionDao.getData().get(i).getShouldNotEat() + "\n\n" +
                         "คำแนะนำ" + "\n"
-                        + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getRecommend() + "\n\n";
             }
             if (i != 0) {
-                content2 = "โรค" + dao.getData().get(i).getDiseaseName() + "\n\n" +
+                content2 = "โรค" + detailItemCollectionDao.getData().get(i).getDiseaseName() + "\n\n" +
                         "รายละเอียด" + "\n"
-                        + "\t\t" + dao.getData().get(i).getDetail() + "\n\n" +
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getDetail() + "\n\n" +
                         "การรักษา" + "\n"
-                        + "\t\t" + dao.getData().get(i).getTreatMent() + "\n\n" +
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getTreatMent() + "\n\n" +
                         "อาหารที่ควรรับประทาน" + "\n"
-                        + dao.getData().get(i).getShouldEat() + "\n\n" +
+                        + detailItemCollectionDao.getData().get(i).getShouldEat() + "\n\n" +
                         "อาหารที่ควรหลีกเลี่ยง" + "\n"
-                        + dao.getData().get(i).getShouldNotEat() + "\n\n" +
+                        + detailItemCollectionDao.getData().get(i).getShouldNotEat() + "\n\n" +
                         "คำแนะนำ" + "\n"
-                        + "\t\t" + dao.getData().get(i).getRecommend() + "\n\n";
+                        + "\t\t" + detailItemCollectionDao.getData().get(i).getRecommend() + "\n\n";
                 moreContent = moreContent.concat(content2);
             }
         }
@@ -173,20 +186,20 @@ public class ShowDetailsFragment extends Fragment {
      * Listener Zone
      ****************/
 
-    Callback<DetailItemCollectionDao> loadDetailListener = new Callback<DetailItemCollectionDao>() {
+    Callback<DetailItemCollectionDao> loadDetailList = new Callback<DetailItemCollectionDao>() {
         @Override
         public void onResponse(Call<DetailItemCollectionDao> call,
                                Response<DetailItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                dao = response.body();
-                if (dao.getData().isEmpty()) { // ไม่พบข้อมูล
+                detailItemCollectionDao = response.body();
+                if (detailItemCollectionDao.getData().isEmpty()) { // ไม่พบข้อมูล
                     showToast("ไม่พบข้อมูลโรคที่เกี่ยวข้องกับอวัยวะดังกล่าว");
                 } else { // พบข้อมูล
                     // Share Button
                     ShareActionProvider shareActionProvider = (ShareActionProvider)
                             MenuItemCompat.getActionProvider(menuItem);
                     shareActionProvider.setShareIntent(getShareIntent());
-                    listAdapter.setDao(dao);            // โยน dao ให้ Adapter
+                    listAdapter.setDetailItemCollectionDao(detailItemCollectionDao);  // โยน detailItemCollectionDao ให้ Adapter
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
                 }
             } else { // 404 NOT FOUND
@@ -198,6 +211,29 @@ public class ShowDetailsFragment extends Fragment {
         public void onFailure(Call<DetailItemCollectionDao> call,
                               Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
+    Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MedicalHistoryItemCollectionDao> call,
+                               Response<MedicalHistoryItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                medicalHistoryItemCollectionDao = response.body();
+                if (medicalHistoryItemCollectionDao.getData().isEmpty()) { // ไม่พบข้อมูล
+
+                } else { // พบข้อมูล
+                    listAdapter.setMedicalHistoryItemCollectionDao(medicalHistoryItemCollectionDao); // โยน medicalHistoryItemCollectionDao ให้ Adapter
+                    listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
+                }
+            } else { // 404 NOT FOUND
+
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+
         }
     };
 

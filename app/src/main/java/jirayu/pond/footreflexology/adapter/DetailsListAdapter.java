@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.view.DetailsListItem;
 
 /**
@@ -18,28 +19,33 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 
 public class DetailsListAdapter extends BaseAdapter {
 
-    private DetailItemCollectionDao dao;
+    private DetailItemCollectionDao detailItemCollectionDao;
+    private MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
     private int lastPosition = -1;
     private CharSequence paragraph = Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ");
 
-    public void setDao(DetailItemCollectionDao dao) {
-        this.dao = dao;
+    public void setDetailItemCollectionDao(DetailItemCollectionDao detailItemCollectionDao) {
+        this.detailItemCollectionDao = detailItemCollectionDao;
+    }
+
+    public void setMedicalHistoryItemCollectionDao(MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao) {
+        this.medicalHistoryItemCollectionDao = medicalHistoryItemCollectionDao;
     }
 
     @Override
     public int getCount() {
-        if (dao == null) {
+        if (detailItemCollectionDao == null) {
             return 0;
         }
-        if (dao.getData() == null) {
+        if (detailItemCollectionDao.getData() == null) {
             return 0;
         }
-        return dao.getData().size();
+        return detailItemCollectionDao.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return dao.getData().get(position);
+        return detailItemCollectionDao.getData().get(position);
     }
 
     @Override
@@ -59,17 +65,24 @@ public class DetailsListAdapter extends BaseAdapter {
             item = new DetailsListItem(parent.getContext());
         }
 
-        DetailItemDao dao = (DetailItemDao) getItem(position);
+        DetailItemDao detailItemDao = (DetailItemDao) getItem(position);
 
         // Set ค่าให้ View of CustomViewGroup
         item.setPageNumber(position);
-        item.setDiseaseName(dao.getDiseaseName());
-        item.setDetail(paragraph + dao.getDetail());
-        item.setTreatment(paragraph + dao.getTreatMent());
-        item.setShouldEat((dao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldEat()));
-        item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldNotEat()));
-        item.setRecommendation(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
-        // TODO: ตรงนี้ทำงี้นะ get ชื่อโรคจาก 2 dao (DetailItemCollectionDao, MedicalHistoryItemCollectionDao)ออกมาเช็คเงื่อนไขเท่ากัน ถ้าเป็นจริง ก็เรียก setBehavior โยนอาการเข้าไปแค่นี้แหละ
+        item.setDiseaseName(detailItemDao.getDiseaseName());
+        item.setDetail(paragraph + detailItemDao.getDetail());
+        item.setTreatment(paragraph + detailItemDao.getTreatMent());
+        item.setShouldEat((detailItemDao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : detailItemDao.getShouldEat()));
+        item.setShouldNotEat((detailItemDao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : detailItemDao.getShouldNotEat()));
+        item.setRecommendation(paragraph + ((detailItemDao.getRecommend().isEmpty() ? "ไม่มี" : detailItemDao.getRecommend())));
+        // TODO: ตรงนี้ทำงี้นะ get ชื่อโรคจาก 2 detailItemCollectionDao (DetailItemCollectionDao, MedicalHistoryItemCollectionDao)ออกมาเช็คเงื่อนไขเท่ากัน ถ้าเป็นจริง ก็เรียก setBehavior โยนอาการเข้าไปแค่นี้แหละ
+        if (medicalHistoryItemCollectionDao != null && medicalHistoryItemCollectionDao.getData() != null) {
+            for (int i = 0; i < medicalHistoryItemCollectionDao.getData().size(); i++) {
+                if (detailItemDao.getDiseaseName().equals(medicalHistoryItemCollectionDao.getData().get(i).getDiseaseName())) {
+                    item.setBehavior(medicalHistoryItemCollectionDao.getData().get(i).getList());
+                }
+            }
+        }
 
         // Start Animation
         if (position > lastPosition) {

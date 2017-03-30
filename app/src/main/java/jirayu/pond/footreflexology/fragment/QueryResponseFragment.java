@@ -167,7 +167,7 @@ public class QueryResponseFragment extends Fragment {
                     ShareActionProvider shareActionProvider =  (ShareActionProvider)
                             MenuItemCompat.getActionProvider(menuItem);
                     shareActionProvider.setShareIntent(getShareIntent());
-                    listAdapter.setDao(dao);            // โยน dao ให้ adapter
+                    listAdapter.setDao(dao);            // โยน detailItemCollectionDao ให้ adapter
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
                 }
             } else { // 404 NOT FOUND
