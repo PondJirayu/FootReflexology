@@ -11,6 +11,7 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.view.DetailsListItem;
 
 /**
@@ -60,6 +61,8 @@ public class DetailsListAdapter extends BaseAdapter {
         if (convertView != null) {
             // Reuse
             item = (DetailsListItem) convertView;
+            // ซ่อน tvBehavior ทุกครั้งที่มีการ Reuse
+            item.setVisibilityTextViewBehavior();
         } else {
             // Create
             item = new DetailsListItem(parent.getContext());
@@ -75,11 +78,11 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setShouldEat((detailItemDao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : detailItemDao.getShouldEat()));
         item.setShouldNotEat((detailItemDao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : detailItemDao.getShouldNotEat()));
         item.setRecommendation(paragraph + ((detailItemDao.getRecommend().isEmpty() ? "ไม่มี" : detailItemDao.getRecommend())));
-        // TODO: ตรงนี้ทำงี้นะ get ชื่อโรคจาก 2 detailItemCollectionDao (DetailItemCollectionDao, MedicalHistoryItemCollectionDao)ออกมาเช็คเงื่อนไขเท่ากัน ถ้าเป็นจริง ก็เรียก setBehavior โยนอาการเข้าไปแค่นี้แหละ
         if (medicalHistoryItemCollectionDao != null && medicalHistoryItemCollectionDao.getData() != null) {
             for (int i = 0; i < medicalHistoryItemCollectionDao.getData().size(); i++) {
-                if (detailItemDao.getDiseaseName().equals(medicalHistoryItemCollectionDao.getData().get(i).getDiseaseName())) {
-                    item.setBehavior(medicalHistoryItemCollectionDao.getData().get(i).getList());
+                if (detailItemDao.getDiseaseName().equals(getItemMedicalHistory(i).getDiseaseName())) {
+                    item.setBehavior(getItemMedicalHistory(i).getList());
+                    break;
                 }
             }
         }
@@ -93,6 +96,10 @@ public class DetailsListAdapter extends BaseAdapter {
         }
 
         return item;
+    }
+
+    private MedicalHistoryItemDao getItemMedicalHistory(int position) {
+        return medicalHistoryItemCollectionDao.getData().get(position);
     }
 
 }

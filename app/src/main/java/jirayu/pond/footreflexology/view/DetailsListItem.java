@@ -207,6 +207,11 @@ public class DetailsListItem extends BaseCustomViewGroup implements View.OnClick
         imgButtonExpandView.setImageResource(R.drawable.ic_expand_less_black_24dp);
     }
 
+    public void setVisibilityTextViewBehavior() {
+        tvBehaviorTitle.setVisibility(Switch.GONE);
+        tvBehavior.setVisibility(Switch.GONE);
+    }
+
     /****************
      * Listener Zone
      ****************/
