@@ -79,6 +79,7 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setShouldNotEat((detailItemDao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : detailItemDao.getShouldNotEat()));
         item.setRecommendation(paragraph + ((detailItemDao.getRecommend().isEmpty() ? "ไม่มี" : detailItemDao.getRecommend())));
         if (medicalHistoryItemCollectionDao != null && medicalHistoryItemCollectionDao.getData() != null) {
+            // ค้นหาโรคที่มีประวัติการรักษาและแสดงอาการของโรคนั้น
             for (int i = 0; i < medicalHistoryItemCollectionDao.getData().size(); i++) {
                 if (detailItemDao.getDiseaseName().equals(getItemMedicalHistory(i).getDiseaseName())) {
                     item.setBehavior(getItemMedicalHistory(i).getList());
