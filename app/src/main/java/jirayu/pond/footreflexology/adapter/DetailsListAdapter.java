@@ -69,6 +69,7 @@ public class DetailsListAdapter extends BaseAdapter {
         item.setShouldEat((dao.getShouldEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldEat()));
         item.setShouldNotEat((dao.getShouldNotEat().isEmpty() ? paragraph + "ไม่มี" : dao.getShouldNotEat()));
         item.setRecommendation(paragraph + ((dao.getRecommend().isEmpty() ? "ไม่มี" : dao.getRecommend())));
+        // TODO: ตรงนี้ทำงี้นะ get ชื่อโรคจาก 2 dao (DetailItemCollectionDao, MedicalHistoryItemCollectionDao)ออกมาเช็คเงื่อนไขเท่ากัน ถ้าเป็นจริง ก็เรียก setBehavior โยนอาการเข้าไปแค่นี้แหละ
 
         // Start Animation
         if (position > lastPosition) {
