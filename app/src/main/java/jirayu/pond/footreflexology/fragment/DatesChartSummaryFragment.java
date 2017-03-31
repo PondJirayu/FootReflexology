@@ -1,11 +1,20 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import jirayu.pond.footreflexology.R;
 
@@ -19,6 +28,7 @@ public class DatesChartSummaryFragment extends Fragment {
      * Variables
      ************/
 
+    GraphView graphView;
 
     /************
      * Functions
@@ -46,10 +56,43 @@ public class DatesChartSummaryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        graphView = (GraphView) rootView.findViewById(R.id.graphView);
     }
 
     private void initGraph() {
+        // generate Dates
+        Calendar calendar = Calendar.getInstance();
+        Date d1 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        Date d2 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        Date d3 = calendar.getTime();
 
+        // เพิ่มข้อมูลใส่กราฟตรงนี้
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(d1, 1),
+                new DataPoint(d2, 3),
+                new DataPoint(d3, 2)
+        });
+        series.setTitle("RRR");
+        series.setColor(Color.RED);
+        series.setDrawDataPoints(true);
+        series.setDataPointsRadius(5);
+        series.setThickness(4);
+        graphView.addSeries(series);
+
+        // set date label formatter
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+
+        // set manual x bounds to have nice steps
+        graphView.getViewport().setMinX(d1.getTime());
+        graphView.getViewport().setMaxX(d3.getTime());
+        graphView.getViewport().setXAxisBoundsManual(true);
+
+        // as we use dates as labels, the human rounding to nice readable numbers
+        // is not necessary
+        graphView.getGridLabelRenderer().setHumanRounding(false);
     }
 
     @Override
