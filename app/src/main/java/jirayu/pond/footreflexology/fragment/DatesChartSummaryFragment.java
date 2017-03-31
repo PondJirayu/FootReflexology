@@ -18,8 +18,6 @@ public class DatesChartSummaryFragment extends Fragment {
      * Variables
      ************/
 
-
-
     /************
      * Functions
      ************/
