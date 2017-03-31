@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import jirayu.pond.footreflexology.R;
 
+
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -17,6 +18,7 @@ public class DatesChartSummaryFragment extends Fragment {
     /************
      * Variables
      ************/
+
 
     /************
      * Functions
