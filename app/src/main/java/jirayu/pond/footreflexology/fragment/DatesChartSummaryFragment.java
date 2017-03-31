@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.LineChart;
-
 import jirayu.pond.footreflexology.R;
 
 /**
@@ -20,7 +18,7 @@ public class DatesChartSummaryFragment extends Fragment {
      * Variables
      ************/
 
-    LineChart lineChart;
+
 
     /************
      * Functions
@@ -48,7 +46,7 @@ public class DatesChartSummaryFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        lineChart = (LineChart) rootView.findViewById(R.id.lineChart);
+
     }
 
     private void initGraph() {
