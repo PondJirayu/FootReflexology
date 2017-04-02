@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="แกนแนวตั้งบอกระดับอาการ"
+            android:text="แกนแนวตั้งแสดงอาการ 4 ระดับ"
             android:textColor="@color/font_black_color"
             android:textSize="14sp"
             android:textStyle="bold" />

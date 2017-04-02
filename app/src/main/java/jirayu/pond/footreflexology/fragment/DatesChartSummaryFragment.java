@@ -70,11 +70,10 @@ public class DatesChartSummaryFragment extends Fragment {
 
         // เพิ่มข้อมูลใส่กราฟตรงนี้
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d1, 1),
+                new DataPoint(d1, 4),
                 new DataPoint(d2, 2),
-                new DataPoint(d3, 4)
+                new DataPoint(d3, 1)
         });
-        series.setTitle("RRR");
         series.setColor(Color.RED);
         series.setDrawDataPoints(true);
         series.setDataPointsRadius(5);
