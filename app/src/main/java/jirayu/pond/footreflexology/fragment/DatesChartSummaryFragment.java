@@ -71,8 +71,8 @@ public class DatesChartSummaryFragment extends Fragment {
         // เพิ่มข้อมูลใส่กราฟตรงนี้
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d1, 1),
-                new DataPoint(d2, 4),
-                new DataPoint(d3, 3)
+                new DataPoint(d2, 2),
+                new DataPoint(d3, 4)
         });
         series.setTitle("RRR");
         series.setColor(Color.RED);
@@ -84,15 +84,15 @@ public class DatesChartSummaryFragment extends Fragment {
         // set date label formatter
         graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graphView.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
-        graphView.getGridLabelRenderer().setNumVerticalLabels(4); // กำหนดแนวตั้ง(แกน Y)แสดง 4 แถว
+        graphView.getGridLabelRenderer().setNumVerticalLabels(4); // กำหนดให้แกนแนวตั้ง(แกน Y)แสดง 4 แถว
 
         // set manual x bounds to have nice steps
         graphView.getViewport().setMinX(d1.getTime());
         graphView.getViewport().setMaxX(d3.getTime());
         graphView.getViewport().setXAxisBoundsManual(true);
         // set manual y bounds
-        graphView.getViewport().setMinY(1);
-        graphView.getViewport().setMaxY(4);
+        graphView.getViewport().setMinY(1); // แกนแนวตั้งค่าต่ำสุดคือ 1 ถ้าต่ำกว่า 1 เส้นจะหลุดกราฟ
+        graphView.getViewport().setMaxY(4); // แกนแนวตั้งค่าสูงสุดคือ 4 ถ้ามากกว่า 4 เส้นจะหลุดกราฟ
         graphView.getViewport().setYAxisBoundsManual(true);
 
         // as we use dates as labels, the human rounding to nice readable numbers
