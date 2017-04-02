@@ -59,6 +59,14 @@
             android:textColor="@color/font_black_color"
             android:textSize="14sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="ระดับ 4 หมายถึง อาการหายเป็นปกติ"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
 </RelativeLayout>
