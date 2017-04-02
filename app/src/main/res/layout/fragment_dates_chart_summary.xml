@@ -19,54 +19,6 @@
         android:layout_height="200dp"
         android:layout_below="@+id/tvTitle" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/graphView"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="แกนแนวตั้งแสดงอาการ 4 ระดับ"
-            android:textColor="@color/font_black_color"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="ระดับ 1 หมายถึง อาการแย่"
-            android:textColor="@color/font_black_color"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="ระดับ 2 หมายถึง อาการทรงตัว"
-            android:textColor="@color/font_black_color"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="ระดับ 3 หมายถึง อาการดีขึ้น"
-            android:textColor="@color/font_black_color"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="ระดับ 4 หมายถึง อาการหายเป็นปกติ"
-            android:textColor="@color/font_black_color"
-            android:textSize="14sp" />
-
-    </LinearLayout>
+    <include layout="@layout/dates_chart_summary_description" />
 
 </RelativeLayout>

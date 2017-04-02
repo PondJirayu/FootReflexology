@@ -54,4 +54,9 @@
     <string name="show_alert">แสดงการแจ้งเตือนอาการ</string>
     <string name="expand_more">แสดงมากขึ้น</string>
     <string name="expand_less">แสดงน้อยลง</string>
+    <string name="four_level_title">แกนแนวตั้งแสดงอาการ 4 ระดับ</string>
+    <string name="lv_one">ระดับ 1 หมายถึง อาการแย่</string>
+    <string name="lv_two">ระดับ 2 หมายถึง อาการทรงตัว</string>
+    <string name="lv_three">ระดับ 3 หมายถึง อาการดีขึ้น</string>
+    <string name="lv_four">ระดับ 4 หมายถึง อาการหายเป็นปกติ</string>
 </resources>

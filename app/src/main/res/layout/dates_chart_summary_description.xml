@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graphView"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvFourLevelTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/four_level_title"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvLvOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/lv_one"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvLvTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/lv_two"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvLvThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/lv_three"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvLvFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/lv_four"
+            android:textColor="@color/font_black_color"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</merge>
