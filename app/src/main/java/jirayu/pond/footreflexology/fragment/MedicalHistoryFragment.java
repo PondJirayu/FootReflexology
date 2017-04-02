@@ -103,7 +103,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);  // Handle Pull to Refresh
 
         // Handle Click (FAB)
         btnFloatingActionSort.setOnClickListener(this);
