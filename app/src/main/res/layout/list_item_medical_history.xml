@@ -188,13 +188,6 @@
 
             </FrameLayout>
 
-            <!--<com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageButton-->
-                <!--android:layout_width="40dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:src="@drawable/ic_expand_more_black_24dp" />-->
-
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
