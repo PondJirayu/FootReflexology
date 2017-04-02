@@ -1,6 +1,5 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,10 +22,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.DetailsMedicalHistoryActivity;
@@ -106,7 +101,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new MedicalHistoryAdapter();  // Create Adapter
         listView.setAdapter(listAdapter);           // ListView + Adapter
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(this);      // Handle Click Item of ListView
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
@@ -311,7 +306,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     }
 
     /*
-     * Handle Click ListView Item
+     * Handle Click Item of ListView
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
