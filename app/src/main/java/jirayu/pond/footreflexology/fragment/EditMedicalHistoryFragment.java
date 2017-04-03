@@ -76,7 +76,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     private void initOptionsMenu() {
         // Edit Title in Toolbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติการรักษา");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ปรับปรุงประวัติการรักษา");
     }
 
     private void initInstances(View rootView) {

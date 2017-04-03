@@ -35,7 +35,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="เลือกโรคที่จะแก้ไข"
+                            android:text="เลือกโรคที่จะปรับปรุง"
                             android:textColor="@color/font_black_color"
                             android:textSize="16sp"
                             android:textStyle="bold" />
