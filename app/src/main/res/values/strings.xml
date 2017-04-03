@@ -45,7 +45,7 @@
     <string name="rank">ลำดับที่</string>
     <string name="behavior">อาการ</string>
     <string name="createdAt">วันที่เข้ารับการรักษา</string>
-    <string name="updatedAt">ปรับปรุงอาการล่าสุดเมื่อ</string>
+    <string name="updatedAt">อัพเดทอาการล่าสุดเมื่อ</string>
     <string name="pick_date">เลือกวันเกิด</string>
     <string name="should_eat">อาหารที่ควรรับประทาน</string>
     <string name="should_not_eat">อาหารที่ควรหลีกเลี่ยง</string>
