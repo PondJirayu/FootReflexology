@@ -73,6 +73,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_toEndOf="@+id/linearRankAndNumber"
                         android:layout_toRightOf="@+id/linearRankAndNumber"
+                        android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <LinearLayout
