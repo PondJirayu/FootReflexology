@@ -25,7 +25,8 @@ public class DetailsMedicalHistoryFragment extends Fragment {
 
     ViewPager viewPager;
     TabLayout tabLayout;
-    String diseaseName;
+    private String diseaseName;
+    private int medicalHistoryId;
 
     /************
      * Functions
@@ -35,10 +36,11 @@ public class DetailsMedicalHistoryFragment extends Fragment {
         super();
     }
 
-    public static DetailsMedicalHistoryFragment newInstance(String diseaseName) {
+    public static DetailsMedicalHistoryFragment newInstance(String diseaseName, int medicalHistoryId) {
         DetailsMedicalHistoryFragment fragment = new DetailsMedicalHistoryFragment();
         Bundle args = new Bundle();
         args.putString("diseaseName", diseaseName);
+        args.putInt("medicalHistoryId", medicalHistoryId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,6 +50,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // Read from Arguments
         diseaseName = getArguments().getString("diseaseName");
+        medicalHistoryId = getArguments().getInt("medicalHistoryId");
     }
 
     @Override
@@ -71,7 +74,7 @@ public class DetailsMedicalHistoryFragment extends Fragment {
                     case 0:
                         return DiseaseSummaryFragment.newInstance(diseaseName);
                     case 1:
-                        return DatesChartSummaryFragment.newInstance();
+                        return DatesChartSummaryFragment.newInstance(medicalHistoryId);
                     default:
                         return null;
                 }

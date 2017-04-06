@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class DatesChartSummaryFragment extends Fragment {
      ************/
 
     GraphView graphView;
+    private int medicalHistoryId; // TODO : เอา Id ไปค้นหาประวัติการรักษาจากตาราง MedicalHistoryBehavior
 
     /************
      * Functions
@@ -38,11 +40,19 @@ public class DatesChartSummaryFragment extends Fragment {
         super();
     }
 
-    public static DatesChartSummaryFragment newInstance() {
+    public static DatesChartSummaryFragment newInstance(int medicalHistoryId) {
         DatesChartSummaryFragment fragment = new DatesChartSummaryFragment();
         Bundle args = new Bundle();
+        args.putInt("medicalHistoryId", medicalHistoryId);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Read from Arguments
+        medicalHistoryId = getArguments().getInt("medicalHistoryId");
     }
 
     @Override

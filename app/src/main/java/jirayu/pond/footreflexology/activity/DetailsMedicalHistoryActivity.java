@@ -18,7 +18,8 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    String diseaseName;
+    private String diseaseName;
+    private int medicalHistoryId;
 
     /************
      * Functions
@@ -31,6 +32,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent(); // เปิดซองจดหมาย (Intent)
         diseaseName = intent.getStringExtra("diseaseName"); // หยิบของออกมา (result)
+        medicalHistoryId = intent.getIntExtra("medicalHistoryId", -1);
 
         initToolbar();
         initInstances();
@@ -60,7 +62,7 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         // Place Fragment here
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(diseaseName))
+                    .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(diseaseName, medicalHistoryId))
                     .commit();
         }
     }

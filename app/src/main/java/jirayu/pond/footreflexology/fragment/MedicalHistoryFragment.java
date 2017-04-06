@@ -310,6 +310,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), DetailsMedicalHistoryActivity.class);
         intent.putExtra("diseaseName", dao.getData().get(position).getDiseaseName()); // ฝากชื่อโรคไปแสดงรายละเอียดในหน้าถัดไป
+        intent.putExtra("medicalHistoryId", dao.getData().get(position).getId()); // ฝาก MedicalHistoryId ไปหน้าสถิติ
         startActivity(intent);
     }
 
