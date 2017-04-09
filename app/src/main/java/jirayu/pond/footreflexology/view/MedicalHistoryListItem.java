@@ -65,7 +65,7 @@ public class MedicalHistoryListItem extends BaseCustomViewGroup {
     }
 
     private void initInflate() {
-        inflate(getContext(), R.layout.list_item_medical_history_beta, this);
+        inflate(getContext(), R.layout.list_item_medical_history, this);
     }
 
     private void initInstances() {
