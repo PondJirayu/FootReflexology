@@ -30,7 +30,7 @@ public class DatesChartSummaryFragment extends Fragment {
      ************/
 
     GraphView graphView;
-    private int medicalHistoryId; // TODO : เอา Id ไปค้นหาประวัติการรักษาจากตาราง MedicalHistoryBehavior
+    private int medicalHistoryId; // TODO : เอา Id ไปค้นหาประวัติการรักษาจากตาราง MedicalHistoryBehavior  *อย่าลืมทำ dao ของตาราง MedicalHistoryBehaviorItemDao && MedicalHistoryBehaviorItemCollectionDao
 
     /************
      * Functions
