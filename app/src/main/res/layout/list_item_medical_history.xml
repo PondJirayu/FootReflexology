@@ -25,61 +25,41 @@
             <View
                 android:id="@+id/viewColourItemMedicalHistory"
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
+                android:layout_height="10dp"
                 android:elevation="1.4dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="153dp">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="10dp">
 
-                    <LinearLayout
-                        android:id="@+id/linearRankAndNumber"
+                    <TextView
+                        android:id="@+id/tvNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvRank"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/rank"
-                            android:textColor="@color/font_black_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:textColor="@color/font_black_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+                        android:textColor="@color/font_black_color"
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:id="@+id/linearDiseaseNameAndBehavior"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_toEndOf="@+id/linearRankAndNumber"
-                        android:layout_toRightOf="@+id/linearRankAndNumber"
+                        android:layout_alignTop="@+id/tvNumber"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_toEndOf="@+id/tvNumber"
+                        android:layout_toRightOf="@+id/tvNumber"
                         android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="0.8"
                             android:orientation="vertical">
 
                             <TextView
@@ -101,14 +81,6 @@
                                 android:textColor="@color/font_black_color"
                                 android:textSize="14.8sp" />
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -126,21 +98,10 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/linearDiseaseNameAndBehavior"
-                        android:layout_alignStart="@+id/linearDiseaseNameAndBehavior"
-                        android:layout_below="@+id/linearDiseaseNameAndBehavior"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <TextView
@@ -157,13 +118,6 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/font_black_color"
                                 android:textSize="14sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
