@@ -74,6 +74,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadMedicalHistory();
         return rootView;
     }
 
@@ -112,15 +113,11 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onStart() {
-        loadMedicalHistory();
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        btnFloatingActionEdit.setVisibility(Switch.GONE);
-        btnFloatingActionSort.setVisibility(Switch.GONE);
-        doPullToRefresh = false;
         super.onStop();
     }
 

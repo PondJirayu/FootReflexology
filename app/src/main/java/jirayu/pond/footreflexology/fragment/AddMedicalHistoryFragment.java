@@ -75,6 +75,9 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         View rootView = inflater.inflate(R.layout.fragment_add_medical_history, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadDisease();
+        loadBehavior();
+        loadMedicalHistory();
         return rootView;
     }
 
@@ -95,9 +98,6 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onStart() {
-        loadDisease();
-        loadBehavior();
-        loadMedicalHistory();
         super.onStart();
     }
 

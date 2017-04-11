@@ -97,6 +97,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
         return rootView;
     }
 
@@ -130,13 +131,11 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onStart() {
-        loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
 
