@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         initOptionsMenu();
         initInstances(rootView);
+        loadProfile();
         return rootView;
     }
 
@@ -119,13 +120,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
-        loadProfile();
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        btnFloatingAction.setVisibility(Switch.GONE);
         super.onStop();
     }
 
