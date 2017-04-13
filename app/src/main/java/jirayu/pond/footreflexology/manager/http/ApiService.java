@@ -21,7 +21,9 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    // Select
+    /**************
+     * Select
+     **************/
 
     @GET("{tableName}/{key}")
     Call<MemberItemCollectionDao> loadMemberList(
@@ -59,7 +61,9 @@ public interface ApiService {
             @Path("tableName") String tableName
     );
 
-    // Insert
+    /**************
+     * Insert
+     **************/
 
     @GET("member/none/create")
     Call<MemberItemCollectionDao> InsertMemberList(
@@ -86,7 +90,9 @@ public interface ApiService {
             @Query("updated_at") Timestamp updatedAt
     );
 
-    // Update
+    /**************
+     * Update
+     **************/
 
     @GET("member/{key}/edit")
     Call<StatusDao> UpdateMember(
@@ -111,6 +117,8 @@ public interface ApiService {
             @Query("updated_at") Timestamp updatedAt
     );
 
-    // Delete
+    /**************
+     * Delete
+     **************/
 
 }
