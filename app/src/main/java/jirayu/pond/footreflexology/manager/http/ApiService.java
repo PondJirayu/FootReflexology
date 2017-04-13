@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.dao.MedicalHistoryBehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.OrganItemCollectionDao;
@@ -59,6 +60,12 @@ public interface ApiService {
     @GET("{tableName}")
     Call<BehaviorCollectionDao> loadBehavior(
             @Path("tableName") String tableName
+    );
+
+    @GET("{tableName}/{key}")
+    Call<MedicalHistoryBehaviorItemCollectionDao> loadMedicalHistoryBehavior(
+            @Path("tableName") String tableName,
+            @Path("key") int key
     );
 
     /**************
