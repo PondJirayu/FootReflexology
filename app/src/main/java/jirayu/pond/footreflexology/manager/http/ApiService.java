@@ -114,6 +114,7 @@ public interface ApiService {
     Call<StatusDao> UpdateMedicalHistory(
             @Path("key") int key,
             @Query("behavior_id") int behaviorId,
+            @Query("created_at") Timestamp createAt,
             @Query("updated_at") Timestamp updatedAt
     );
 

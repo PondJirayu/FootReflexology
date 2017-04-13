@@ -160,7 +160,8 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMedicalHistory(
                 rowId,
                 behaviorId,
-                new Timestamp(System.currentTimeMillis())   // GET เวลาปัจจุบัน
+                new Timestamp(System.currentTimeMillis()), // GET เวลาปัจจุบัน
+                new Timestamp(System.currentTimeMillis())
         );
         call.enqueue(updateMedicalHistory);
     }
