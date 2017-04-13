@@ -10,8 +10,10 @@ import java.util.List;
 
 public class OrganItemCollectionDao {
 
-    @SerializedName("success")                 private int success;
-    @SerializedName("data")                    private List<OrganItemDao> data;
+    @SerializedName("success")
+    private int success;
+    @SerializedName("data")
+    private List<OrganItemDao> data;
 
     public int getSuccess() {
         return success;

@@ -11,19 +11,32 @@ import java.sql.Timestamp;
 
 public class MemberItemDao {
 
-    @SerializedName("id")                       private int id;
-    @SerializedName("firstname")                private String firstName;
-    @SerializedName("lastname")                 private String lastName;
-    @SerializedName("identification_number")    private String identificationNumber;
-    @SerializedName("gender")                   private String gender;
-    @SerializedName("birthdate")                private Date birthDate;
-    @SerializedName("telephone_number")         private String telephoneNumber;
-    @SerializedName("house_village")            private String houseVillage;
-    @SerializedName("sub_district")             private String subDistrict;
-    @SerializedName("district")                 private String district;
-    @SerializedName("province")                 private String province;
-    @SerializedName("created_at")               private Timestamp createdAt;
-    @SerializedName("updated_at")               private Timestamp updatedAt;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("firstname")
+    private String firstName;
+    @SerializedName("lastname")
+    private String lastName;
+    @SerializedName("identification_number")
+    private String identificationNumber;
+    @SerializedName("gender")
+    private String gender;
+    @SerializedName("birthdate")
+    private Date birthDate;
+    @SerializedName("telephone_number")
+    private String telephoneNumber;
+    @SerializedName("house_village")
+    private String houseVillage;
+    @SerializedName("sub_district")
+    private String subDistrict;
+    @SerializedName("district")
+    private String district;
+    @SerializedName("province")
+    private String province;
+    @SerializedName("created_at")
+    private Timestamp createdAt;
+    @SerializedName("updated_at")
+    private Timestamp updatedAt;
 
     public int getId() {
         return id;

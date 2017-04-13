@@ -10,8 +10,10 @@ import java.util.List;
 
 public class MedicalHistoryItemCollectionDao {
 
-    @SerializedName("success")                     private int success;
-    @SerializedName("data")                        private List<MedicalHistoryItemDao> data;
+    @SerializedName("success")
+    private int success;
+    @SerializedName("data")
+    private List<MedicalHistoryItemDao> data;
 
     public int getSuccess() {
         return success;

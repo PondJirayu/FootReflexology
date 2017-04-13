@@ -8,8 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class BehaviorDao {
 
-    @SerializedName("id")           private int id;
-    @SerializedName("list")         private String list;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("list")
+    private String list;
 
     public int getId() {
         return id;

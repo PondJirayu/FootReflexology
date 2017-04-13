@@ -8,15 +8,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class DiseaseItemDao {
 
-    @SerializedName("id")                   private int id;
-    @SerializedName("disease_name")         private String diseaseName;
-    @SerializedName("detail")               private String detail;
-    @SerializedName("treatment")            private String treatment;
-    @SerializedName("shouldeat")            private String shouldEat;
-    @SerializedName("shouldnoteat")         private String shouldNotEat;
-    @SerializedName("recommend")            private String recommend;
-    @SerializedName("created_at")           private String createdAt;
-    @SerializedName("updated_at")           private String updatedAt;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("disease_name")
+    private String diseaseName;
+    @SerializedName("detail")
+    private String detail;
+    @SerializedName("treatment")
+    private String treatment;
+    @SerializedName("shouldeat")
+    private String shouldEat;
+    @SerializedName("shouldnoteat")
+    private String shouldNotEat;
+    @SerializedName("recommend")
+    private String recommend;
+    @SerializedName("created_at")
+    private String createdAt;
+    @SerializedName("updated_at")
+    private String updatedAt;
 
     public int getId() {
         return id;

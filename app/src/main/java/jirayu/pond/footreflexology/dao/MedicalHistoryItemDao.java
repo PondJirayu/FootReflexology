@@ -10,13 +10,20 @@ import java.sql.Timestamp;
 
 public class MedicalHistoryItemDao {
 
-    @SerializedName("id")                           private int id;
-    @SerializedName("firstname")                    private String firstName;
-    @SerializedName("lastname")                     private String lastName;
-    @SerializedName("disease_name")                 private String diseaseName;
-    @SerializedName("list")                         private String list;
-    @SerializedName("created_at")                   private Timestamp createdAt;
-    @SerializedName("updated_at")                   private Timestamp updatedAt;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("firstname")
+    private String firstName;
+    @SerializedName("lastname")
+    private String lastName;
+    @SerializedName("disease_name")
+    private String diseaseName;
+    @SerializedName("list")
+    private String list;
+    @SerializedName("created_at")
+    private Timestamp createdAt;
+    @SerializedName("updated_at")
+    private Timestamp updatedAt;
 
     public int getId() {
         return id;

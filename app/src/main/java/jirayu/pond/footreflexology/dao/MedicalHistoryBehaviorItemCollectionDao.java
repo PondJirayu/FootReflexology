@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by lp700 on 13/12/2559.
+ * Created by lp700 on 13/4/2560.
  */
 
-public class DiseaseItemCollectionDao {
+public class MedicalHistoryBehaviorItemCollectionDao {
 
     @SerializedName("success")
     private int success;
     @SerializedName("data")
-    private List<DiseaseItemDao> data;
+    private List<MedicalHistoryBehaviorItemDao> data;
 
     public int getSuccess() {
         return success;
@@ -23,11 +23,11 @@ public class DiseaseItemCollectionDao {
         this.success = success;
     }
 
-    public List<DiseaseItemDao> getData() {
+    public List<MedicalHistoryBehaviorItemDao> getData() {
         return data;
     }
 
-    public void setData(List<DiseaseItemDao> data) {
+    public void setData(List<MedicalHistoryBehaviorItemDao> data) {
         this.data = data;
     }
 }

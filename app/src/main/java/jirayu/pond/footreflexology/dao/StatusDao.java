@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class StatusDao {
 
-    @SerializedName("success")      private int success;
+    @SerializedName("success")
+    private int success;
 
     public int getSuccess() {
         return success;

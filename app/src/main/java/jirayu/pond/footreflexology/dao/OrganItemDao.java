@@ -8,10 +8,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class OrganItemDao {
 
-    @SerializedName("id")                       private int id;
-    @SerializedName("organ_name")               private String organName;
-    @SerializedName("created_at")               private String createdAt;
-    @SerializedName("updated_at")               private String updatedAt;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("organ_name")
+    private String organName;
+    @SerializedName("created_at")
+    private String createdAt;
+    @SerializedName("updated_at")
+    private String updatedAt;
 
     public int getId() {
         return id;

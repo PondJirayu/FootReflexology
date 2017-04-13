@@ -10,8 +10,10 @@ import java.util.List;
 
 public class BehaviorCollectionDao {
 
-    @SerializedName("success")      private int success;
-    @SerializedName("data")         private List<BehaviorDao> data;
+    @SerializedName("success")
+    private int success;
+    @SerializedName("data")
+    private List<BehaviorDao> data;
 
     public int getSuccess() {
         return success;
