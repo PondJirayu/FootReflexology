@@ -29,7 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -136,6 +135,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * Listener Zone
      ****************/
 
+    Callback<MemberItemCollectionDao> loadMemberList = new Callback<MemberItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MemberItemCollectionDao> call,
+                               Response<MemberItemCollectionDao> response) {
+
+            if (response.isSuccessful()) {
+                MemberItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
+                    progressDialog.dismiss();
+                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                    intent.putExtra("identificationNumber", identificationNumber);
+                    startActivity(intent);
+                } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
+                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+                    progressDialog.dismiss();   // ยกเลิก Dialog
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
+                }
+            } else {
+                progressDialog.dismiss();
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MemberItemCollectionDao> call,
+                              Throwable t) {
+            progressDialog.dismiss();
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
     /*
      * Handle Click Button
      */
@@ -169,39 +201,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-
-    Callback<MemberItemCollectionDao> loadMemberList = new Callback<MemberItemCollectionDao>() {
-        @Override
-        public void onResponse(Call<MemberItemCollectionDao> call,
-                               Response<MemberItemCollectionDao> response) {
-
-            if (response.isSuccessful()) {
-                MemberItemCollectionDao dao = response.body();
-                if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
-                    progressDialog.dismiss();
-                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                    intent.putExtra("identificationNumber", identificationNumber);
-                    startActivity(intent);
-                } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
-                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-                    progressDialog.dismiss();   // ยกเลิก Dialog
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
-                }
-            } else {
-                progressDialog.dismiss();
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
-            }
-        }
-
-        @Override
-        public void onFailure(Call<MemberItemCollectionDao> call,
-                              Throwable t) {
-            progressDialog.dismiss();
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
-        }
-    };
 
     /***************
      * Inner Class
