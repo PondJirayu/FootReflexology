@@ -1,6 +1,5 @@
 package jirayu.pond.footreflexology.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -16,12 +15,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 import android.support.v7.widget.SearchView;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.adapter.ViewPagerAdapter;
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
 import jirayu.pond.footreflexology.fragment.InTheFootFragment;
 import jirayu.pond.footreflexology.fragment.OnTheBackFootFragment;
@@ -41,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ViewPager viewPager;
     Intent intent;
-    Boolean isShowDrawerMenu;
     MenuItem menuItem;
     SearchView searchView;
 
@@ -55,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        // เปิดซองจดหมาย (intent)
-        Intent intent = getIntent();
-        isShowDrawerMenu = intent.getBooleanExtra("isShowDrawerMenu", true);
-
         setContentView(R.layout.activity_main); // inflate
-
         initToolbar();
         initInstances();
         initFragments(savedInstanceState);
@@ -87,13 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 R.string.open_drawer,
                 R.string.close_drawer
         );
-
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         // Set Home Button
         getSupportActionBar().setTitle("หน้าแรก");
-        getSupportActionBar().setHomeButtonEnabled(isShowDrawerMenu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(isShowDrawerMenu);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Handle ViewPager
         viewPager.setAdapter(fragmentStatePagerAdapter);
@@ -121,13 +110,11 @@ public class MainActivity extends AppCompatActivity {
     // Inflate Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (isShowDrawerMenu) {
-            getMenuInflater().inflate(R.menu.menu_main, menu);
-            // Handle SearchView (First Step)
-            menuItem = menu.findItem(R.id.action_search);
-            searchView = (SearchView) menuItem.getActionView();
-            searchView.setOnQueryTextListener(searchViewListener);
-        }
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Handle SearchView (First Step)
+        menuItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(searchViewListener);
         return true;
     }
 

@@ -41,7 +41,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     TextView tvAppName;
     EditText editName;
-    Button btnSignUp, btnIntoMainPage;
+    Button btnSignUp;
     Animation anim;
     ProgressDialog progressDialog;
     String identificationNumber;
@@ -75,7 +75,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         tvAppName = (TextView) rootView.findViewById(R.id.tvAppName);
         editName = (EditText) rootView.findViewById(R.id.editName);
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
-        btnIntoMainPage = (Button) rootView.findViewById(R.id.btnIntoMainPage);
 
         // Play Animation
         anim.setDuration(500);
@@ -84,12 +83,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editName.startAnimation(anim);
         anim.setDuration(1100);
         btnSignUp.startAnimation(anim);
-        anim.setDuration(1400);
-        btnIntoMainPage.startAnimation(anim);
 
         // Handle Click
         btnSignUp.setOnClickListener(this);
-        btnIntoMainPage.setOnClickListener(this);
     }
 
     @Override
@@ -170,11 +166,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 } else {
                     showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
                 }
-                break;
-            case R.id.btnIntoMainPage:
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("isShowDrawerMenu", false);
-                startActivity(intent);
                 break;
         }
     }
