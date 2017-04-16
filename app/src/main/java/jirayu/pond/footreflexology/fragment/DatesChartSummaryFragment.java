@@ -18,6 +18,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.dao.MedicalHistoryBehaviorItemCollectionDao;
+import jirayu.pond.footreflexology.manager.HttpManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -30,7 +35,7 @@ public class DatesChartSummaryFragment extends Fragment {
      ************/
 
     GraphView graphView;
-    private int medicalHistoryId; // TODO : เอา Id ไปค้นหาประวัติการรักษาจากตาราง MedicalHistoryBehavior  *อย่าลืมทำ dao ของตาราง MedicalHistoryBehaviorItemDao && MedicalHistoryBehaviorItemCollectionDao
+    private int medicalHistoryId;
 
     /************
      * Functions
@@ -60,6 +65,7 @@ public class DatesChartSummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
+        loadMedicalHistoryBehavior();
         initGraph();
         return rootView;
     }
@@ -139,6 +145,14 @@ public class DatesChartSummaryFragment extends Fragment {
         }
     }
 
+    private void loadMedicalHistoryBehavior() {
+        Call<MedicalHistoryBehaviorItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistoryBehavior(
+                "medicalhistorybehavior",
+                medicalHistoryId
+        );
+        call.enqueue(loadMedicalHistoryBehavior);
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
@@ -149,6 +163,29 @@ public class DatesChartSummaryFragment extends Fragment {
     /****************
      * Listener Zone
      ****************/
+
+    Callback<MedicalHistoryBehaviorItemCollectionDao> loadMedicalHistoryBehavior = new Callback<MedicalHistoryBehaviorItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<MedicalHistoryBehaviorItemCollectionDao> call, Response<MedicalHistoryBehaviorItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                MedicalHistoryBehaviorItemCollectionDao dao = response.body();
+                if (dao.getData().isEmpty()) {
+                    showToast("ไม่พบประวัติการรักษา");
+                } else {
+                    // TODO : เอาประวัติมา ทำ สถิติ
+                    showToast(String.valueOf(dao.getData().get(0).getUpdatedAt()));
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<MedicalHistoryBehaviorItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
 
     /**************
      * Inner Class
