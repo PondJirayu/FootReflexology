@@ -172,7 +172,7 @@ public class DatesChartSummaryFragment extends Fragment {
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else {
-                    // TODO : เอาประวัติมา ทำ สถิติ
+                    // TODO : เอาประวัติมา ลำดับที่ 0 1 2 ทำ สถิติ
                     showToast(String.valueOf(dao.getData().get(0).getUpdatedAt()));
                 }
             } else {
