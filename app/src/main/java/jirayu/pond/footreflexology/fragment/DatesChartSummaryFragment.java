@@ -71,7 +71,6 @@ public class DatesChartSummaryFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
         loadMedicalHistoryBehavior();
-//        initGraph();
         return rootView;
     }
 
@@ -199,7 +198,6 @@ public class DatesChartSummaryFragment extends Fragment {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
-
 
     /**************
      * Inner Class
