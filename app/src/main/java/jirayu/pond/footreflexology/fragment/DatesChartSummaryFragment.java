@@ -180,10 +180,12 @@ public class DatesChartSummaryFragment extends Fragment {
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else {
-                    try {
-                        initGraph(); // นำข้อมูลไปวาดกราฟ
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    if (dao.getData().size() >= 3) {
+                        try {
+                            initGraph(); // นำข้อมูลไปวาดกราฟ
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             } else {
