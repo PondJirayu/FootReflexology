@@ -2,6 +2,7 @@ package jirayu.pond.footreflexology.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,8 +15,11 @@ import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MedicalHistoryBehaviorItemCollectionDao;
@@ -23,7 +27,6 @@ import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -36,6 +39,8 @@ public class DatesChartSummaryFragment extends Fragment {
 
     GraphView graphView;
     private int medicalHistoryId;
+    SimpleDateFormat simpleDateFormat;
+    MedicalHistoryBehaviorItemCollectionDao dao;
 
     /************
      * Functions
@@ -66,7 +71,7 @@ public class DatesChartSummaryFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_dates_chart_summary, container, false);
         initInstances(rootView);
         loadMedicalHistoryBehavior();
-        initGraph();
+//        initGraph();
         return rootView;
     }
 
@@ -75,20 +80,23 @@ public class DatesChartSummaryFragment extends Fragment {
         graphView = (GraphView) rootView.findViewById(R.id.graphView);
     }
 
-    private void initGraph() {
-        // generate Dates
-        Calendar calendar = Calendar.getInstance();
-        Date d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d3 = calendar.getTime();
+    private void initGraph() throws ParseException {
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT);
+        // 0 เป็นวันที่ล่าสุด
+        String dateAsString2 = simpleDateFormat.format(dao.getData().get(2).getUpdatedAt()); // กำหนดรูปแบบวันที่ให้เป็นไปตาม SimpleDateFormat
+        Date dateFromString2 = simpleDateFormat.parse(dateAsString2); // Convert String to Date
+
+        String dateAsString1 = simpleDateFormat.format(dao.getData().get(1).getUpdatedAt());
+        Date dateFromString1 = simpleDateFormat.parse(dateAsString1);
+
+        String dateAsString0 = simpleDateFormat.format(dao.getData().get(0).getUpdatedAt());
+        Date dateFromString0 = simpleDateFormat.parse(dateAsString0);
 
         // เพิ่มข้อมูลใส่กราฟตรงนี้
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d1, 4),
-                new DataPoint(d2, 2),
-                new DataPoint(d3, 1)
+                new DataPoint(dateFromString2, dao.getData().get(2).getBehaviorId()),
+                new DataPoint(dateFromString1, dao.getData().get(1).getBehaviorId()),
+                new DataPoint(dateFromString0, dao.getData().get(0).getBehaviorId())
         });
         series.setColor(Color.RED);
         series.setDrawDataPoints(true);
@@ -102,8 +110,8 @@ public class DatesChartSummaryFragment extends Fragment {
         graphView.getGridLabelRenderer().setNumVerticalLabels(4); // กำหนดให้แกนแนวตั้ง(แกน Y)แสดง 4 แถว
 
         // set manual x bounds to have nice steps
-        graphView.getViewport().setMinX(d1.getTime());
-        graphView.getViewport().setMaxX(d3.getTime());
+        graphView.getViewport().setMinX(dateFromString2.getTime());
+        graphView.getViewport().setMaxX(dateFromString0.getTime());
         graphView.getViewport().setXAxisBoundsManual(true);
         // set manual y bounds
         graphView.getViewport().setMinY(1); // แกนแนวตั้งค่าต่ำสุดคือ 1 ถ้าต่ำกว่า 1 เส้นจะหลุดกราฟ
@@ -168,12 +176,15 @@ public class DatesChartSummaryFragment extends Fragment {
         @Override
         public void onResponse(Call<MedicalHistoryBehaviorItemCollectionDao> call, Response<MedicalHistoryBehaviorItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                MedicalHistoryBehaviorItemCollectionDao dao = response.body();
+                dao = response.body(); // เก็บเป็น member variable
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else {
-                    // TODO : เอาประวัติมา ลำดับที่ 0 1 2 ทำ สถิติ
-                    showToast(String.valueOf(dao.getData().get(0).getUpdatedAt()));
+                    try {
+                        initGraph(); // นำข้อมูลไปวาดกราฟ
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
