@@ -38,6 +38,9 @@ public interface ApiService {
             @Path("key") String key
     );
 
+    // TODO : details with behaviors
+
+
     @GET("{tableName}/{key}")
     Call<DiseaseItemCollectionDao> loadDiseaseList(
             @Path("tableName") String tableName,
