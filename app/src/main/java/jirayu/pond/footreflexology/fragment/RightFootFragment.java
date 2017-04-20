@@ -12,13 +12,22 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
+import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.StringsManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -61,7 +70,16 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
         initInstances(rootView);
         initBtnAlert();
+        loadDiseaseWithOrgan();
         return rootView;
+    }
+
+    private void loadDiseaseWithOrgan() {
+        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
+                "diseasewithorgan",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadDiseaseWithOrgan);
     }
 
     private void initInstances(View rootView) {
@@ -200,9 +218,37 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         startActivity(intent);
     }
 
+    private void showToast(String text) {
+        Toast.makeText(Contextor.getInstance().getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
+
+    Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
+            if (response.isSuccessful()){
+                DiseaseWithOrganItemCollectionDao dao = response.body();
+                if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
+                    showToast("ไม่พบข้อมูลผู้ป่วย");
+                } else {
+                    showToast(dao.getDiseaseWithOrganItemDaos().get(0).get(0).getOrganName());
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
 
     /*
      * Handle Click Spinner
