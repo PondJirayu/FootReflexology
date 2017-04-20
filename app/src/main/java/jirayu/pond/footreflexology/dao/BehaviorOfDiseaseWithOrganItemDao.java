@@ -3,22 +3,22 @@ package jirayu.pond.footreflexology.dao;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by lp700 on 15/1/2560.
+ * Created by lp700 on 20/4/2560.
  */
 
-public class BehaviorDao {
+public class BehaviorOfDiseaseWithOrganItemDao {
 
-    @SerializedName("id")
-    private int id;
+    @SerializedName("behavior_id")
+    private int behaviorId;
     @SerializedName("list")
     private String list;
 
-    public int getId() {
-        return id;
+    public int getBehaviorId() {
+        return behaviorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBehaviorId(int behaviorId) {
+        this.behaviorId = behaviorId;
     }
 
     public String getList() {

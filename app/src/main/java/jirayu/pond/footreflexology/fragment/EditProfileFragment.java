@@ -32,7 +32,7 @@ import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
-import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.dao.StatusItemDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.StringsManager;
@@ -244,7 +244,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 } else {
                     progressDialog.show();
                     // UpdateMember Here
-                    Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMember(
+                    Call<StatusItemDao> call = HttpManager.getInstance().getService().UpdateMember(
                             DataMemberManager.getInstance().getMemberItemDao().getId(),
                             firstName,
                             lastName,
@@ -319,13 +319,13 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         }
     };
 
-    Callback<StatusDao> insertMemberList = new Callback<StatusDao>() {
+    Callback<StatusItemDao> insertMemberList = new Callback<StatusItemDao>() {
         @Override
-        public void onResponse(Call<StatusDao> call,
-                               Response<StatusDao> response) {
+        public void onResponse(Call<StatusItemDao> call,
+                               Response<StatusItemDao> response) {
 
             if (response.isSuccessful()) {
-                StatusDao dao = response.body();
+                StatusItemDao dao = response.body();
                 if (dao.getSuccess() != 1) {
                     progressDialog.dismiss();
                     showToast("ขออภัยแก้ไขข้อมูลไม่สำเร็จ");
@@ -341,7 +341,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         }
 
         @Override
-        public void onFailure(Call<StatusDao> call,
+        public void onFailure(Call<StatusItemDao> call,
                               Throwable t) {
 
             progressDialog.dismiss();

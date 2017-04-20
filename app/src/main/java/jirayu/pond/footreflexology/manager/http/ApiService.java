@@ -3,14 +3,15 @@ package jirayu.pond.footreflexology.manager.http;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
+import jirayu.pond.footreflexology.dao.BehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
+import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryBehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.OrganItemCollectionDao;
-import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.dao.StatusItemDao;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -38,8 +39,11 @@ public interface ApiService {
             @Path("key") String key
     );
 
-    // TODO : details with behaviors
-
+    @GET("{tableName}/{key}")
+    Call<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan(
+            @Path("tableName") String tableName,
+            @Path("key") int key
+    );
 
     @GET("{tableName}/{key}")
     Call<DiseaseItemCollectionDao> loadDiseaseList(
@@ -61,7 +65,7 @@ public interface ApiService {
     );
 
     @GET("{tableName}")
-    Call<BehaviorCollectionDao> loadBehavior(
+    Call<BehaviorItemCollectionDao> loadBehavior(
             @Path("tableName") String tableName
     );
 
@@ -92,7 +96,7 @@ public interface ApiService {
     );
 
     @GET("medicalhistory/none/create")
-    Call<StatusDao> InsertMedicalHistory(
+    Call<StatusItemDao> InsertMedicalHistory(
             @Query("member_id") int memberId,
             @Query("disease_id") int diseaseId,
             @Query("behavior_id") int behaviorId,
@@ -105,7 +109,7 @@ public interface ApiService {
      **************/
 
     @GET("member/{key}/edit")
-    Call<StatusDao> UpdateMember(
+    Call<StatusItemDao> UpdateMember(
             @Path("key") int key,
             @Query("firstname") String firstName,
             @Query("lastname") String lastName,
@@ -121,7 +125,7 @@ public interface ApiService {
     );
 
     @GET("medicalhistory/{key}/edit")
-    Call<StatusDao> UpdateMedicalHistory(
+    Call<StatusItemDao> UpdateMedicalHistory(
             @Path("key") int key,
             @Query("behavior_id") int behaviorId,
             @Query("created_at") Timestamp createAt,

@@ -8,12 +8,12 @@ import java.util.List;
  * Created by lp700 on 15/1/2560.
  */
 
-public class BehaviorCollectionDao {
+public class BehaviorItemCollectionDao {
 
     @SerializedName("success")
     private int success;
     @SerializedName("data")
-    private List<BehaviorDao> data;
+    private List<BehaviorItemDao> data;
 
     public int getSuccess() {
         return success;
@@ -23,11 +23,11 @@ public class BehaviorCollectionDao {
         this.success = success;
     }
 
-    public List<BehaviorDao> getData() {
+    public List<BehaviorItemDao> getData() {
         return data;
     }
 
-    public void setData(List<BehaviorDao> data) {
+    public void setData(List<BehaviorItemDao> data) {
         this.data = data;
     }
 }

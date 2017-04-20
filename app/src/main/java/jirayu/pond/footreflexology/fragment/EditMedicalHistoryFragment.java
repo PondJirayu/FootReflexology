@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
+import jirayu.pond.footreflexology.dao.BehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.dao.StatusItemDao;
 import jirayu.pond.footreflexology.manager.BehaviorManager;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
@@ -122,7 +122,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     }
 
     private void loadBehavior() {
-        Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior(
+        Call<BehaviorItemCollectionDao> call = HttpManager.getInstance().getService().loadBehavior(
                 "behaviors"
         );
         call.enqueue(loadBehavior);
@@ -157,7 +157,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     }
 
     private void updateMedicalHistory() {
-        Call<StatusDao> call = HttpManager.getInstance().getService().UpdateMedicalHistory(
+        Call<StatusItemDao> call = HttpManager.getInstance().getService().UpdateMedicalHistory(
                 rowId,
                 behaviorId,
                 new Timestamp(System.currentTimeMillis()), // GET เวลาปัจจุบัน
@@ -177,11 +177,11 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
      * Listener Zone
      ****************/
 
-    Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
+    Callback<BehaviorItemCollectionDao> loadBehavior = new Callback<BehaviorItemCollectionDao>() {
         @Override
-        public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
+        public void onResponse(Call<BehaviorItemCollectionDao> call, Response<BehaviorItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                BehaviorCollectionDao dao = response.body();
+                BehaviorItemCollectionDao dao = response.body();
                 behavior = new ArrayList<>();
                 // add json to array list
                 for (int i = 0; i < dao.getData().size(); i++) {
@@ -195,7 +195,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         }
 
         @Override
-        public void onFailure(Call<BehaviorCollectionDao> call, Throwable t) {
+        public void onFailure(Call<BehaviorItemCollectionDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
@@ -227,11 +227,11 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         }
     };
 
-    Callback<StatusDao> updateMedicalHistory = new Callback<StatusDao>() {
+    Callback<StatusItemDao> updateMedicalHistory = new Callback<StatusItemDao>() {
         @Override
-        public void onResponse(Call<StatusDao> call, Response<StatusDao> response) {
+        public void onResponse(Call<StatusItemDao> call, Response<StatusItemDao> response) {
             if (response.isSuccessful()) {
-                StatusDao dao = response.body();
+                StatusItemDao dao = response.body();
                 if (dao.getSuccess() == 1) {
                     showToast("แก้ไขประวัติการรักษาสำเร็จ");
                     getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบัน
@@ -245,7 +245,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         }
 
         @Override
-        public void onFailure(Call<StatusDao> call, Throwable t) {
+        public void onFailure(Call<StatusItemDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };

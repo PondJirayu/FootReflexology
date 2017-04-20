@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.dao.BehaviorCollectionDao;
+import jirayu.pond.footreflexology.dao.BehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.dao.StatusDao;
+import jirayu.pond.footreflexology.dao.StatusItemDao;
 import jirayu.pond.footreflexology.manager.BehaviorManager;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.DiseaseManager;
@@ -136,7 +136,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     }
 
     private void loadBehavior() {
-        Call<BehaviorCollectionDao> call = HttpManager.getInstance().getService().loadBehavior(
+        Call<BehaviorItemCollectionDao> call = HttpManager.getInstance().getService().loadBehavior(
                 "behaviors"
         );
         call.enqueue(loadBehavior);
@@ -191,11 +191,11 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      * Listener Zone
      ****************/
 
-    Callback<StatusDao> insertMedicalHistory = new Callback<StatusDao>() {
+    Callback<StatusItemDao> insertMedicalHistory = new Callback<StatusItemDao>() {
         @Override
-        public void onResponse(Call<StatusDao> call, Response<StatusDao> response) {
+        public void onResponse(Call<StatusItemDao> call, Response<StatusItemDao> response) {
             if (response.isSuccessful()) {
-                StatusDao dao = response.body();
+                StatusItemDao dao = response.body();
                 if (dao.getSuccess() == 1) {
                     showToast("เพิ่มประวัติการรักษาแล้ว");
                     getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบันทิ้ง
@@ -208,7 +208,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
 
         @Override
-        public void onFailure(Call<StatusDao> call, Throwable t) {
+        public void onFailure(Call<StatusItemDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
@@ -238,11 +238,11 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
     };
 
-    Callback<BehaviorCollectionDao> loadBehavior = new Callback<BehaviorCollectionDao>() {
+    Callback<BehaviorItemCollectionDao> loadBehavior = new Callback<BehaviorItemCollectionDao>() {
         @Override
-        public void onResponse(Call<BehaviorCollectionDao> call, Response<BehaviorCollectionDao> response) {
+        public void onResponse(Call<BehaviorItemCollectionDao> call, Response<BehaviorItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                BehaviorCollectionDao dao = response.body();
+                BehaviorItemCollectionDao dao = response.body();
                 behavior = new ArrayList<>();
                 // add json to array list
                 for (int i = 0; i < dao.getData().size(); i++) {
@@ -258,7 +258,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
 
         @Override
-        public void onFailure(Call<BehaviorCollectionDao> call, Throwable t) {
+        public void onFailure(Call<BehaviorItemCollectionDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
@@ -311,7 +311,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     showToast("มีประวัติการรักษาอยู่แล้ว");
                 } else {
                     // Insert MedicalHistory Here
-                    Call<StatusDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                    Call<StatusItemDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
                             DataMemberManager.getInstance().getMemberItemDao().getId(),
                             diseaseId,
                             behaviorId,
