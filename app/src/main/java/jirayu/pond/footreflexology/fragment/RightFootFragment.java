@@ -237,7 +237,8 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
                     showToast("ไม่พบข้อมูลผู้ป่วย");
                 } else {
-                    showToast(dao.getDiseaseWithOrganItemDaos().get(0).get(0).getOrganName());
+                    showToast(dao.getDiseaseWithOrganItemDaos().get(0).get(0).getOrganName()
+                            + "" + String.valueOf(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(0).getBehaviorId()));
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
