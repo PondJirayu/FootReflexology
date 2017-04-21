@@ -142,8 +142,11 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
      * Create Adapter of Spinner
      */
     private void createAdapter() {
-        adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.right_foot_names, android.R.layout.simple_spinner_item);
+        adapter = ArrayAdapter.createFromResource(
+                getActivity(),
+                R.array.right_foot_names,
+                android.R.layout.simple_spinner_item
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFoot.setAdapter(adapter); // Spinner + Adapter
     }
