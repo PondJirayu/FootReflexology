@@ -10,7 +10,7 @@
     <string name="action_about">เกี่ยวกับ</string>
     <string name="title_activity_settings">ตั้งค่า</string>
     <string name="action_logout">ออกจากระบบ</string>
-    <string name="select_the_response">แสดงเขตตอบสนองของอวัยวะต่างๆ</string>
+    <string name="select_the_response">เลือกเขตตอบสนองของอวัยวะต่างๆ</string>
     <string name="action_edit">แก้ไขประวัติส่วนตัว</string>
     <string name="action_edit_medical">แก้ไขประวัติการรักษา</string>
     <string name="first_name">ชื่อ</string>
