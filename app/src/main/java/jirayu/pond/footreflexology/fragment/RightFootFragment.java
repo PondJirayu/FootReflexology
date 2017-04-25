@@ -319,13 +319,19 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     };
 
     private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
-        for (int i = 0; i < SIZE; i++) {
-           for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(0).size(); k++) {
-                if (buttonAlertUtils[i].getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(0).get(k).getOrganName())) {
-                    buttonAlertUtils[i].setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(0).getBehaviorId());
-                    buttonAlertUtils[i].showAlertView();
+        for (int i = 0; i < SIZE; i++)
+        {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++)
+            {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++)
+                {
+                    if (buttonAlertUtils[i].getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName()))
+                    {
+                        buttonAlertUtils[i].setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        buttonAlertUtils[i].showAlertView();
+                    }
                 }
-           }
+            }
         }
     }
 
