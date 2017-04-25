@@ -3,6 +3,7 @@ package jirayu.pond.footreflexology.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ import retrofit2.Response;
 public class RightFootFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     /************
-    * Variables
+     * Variables
      ***********/
 
     Spinner spinnerFoot;
@@ -144,10 +145,28 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         // Create btnAlert
         for (int i = 0; i < SIZE; i++) {
             buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            buttonAlertUtils[i].setOrganName(organName.get(i)); // Add OrganName to btnAlert
+        }
+
+        for (int i = 0; i < SIZE; i++) {
+            // Add OrganName to btnAlert
+            if (i >= 38 && i <= 45) {
+                for (int j = 38; j <= 45; j++)
+                    buttonAlertUtils[j].setOrganName(organName.get(0));
+            } else if (i == 46) { // 3
+                buttonAlertUtils[i].setOrganName(organName.get(2));
+            } else if (i == 47) { // 4
+                buttonAlertUtils[i].setOrganName(organName.get(3));
+            } else if (i >= 48 && i <= 51) { // 6
+                for (int j = 48; j <= 51; j++)
+                    buttonAlertUtils[j].setOrganName(organName.get(5));
+            } else {
+                buttonAlertUtils[i].setOrganName(organName.get(i));
+            }
+
             layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add to Layout
             buttonAlertUtils[i].hideAlertView(); // Hide
         }
+
         // Handle Click btnAlert
         for (int i = 0; i < SIZE; i++) {
             buttonAlertUtils[i].getBtnAlert().setOnClickListener(this);
@@ -205,10 +224,10 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                 hideAlertViewNumberOneExtend();
                 break;
             case 2:
-                buttonAlertUtils[37+9].hideAlertView();
+                buttonAlertUtils[37 + 9].hideAlertView();
                 break;
             case 3:
-                buttonAlertUtils[37+10].hideAlertView();
+                buttonAlertUtils[37 + 10].hideAlertView();
                 break;
             case 5:
                 hideAlertViewNumberSixExtend();
@@ -222,10 +241,10 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                         showAlertViewNumberOneExtend();
                         break;
                     case 2:
-                        buttonAlertUtils[37+9].showAlertView();
+                        buttonAlertUtils[37 + 9].showAlertView();
                         break;
                     case 3:
-                        buttonAlertUtils[37+10].showAlertView();
+                        buttonAlertUtils[37 + 10].showAlertView();
                         break;
                     case 5:
                         showAlertViewNumberSixExtend();
@@ -239,25 +258,25 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37+i].showAlertView();
+            buttonAlertUtils[37 + i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37+i].hideAlertView();
+            buttonAlertUtils[37 + i].hideAlertView();
         }
     }
 
     private void showAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37+i].showAlertView();
+            buttonAlertUtils[37 + i].showAlertView();
         }
     }
 
     private void hideAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37+i].hideAlertView();
+            buttonAlertUtils[37 + i].hideAlertView();
         }
     }
 
@@ -281,13 +300,14 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
         @Override
         public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
-            if (response.isSuccessful()){
+            if (response.isSuccessful()) {
                 DiseaseWithOrganItemCollectionDao dao = response.body();
                 if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
                     showToast("ไม่พบข้อมูลผู้ป่วย");
                 } else {
-                    showToast(dao.getDiseaseWithOrganItemDaos().get(0).get(0).getOrganName()
-                            + "" + String.valueOf(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(0).getBehaviorId()));
+//                    showToast(dao.getDiseaseWithOrganItemDaos().get(0).get(0).getOrganName()
+//                            + "" + String.valueOf(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(0).getBehaviorId()));
+                    initBehaviors(dao);
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -300,6 +320,17 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     };
 
+    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
+        for (int i = 0; i < SIZE; i++) {
+           for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().get(0).size(); j++) {
+                if (buttonAlertUtils[i].getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(0).get(j).getOrganName())) {
+                    buttonAlertUtils[i].setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(0).getBehaviorId());
+                    buttonAlertUtils[i].showAlertView();
+                }
+           }
+        }
+    }
+
     /*
      * Handle Click Spinner
      */
@@ -309,6 +340,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         stringsManager.setWord(parent.getItemAtPosition(position).toString());
         showBtnAlert(position);
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 

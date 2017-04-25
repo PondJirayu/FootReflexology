@@ -42,8 +42,13 @@ public class ButtonAlertUtils {
     private void initInstance() {
         btnAlert = new Button(getContext());   // Create View
         btnAlert.setId(R.id.btnAlert); // Set Id
-        // Set Background View
-        switch (getStatus()) {
+        setBackgroundView(getStatus());
+        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
+        btnAlert.startAnimation(anim); // Start View Animation
+    }
+
+    public void setBackgroundView(int status) {
+        switch (status) {
             case 1: // อาการแย่
                 btnAlert.setBackgroundResource(R.drawable.shape_view_alert_red_color);
                 break;
@@ -59,8 +64,6 @@ public class ButtonAlertUtils {
             default:
                 break;
         }
-        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
-        btnAlert.startAnimation(anim); // Start View Animation
     }
 
     public FrameLayout.LayoutParams getParams() {
@@ -109,7 +112,7 @@ public class ButtonAlertUtils {
         return context;
     }
 
-    private void setStatus(int status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -140,4 +143,6 @@ public class ButtonAlertUtils {
     public void setOrganName(String organName) {
         this.organName = organName;
     }
+
+
 }
