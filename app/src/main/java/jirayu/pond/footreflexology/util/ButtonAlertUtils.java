@@ -22,6 +22,7 @@ public class ButtonAlertUtils {
     private Button btnAlert;
     private Animation anim;
     private int status, width, height, leftMargin, topMargin;
+    private String organName;
     private Context context;
 
     /************
@@ -132,4 +133,11 @@ public class ButtonAlertUtils {
         this.context = context;
     }
 
+    public String getOrganName() {
+        return organName;
+    }
+
+    public void setOrganName(String organName) {
+        this.organName = organName;
+    }
 }

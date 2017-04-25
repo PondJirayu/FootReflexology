@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
+import java.util.ArrayList;
+
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
@@ -48,6 +50,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     private final int SIZE = 38 + 14;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewRightFootPosition();
     private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
+    private ArrayList<String> organName = new ArrayList<>();
 
     /************
      * Functions
@@ -69,6 +72,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
         initInstances(rootView);
+        initOrganName();
         initBtnAlert();
         loadDiseaseWithOrgan();
         return rootView;
@@ -95,10 +99,52 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         imgBtnInfo.setOnClickListener(this);
     }
 
+    private void initOrganName() {
+        organName.add("โพรงอากาศและกระดูกหน้าผาก");
+        organName.add("สมอง");
+        organName.add("ตา");
+        organName.add("หู");
+        organName.add("กล้ามเนื้อทราปิเซียส");
+        organName.add("ฟัน");
+        organName.add("ไหล่ขวา");
+        organName.add("ถุงน้ำดี");
+        organName.add("ตับ");
+        organName.add("ต่อมหมวกไต");
+        organName.add("ลำไส้ใหญ่ขาขึ้น");
+        organName.add("ลำไส้ใหญ่ซีคัม");
+        organName.add("เข่าขวา");
+        organName.add("ไส้ติ่ง");
+        organName.add("ต่อมไพเนียล");
+        organName.add("ต่อมใต้สมอง");
+        organName.add("จมูก");
+        organName.add("ขมับศีรษะ");
+        organName.add("สมองใหญ่");
+        organName.add("สมองเล็กและก้านสมอง");
+        organName.add("ศีรษะต้นคอ");
+        organName.add("ต่อมธัยรอยด์และต่อมพาราธัยรอยด์");
+        organName.add("หลอดลมคอหอย");
+        organName.add("ปอดและท่อหลอดลม");
+        organName.add("ระบบประสาท");
+        organName.add("กระเพาะอาหาร");
+        organName.add("เส้นประสาทช่องท้อง");
+        organName.add("กระบังลม");
+        organName.add("ตับอ่อน");
+        organName.add("ลำไส้เล็กส่วนตัว");
+        organName.add("ลำไส้ใหญ่ส่วนขวาง");
+        organName.add("ไต");
+        organName.add("หลอดไต");
+        organName.add("ลำไส้เล็กส่วนกลางและปลาย");
+        organName.add("กระเพาะปัสสาวะ");
+        organName.add("กระดูกเชิงกราน");
+        organName.add("สะโพก");
+        organName.add("เส้นประสาทกระเบนเหน็บ");
+    }
+
     private void initBtnAlert() {
         // Create btnAlert
         for (int i = 0; i < SIZE; i++) {
             buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
+            buttonAlertUtils[i].setOrganName(organName.get(i)); // Add OrganName to btnAlert
             layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add to Layout
             buttonAlertUtils[i].hideAlertView(); // Hide
         }
