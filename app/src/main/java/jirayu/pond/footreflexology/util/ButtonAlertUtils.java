@@ -33,26 +33,36 @@ public class ButtonAlertUtils implements View.OnClickListener {
      ************/
 
     public ButtonAlertUtils(Context context, int status, int width, int height, int topMargin, int leftMargin) {
-        setStatus(status);
-        setWidth(width);
-        setHeight(height);
-        setTopMargin(topMargin);
-        setLeftMargin(leftMargin);
-        setContext(context);
+        this.status = status;
+        this.width = width;
+        this.height = height;
+        this.topMargin = topMargin;
+        this.leftMargin = leftMargin;
+        this.context = context;
         initInstance();
     }
 
     private void initInstance() {
-        btnAlert = new Button(getContext());   // Create View
+        btnAlert = new Button(context);   // Create View
         btnAlert.setId(R.id.btnAlert); // Set Id
-        setBackgroundView(getStatus());
-        anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
+        setBackgroundView(status); // Set BackgroundView
 
-        // Start View Animation
-        btnAlert.startAnimation(anim);
+        anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim); // Create Animation
+        btnAlert.startAnimation(anim); // Start View Animation
 
         // Handle Click btnAlert
         btnAlert.setOnClickListener(this);
+    }
+
+    public void hideAlertView() {
+        btnAlert.setVisibility(Switch.GONE);
+        anim.setRepeatCount(0);
+    }
+
+    public void showAlertView() {
+        anim.setRepeatCount(Animation.INFINITE);
+        btnAlert.startAnimation(anim);
+        btnAlert.setVisibility(Switch.VISIBLE);
     }
 
     public void setBackgroundView(int status) {
@@ -75,73 +85,14 @@ public class ButtonAlertUtils implements View.OnClickListener {
     }
 
     public FrameLayout.LayoutParams getParams() {
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(getWidth(), getHeight());
-        params.leftMargin = getLeftMargin();
-        params.topMargin = getTopMargin();
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        params.leftMargin = leftMargin;
+        params.topMargin = topMargin;
         return params;
-    }
-
-    public void hideAlertView() {
-        btnAlert.setVisibility(Switch.GONE);
-        anim.setRepeatCount(0);
-    }
-
-    public void showAlertView() {
-        anim.setRepeatCount(Animation.INFINITE);
-        btnAlert.startAnimation(anim);
-        btnAlert.setVisibility(Switch.VISIBLE);
     }
 
     public Button getBtnAlert() {
         return btnAlert;
-    }
-
-    private int getStatus() {
-        return status;
-    }
-
-    private int getWidth() {
-        return width;
-    }
-
-    private int getHeight() {
-        return height;
-    }
-
-    private int getLeftMargin() {
-        return leftMargin;
-    }
-
-    private int getTopMargin() {
-        return topMargin;
-    }
-
-    private Context getContext() {
-        return context;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    private void setWidth(int width) {
-        this.width = width;
-    }
-
-    private void setHeight(int height) {
-        this.height = height;
-    }
-
-    private void setLeftMargin(int leftMargin) {
-        this.leftMargin = leftMargin;
-    }
-
-    private void setTopMargin(int topMargin) {
-        this.topMargin = topMargin;
-    }
-
-    private void setContext(Context context) {
-        this.context = context;
     }
 
     public String getOrganName() {
@@ -158,7 +109,7 @@ public class ButtonAlertUtils implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+        Intent intent = new Intent(context, ShowDetailsActivity.class);
         intent.putExtra("result", organName);
         context.startActivity(intent);
     }

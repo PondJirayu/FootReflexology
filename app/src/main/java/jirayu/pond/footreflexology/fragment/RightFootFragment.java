@@ -45,8 +45,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     ArrayAdapter<CharSequence> adapter;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
-    StringsManager stringsManager;
-
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewRightFootPosition();
@@ -147,8 +145,8 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
         }
 
+        // Add OrganName to btnAlert
         for (int i = 0; i < SIZE; i++) {
-            // Add OrganName to btnAlert
             if (i >= 38 && i <= 45) {
                 for (int j = 38; j <= 45; j++)
                     buttonAlertUtils[j].setOrganName(organName.get(0));
@@ -162,11 +160,9 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             } else {
                 buttonAlertUtils[i].setOrganName(organName.get(i));
             }
-
             layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add to Layout
             buttonAlertUtils[i].hideAlertView(); // Hide
         }
-
     }
 
     @Override
@@ -330,8 +326,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        stringsManager = new StringsManager();
-        stringsManager.setWord(parent.getItemAtPosition(position).toString());
         showBtnAlert(position);
     }
 
