@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="primary_color">#8BC34A</color>
     <color name="primary_dark_color">#689F38</color>
     <color name="accent_color">#FF4081</color>
@@ -19,11 +20,21 @@
     <color name="view_even_color">#F06292</color>
     <color name="view_odd_color">#64B5F6</color>
     <color name="font_black_color">#c8000000</color>
-    <color name="grey_color_500">#9E9E9E</color>
-    <color name="grey_color_600">#757575</color>
-    <color name="red_color_500">#F44336</color>
+
+    <!-- 500 -->
     <color name="yellow_color_500">#FFEB3B</color>
     <color name="green_color_500">#4CAF50</color>
+    <color name="grey_color_500">#9E9E9E</color>
+    <color name="red_color_500">#F44336</color>
+
+    <!-- 600 -->
+    <color name="grey_color_600">#757575</color>
+    <color name="red_color_600">#E53935</color>
+    <color name="yellow_color_600">#FDD835</color>
+    <color name="green_color_600">#43A047</color>
     <color name="teal_color_600">#00897B</color>
+
+    <!-- 700 -->
     <color name="teal_color_700">#00796B</color>
+
 </resources>
