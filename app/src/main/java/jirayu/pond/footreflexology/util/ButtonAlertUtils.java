@@ -47,8 +47,12 @@ public class ButtonAlertUtils implements View.OnClickListener {
         btnAlert.setId(R.id.btnAlert); // Set Id
         setBackgroundView(getStatus());
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
-        btnAlert.startAnimation(anim); // Start View Animation
-        btnAlert.setOnClickListener(this); // Handle Click btnAlert
+
+        // Start View Animation
+        btnAlert.startAnimation(anim);
+
+        // Handle Click btnAlert
+        btnAlert.setOnClickListener(this);
     }
 
     public void setBackgroundView(int status) {
@@ -148,10 +152,19 @@ public class ButtonAlertUtils implements View.OnClickListener {
         this.organName = organName;
     }
 
+    /****************
+     * Listener Zone
+     ****************/
+
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
         intent.putExtra("result", organName);
         context.startActivity(intent);
     }
+
+    /**************
+     * Inner Class
+     **************/
+
 }

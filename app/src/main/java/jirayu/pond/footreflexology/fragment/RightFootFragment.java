@@ -167,10 +167,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             buttonAlertUtils[i].hideAlertView(); // Hide
         }
 
-        // Handle Click btnAlert
-//        for (int i = 0; i < SIZE; i++) {
-//            buttonAlertUtils[i].getBtnAlert().setOnClickListener(this);
-//        }
     }
 
     @Override
@@ -280,12 +276,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void startActivity() {
-        Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-        intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-        startActivity(intent);
-    }
-
     private void showToast(String text) {
         Toast.makeText(Contextor.getInstance().getContext(),
                 text,
@@ -356,9 +346,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.btnAlert:
-//                startActivity();
-//                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
