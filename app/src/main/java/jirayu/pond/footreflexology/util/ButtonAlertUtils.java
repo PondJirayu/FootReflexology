@@ -1,6 +1,8 @@
 package jirayu.pond.footreflexology.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -8,12 +10,13 @@ import android.widget.FrameLayout;
 import android.widget.Switch;
 
 import jirayu.pond.footreflexology.R;
+import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 
 /**
  * Created by lp700 on 10/3/2560.
  */
 
-public class ButtonAlertUtils {
+public class ButtonAlertUtils implements View.OnClickListener {
 
     /************
      * Variables
@@ -45,6 +48,7 @@ public class ButtonAlertUtils {
         setBackgroundView(getStatus());
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.alert_view_alpha_anim); // Create Animation
         btnAlert.startAnimation(anim); // Start View Animation
+        btnAlert.setOnClickListener(this); // Handle Click btnAlert
     }
 
     public void setBackgroundView(int status) {
@@ -144,5 +148,10 @@ public class ButtonAlertUtils {
         this.organName = organName;
     }
 
-
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+        intent.putExtra("result", organName);
+        context.startActivity(intent);
+    }
 }

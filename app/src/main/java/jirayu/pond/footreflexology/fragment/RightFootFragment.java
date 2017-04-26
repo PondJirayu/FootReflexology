@@ -168,9 +168,9 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
 
         // Handle Click btnAlert
-        for (int i = 0; i < SIZE; i++) {
-            buttonAlertUtils[i].getBtnAlert().setOnClickListener(this);
-        }
+//        for (int i = 0; i < SIZE; i++) {
+//            buttonAlertUtils[i].getBtnAlert().setOnClickListener(this);
+//        }
     }
 
     @Override
@@ -356,9 +356,9 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAlert:
-                startActivity();
-                break;
+//            case R.id.btnAlert:
+//                startActivity();
+//                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
