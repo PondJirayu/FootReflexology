@@ -72,14 +72,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         return rootView;
     }
 
-    private void loadDiseaseWithOrgan() {
-        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
-                "diseasewithorgan",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
-        );
-        call.enqueue(loadDiseaseWithOrgan);
-    }
-
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
@@ -159,17 +151,12 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
-                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
-                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
-                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
-                        btnAlerts.get(i).showAlertView();
-                    }
-                }
-            }
-        }
+    private void loadDiseaseWithOrgan() {
+        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
+                "diseasewithorgan",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadDiseaseWithOrgan);
     }
 
     @Override
@@ -202,9 +189,20 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    /*
-     * Create Adapter of Spinner
-     */
+    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
+                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        btnAlerts.get(i).showAlertView();
+                    }
+                }
+            }
+        }
+    }
+
+    // Create Adapter of Spinner
     private void createAdapter() {
         adapter = ArrayAdapter.createFromResource(
                 getActivity(),

@@ -24,6 +24,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
+                    android:contentDescription="@string/left_foot"
                     android:scaleType="centerCrop"
                     android:src="@drawable/foot_left" />
 
@@ -31,13 +32,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="15dp">
 
                     <include layout="@layout/tv_display_response_zone" />
 
                     <include layout="@layout/spinner_foot" />
-
-                    <include layout="@layout/btn_show_details" />
 
                 </LinearLayout>
 
