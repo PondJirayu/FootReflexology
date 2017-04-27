@@ -128,8 +128,21 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
 
         // Add OrganName to btnAlert
         for (int i = 0; i < SIZE; i++) {
-
-
+            if (i >= 38 && i <= 45) {
+                for (int j = 38; j <= 45; j++){
+                    btnAlerts.get(j).setOrganName(organName.get(0));
+                }
+            } else if (i == 46){ // 3
+                btnAlerts.get(i).setOrganName(organName.get(2));
+            } else if (i == 47){ // 4
+                btnAlerts.get(i).setOrganName(organName.get(3));
+            } else if (i >= 48 && i <= 51){ //6
+                for (int j = 48; j <= 51; j++) {
+                    btnAlerts.get(j).setOrganName(organName.get(5));
+                }
+            } else {
+                btnAlerts.get(i).setOrganName(organName.get(i));
+            }
             layoutAlert.addView(btnAlerts.get(i).getBtnAlert(), btnAlerts.get(i).getParams()); // Add to Layout
             btnAlerts.get(i).hideAlertView(); // Hide
         }
