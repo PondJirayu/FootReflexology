@@ -149,7 +149,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void loadDiseaseWithOrgan() {
-
+        // TODO : จะโหลดข้อมูลซ้ำเหรออออออออออ
     }
 
     @Override
