@@ -193,17 +193,17 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void showAlertView(int position) {
-        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
+        if (lastPosition != -1) btnAlerts.get(lastPosition).hideAlertView(); // ซ่อน AlertView
         // ซ่อน AlertView ตัวซ้ำ
         switch (lastPosition) {
             case 0:
                 hideAlertViewNumberOneExtend();
                 break;
             case 2:
-                buttonAlertUtils[37+9].hideAlertView();
+                btnAlerts.get(37 + 9).hideAlertView();
                 break;
             case 3:
-                buttonAlertUtils[37+10].hideAlertView();
+                btnAlerts.get(37 + 10).hideAlertView();
                 break;
             case 5:
                 hideAlertViewNumberSixExtend();
@@ -211,16 +211,16 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         }
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                buttonAlertUtils[i].showAlertView();
+                btnAlerts.get(i).showAlertView();
                 switch (position) {
                     case 0:
                         showAlertViewNumberOneExtend();
                         break;
                     case 2:
-                        buttonAlertUtils[37+9].showAlertView();
+                        btnAlerts.get(37 + 9).showAlertView();
                         break;
                     case 3:
-                        buttonAlertUtils[37+10].showAlertView();
+                        btnAlerts.get(37 + 10).showAlertView();
                         break;
                     case 5:
                         showAlertViewNumberSixExtend();
@@ -234,25 +234,25 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
 
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37+i].showAlertView();
+            btnAlerts.get(37 + i).showAlertView();
         }
     }
 
     private void hideAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37+i].hideAlertView();
+            btnAlerts.get(37 + i).hideAlertView();
         }
     }
 
     private void showAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37+i].showAlertView();
+            btnAlerts.get(37 + i).showAlertView();
         }
     }
 
     private void hideAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37+i].hideAlertView();
+            btnAlerts.get(37 + i).hideAlertView();
         }
     }
 
@@ -265,8 +265,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        stringsManager = new StringsManager();
-        stringsManager.setWord(parent.getItemAtPosition(position).toString());
         showAlertView(position);
     }
 
@@ -281,11 +279,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnShowDetails:
-                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-                startActivity(intent);
-                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
