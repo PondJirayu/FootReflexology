@@ -159,6 +159,19 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
+                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        btnAlerts.get(i).showAlertView();
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -297,19 +310,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
         }
     };
-
-    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
-                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
-                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
-                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
-                        btnAlerts.get(i).showAlertView();
-                    }
-                }
-            }
-        }
-    }
 
     /*
      * Handle Click Spinner
