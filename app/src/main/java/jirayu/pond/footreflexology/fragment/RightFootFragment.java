@@ -1,15 +1,12 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -20,11 +17,9 @@ import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
-import jirayu.pond.footreflexology.manager.StringsManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
@@ -48,7 +43,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     private int lastPosition = -1;
     private final int SIZE = 38 + 14;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewRightFootPosition();
-    private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
+    private ArrayList<ButtonAlertUtils> btnAlerts = new ArrayList<>();
     private ArrayList<String> organName = new ArrayList<>();
 
     /************
@@ -140,28 +135,27 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     }
 
     private void initBtnAlert() {
-        // Create btnAlert
         for (int i = 0; i < SIZE; i++) {
-            buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
+            btnAlerts.add(new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1])); // New Object
         }
 
         // Add OrganName to btnAlert
         for (int i = 0; i < SIZE; i++) {
             if (i >= 38 && i <= 45) {
                 for (int j = 38; j <= 45; j++)
-                    buttonAlertUtils[j].setOrganName(organName.get(0));
+                btnAlerts.get(j).setOrganName(organName.get(0));
             } else if (i == 46) { // 3
-                buttonAlertUtils[i].setOrganName(organName.get(2));
+                btnAlerts.get(i).setOrganName(organName.get(2));
             } else if (i == 47) { // 4
-                buttonAlertUtils[i].setOrganName(organName.get(3));
+                btnAlerts.get(i).setOrganName(organName.get(3));
             } else if (i >= 48 && i <= 51) { // 6
                 for (int j = 48; j <= 51; j++)
-                    buttonAlertUtils[j].setOrganName(organName.get(5));
+                      btnAlerts.get(j).setOrganName(organName.get(5));
             } else {
-                buttonAlertUtils[i].setOrganName(organName.get(i));
+                btnAlerts.get(i).setOrganName(organName.get(i));
             }
-            layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add to Layout
-            buttonAlertUtils[i].hideAlertView(); // Hide
+            layoutAlert.addView(btnAlerts.get(i).getBtnAlert(), btnAlerts.get(i).getParams()); // Add to Layout
+            btnAlerts.get(i).hideAlertView(); // Hide
         }
     }
 
@@ -209,17 +203,17 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     }
 
     private void showBtnAlert(int position) {
-        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView
+        if (lastPosition != -1) btnAlerts.get(lastPosition).hideAlertView(); // ซ่อน AlertView
         // ซ่อน AlertView ตัวซ้ำ
         switch (lastPosition) {
             case 0:
                 hideAlertViewNumberOneExtend();
                 break;
             case 2:
-                buttonAlertUtils[37 + 9].hideAlertView();
+                btnAlerts.get(37 + 9).hideAlertView();
                 break;
             case 3:
-                buttonAlertUtils[37 + 10].hideAlertView();
+                btnAlerts.get(37 + 10).hideAlertView();
                 break;
             case 5:
                 hideAlertViewNumberSixExtend();
@@ -227,16 +221,16 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                buttonAlertUtils[i].showAlertView();
+                btnAlerts.get(i).showAlertView();
                 switch (position) {
                     case 0:
                         showAlertViewNumberOneExtend();
                         break;
                     case 2:
-                        buttonAlertUtils[37 + 9].showAlertView();
+                        btnAlerts.get(37 + 9).showAlertView();
                         break;
                     case 3:
-                        buttonAlertUtils[37 + 10].showAlertView();
+                        btnAlerts.get(37 + 10).showAlertView();
                         break;
                     case 5:
                         showAlertViewNumberSixExtend();
@@ -250,25 +244,25 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
 
     private void showAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37 + i].showAlertView();
+            btnAlerts.get(37 + i).showAlertView();
         }
     }
 
     private void hideAlertViewNumberOneExtend() {
         for (int i = 1; i <= 8; i++) {
-            buttonAlertUtils[37 + i].hideAlertView();
+            btnAlerts.get(37 + i).hideAlertView();
         }
     }
 
     private void showAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37 + i].showAlertView();
+            btnAlerts.get(37 + i).showAlertView();
         }
     }
 
     private void hideAlertViewNumberSixExtend() {
         for (int i = 11; i <= 14; i++) {
-            buttonAlertUtils[37 + i].hideAlertView();
+            btnAlerts.get(37 + i).hideAlertView();
         }
     }
 
@@ -305,16 +299,12 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     };
 
     private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
-        for (int i = 0; i < SIZE; i++)
-        {
-            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++)
-            {
-                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++)
-                {
-                    if (buttonAlertUtils[i].getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName()))
-                    {
-                        buttonAlertUtils[i].setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
-                        buttonAlertUtils[i].showAlertView();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
+                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        btnAlerts.get(i).showAlertView();
                     }
                 }
             }
