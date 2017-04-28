@@ -117,7 +117,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    // Function Check Internet Access
+    // Check Internet Access
     private boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

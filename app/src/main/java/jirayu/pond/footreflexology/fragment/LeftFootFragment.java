@@ -11,15 +11,24 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
+import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.StringsManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -63,6 +72,7 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         initInstances(rootView);
         initOrganName();
         initBtnAlert();
+        loadDiseaseWithOrgan();
         return rootView;
     }
 
@@ -147,6 +157,14 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    private void loadDiseaseWithOrgan() {
+        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
+                "diseasewithorgan",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadDiseaseWithOrgan);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -177,9 +195,20 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    /*
-     * Create Adapter of Spinner
-     */
+    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
+                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        btnAlerts.get(i).showAlertView();
+                    }
+                }
+            }
+        }
+    }
+
+    // Create Adapter of Spinner
     private void createAdapter() {
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.left_foot_names, android.R.layout.simple_spinner_item);
@@ -251,9 +280,37 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    public void showToast(String text) {
+        Toast.makeText(Contextor.getInstance().getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
+
+    Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                DiseaseWithOrganItemCollectionDao dao = response.body();
+                if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
+                    showToast("ไม่พบข้อมูลผู้ป่วย");
+                } else {
+                    initBehaviors(dao);
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
 
     /*
      * Handle Click Spinner
