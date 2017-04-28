@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main); // inflate
         initToolbar();
+        loadDiseaseWithOrgan();
         initInstances();
         initFragments(savedInstanceState);
     }
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private void loadDiseaseWithOrgan() {
+
     }
 
     private void initInstances() {
@@ -84,10 +89,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Handle ViewPager
-        viewPager.setAdapter(fragmentStatePagerAdapter);
-        // ViewPagerIndicator
-        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setAdapter(fragmentStatePagerAdapter);    // Set Adapter provide ViewPager
+        tabLayout.setupWithViewPager(viewPager);    // ViewPagerIndicator
     }
 
     private void initFragments(Bundle savedInstanceState) {
@@ -219,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // Handle ViewPager
+    // Create Adapter of ViewPager
     FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
         @Override
         public Fragment getItem(int position) {

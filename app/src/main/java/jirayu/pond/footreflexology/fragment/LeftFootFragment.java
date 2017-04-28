@@ -63,7 +63,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
         initInstances(rootView);
         initOrganName();
         initBtnAlert();
-        loadDiseaseWithOrgan();
         return rootView;
     }
 
@@ -146,10 +145,6 @@ public class LeftFootFragment extends Fragment implements View.OnClickListener, 
             layoutAlert.addView(btnAlerts.get(i).getBtnAlert(), btnAlerts.get(i).getParams()); // Add to Layout
             btnAlerts.get(i).hideAlertView(); // Hide
         }
-    }
-
-    private void loadDiseaseWithOrgan() {
-        // TODO : จะโหลดข้อมูลซ้ำเหรออออออออออ
     }
 
     @Override
