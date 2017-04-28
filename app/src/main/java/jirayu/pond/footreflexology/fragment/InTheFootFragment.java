@@ -1,6 +1,5 @@
 package jirayu.pond.footreflexology.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,17 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
+import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
-import jirayu.pond.footreflexology.manager.StringsManager;
+import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
+import jirayu.pond.footreflexology.manager.DataMemberManager;
+import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -31,15 +38,13 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
 
     Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
-    Button btnShowDetails;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
-    StringsManager stringsManager;
-
     private int lastPosition = -1;
     private final int SIZE = 14 + 1;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewInTheFootPosition();
-    private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
+    private ArrayList<ButtonAlertUtils> btnAlerts = new ArrayList<>();
+    private ArrayList<String> organName = new ArrayList<>();
 
     /************
      * Functions
@@ -61,14 +66,15 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inthefoot, container, false);
         initInstances(rootView);
-        initAlertView();
+        initOrganName();
+        initBtnAlert();
+        loadDiseaseWithOrgan();
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
-        btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
@@ -76,17 +82,50 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         spinnerFoot.setOnItemSelectedListener(this);   // Handle Click Spinner
 
         // Handle Click
-        btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
     }
 
-    private void initAlertView() {
+    private void initOrganName() {
+        organName.add("ลำไส้ใหญ่ตรง");
+        organName.add("ไต");
+        organName.add("ข้อสะโพก");
+        organName.add("มดลูกและต่อมลูกหมาก");
+        organName.add("กระดูกก้นกบ");
+        organName.add("ช่องคลอดองคชาติและท่อปัสสาวะ");
+        organName.add("กระเพาะปัสสาวะ");
+        organName.add("กระดูกสันหลัง");
+        organName.add("กระดูกสันหลังอก");
+        organName.add("กระดูกสันหลังคอ");
+        organName.add("จมูก");
+        organName.add("ระบบต่อมไร้ท่อ");
+        organName.add("ต่อมน้ำเหลืองบริเวณท่อนล่างร่างกาย");
+        organName.add("ต่อมน้ำเหลืองขาหนีบ");
+    }
+
+    private void initBtnAlert() {
         for (int i = 0; i < SIZE; i++) {
-            buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // Create
-            layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams()); // Add
-            buttonAlertUtils[i].hideAlertView(); // Hide
+            btnAlerts.add(new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1])); // New Object
+        }
+
+        // Add OrganName to btnAlert
+        for (int i = 0; i < SIZE; i++) {
+            if (i != 14) {
+                btnAlerts.get(i).setOrganName(organName.get(i));
+            } else {
+                btnAlerts.get(i).setOrganName(organName.get(4));
+            }
+            layoutAlert.addView(btnAlerts.get(i).getBtnAlert(), btnAlerts.get(i).getParams()); // Add to Layout
+            btnAlerts.get(i).hideAlertView(); // Hide
         }
      }
+
+    private void loadDiseaseWithOrgan() {
+        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
+                "diseasewithorgan",
+                DataMemberManager.getInstance().getMemberItemDao().getId()
+        );
+        call.enqueue(loadDiseaseWithOrgan);
+    }
 
     @Override
     public void onStart() {
@@ -118,9 +157,20 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    /*
-     * Create Adapter of Spinner
-     */
+    private void initBehaviors(DiseaseWithOrganItemCollectionDao dao) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
+                for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
+                    if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
+                        btnAlerts.get(i).showAlertView();
+                    }
+                }
+            }
+        }
+    }
+
+    // Create Adapter of Spinner
     private void createAdapter() {
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.in_the_foot_names, android.R.layout.simple_spinner_item);
@@ -129,29 +179,56 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     }
 
     private void showAlertView(int position) {
-        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
-        if (lastPosition == 4) buttonAlertUtils[13+1].hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
+        if (lastPosition != -1) btnAlerts.get(lastPosition).hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        if (lastPosition == 4) btnAlerts.get(13 + 1).hideAlertView(); // ซ่อน AlertView ตัวซ้ำ
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                buttonAlertUtils[i].showAlertView();
-                if (position == 4) buttonAlertUtils[13+1].showAlertView();
+                btnAlerts.get(i).showAlertView();
+                if (position == 4) btnAlerts.get(13 + 1).showAlertView();
                 lastPosition = position;
                 break;
             }
         }
     }
 
+    public void showToast(String text) {
+        Toast.makeText(Contextor.getInstance().getContext(),
+                text,
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
     /****************
      * Listener Zone
      ****************/
+
+    Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
+        @Override
+        public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
+            if (response.isSuccessful()) {
+                DiseaseWithOrganItemCollectionDao dao = response.body();
+                if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
+                    showToast("ไม่พบข้อมูลผู้ป่วย");
+                } else {
+                    initBehaviors(dao);
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+        }
+    };
+
 
     /*
      * Handle Click Spinner
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        stringsManager = new StringsManager();
-        stringsManager.setWord(parent.getItemAtPosition(position).toString());
         showAlertView(position);
     }
 
@@ -166,11 +243,6 @@ public class InTheFootFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnShowDetails:
-                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-                startActivity(intent);
-                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();
