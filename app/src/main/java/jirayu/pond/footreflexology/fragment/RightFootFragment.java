@@ -1,6 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,6 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         initInstances(rootView);
         initOrganName();
         initBtnAlert();
-        loadDiseaseWithOrgan();
         return rootView;
     }
 
@@ -153,13 +153,13 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void loadDiseaseWithOrgan() {
-        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
-                "diseasewithorgan",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
-        );
-        call.enqueue(loadDiseaseWithOrgan);
-    }
+//    private void loadDiseaseWithOrgan() {
+//        Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
+//                "diseasewithorgan",
+//                DataMemberManager.getInstance().getMemberItemDao().getId()
+//        );
+//        call.enqueue(loadDiseaseWithOrgan);
+//    }
 
     @Override
     public void onStart() {
@@ -290,26 +290,26 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
      * Listener Zone
      ****************/
 
-    Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
-        @Override
-        public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
-            if (response.isSuccessful()) {
-                DiseaseWithOrganItemCollectionDao dao = response.body();
-                if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
-                    showToast("ไม่พบข้อมูลผู้ป่วย");
-                } else {
-                    initBehaviors(dao);
-                }
-            } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
-            }
-        }
-
-        @Override
-        public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
-        }
-    };
+//    Callback<DiseaseWithOrganItemCollectionDao> loadDiseaseWithOrgan = new Callback<DiseaseWithOrganItemCollectionDao>() {
+//        @Override
+//        public void onResponse(Call<DiseaseWithOrganItemCollectionDao> call, Response<DiseaseWithOrganItemCollectionDao> response) {
+//            if (response.isSuccessful()) {
+//                DiseaseWithOrganItemCollectionDao dao = response.body();
+//                if (dao.getDiseaseWithOrganItemDaos().isEmpty()) {
+//                    showToast("ไม่พบข้อมูลผู้ป่วย");
+//                } else {
+//                    initBehaviors(dao);
+//                }
+//            } else {
+//                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+//            }
+//        }
+//
+//        @Override
+//        public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
+//            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+//        }
+//    };
 
     /*
      * Handle Click Spinner
