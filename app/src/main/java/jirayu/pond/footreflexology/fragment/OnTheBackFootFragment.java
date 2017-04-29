@@ -43,7 +43,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     private int lastPosition = -1;
     private final int SIZE = 12;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewOnTheBackFootPosition();
-    private ButtonAlertUtils buttonAlertUtils[] = new ButtonAlertUtils[SIZE];
     private ArrayList<ButtonAlertUtils> btnAlerts = new ArrayList<>();
     private ArrayList<String> organName = new ArrayList<>();
 
@@ -103,14 +102,14 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
     private void initBtnAlert() {
         for (int i = 0; i < SIZE; i++) {
-            buttonAlertUtils[i] = new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1]); // New Object
+            btnAlerts.add(new ButtonAlertUtils(getContext(), 4, 38, 38, position[i][0], position[i][1])); // New Object
         }
 
         // Add OrganName to btnAlert
         for (int i = 0; i < SIZE; i++) {
             btnAlerts.get(i).setOrganName(organName.get(i));
-            layoutAlert.addView(buttonAlertUtils[i].getBtnAlert(), buttonAlertUtils[i].getParams());   // Add to Layout
-            buttonAlertUtils[i].hideAlertView();  // Hide
+            layoutAlert.addView(btnAlerts.get(i).getBtnAlert(), btnAlerts.get(i).getParams());   // Add to Layout
+            btnAlerts.get(i).hideAlertView();  // Hide
         }
      }
 
@@ -176,10 +175,10 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     }
 
     private void showAlertView(int position) {
-        if (lastPosition != -1) buttonAlertUtils[lastPosition].hideAlertView(); // ซ่อน AlertView ตัวเก่า
+        if (lastPosition != -1) btnAlerts.get(lastPosition).hideAlertView(); // ซ่อน AlertView ตัวเก่า
         for (int i = 0; i < SIZE; i++) {
             if (i == position) {
-                buttonAlertUtils[i].showAlertView();
+                btnAlerts.get(i).showAlertView();
                 lastPosition = position;
                 break;
             }
