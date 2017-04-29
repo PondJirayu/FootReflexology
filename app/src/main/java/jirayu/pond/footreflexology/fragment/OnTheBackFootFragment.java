@@ -31,11 +31,8 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
 
     Spinner spinnerFoot;
     ArrayAdapter<CharSequence> adapter;
-    Button btnShowDetails;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
-    StringsManager stringsManager;
-
     private int lastPosition = -1;
     private final int SIZE = 12;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewOnTheBackFootPosition();
@@ -68,7 +65,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         spinnerFoot = (Spinner) rootView.findViewById(R.id.spinnerFoot);
-        btnShowDetails = (Button) rootView.findViewById(R.id.btnShowDetails);
         layoutAlert = (FrameLayout) rootView.findViewById(R.id.layoutAlert);
         imgBtnInfo = (ImageButton) rootView.findViewById(R.id.imgBtnInfo);
 
@@ -76,7 +72,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         spinnerFoot.setOnItemSelectedListener(this); // Handle Click Spinner
 
         // Handle Click
-        btnShowDetails.setOnClickListener(this);
         imgBtnInfo.setOnClickListener(this);
     }
 
@@ -148,8 +143,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        stringsManager = new StringsManager();
-        stringsManager.setWord(parent.getItemAtPosition(position).toString());
         showAlertView(position);
     }
 
@@ -164,11 +157,6 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnShowDetails:
-                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
-                intent.putExtra("result", stringsManager.getWordNoneNumberAndNoneWhiteSpace());
-                startActivity(intent);
-                break;
             case R.id.imgBtnInfo:
                 InfoDialogUtils infoDialog = new InfoDialogUtils(getContext());
                 infoDialog.showDialog();

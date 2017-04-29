@@ -23,6 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="280dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/on_the_back_foot"
                     android:src="@drawable/on_the_back_foot" />
 
                 <LinearLayout
@@ -34,8 +35,6 @@
                     <include layout="@layout/tv_display_response_zone" />
 
                     <include layout="@layout/spinner_foot" />
-
-                    <include layout="@layout/btn_show_details" />
 
                 </LinearLayout>
 
