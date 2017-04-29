@@ -113,7 +113,7 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
         }
 
         // Add OrganName to btnAlert
-        for(int i = 0; i < SIZE; i++){
+        for (int i = 0; i < SIZE; i++) {
             if (i != 16) {
                 btnAlerts.get(i).setOrganName(organName.get(i));
             } else {
