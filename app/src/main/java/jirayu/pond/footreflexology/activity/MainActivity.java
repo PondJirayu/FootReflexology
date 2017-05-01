@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     MenuItem menuItem;
     SearchView searchView;
+    TextView tvPatient;
 
     /************
      * Functions
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
+
         // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         assert navigationView != null;
@@ -87,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 R.string.close_drawer
         );
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        // กำหนดชื่อผู้ป่วยใน navigationHeader
+        View navigationHeader = navigationView.getHeaderView(0); // Finding navigationHeader inside navigationView
+        tvPatient = (TextView) navigationHeader.findViewById(R.id.tvPatient);
+        tvPatient.setText(getPatientName());
 
         // Set Home Button
         getSupportActionBar().setTitle("หน้าแรก");
@@ -124,34 +132,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    private String getPatientName() {
+        return DataMemberManager.getInstance().getMemberItemDao().getFirstName()
+                + "\t" + DataMemberManager.getInstance().getMemberItemDao().getLastName();
     }
 
     /****************

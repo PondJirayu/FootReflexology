@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:background="@color/overlay_color">
 
@@ -27,12 +27,12 @@
             android:src="@drawable/ic_sentiment_satisfied_white_24dp" />
 
         <TextView
+            android:id="@+id/tvPatient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"
-            android:text="จิรายุ สุมังคละพันธุ์"
             android:textSize="18sp" />
 
     </LinearLayout>
