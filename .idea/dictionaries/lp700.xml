@@ -2,9 +2,19 @@
   <dictionary name="lp700">
     <words>
       <w>behaviorofdiseasewithorgan</w>
+      <w>birthdate</w>
       <w>contextor</w>
+      <w>createdat</w>
       <w>daos</w>
       <w>diseasewithorgan</w>
+      <w>firstname</w>
+      <w>footreflexology</w>
+      <w>housevillage</w>
+      <w>identificationnumber</w>
+      <w>lastname</w>
+      <w>subdistrict</w>
+      <w>telephonenumber</w>
+      <w>updatedat</w>
     </words>
   </dictionary>
 </component>
