@@ -33,6 +33,8 @@
     <string name="in_the_foot">in_the_foot</string>
     <string name="out_side_foot">out_side_foot</string>
     <string name="on_the_back_foot">on_the_back_foot</string>
+    <string name="reflexology_background">reflexology_background</string>
+    <string name="sentiment_satisfied">sentiment_satisfied</string>
     <string name="save">บันทึก</string>
     <string name="action_save">บันทึก</string>
     <string name="write_something">เขียนอะไรบางอย่าง..</string>
