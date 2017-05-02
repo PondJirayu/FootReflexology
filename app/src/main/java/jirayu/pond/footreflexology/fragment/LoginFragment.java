@@ -3,11 +3,13 @@ package jirayu.pond.footreflexology.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -25,6 +28,7 @@ import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
+import jirayu.pond.footreflexology.manager.database.DatabaseHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +48,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     Animation anim;
     ProgressDialog progressDialog;
     String identificationNumber;
+
+    SQLiteDatabase sqLiteDatabase;
+    DatabaseHelper dataBaseHelper;
+    Cursor cursor;
 
     /************
      * Functions
@@ -65,8 +73,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_anim);
+        initDatabase();
         initInstances(rootView);
         return rootView;
+    }
+
+    private void initDatabase() {
+        // Opening Database
+        dataBaseHelper = new DatabaseHelper(Contextor.getInstance().getContext());
+        sqLiteDatabase = dataBaseHelper.getWritableDatabase();
+        // Query Data
+        cursor = sqLiteDatabase.rawQuery("SELECT *  FROM " + "Members", null);
+
+//        Log.i("45457", cursor.getPosition() + ""); // แถวที่ cursor ชี้อยู่โดย default = -1
+        cursor.moveToFirst();
+//        Log.i("45457", cursor.getPosition() + ""); // หลังจากเลื่อน cursor ทำให้ cursor ชี้ไปที่แถวที่ 1
+//        Log.i("78941", cursor.getColumnCount() + ""); // จำนวนคอลัมน์ = 2
+//        Log.i("77777", cursor.getColumnIndex("identification_number")+ ""); // identification_number อยู่คอลัมน์ที่ 1
+//        Log.i("78941", cursor.getColumnName(1)); // = identification_number
+        Log.i("40004", cursor.getString(cursor.getColumnIndex("identification_number")));
     }
 
     private void initInstances(View rootView) {
@@ -93,6 +118,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        dataBaseHelper.close();
+        sqLiteDatabase.close();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
     }
@@ -115,6 +147,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             // Restore Instance State here
         }
+    }
+
+    private void loadMemberList() {
+        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
+                "members",
+                identificationNumber
+        );
+        call.enqueue(loadMemberList);
     }
 
     // Check Internet Access
@@ -189,11 +229,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
                     } else {
                         progressDialog.show();
-                        Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
-                                "members",
-                                identificationNumber
-                        );
-                        call.enqueue(loadMemberList);
+                        loadMemberList();
                     }
                 } else {
                     showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");

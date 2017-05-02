@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-
         // Drawer Menu
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         assert navigationView != null;

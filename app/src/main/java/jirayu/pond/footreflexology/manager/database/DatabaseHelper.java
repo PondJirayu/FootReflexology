@@ -12,31 +12,26 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     private static final String databaseName = "footreflexology";
     private static final int databaseVersion = 1;
-    private static final String tableName = "Members";
-    private static final String columnFirstName = "firstname";
-    private static final String columnLastName = "lastname";
-    private static final String columnIdentificationNumber = "identification_number";
-    private static final String columnGender = "gender";
-    private static final String columnBirthDate = "birthdate";
-    private static final String columnTelephoneNumber = "telephone_number";
-    private static final String columnHouseVillage = "house_village";
-    private static final String columnSubDistrict = "sub_district";
-    private static final String columnDistrict = "district";
-    private static final String columnProvince = "province";
-    private static final String columnCreatedAt = "created_at";
-    private static final String columnUpdatedAt = "updated_at";
+    public static final String tableName = "Members";
+    public static final String columnIdentificationNumber = "identification_number";
 
     public DatabaseHelper(Context context) {
         super(context, databaseName, null, databaseVersion);
     }
 
+    /*
+     * onCreate จะถูกเรียกใช้งานตอนที่ new object ครั้งแรกและครั้งเดียว
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL("CREATE TABLE " + tableName + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " + columnIdentificationNumber + " TEXT UNIQUE NOT NULL);");
+        db.execSQL("INSERT INTO " + tableName + " (" + columnIdentificationNumber + ") VALUES ('1769900332760');");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + tableName);
+        onCreate(db);
     }
+
 }
