@@ -15,12 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
+
+import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -43,11 +46,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      ************/
 
     TextView tvAppName;
-    EditText editName;
+    AutoCompleteTextView autotvName;
     Button btnSignUp;
     Animation anim;
     ProgressDialog progressDialog;
     String identificationNumber;
+    ArrayList<String> arrListIdentificationNumber;
 
     SQLiteDatabase sqLiteDatabase;
     DatabaseHelper dataBaseHelper;
@@ -75,6 +79,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_anim);
         initDatabase();
         initInstances(rootView);
+        initAutoCompleteTextView();
         return rootView;
     }
 
@@ -82,7 +87,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         // Opening Database
         dataBaseHelper = new DatabaseHelper(Contextor.getInstance().getContext());
         sqLiteDatabase = dataBaseHelper.getWritableDatabase();
-        // Query Data
+        // Query Data to Cursor
         cursor = sqLiteDatabase.rawQuery("SELECT *  FROM " + "Members", null);
 
 //        Log.i("45457", cursor.getPosition() + ""); // แถวที่ cursor ชี้อยู่โดย default = -1
@@ -91,25 +96,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //        Log.i("78941", cursor.getColumnCount() + ""); // จำนวนคอลัมน์ = 2
 //        Log.i("77777", cursor.getColumnIndex("identification_number")+ ""); // identification_number อยู่คอลัมน์ที่ 1
 //        Log.i("78941", cursor.getColumnName(1)); // = identification_number
-        Log.i("40004", cursor.getString(cursor.getColumnIndex("identification_number")));
+//        Log.i("40004", cursor.getString(cursor.getColumnIndex("identification_number")));
+
+        arrListIdentificationNumber = new ArrayList<>();
+        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
+        cursor.moveToNext();
+        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
+        cursor.moveToNext();
+        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         tvAppName = (TextView) rootView.findViewById(R.id.tvAppName);
-        editName = (EditText) rootView.findViewById(R.id.editName);
+        autotvName = (AutoCompleteTextView) rootView.findViewById(R.id.autotvName);
         btnSignUp = (Button) rootView.findViewById(R.id.btnSignUp);
 
         // Play Animation
         anim.setDuration(500);
         tvAppName.startAnimation(anim);
         anim.setDuration(800);
-        editName.startAnimation(anim);
+        autotvName.startAnimation(anim);
         anim.setDuration(1100);
         btnSignUp.startAnimation(anim);
 
         // Handle Click
         btnSignUp.setOnClickListener(this);
+    }
+
+    private void initAutoCompleteTextView() {
+        // Create Adapter of AutoCompleteTextView
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_list_item_1, arrListIdentificationNumber);
+        autotvName.setAdapter(adapter); // Set Adapter to AutoCompleteTextView
     }
 
     @Override
@@ -188,7 +207,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     intent.putExtra("identificationNumber", identificationNumber);
                     startActivity(intent);
                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
+                    // TODO : เก็บข้อมูลผู้ป่วยลงไฟล์
                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+                    // TODO : เก็บ identification number into database
                     progressDialog.dismiss();   // ยกเลิก Dialog
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
@@ -218,14 +239,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setCancelable(true);
         progressDialog.setTitle("รอสักครู่...");
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
-        identificationNumber = editName.getText().toString();
+        identificationNumber = autotvName.getText().toString();
 
         switch (v.getId()) {
             case R.id.btnSignUp:
                 if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
-                    if (editName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
+                    if (autotvName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
                         showToast("กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก");
-                    } else if (editName.getText().toString().trim().length() < 13){
+                    } else if (autotvName.getText().toString().trim().length() < 13){
                         showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
                     } else {
                         progressDialog.show();

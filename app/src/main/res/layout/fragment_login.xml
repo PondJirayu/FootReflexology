@@ -10,9 +10,9 @@
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView"
-        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,28 +45,32 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <EditText
-                    android:id="@+id/editName"
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/autotvName"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/edit_name_margin_right"
                     android:layout_marginLeft="@dimen/edit_name_margin_left"
                     android:layout_marginRight="@dimen/edit_name_margin_right"
+                    android:layout_marginStart="@dimen/edit_name_margin_left"
                     android:background="@drawable/edit_person_circle"
-                    android:inputType="number"
                     android:hint="@string/editName_FirstLast_Name"
+                    android:inputType="number"
                     android:maxLength="13"
-                    android:textColorHint="@android:color/white"
                     android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
                     android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_alignLeft="@id/editName"
-                    android:layout_alignRight="@id/editName"
-                    android:layout_below="@id/editName"
+                    android:layout_alignEnd="@id/autotvName"
+                    android:layout_alignLeft="@id/autotvName"
+                    android:layout_alignRight="@id/autotvName"
+                    android:layout_alignStart="@id/autotvName"
+                    android:layout_below="@id/autotvName"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/selector_btn_sign_up_login_page"
                     android:gravity="center"

@@ -25,7 +25,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + tableName + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " + columnIdentificationNumber + " TEXT UNIQUE NOT NULL);");
+        // TODO : delete insert ทั้งหมดด้วย
         db.execSQL("INSERT INTO " + tableName + " (" + columnIdentificationNumber + ") VALUES ('1769900332760');");
+        db.execSQL("INSERT INTO " + tableName + " (" + columnIdentificationNumber + ") VALUES ('1769900332761');");
+        db.execSQL("INSERT INTO " + tableName + " (" + columnIdentificationNumber + ") VALUES ('1769900332762');");
     }
 
     @Override
