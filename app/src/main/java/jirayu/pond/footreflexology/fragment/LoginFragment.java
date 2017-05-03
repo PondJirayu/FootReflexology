@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         arrListIdentificationNumber = new ArrayList<>();
         cursor.moveToFirst(); // = 0
         while (!cursor.isAfterLast()) {
-            arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number"))); // Get เลขบัตรฯ ใส่ ArrayList
+            arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex(DatabaseHelper.columnIdentificationNumber))); // Get เลขบัตรฯ ใส่ ArrayList
             cursor.moveToNext();
         }
     }
