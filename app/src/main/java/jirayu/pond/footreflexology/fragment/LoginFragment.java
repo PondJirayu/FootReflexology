@@ -173,6 +173,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 + " WHERE " + DatabaseHelper.columnIdentificationNumber
                 + "='" + identificationNumber + "'", null);
 
+        // ถ้าใน cursor มีข้อมูล 0 แถว ก็แปลว่าไม่มีเลขบัตรฯในฐานข้อมูล
         if (cursor.getCount() == 0) {
             sqLiteDatabase.execSQL("INSERT INTO " + DatabaseHelper.tableName
                     + " (" + DatabaseHelper.columnIdentificationNumber + ") "
