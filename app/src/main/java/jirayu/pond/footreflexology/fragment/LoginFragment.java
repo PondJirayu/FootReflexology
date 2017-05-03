@@ -87,7 +87,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         dataBaseHelper = new DatabaseHelper(Contextor.getInstance().getContext());
         sqLiteDatabase = dataBaseHelper.getWritableDatabase();
         // Query Data to Cursor
-        cursor = sqLiteDatabase.rawQuery("SELECT *  FROM " + "Members", null);
+        cursor = sqLiteDatabase.rawQuery("SELECT *  FROM " + DatabaseHelper.tableName, null);
 
         arrListIdentificationNumber = new ArrayList<>();
         cursor.moveToFirst(); // = 0
@@ -168,9 +168,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void addIdentificationNumberToDatabase() {
-        sqLiteDatabase.execSQL("INSERT INTO " + DatabaseHelper.tableName + " ("
-                + DatabaseHelper.columnIdentificationNumber + ") "
-                + "VALUES ('" + identificationNumber + "');");
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.tableName
+                + " WHERE " + DatabaseHelper.columnIdentificationNumber
+                + "='" + identificationNumber + "'", null);
+
+        if (cursor.getCount() == 0) {
+            sqLiteDatabase.execSQL("INSERT INTO " + DatabaseHelper.tableName
+                    + " (" + DatabaseHelper.columnIdentificationNumber + ") "
+                    + "VALUES ('" + identificationNumber + "');");
+        }
     }
 
     // Check Internet Access
