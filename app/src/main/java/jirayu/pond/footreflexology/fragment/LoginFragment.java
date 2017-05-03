@@ -168,6 +168,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void addIdentificationNumberToDatabase() {
+        // ตรวจสอบเลขบัตรฯมีในฐานข้อมูลหรือไม่
         cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.tableName
                 + " WHERE " + DatabaseHelper.columnIdentificationNumber
                 + "='" + identificationNumber + "'", null);
