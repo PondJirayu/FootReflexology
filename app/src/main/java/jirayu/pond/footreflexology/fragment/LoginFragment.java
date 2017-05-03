@@ -9,7 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,20 +89,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         // Query Data to Cursor
         cursor = sqLiteDatabase.rawQuery("SELECT *  FROM " + "Members", null);
 
-//        Log.i("45457", cursor.getPosition() + ""); // แถวที่ cursor ชี้อยู่โดย default = -1
-        cursor.moveToFirst();
-//        Log.i("45457", cursor.getPosition() + ""); // หลังจากเลื่อน cursor ทำให้ cursor ชี้ไปที่แถวที่ 1
-//        Log.i("78941", cursor.getColumnCount() + ""); // จำนวนคอลัมน์ = 2
-//        Log.i("77777", cursor.getColumnIndex("identification_number")+ ""); // identification_number อยู่คอลัมน์ที่ 1
-//        Log.i("78941", cursor.getColumnName(1)); // = identification_number
-//        Log.i("40004", cursor.getString(cursor.getColumnIndex("identification_number")));
-
         arrListIdentificationNumber = new ArrayList<>();
-        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
-        cursor.moveToNext();
-        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
-        cursor.moveToNext();
-        arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number")));
+        cursor.moveToFirst(); // = 0
+        while (!cursor.isAfterLast()) {
+            arrListIdentificationNumber.add(cursor.getString(cursor.getColumnIndex("identification_number"))); // Get เลขบัตรฯ ใส่ ArrayList
+            cursor.moveToNext();
+        }
     }
 
     private void initInstances(View rootView) {
@@ -176,6 +167,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         call.enqueue(loadMemberList);
     }
 
+    private void addIdentificationNumberToDatabase() {
+        sqLiteDatabase.execSQL("INSERT INTO " + DatabaseHelper.tableName + " ("
+                + DatabaseHelper.columnIdentificationNumber + ") "
+                + "VALUES ('" + identificationNumber + "');");
+    }
+
     // Check Internet Access
     private boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -198,9 +195,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onResponse(Call<MemberItemCollectionDao> call,
                                Response<MemberItemCollectionDao> response) {
-
             if (response.isSuccessful()) {
                 MemberItemCollectionDao dao = response.body();
+                addIdentificationNumberToDatabase();
                 if (dao.getData().isEmpty()) { // ไม่พบข้อมูลผู้ป่วย ให้ลงทะเบียนผู้ป่วย
                     progressDialog.dismiss();
                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
@@ -209,8 +206,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
                     // TODO : เก็บข้อมูลผู้ป่วยลงไฟล์
                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-                    // TODO : เก็บ identification number into database
-                    progressDialog.dismiss();   // ยกเลิก Dialog
+                    progressDialog.dismiss();   // Cancel Dialog
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
