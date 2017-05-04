@@ -4,6 +4,8 @@ import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -33,13 +35,11 @@ import java.util.Locale;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusItemDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.StringsManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -52,24 +52,35 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
      * Variables
      ************/
 
-    EditText editFirstName, editLastName, editTelephoneNumber, editAddress,
-            editSubDistrict, editDistrict;
+    EditText editFirstName,
+             editLastName,
+             editTelephoneNumber,
+             editAddress,
+             editSubDistrict,
+             editDistrict;
     RadioGroup radioGroup;
     TextView tvBirthDate;
     ImageButton btnDatePicker;
     Spinner spinnerProvince;
     ProgressDialog progressDialog;
     FloatingActionButton btnFloatingAction;
-
     ArrayAdapter<CharSequence> adapterProvince;
     StringsManager stringsManager;
-    String firstName, lastName, gender, telephoneNumber, houseVillage, subDistrict,
-            district, province;
-
+    String firstName,
+           lastName,
+           gender,
+           telephoneNumber,
+           houseVillage,
+           subDistrict,
+           district,
+           province,
+           identificationNumber;
     java.sql.Date birthDate;
     DatePickerDialog datePickerDialog;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
+    SharedPreferences sharedPreferences;
+    int id;
 
     /************
      * Functions
@@ -96,6 +107,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         initOptionsMenu();
+        initSharedPreferences();
         initInstances(rootView);
         loadMemberList(); // โหลดข้อมูลเก่าไปแสดงในหน้าแก้ไขก่อน
         return rootView;
@@ -104,6 +116,13 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("แก้ไขประวัติส่วนตัว");
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
+        identificationNumber = sharedPreferences.getString("identification_number", null);
     }
 
     private void initInstances(View rootView) {
@@ -162,7 +181,6 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     private void setDate() {
         // แสดงเวลาปัจจุบัน
         calendar = Calendar.getInstance();
-
         datePickerDialog = DatePickerDialog.newInstance(this,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -189,7 +207,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     private void loadMemberList() {
         Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
                 "members",
-                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+                identificationNumber
         );
         call.enqueue(loadMemberList);
     }
@@ -245,10 +263,10 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                     progressDialog.show();
                     // UpdateMember Here
                     Call<StatusItemDao> call = HttpManager.getInstance().getService().UpdateMember(
-                            DataMemberManager.getInstance().getMemberItemDao().getId(),
+                            id,
                             firstName,
                             lastName,
-                            DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber(),
+                            identificationNumber,
                             gender,
                             birthDate,
                             telephoneNumber,

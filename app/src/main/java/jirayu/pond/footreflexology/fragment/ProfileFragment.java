@@ -1,5 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,7 +26,6 @@ import java.util.Locale;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.StringsManager;
 import retrofit2.Call;
@@ -42,14 +43,32 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     ImageView ivPerson, ivPlace;
     FloatingActionButton btnFloatingAction;
-    TextView tvFirstName, tvLastName, tvGender, tvBirthDate, tvAge, tvIdentificationNumber,
-            tvTelephoneNumber, tvHouseVillage, tvSubDistrict, tvDistrict, tvProvince,
-            tvTitleFirstLastName, tvTitleGender, tvTitleBirthDate, tvTitleAge, tvTitleYear,
-            tvTitleIdentificationNumber, tvTitleTelephoneNumber, tvTitleHouseVillage, tvTitleSubDistrict,
-            tvTitleDistrict, tvTitleProvince;
-
+    TextView tvFirstName,
+             tvLastName,
+             tvGender,
+             tvBirthDate,
+             tvAge,
+             tvIdentificationNumber,
+             tvTelephoneNumber,
+             tvHouseVillage,
+             tvSubDistrict,
+             tvDistrict,
+             tvProvince,
+             tvTitleFirstLastName,
+             tvTitleGender,
+             tvTitleBirthDate,
+             tvTitleAge,
+             tvTitleYear,
+             tvTitleIdentificationNumber,
+             tvTitleTelephoneNumber,
+             tvTitleHouseVillage,
+             tvTitleSubDistrict,
+             tvTitleDistrict,
+             tvTitleProvince;
     StringsManager stringsManager;
     SimpleDateFormat simpleDateFormat;
+    SharedPreferences sharedPreferences;
+    String identificationNumber;
 
     /************
      * Functions
@@ -71,6 +90,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         initOptionsMenu();
+        initSharedPreferences();
         initInstances(rootView);
         loadProfile();
         return rootView;
@@ -79,6 +99,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติส่วนตัว");
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        identificationNumber = sharedPreferences.getString("identification_number", null);
     }
 
     private void initInstances(View rootView) {
@@ -195,7 +221,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void loadProfile() {
         Call<MemberItemCollectionDao> call = HttpManager.getInstance().getService().loadMemberList(
                 "members",
-                DataMemberManager.getInstance().getMemberItemDao().getIdentificationNumber()
+                identificationNumber
         );
         call.enqueue(loadProfile);
     }
@@ -223,16 +249,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     tvFirstName.setText(dao.getData().get(0).getFirstName());
                     tvLastName.setText(dao.getData().get(0).getLastName());
                     tvGender.setText(dao.getData().get(0).getGender());
-                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT);                     // กำหนด Date Format
-                    tvBirthDate.setText(simpleDateFormat.format(dao.getData().get(0).getBirthDate()));      // แปลง Date เป็น String
-                    tvAge.setText(calAge(dao));                                                             // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน calAge()
+                    simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ROOT); // กำหนด Date Format
+                    tvBirthDate.setText(simpleDateFormat.format(dao.getData().get(0).getBirthDate())); // แปลง Date เป็น String
+                    tvAge.setText(calAge(dao)); // ส่งวันเกิดไปคำนวณหาอายุในฟังก์ชัน calAge()
                     tvIdentificationNumber.setText(dao.getData().get(0).getIdentificationNumber());
                     tvTelephoneNumber.setText(dao.getData().get(0).getTelephoneNumber());
                     tvHouseVillage.setText(dao.getData().get(0).getHouseVillage());
                     tvSubDistrict.setText(dao.getData().get(0).getSubDistrict());
                     tvDistrict.setText(dao.getData().get(0).getDistrict());
                     tvProvince.setText(dao.getData().get(0).getProvince());
-                    loadFabAnimation();   // FAB Animation
+                    loadFabAnimation(); // FAB Animation
                 }
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");

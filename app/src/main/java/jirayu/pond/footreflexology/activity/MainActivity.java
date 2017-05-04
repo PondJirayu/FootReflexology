@@ -20,22 +20,13 @@ import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
 import jirayu.pond.footreflexology.fragment.LeftFootFragment;
 import jirayu.pond.footreflexology.fragment.InTheFootFragment;
 import jirayu.pond.footreflexology.fragment.OnTheBackFootFragment;
 import jirayu.pond.footreflexology.fragment.OutSideFootFragment;
 import jirayu.pond.footreflexology.fragment.RightFootFragment;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
-import jirayu.pond.footreflexology.manager.HttpManager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
     TextView tvPatient;
     SharedPreferences sharedPreferences;
+    String firstName, lastName;
 
     /************
      * Functions
@@ -67,14 +59,21 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main); // inflate
         initToolbar();
+        initSharedPreferences();
         initInstances();
-        initInternalStorage();
         initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = MainActivity.this.getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        firstName = sharedPreferences.getString("firstname", null);
+        lastName = sharedPreferences.getString("lastname", null);
     }
 
     private void initInstances() {
@@ -108,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);    // ViewPagerIndicator
     }
 
-    private void initInternalStorage() {
-        sharedPreferences = MainActivity.this.getSharedPreferences("loginMember",
-                Context.MODE_PRIVATE);
-    }
-
     private void initFragments(Bundle savedInstanceState) {
         // Place Fragment here
     }
@@ -141,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getPatientName() {
-        return DataMemberManager.getInstance().getMemberItemDao().getFirstName()
-                + "\t" + DataMemberManager.getInstance().getMemberItemDao().getLastName();
+        return firstName + "\t" + lastName;
     }
 
     /****************
