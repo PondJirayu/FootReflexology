@@ -261,6 +261,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
         identificationNumber = autotvName.getText().toString();
 
+        // TODO : เงื่อนไขตรงนี้ใช้ RegEx ดีกว่า
         switch (v.getId()) {
             case R.id.btnSignUp:
                 if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
