@@ -36,12 +36,17 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
+        initSharedPreferences();
         initFragments(savedInstanceState);
     }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private void initSharedPreferences() {
+
     }
 
     private void initInstances() {
