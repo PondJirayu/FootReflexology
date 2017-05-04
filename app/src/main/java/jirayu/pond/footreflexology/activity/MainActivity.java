@@ -1,6 +1,8 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     MenuItem menuItem;
     SearchView searchView;
     TextView tvPatient;
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); // inflate
         initToolbar();
         initInstances();
+        initInternalStorage();
         initFragments(savedInstanceState);
     }
 
@@ -102,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(fragmentStatePagerAdapter);    // Set Adapter provide ViewPager
         tabLayout.setupWithViewPager(viewPager);    // ViewPagerIndicator
+    }
+
+    private void initInternalStorage() {
+        sharedPreferences = MainActivity.this.getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
     }
 
     private void initFragments(Bundle savedInstanceState) {
