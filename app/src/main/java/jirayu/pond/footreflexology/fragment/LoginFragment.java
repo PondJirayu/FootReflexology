@@ -3,6 +3,7 @@ package jirayu.pond.footreflexology.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -212,8 +213,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     intent.putExtra("identificationNumber", identificationNumber);
                     startActivity(intent);
                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
-                    // TODO : เก็บข้อมูลผู้ป่วยลงไฟล์
+                    // เก็บข้อมูลผู้ป่วยลงไฟล์เพื่อกระจายให้ Activity อื่นๆ เรียกใช้งาน
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginToken",
+                            Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("id", dao.getData().get(0).getId());
+                    editor.putString("firstname", dao.getData().get(0).getFirstName());
+                    editor.putString("lastname", dao.getData().get(0).getLastName());
+                    editor.putString("identification_number", dao.getData().get(0).getIdentificationNumber());
+                    editor.apply(); // บันทึกข้อมูลลงไฟล์
+                    // TODO : เสร็จแล้วอย่าลืมลบบรรทัดนี้ด้วยนะ ^^
                     DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+
                     progressDialog.dismiss();   // Cancel Dialog
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
