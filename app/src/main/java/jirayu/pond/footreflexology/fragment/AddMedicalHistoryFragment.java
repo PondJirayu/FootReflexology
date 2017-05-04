@@ -1,5 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +26,11 @@ import jirayu.pond.footreflexology.dao.DiseaseItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusItemDao;
 import jirayu.pond.footreflexology.manager.BehaviorManager;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.DiseaseManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -43,16 +43,15 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
     Button btnSave;
     Spinner spinnerBehavior, spinnerDisease;
-
     ArrayAdapter<String> adapterBehavior, adapterDisease;
     List<String> disease, behavior;
     Boolean successBehavior = false, successDisease = false;
-    int diseaseId, behaviorId;
+    int diseaseId, behaviorId, id;
     String diseaseName;
     MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
-
     DiseaseManager diseaseManager;
     BehaviorManager behaviorManager;
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -74,6 +73,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_medical_history, container, false);
         initOptionsMenu();
+        initSharedPreferences();
         initInstances(rootView);
         loadDisease();
         loadBehavior();
@@ -84,6 +84,12 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("เพิ่มประวัติการรักษา");
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
     }
 
     private void initInstances(View rootView) {
@@ -129,7 +135,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
     private void loadMedicalHistory() {
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                id,
                 0
         );
         call.enqueue(loadMedicalHistory);
@@ -312,7 +318,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 } else {
                     // Insert MedicalHistory Here
                     Call<StatusItemDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
-                            DataMemberManager.getInstance().getMemberItemDao().getId(),
+                            id,
                             diseaseId,
                             behaviorId,
                             new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน

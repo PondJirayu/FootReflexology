@@ -1,6 +1,8 @@
 package jirayu.pond.footreflexology.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +20,9 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
      ************/
 
     Toolbar toolbar;
-    private String diseaseName;
-    private int medicalHistoryId;
+    String diseaseName, firstName, lastName;
+    int medicalHistoryId;
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -35,8 +38,8 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
         medicalHistoryId = intent.getIntExtra("medicalHistoryId", -1);
 
         initToolbar();
-        initInstances();
         initSharedPreferences();
+        initInstances();
         initFragments(savedInstanceState);
     }
 
@@ -46,7 +49,10 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
     }
 
     private void initSharedPreferences() {
-
+        sharedPreferences = DetailsMedicalHistoryActivity.this.getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        firstName = sharedPreferences.getString("firstname", null);
+        lastName = sharedPreferences.getString("lastname", null);
     }
 
     private void initInstances() {
@@ -54,11 +60,10 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 
         // Set Home Button
         getSupportActionBar().setTitle("รายละเอียดประวัติการรักษา");
-        getSupportActionBar().setSubtitle(
-                "ของ" +
-                DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " "
-                + DataMemberManager.getInstance().getMemberItemDao().getLastName()
-        );
+        getSupportActionBar().setSubtitle("ของ"
+                + firstName
+                + " "
+                + lastName);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -70,36 +75,6 @@ public class DetailsMedicalHistoryActivity extends AppCompatActivity {
                     .add(R.id.contentContainer, DetailsMedicalHistoryFragment.newInstance(diseaseName, medicalHistoryId))
                     .commit();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     /****************

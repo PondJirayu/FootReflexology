@@ -1,6 +1,8 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,6 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.adapter.DetailsListAdapter;
 import jirayu.pond.footreflexology.dao.DetailItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,10 +40,11 @@ public class ShowDetailsFragment extends Fragment {
     ListView listView;
     DetailsListAdapter listAdapter;
     MenuItem menuItem;
-
     String result;
     DetailItemCollectionDao detailItemCollectionDao;
     MedicalHistoryItemCollectionDao medicalHistoryItemCollectionDao;
+    SharedPreferences sharedPreferences;
+    int id;
 
     /************
      * Functions
@@ -72,12 +74,19 @@ public class ShowDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_show_details, container, false);
         initOptionMenu();
+        initSharedPreferences();
         initInstances(rootView);
         return rootView;
     }
 
     private void initOptionMenu() {
         setHasOptionsMenu(true);
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
     }
 
     private void initInstances(View rootView) {
@@ -130,7 +139,7 @@ public class ShowDetailsFragment extends Fragment {
     private void loadMedicalHistoryList() {
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                id,
                 0
         );
         call.enqueue(loadMedicalHistory);

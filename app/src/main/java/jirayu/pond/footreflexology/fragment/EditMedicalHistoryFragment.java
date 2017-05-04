@@ -1,5 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +25,6 @@ import jirayu.pond.footreflexology.dao.BehaviorItemCollectionDao;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
 import jirayu.pond.footreflexology.dao.StatusItemDao;
 import jirayu.pond.footreflexology.manager.BehaviorManager;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.MedicalHistoryManager;
 import retrofit2.Call;
@@ -42,13 +43,12 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     Button btnSave;
     Spinner spinnerDisease, spinnerBehavior;
-
     List<String> disease, behavior;
     ArrayAdapter<String> adapterDisease, adapterBehavior;
-    int rowId, behaviorId;
-
+    int rowId, behaviorId, id;
     BehaviorManager behaviorManager;
     MedicalHistoryManager medicalHistoryManager;
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -70,6 +70,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_medical_history, container, false);
         initOptionsMenu();
+        initSharedPreferences();
         initInstances(rootView);
         loadDisease();
         loadBehavior();
@@ -79,6 +80,12 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     private void initOptionsMenu() {
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("อัพเดทประวัติการรักษา");
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
     }
 
     private void initInstances(View rootView) {
@@ -132,7 +139,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         // โหลดรายชื่อโรคจากตารางประวัติการรักษา
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                id,
                 0
         );
         call.enqueue(loadDisease);

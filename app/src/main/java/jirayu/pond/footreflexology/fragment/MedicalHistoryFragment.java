@@ -1,7 +1,9 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -27,12 +29,10 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.DetailsMedicalHistoryActivity;
 import jirayu.pond.footreflexology.adapter.MedicalHistoryAdapter;
 import jirayu.pond.footreflexology.dao.MedicalHistoryItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -46,12 +46,13 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     ListView listView;
     SwipeRefreshLayout swipeRefreshLayout;
     FloatingActionButton btnFloatingActionSort, btnFloatingActionEdit;
-
     MedicalHistoryAdapter listAdapter;
     Thread thread;
     Boolean doPullToRefresh;
-    private int selected = 0;
+    int selected = 0, id;
     MedicalHistoryItemCollectionDao dao;
+    SharedPreferences sharedPreferences;
+    String firstName, lastName;
 
     /************
      * Functions
@@ -72,10 +73,19 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_medical_history, container, false);
+        initSharedPreferences();
         initOptionsMenu();
         initInstances(rootView);
         loadMedicalHistory();
         return rootView;
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
+        firstName = sharedPreferences.getString("firstname", null);
+        lastName = sharedPreferences.getString("lastname", null);
     }
 
     private void initOptionsMenu() {
@@ -83,11 +93,10 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         // Edit Title in Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติการรักษา");
         // Edit Subtitle in Toolbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
-                "ของ" +
-                        DataMemberManager.getInstance().getMemberItemDao().getFirstName() + " " +
-                        DataMemberManager.getInstance().getMemberItemDao().getLastName()
-        );
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("ของ"
+                + firstName
+                + " "
+                + lastName);
     }
 
     private void initInstances(View rootView) {
@@ -158,7 +167,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     private void loadMedicalHistory() {
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
-                DataMemberManager.getInstance().getMemberItemDao().getId(),
+                id,
                 selected
         );
         call.enqueue(loadMedicalHistory);
