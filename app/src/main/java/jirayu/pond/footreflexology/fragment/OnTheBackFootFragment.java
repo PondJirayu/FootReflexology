@@ -1,5 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,11 +42,12 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     ArrayAdapter<CharSequence> adapter;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
-    private int lastPosition = -1;
+    private int lastPosition = -1, id;
     private final int SIZE = 12;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewOnTheBackFootPosition();
     private ArrayList<ButtonAlertUtils> btnAlerts = new ArrayList<>();
     private ArrayList<String> organName = new ArrayList<>();
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -65,11 +68,18 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onthebackfoot, container, false);
+        initSharedPreferences();
         initInstances(rootView);
         initOrganName();
         initBtnAlert();
         loadDiseaseWithOrgan();
         return rootView;
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
     }
 
     private void initInstances(View rootView) {
@@ -116,7 +126,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
     private void loadDiseaseWithOrgan() {
         Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
                 "diseasewithorgan",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
+                id
         );
         call.enqueue(loadDiseaseWithOrgan);
     }
@@ -164,9 +174,7 @@ public class OnTheBackFootFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    /*
-     * Create Adapter of Spinner
-     */
+    // Create Adapter of Spinner
     private void createAdapter() {
         adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.on_the_back_foot_names, android.R.layout.simple_spinner_item);

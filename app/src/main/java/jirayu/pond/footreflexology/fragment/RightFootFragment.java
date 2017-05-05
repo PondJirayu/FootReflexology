@@ -1,5 +1,7 @@
 package jirayu.pond.footreflexology.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -41,11 +43,12 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     ArrayAdapter<CharSequence> adapter;
     FrameLayout layoutAlert;
     ImageButton imgBtnInfo;
-    private int lastPosition = -1;
+    private int lastPosition = -1, id;
     private final int SIZE = 38 + 14;
     private int position[][] = ButtonAlertPositionUtils.getAlertViewRightFootPosition();
     private ArrayList<ButtonAlertUtils> btnAlerts = new ArrayList<>();
     private ArrayList<String> organName = new ArrayList<>();
+    SharedPreferences sharedPreferences;
 
     /************
      * Functions
@@ -66,11 +69,18 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rightfoot, container, false);
+        initSharedPreferences();
         initInstances(rootView);
         initOrganName();
         initBtnAlert();
         loadDiseaseWithOrgan();
         return rootView;
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", -1);
     }
 
     private void initInstances(View rootView) {
@@ -157,7 +167,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
     private void loadDiseaseWithOrgan() {
         Call<DiseaseWithOrganItemCollectionDao> call = HttpManager.getInstance().getService().loadDiseaseWithOrgan(
                 "diseasewithorgan",
-                DataMemberManager.getInstance().getMemberItemDao().getId()
+                id
         );
         call.enqueue(loadDiseaseWithOrgan);
     }

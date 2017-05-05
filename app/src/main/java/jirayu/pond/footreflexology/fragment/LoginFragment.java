@@ -228,7 +228,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     saveLoginMemberToInternalStorage(dao);
 
                     // TODO : เสร็จแล้วอย่าลืมลบบรรทัดนี้ด้วยนะ ^^
-                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
+//                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
 
                     progressDialog.dismiss();   // Cancel Dialog
                     Intent intent = new Intent(getActivity(), MainActivity.class);
