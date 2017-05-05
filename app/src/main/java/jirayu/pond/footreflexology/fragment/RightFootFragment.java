@@ -3,7 +3,6 @@ package jirayu.pond.footreflexology.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;

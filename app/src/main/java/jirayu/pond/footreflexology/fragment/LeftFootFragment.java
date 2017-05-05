@@ -1,7 +1,6 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,11 +19,8 @@ import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.activity.ShowDetailsActivity;
 import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
-import jirayu.pond.footreflexology.manager.StringsManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;
 import jirayu.pond.footreflexology.util.InfoDialogUtils;

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.DiseaseWithOrganItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.util.ButtonAlertPositionUtils;
 import jirayu.pond.footreflexology.util.ButtonAlertUtils;

@@ -9,9 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import jirayu.pond.footreflexology.R;
-import jirayu.pond.footreflexology.dao.MedicalHistoryItemDao;
 import jirayu.pond.footreflexology.fragment.DetailsMedicalHistoryFragment;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 
 public class DetailsMedicalHistoryActivity extends AppCompatActivity {
 

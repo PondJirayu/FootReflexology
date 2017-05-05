@@ -1,7 +1,9 @@
 package jirayu.pond.footreflexology.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
@@ -30,7 +31,6 @@ import java.util.Locale;
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -188,6 +188,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    private void saveLoginMemberToInternalStorage(MemberItemCollectionDao dao) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("id", dao.getData().get(0).getId());
+        editor.putString("firstname", dao.getData().get(0).getFirstName());
+        editor.putString("lastname", dao.getData().get(0).getLastName());
+        editor.putString("identification_number", dao.getData().get(0).getIdentificationNumber());
+        editor.apply(); // บันทึกข้อมูลลงไฟล์
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(),
                 text,
@@ -260,13 +271,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
                 if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
                     progressDialog.dismiss();
                     showToast("ลงทะเบียนสำเร็จ");
-                    // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0));
-                    // เข้าสู่หน้าหลัก
+                    // เก็บข้อมูลผู้ป่วยลงไฟล์เพื่อกระจายให้ Activity อื่นๆ เรียกใช้งาน
+                    saveLoginMemberToInternalStorage(dao);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                    // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity
-                    getActivity().finish();
+                    getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity
                 } else if (dao.getSuccess() == 0) { // ลงทะเบียนไม่สำเร็จ
                     progressDialog.dismiss();
                     showToast("ขออภัยลงทะเบียนไม่สำเร็จ");

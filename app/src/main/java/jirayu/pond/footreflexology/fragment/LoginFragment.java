@@ -29,7 +29,6 @@ import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
 import jirayu.pond.footreflexology.activity.RegisterActivity;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
-import jirayu.pond.footreflexology.manager.DataMemberManager;
 import jirayu.pond.footreflexology.manager.HttpManager;
 import jirayu.pond.footreflexology.manager.database.DatabaseHelper;
 import retrofit2.Call;
@@ -226,10 +225,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 } else { // พบข้อมูลผู้ป่วย เข้าสู่หน้าหลัก
                     // เก็บข้อมูลผู้ป่วยลงไฟล์เพื่อกระจายให้ Activity อื่นๆ เรียกใช้งาน
                     saveLoginMemberToInternalStorage(dao);
-
-                    // TODO : เสร็จแล้วอย่าลืมลบบรรทัดนี้ด้วยนะ ^^
-//                    DataMemberManager.getInstance().setMemberItemDao(dao.getData().get(0)); // เอาข้อมูลสมาชิกไปเก็บไว้ที่ Singleton เพื่อกระจายให้คนอื่นๆ เรียกใช้งาน
-
                     progressDialog.dismiss();   // Cancel Dialog
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
