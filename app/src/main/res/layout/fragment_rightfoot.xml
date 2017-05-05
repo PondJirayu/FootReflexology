@@ -25,7 +25,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@string/right_foot"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/foot_right" />
+                    android:src="@drawable/right_foot_monochrome" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

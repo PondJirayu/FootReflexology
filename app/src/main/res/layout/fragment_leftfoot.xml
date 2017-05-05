@@ -26,7 +26,7 @@
                     android:layout_marginTop="3dp"
                     android:contentDescription="@string/left_foot"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/foot_left" />
+                    android:src="@drawable/left_foot_monochrome" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
