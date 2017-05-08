@@ -132,8 +132,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        dataBaseHelper.close();
         sqLiteDatabase.close();
+        dataBaseHelper.close();
+        cursor.close();
     }
 
     @Override
