@@ -207,7 +207,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * ตรวจสอบหมายเลขบัตรฯด้วย RegEx(Regular Expression)
      */
     private boolean validateIdCard(String identificationNumber) {
-        String pattern = "[0-9]{13}";
+        String pattern = "[0-9]{13}"; // หมายเลขบัตรฯประกอบด้วยตัวเลข 0-9 13 ตัวเท่านั้น
 
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(identificationNumber);
@@ -248,7 +248,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 }
             } else {
                 progressDialog.dismiss();
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
@@ -256,7 +256,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         public void onFailure(Call<MemberItemCollectionDao> call,
                               Throwable t) {
             progressDialog.dismiss();
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 
@@ -279,10 +279,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         progressDialog.show();
                         loadMemberList();
                     } else {
-                        showToast("กรุณาตรวจสอบหมายเลขบัตรฯของท่านให้ถูกต้อง");
+                        showToast("กรุณาระบุหมายเลขบัตรฯให้ถูกต้อง");
                     }
                 } else {
-                    showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+                    showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
                 }
                 break;
         }
