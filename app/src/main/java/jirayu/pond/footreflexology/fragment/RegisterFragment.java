@@ -286,11 +286,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
             case R.id.btnFloatingAction:
                 // getText to variable
                 getTextToVariables();
-                if (validateFirstNameLastName(firstName, lastName)) {
+                if (!validateFirstNameLastName(firstName, lastName)) {
                     showToast("กรุณาระบุชื่อนามสกุลให้ถูกต้องและห้ามเว้นว่าง");
-                } else if (validateTelephoneNumber(telephoneNumber)) {
+                } else if (!validateTelephoneNumber(telephoneNumber)) {
                     showToast("กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง");
-                } else if (validateAddress(houseVillage, subDistrict, district)) {
+                } else if (!validateAddress(houseVillage, subDistrict, district)) {
                     showToast("กรุณาระบุที่อยู่ให้ถูกต้อง");
                 } else if (birthDate == null) {
                     showToast("กรุณาระบุวันเกิด");
