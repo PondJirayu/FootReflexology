@@ -284,8 +284,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
 
         switch (v.getId()) {
             case R.id.btnFloatingAction:
-                // getText to variable
-                getTextToVariables();
+                getTextToVariables(); // Get Text to Variable
                 if (!validateFirstNameLastName(firstName, lastName)) {
                     showToast("กรุณาระบุชื่อนามสกุลให้ถูกต้องและห้ามเว้นว่าง");
                 } else if (!validateTelephoneNumber(telephoneNumber)) {
@@ -295,7 +294,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
                 } else if (birthDate == null) {
                     showToast("กรุณาระบุวันเกิด");
                 } else {
-                    progressDialog.show(); // show progressDialog
+                    progressDialog.show(); // Show ProgressDialog
                     insertMemberList();
                 }
                 break;
