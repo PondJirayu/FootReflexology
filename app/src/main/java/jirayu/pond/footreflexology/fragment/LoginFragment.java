@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.activity.MainActivity;
@@ -192,15 +194,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editor.apply(); // บันทึกข้อมูลลงไฟล์
     }
 
-    // Check Internet Access
+    /*
+     * Check Internet Access
+     */
     private boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
+    /*
+     * ตรวจสอบหมายเลขบัตรฯด้วย RegEx(Regular Expression)
+     */
+    private boolean validateIdCard(String identificationNumber) {
+        String pattern = "[0-9]{13}";
+
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(identificationNumber);
+
+        return m.matches();
+    }
+
     private void showToast(String text) {
-        Toast.makeText(getContext(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();
@@ -256,17 +272,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog.setMessage("กำลังตรวจสอบข้อมูล");
         identificationNumber = autotvName.getText().toString();
 
-        // TODO : เงื่อนไขตรงนี้ใช้ RegEx ดีกว่า
         switch (v.getId()) {
             case R.id.btnSignUp:
                 if (isOnline()) {   // ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตหรือไม่
-                    if (autotvName.getText().toString().trim().length() == 0){    // ตรวจสอบว่า editText ว่างหรือไม่
-                        showToast("กรุณาป้อนหมายเลขบัตรประชาชน 13 หลัก");
-                    } else if (autotvName.getText().toString().trim().length() < 13){
-                        showToast("กรุณาป้อนหมายเลขบัตรประชาชนให้ครบ 13 หลัก");
-                    } else {
+                    if (validateIdCard(identificationNumber)) {
                         progressDialog.show();
                         loadMemberList();
+                    } else {
+                        showToast("กรุณาตรวจสอบหมายเลขบัตรฯของท่านให้ถูกต้อง");
                     }
                 } else {
                     showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
