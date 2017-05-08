@@ -206,16 +206,16 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                     showToast("เพิ่มประวัติการรักษาแล้ว");
                     getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบันทิ้ง
                 } else {
-                    showToast("เพิ่มประวัติการรักษาไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง");
+                    showToast("เพิ่มประวัติการรักษาไม่สำเร็จโปรดลองอีกครั้งในภายหลัง");
                 }
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<StatusItemDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 
@@ -234,13 +234,13 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 // เอาข้อมูลไปฝากท่ DiseaseManager
                 diseaseManager = new DiseaseManager(dao);
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ 2");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 
@@ -259,13 +259,13 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 // เอาข้อมูลไปฝากที่ BehaviorManager
                 behaviorManager = new BehaviorManager(dao);
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<BehaviorItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 
@@ -275,13 +275,13 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
             if (response.isSuccessful()) {
                 medicalHistoryItemCollectionDao = response.body();
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 

@@ -224,13 +224,13 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
                     initBehaviors(dao);
                 }
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<DiseaseWithOrganItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 

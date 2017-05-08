@@ -37,9 +37,18 @@ public class DiseaseSummaryFragment extends Fragment {
      * Variables
      ************/
 
-    TextView tvDiseaseName, tvDetail, tvTreatment, tvShouldEat, tvShouldNotEat, tvRecommend,
-            tvTitleDiseaseName, tvTitleDetail, tvTitleTreatment, tvTitleShouldEat, tvTitleShouldNotEat, tvTitleRecommend;
-
+    TextView tvDiseaseName,
+             tvDetail,
+             tvTreatment,
+             tvShouldEat,
+             tvShouldNotEat,
+             tvRecommend,
+             tvTitleDiseaseName,
+             tvTitleDetail,
+             tvTitleTreatment,
+             tvTitleShouldEat,
+             tvTitleShouldNotEat,
+             tvTitleRecommend;
     private String diseaseName;
     private CharSequence paragraph = Html.fromHtml("&nbsp; &nbsp; &nbsp; &nbsp; ");
 
@@ -181,13 +190,13 @@ public class DiseaseSummaryFragment extends Fragment {
                     tvRecommend.setText((paragraph + ((dao.getData().get(0).getRecommend().isEmpty() ? "ไม่มี" : dao.getData().get(0).getRecommend()))));
                 }
             } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
         public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 

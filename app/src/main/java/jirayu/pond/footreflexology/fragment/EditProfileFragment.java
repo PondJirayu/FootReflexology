@@ -193,8 +193,8 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         adapterProvince = ArrayAdapter.createFromResource(getActivity(),
                 R.array.province_names, android.R.layout.simple_spinner_item);
         adapterProvince.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProvince.setAdapter(adapterProvince);        // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
-        spinnerProvince.setOnItemSelectedListener(this);    // Handle Click Spinner
+        spinnerProvince.setAdapter(adapterProvince); // สั่งให้ spinner กับ adapter ทำงานร่วมกัน
+        spinnerProvince.setOnItemSelectedListener(this); // Handle Click Spinner
     }
 
     private void loadAnimation() {
@@ -354,7 +354,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 }
             } else { // 404
                 progressDialog.dismiss();
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
@@ -363,7 +363,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                               Throwable t) {
 
             progressDialog.dismiss();
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 

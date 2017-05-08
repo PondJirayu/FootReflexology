@@ -277,7 +277,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                     }
                 }
             } else { // 404 NOT FOUND
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนอง โปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
@@ -285,7 +285,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         public void onFailure(Call<MedicalHistoryItemCollectionDao> call,
                               Throwable t) {
             swipeRefreshLayout.setRefreshing(false);    // สั่งให้ Pull to Refresh หยุดหมุน
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ");
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
 
