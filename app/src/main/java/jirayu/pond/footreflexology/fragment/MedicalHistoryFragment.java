@@ -231,7 +231,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                     listAdapter.setDao(dao);            // โยน Dao ให้ Adapter
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
 
-                    // เมื่อมีการ Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
+                    // When Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
                     if (!doPullToRefresh && isFirstTime) {
                         // JAVA Thread - Run in Background Thread
                         thread = new Thread(new Runnable() {
