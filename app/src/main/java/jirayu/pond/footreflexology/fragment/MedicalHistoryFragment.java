@@ -48,7 +48,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
     FloatingActionButton btnFloatingActionSort, btnFloatingActionEdit;
     MedicalHistoryAdapter listAdapter;
     Thread thread;
-    Boolean doPullToRefresh;
+    Boolean doPullToRefresh, isFirstTime;
     int selected = 0, id;
     MedicalHistoryItemCollectionDao dao;
     SharedPreferences sharedPreferences;
@@ -106,6 +106,7 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
         btnFloatingActionEdit = (FloatingActionButton) rootView.findViewById(R.id.btnFloatingActionEdit);
         btnFloatingActionEdit.setVisibility(Switch.GONE);
         doPullToRefresh = false;
+        isFirstTime = true;
         listView = (ListView) rootView.findViewById(R.id.listView); // Create ListView
         listAdapter = new MedicalHistoryAdapter();  // Create Adapter
         listView.setAdapter(listAdapter);           // ListView + Adapter
@@ -196,8 +197,8 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == -1) { // ถ้ากดตกลงจะโยน which -1
-                    btnFloatingActionEdit.setVisibility(Switch.GONE);
-                    btnFloatingActionSort.setVisibility(Switch.GONE);
+//                    btnFloatingActionEdit.setVisibility(Switch.GONE);
+//                    btnFloatingActionSort.setVisibility(Switch.GONE);
                     loadMedicalHistory();
                 }
             }
@@ -231,26 +232,25 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                     listAdapter.notifyDataSetChanged(); // Adapter สั่งให้ ListView Refresh ตัวเอง
 
                     // เมื่อมีการ Pull to Refresh ไม่ต้องทำ Animation ปุ่ม FAB
-                    if (!doPullToRefresh) {
-                        // JAVA Thread
+                    if (!doPullToRefresh && isFirstTime) {
+                        // JAVA Thread - Run in Background Thread
                         thread = new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                // Run in Background Thread
                                 try {
                                     Thread.sleep(400);
                                 } catch (InterruptedException e) {
                                     return;
                                 }
 
-                                // if Activity เป็น null ให้จบการทำงาน
+                                // ถ้า activity เป็น null ให้จบการทำงาน
                                 if (getActivity() == null)
                                     return;
 
+                                // Run in UI Thread a.k.a. Main Thread
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        // Run in UI Thread a.k.a. Main Thread
                                         loadFabEditAnimation();   // FAB Animation
                                     }
                                 });
@@ -264,16 +264,17 @@ public class MedicalHistoryFragment extends Fragment implements View.OnClickList
                                 if (getActivity() == null)
                                     return;
 
+                                // Run in UI Thread a.k.a. Main Thread
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        // Run in UI Thread a.k.a. Main Thread
                                         loadFabAddAnimation();    // FAB Animation
                                     }
                                 });
                             }
                         });
                         thread.start();
+                        isFirstTime = false;
                     }
                 }
             } else { // 404 NOT FOUND
