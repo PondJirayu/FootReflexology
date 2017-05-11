@@ -173,8 +173,14 @@ public class OutSideFootFragment extends Fragment implements View.OnClickListene
             for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
                 for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
                     if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
-                        btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
-                        btnAlerts.get(i).showAlertView();
+                        for (int l = 0; l < dao.getBehaviorOfDiseaseWithOrganItemDaos().size(); l++) {
+                            if (dao.getDiseaseWithOrganItemDaos().get(j).get(k).getDiseaseId() == dao.getBehaviorOfDiseaseWithOrganItemDaos().get(l).getDiseaseId()){
+                                if (dao.getBehaviorOfDiseaseWithOrganItemDaos().get(l).getBehaviorId() != 4) {
+                                    btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(l).getBehaviorId());
+                                    btnAlerts.get(i).showAlertView();
+                                }
+                            }
+                        }
                     }
                 }
             }

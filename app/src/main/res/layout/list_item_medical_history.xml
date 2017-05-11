@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
         android:background="#FFFFFF"
-        app:cardCornerRadius="6dp"
+        app:cardCornerRadius="3dp"
         app:cardElevation="2dp">
 
         <LinearLayout
@@ -25,7 +25,7 @@
             <View
                 android:id="@+id/viewColourItemMedicalHistory"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="5dp"
                 android:elevation="1.4dp" />
 
             <FrameLayout
