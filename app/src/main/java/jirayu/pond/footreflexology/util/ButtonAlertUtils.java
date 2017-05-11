@@ -47,8 +47,8 @@ public class ButtonAlertUtils implements View.OnClickListener {
         btnAlert.setId(R.id.btnAlert); // Set Id
         setBackgroundView(status); // Set BackgroundView
 
-        anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim); // Create Animation
-        btnAlert.startAnimation(anim); // Start View Animation
+//        anim = AnimationUtils.loadAnimation(context, R.anim.alert_view_alpha_anim); // Create Animation
+//        btnAlert.startAnimation(anim); // Start View Animation
 
         // Handle Click btnAlert
         btnAlert.setOnClickListener(this);
@@ -56,12 +56,12 @@ public class ButtonAlertUtils implements View.OnClickListener {
 
     public void hideAlertView() {
         btnAlert.setVisibility(Switch.GONE);
-        anim.setRepeatCount(0);
+//        anim.setRepeatCount(0);
     }
 
     public void showAlertView() {
-        anim.setRepeatCount(Animation.INFINITE);
-        btnAlert.startAnimation(anim);
+//        anim.setRepeatCount(Animation.INFINITE);
+//        btnAlert.startAnimation(anim);
         btnAlert.setVisibility(Switch.VISIBLE);
     }
 

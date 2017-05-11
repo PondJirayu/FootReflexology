@@ -8,10 +8,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class BehaviorOfDiseaseWithOrganItemDao {
 
+    @SerializedName("id")
+    private int diseaseId;
+    @SerializedName("disease_name")
+    private String diseaseName;
     @SerializedName("behavior_id")
     private int behaviorId;
     @SerializedName("list")
     private String list;
+
+    public int getDiseaseId() {
+        return diseaseId;
+    }
+
+    public void setDiseaseId(int diseaseId) {
+        this.diseaseId = diseaseId;
+    }
+
+    public String getDiseaseName() {
+        return diseaseName;
+    }
+
+    public void setDiseaseName(String diseaseName) {
+        this.diseaseName = diseaseName;
+    }
 
     public int getBehaviorId() {
         return behaviorId;

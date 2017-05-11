@@ -205,6 +205,7 @@ public class RightFootFragment extends Fragment implements View.OnClickListener,
             for (int j = 0; j < dao.getDiseaseWithOrganItemDaos().size(); j++) {
                 for (int k = 0; k < dao.getDiseaseWithOrganItemDaos().get(j).size(); k++) {
                     if (btnAlerts.get(i).getOrganName().equals(dao.getDiseaseWithOrganItemDaos().get(j).get(k).getOrganName())) {
+                        //
                         btnAlerts.get(i).setBackgroundView(dao.getBehaviorOfDiseaseWithOrganItemDaos().get(j).getBehaviorId());
                         btnAlerts.get(i).showAlertView();
                     }

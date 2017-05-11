@@ -8,17 +8,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class DiseaseWithOrganItemDao {
 
-    @SerializedName("organ_name")
-    private String organName;
+    @SerializedName("id")
+    private int diseaseId;
     @SerializedName("disease_name")
     private String diseaseName;
+    @SerializedName("organ_name")
+    private String organName;
 
-    public String getOrganName() {
-        return organName;
+    public int getDiseaseId() {
+        return diseaseId;
     }
 
-    public void setOrganName(String organName) {
-        this.organName = organName;
+    public void setDiseaseId(int diseaseId) {
+        this.diseaseId = diseaseId;
     }
 
     public String getDiseaseName() {
@@ -27,5 +29,13 @@ public class DiseaseWithOrganItemDao {
 
     public void setDiseaseName(String diseaseName) {
         this.diseaseName = diseaseName;
+    }
+
+    public String getOrganName() {
+        return organName;
+    }
+
+    public void setOrganName(String organName) {
+        this.organName = organName;
     }
 }

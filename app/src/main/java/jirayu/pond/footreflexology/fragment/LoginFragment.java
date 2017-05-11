@@ -132,9 +132,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        sqLiteDatabase.close();
-        dataBaseHelper.close();
-        cursor.close();
     }
 
     @Override
@@ -182,6 +179,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     + " (" + DatabaseHelper.columnIdentificationNumber + ") "
                     + "VALUES ('" + identificationNumber + "');");
         }
+        sqLiteDatabase.close();
+        dataBaseHelper.close();
+        cursor.close();
     }
 
     private void saveLoginMemberToInternalStorage(MemberItemCollectionDao dao) {
