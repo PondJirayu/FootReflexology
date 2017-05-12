@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Foot Reflexology</string>
     <string name="app_name_background">Foot Reflexology</string>
-    <string name="editName_FirstLast_Name">หมายเลขบัตรประชาชน 13 หลัก</string>
+    <string name="editName_FirstLast_Name">ระบุหมายเลขบัตรประชาชน 13 หลัก</string>
     <string name="btn_SignUp">ลงทะเบียนผู้ป่วย</string>
     <string name="btn_MainPage">เข้าสู่หน้าหลัก</string>
     <string name="open_drawer">Open Menu</string>

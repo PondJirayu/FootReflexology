@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle Click Options Menu
         switch (item.getItemId()) {
             case R.id.action_logout:
+                setZeroIdMember();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -158,6 +159,17 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /*
+     * เมื่อมีการ Log out ให้กำหนดค่า Id เป็น -1(หมายถึงไม่มีค่าให้ Log in ใหม่)
+     */
+    private void setZeroIdMember() {
+        SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("id", -1);
+        editor.apply();
     }
 
     // Handle Drawer Menu

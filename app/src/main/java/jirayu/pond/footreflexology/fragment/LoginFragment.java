@@ -78,10 +78,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_anim);
+        checkLogin();
         initDatabase();
         initInstances(rootView);
         initAutoCompleteTextView();
         return rootView;
+    }
+
+    /*
+     * ตรวจสอบการเข้าสู่ระบบ[ถ้ามีการออกจากระบบให้ล็อคอินใหม่][แต่ถ้าไม่มีการออกจากระบบให้เข้าสู่หน้าแรก]
+     */
+    private void checkLogin() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginMember",
+                Context.MODE_PRIVATE);
+        if (sharedPreferences.getInt("id", -1) > 0) {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            getActivity().finish(); // เรียก Activity ที่ถือครอง Fragment ขึ้นมา แล้วสั่งทำลาย Activity นั้น
+        }
     }
 
     private void initDatabase() {
