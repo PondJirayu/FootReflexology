@@ -51,7 +51,7 @@
     <string name="rank">ลำดับที่</string>
     <string name="behavior">อาการ</string>
     <string name="createdAt">วันที่เข้ารับการรักษา</string>
-    <string name="updatedAt">อัพเดทอาการล่าสุดเมื่อ</string>
+    <string name="updatedAt">อัพเดทอาการล่าสุด</string>
     <string name="pick_date">เลือกวันเกิด</string>
     <string name="should_eat">อาหารที่ควรรับประทาน</string>
     <string name="should_not_eat">อาหารที่ควรหลีกเลี่ยง</string>
@@ -60,7 +60,7 @@
     <string name="show_alert">แสดงการแจ้งเตือนอาการ</string>
     <string name="expand_more">แสดงมากขึ้น</string>
     <string name="expand_less">แสดงน้อยลง</string>
-    <string name="previous_chart_title">กราฟแสดงอาการย้อนหลัง 3 วัน</string>
+    <string name="previous_chart_title">กราฟแสดงอาการย้อนหลัง 3 ครั้ง</string>
     <string name="four_level_title">แกนแนวตั้งแสดงอาการ 4 ระดับ</string>
     <string name="lv_one">ระดับ 1 หมายถึง อาการแย่</string>
     <string name="lv_two">ระดับ 2 หมายถึง อาการทรงตัว</string>
