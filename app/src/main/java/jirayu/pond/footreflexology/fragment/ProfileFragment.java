@@ -102,8 +102,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initSharedPreferences() {
-        sharedPreferences = getContext().getSharedPreferences("loginMember",
-                Context.MODE_PRIVATE);
+        sharedPreferences = getContext().getSharedPreferences(
+                "loginMember",
+                Context.MODE_PRIVATE
+        );
         identificationNumber = sharedPreferences.getString("identification_number", null);
     }
 
@@ -206,8 +208,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadFabAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),
-                R.anim.fab_open);
+        Animation anim = AnimationUtils.loadAnimation(
+                Contextor.getInstance().getContext(),
+                R.anim.fab_open
+        );
         btnFloatingAction.startAnimation(anim);
         btnFloatingAction.setVisibility(Switch.VISIBLE);
     }
