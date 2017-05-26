@@ -133,8 +133,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void initAutoCompleteTextView() {
         // Create Adapter of AutoCompleteTextView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_list_item_1, arrListIdentificationNumber);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                arrListIdentificationNumber
+        );
         autotvName.setAdapter(adapter); // Set Adapter to AutoCompleteTextView
     }
 
