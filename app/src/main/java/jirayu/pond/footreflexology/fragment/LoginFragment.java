@@ -132,6 +132,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initAutoCompleteTextView() {
+
         // Create Adapter of AutoCompleteTextView
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getContext(),
