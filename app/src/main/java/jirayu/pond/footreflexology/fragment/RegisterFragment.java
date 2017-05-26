@@ -294,7 +294,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
                 } else if (birthDate == null) {
                     showToast("กรุณาระบุวันเกิด");
                 } else {
-                    progressDialog.show(); // Show ProgressDialog
+                    progressDialog.show();
                     insertMemberList();
                 }
                 break;

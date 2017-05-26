@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jirayu.pond.footreflexology.R;
 import jirayu.pond.footreflexology.dao.MemberItemCollectionDao;
@@ -53,11 +55,11 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
      ************/
 
     EditText editFirstName,
-             editLastName,
-             editTelephoneNumber,
-             editAddress,
-             editSubDistrict,
-             editDistrict;
+            editLastName,
+            editTelephoneNumber,
+            editAddress,
+            editSubDistrict,
+            editDistrict;
     RadioGroup radioGroup;
     TextView tvBirthDate;
     ImageButton btnDatePicker;
@@ -67,14 +69,14 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     ArrayAdapter<CharSequence> adapterProvince;
     StringsManager stringsManager;
     String firstName,
-           lastName,
-           gender,
-           telephoneNumber,
-           houseVillage,
-           subDistrict,
-           district,
-           province,
-           identificationNumber;
+            lastName,
+            gender,
+            telephoneNumber,
+            houseVillage,
+            subDistrict,
+            district,
+            province,
+            identificationNumber;
     java.sql.Date birthDate;
     DatePickerDialog datePickerDialog;
     Calendar calendar;
@@ -212,6 +214,24 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         call.enqueue(loadMemberList);
     }
 
+    private void insertMemberList() {
+        Call<StatusItemDao> call = HttpManager.getInstance().getService().UpdateMember(
+                id,
+                firstName,
+                lastName,
+                identificationNumber,
+                gender,
+                birthDate,
+                telephoneNumber,
+                houseVillage,
+                subDistrict,
+                district,
+                province,
+                new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
+        );
+        call.enqueue(insertMemberList);
+    }
+
     private void getTextToVariables() {
         firstName = editFirstName.getText().toString();
         lastName = editLastName.getText().toString();
@@ -227,6 +247,41 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 gender = "หญิง";
                 break;
         }
+    }
+
+    /*
+     * ตรวจสอบสิ่งที่ป้อนเข้ามาด้วย RegEx(Regular Expression)
+     */
+    private boolean validateFirstNameLastName(String firstName, String lastName) {
+        Matcher m1, m2;
+        String pattern = "[ก-์]+"; // ชื่อนามสกุลประกอบด้วยตัวอักษร ก-์ อย่างน้อย 1 ตัวอักษร
+
+        Pattern p = Pattern.compile(pattern);
+        m1 = p.matcher(firstName);
+        m2 = p.matcher(lastName);
+
+        return (m1.matches() && m2.matches());
+    }
+
+    private boolean validateTelephoneNumber(String telephoneNumber) {
+        String pattern = "([0-9]{9,})*"; // เบอร์โทรศัพท์ประกอบด้วยตัวเลข 0-9 อย่างน้อย 9 ตัว (จะมีหรือไม่มีก็ได้)
+
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(telephoneNumber);
+
+        return m.matches();
+    }
+
+    private boolean validateAddress(String houseVillage, String subDistrict, String district) {
+        Matcher m1, m2, m3;
+        String pattern = ".*"; // ที่อยู่ประกอบด้วยตัวอักษรอะไรก็ได้ มีหรือไม่มีก็ได้
+
+        Pattern p = Pattern.compile(pattern);
+        m1 = p.matcher(houseVillage);
+        m2 = p.matcher(subDistrict);
+        m3 = p.matcher(district);
+
+        return ((m1.matches() && m2.matches()) && m3.matches());
     }
 
     private void showToast(String text) {
@@ -253,30 +308,18 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.btnFloatingAction:
-                // getText to variable
-                getTextToVariables();
-                if (firstName.trim().length() == 0 || lastName.trim().length() == 0
-                        || telephoneNumber.trim().length() == 0 || houseVillage.trim().length() == 0
-                        || subDistrict.trim().length() == 0 || district.trim().length() == 0) {
-                    showToast("กรุณาป้อนข้อมูลให้ครบถ้วน");
+                getTextToVariables(); // Get Text to Variable
+                if (!validateFirstNameLastName(firstName, lastName)) {
+                    showToast("กรุณาระบุชื่อนามสกุลเป็นภาษาไทยให้ถูกต้องและห้ามเว้นว่าง");
+                } else if (!validateTelephoneNumber(telephoneNumber)) {
+                    showToast("กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง");
+                } else if (!validateAddress(houseVillage, subDistrict, district)) {
+                    showToast("กรุณาระบุที่อยู่ให้ถูกต้อง");
+                } else if (birthDate == null) {
+                    showToast("กรุณาระบุวันเกิด");
                 } else {
                     progressDialog.show();
-                    // UpdateMember Here
-                    Call<StatusItemDao> call = HttpManager.getInstance().getService().UpdateMember(
-                            id,
-                            firstName,
-                            lastName,
-                            identificationNumber,
-                            gender,
-                            birthDate,
-                            telephoneNumber,
-                            houseVillage,
-                            subDistrict,
-                            district,
-                            province,
-                            new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบันเก็บในตัวแปร updatedAt
-                    );
-                    call.enqueue(insertMemberList);
+                    insertMemberList();
                 }
                 break;
             case R.id.btnDatePicker:
