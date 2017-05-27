@@ -51,6 +51,10 @@ public class DetailsListAdapter extends BaseAdapter {
         return detailItemCollectionDao.getData().get(position);
     }
 
+    private MedicalHistoryItemDao getItemMedicalHistory(int position) {
+        return medicalHistoryItemCollectionDao.getData().get(position);
+    }
+
     @Override
     public long getItemId(int position) {
         return 0;
@@ -100,9 +104,4 @@ public class DetailsListAdapter extends BaseAdapter {
 
         return item;
     }
-
-    private MedicalHistoryItemDao getItemMedicalHistory(int position) {
-        return medicalHistoryItemCollectionDao.getData().get(position);
-    }
-
 }
