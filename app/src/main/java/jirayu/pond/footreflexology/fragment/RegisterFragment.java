@@ -307,9 +307,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
 
     Callback<MemberItemCollectionDao> insertMemberList = new Callback<MemberItemCollectionDao>() {
         @Override
-        public void onResponse(Call<MemberItemCollectionDao> call,
-                               Response<MemberItemCollectionDao> response) {
-
+        public void onResponse(Call<MemberItemCollectionDao> call, Response<MemberItemCollectionDao> response) {
             if (response.isSuccessful()) {
                 MemberItemCollectionDao dao = response.body();
                 if (dao.getSuccess() == 1) { // ลงทะเบียนสำเร็จ
@@ -330,9 +328,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener,
         }
 
         @Override
-        public void onFailure(Call<MemberItemCollectionDao> call,
-                              Throwable t) {
-
+        public void onFailure(Call<MemberItemCollectionDao> call, Throwable t) {
             progressDialog.dismiss();
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
