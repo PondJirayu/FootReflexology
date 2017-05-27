@@ -17,9 +17,6 @@ import jirayu.pond.footreflexology.view.DetailsListItem;
 /**
  * Created by lp700 on 16/12/2559.
  */
-
-// TODO: Capture หน้านี้ด้วย ใส่ folder (4.ขั้นตอนเมื่อมีการคลิกที่วิว....)
-
 public class DetailsListAdapter extends BaseAdapter {
 
     private DetailItemCollectionDao detailItemCollectionDao;
