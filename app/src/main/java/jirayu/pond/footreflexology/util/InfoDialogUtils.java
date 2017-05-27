@@ -11,7 +11,6 @@ import jirayu.pond.footreflexology.R;
 /**
  * Created by lp700 on 12/3/2560.
  */
-
 public class InfoDialogUtils {
 
     private AlertDialog.Builder builder;
