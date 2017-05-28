@@ -156,10 +156,24 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         call.enqueue(loadDisease);
     }
 
+    private void insertMedicalHistory() {
+        Call<StatusItemDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
+                id,
+                diseaseId,
+                behaviorId,
+                new Timestamp(System.currentTimeMillis()), // GET เวลาปัจจุบัน
+                new Timestamp(System.currentTimeMillis())  // GET เวลาปัจจุบัน
+        );
+        call.enqueue(insertMedicalHistory);
+    }
+
     private void createSpinnerBehavior() {
         // Behavior
-        adapterBehavior = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, behavior);
+        adapterBehavior = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                behavior
+        );
         adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBehavior.setAdapter(adapterBehavior);
         spinnerBehavior.setOnItemSelectedListener(this);
@@ -167,8 +181,11 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
 
     private void createSpinnerDisease() {
         // Disease
-        adapterDisease = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, disease);
+        adapterDisease = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                disease
+        );
         adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDisease.setAdapter(adapterDisease);
         spinnerDisease.setOnItemSelectedListener(this);
@@ -197,49 +214,18 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      * Listener Zone
      ****************/
 
-    Callback<StatusItemDao> insertMedicalHistory = new Callback<StatusItemDao>() {
+    Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
         @Override
-        public void onResponse(Call<StatusItemDao> call, Response<StatusItemDao> response) {
+        public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                StatusItemDao dao = response.body();
-                if (dao.getSuccess() == 1) {
-                    showToast("เพิ่มประวัติการรักษาแล้ว");
-                    getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบันทิ้ง
-                } else {
-                    showToast("เพิ่มประวัติการรักษาไม่สำเร็จโปรดลองอีกครั้งในภายหลัง");
-                }
+                medicalHistoryItemCollectionDao = response.body();
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
-        public void onFailure(Call<StatusItemDao> call, Throwable t) {
-            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
-        }
-    };
-
-    Callback<DiseaseItemCollectionDao> loadDisease = new Callback<DiseaseItemCollectionDao>() {
-        @Override
-        public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
-            if (response.isSuccessful()) {
-                DiseaseItemCollectionDao dao = response.body();
-                disease = new ArrayList<>();
-                // add json to array list
-                for (int i = 0; i < dao.getData().size(); i++) {
-                    disease.add(dao.getData().get(i).getDiseaseName());
-                }
-                successDisease = true;
-                createSpinnerDisease();
-                // เอาข้อมูลไปฝากท่ DiseaseManager
-                diseaseManager = new DiseaseManager(dao);
-            } else {
-                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
-            }
-        }
-
-        @Override
-        public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
+        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
@@ -269,18 +255,49 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
         }
     };
 
-    Callback<MedicalHistoryItemCollectionDao> loadMedicalHistory = new Callback<MedicalHistoryItemCollectionDao>() {
+    Callback<DiseaseItemCollectionDao> loadDisease = new Callback<DiseaseItemCollectionDao>() {
         @Override
-        public void onResponse(Call<MedicalHistoryItemCollectionDao> call, Response<MedicalHistoryItemCollectionDao> response) {
+        public void onResponse(Call<DiseaseItemCollectionDao> call, Response<DiseaseItemCollectionDao> response) {
             if (response.isSuccessful()) {
-                medicalHistoryItemCollectionDao = response.body();
+                DiseaseItemCollectionDao dao = response.body();
+                disease = new ArrayList<>();
+                // add json to array list
+                for (int i = 0; i < dao.getData().size(); i++) {
+                    disease.add(dao.getData().get(i).getDiseaseName());
+                }
+                successDisease = true;
+                createSpinnerDisease();
+                // เอาข้อมูลไปฝากท่ DiseaseManager
+                diseaseManager = new DiseaseManager(dao);
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
             }
         }
 
         @Override
-        public void onFailure(Call<MedicalHistoryItemCollectionDao> call, Throwable t) {
+        public void onFailure(Call<DiseaseItemCollectionDao> call, Throwable t) {
+            showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
+        }
+    };
+
+    Callback<StatusItemDao> insertMedicalHistory = new Callback<StatusItemDao>() {
+        @Override
+        public void onResponse(Call<StatusItemDao> call, Response<StatusItemDao> response) {
+            if (response.isSuccessful()) {
+                StatusItemDao dao = response.body();
+                if (dao.getSuccess() == 1) {
+                    showToast("เพิ่มประวัติการรักษาแล้ว");
+                    getFragmentManager().popBackStack(); // remove fragment ตัวปัจจุบันทิ้ง
+                } else {
+                    showToast("เพิ่มประวัติการรักษาไม่สำเร็จโปรดลองอีกครั้งในภายหลัง");
+                }
+            } else {
+                showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<StatusItemDao> call, Throwable t) {
             showToast("กรุณาตรวจสอบการเชื่อมต่อเครือข่าย");
         }
     };
@@ -290,14 +307,20 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.spinnerBehavior && successBehavior) {
-            behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString()); // โยน String เข้าไปที่ Manager เพื่อหา ID ของ String ดังกล่าว
-            behaviorId = behaviorManager.getBehaviorId(); // return Id of String
-        }
-        if (parent.getId() == R.id.spinnerDisease && successDisease) {
-            diseaseName = spinnerDisease.getItemAtPosition(position).toString(); // เอาชื่อโรคไปเก็บในตัวแปร เพื่อเอาไปใช้งานใน func checkMedicalHistory
-            diseaseManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
-            diseaseId = diseaseManager.getDiseaseId();
+        switch (parent.getId()) {
+            case R.id.spinnerBehavior:
+                if (successBehavior) {
+                    behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString()); // โยน String เข้าไปที่ Manager เพื่อหา ID ของ String ดังกล่าว
+                    behaviorId = behaviorManager.getBehaviorId(); // return Id of String
+                }
+                break;
+            case R.id.spinnerDisease:
+                if (successDisease) {
+                    diseaseName = spinnerDisease.getItemAtPosition(position).toString(); // เอาชื่อโรคไปเก็บในตัวแปร เพื่อเอาไปใช้งานใน func checkMedicalHistory
+                    diseaseManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
+                    diseaseId = diseaseManager.getDiseaseId();
+                }
+                break;
         }
     }
 
@@ -316,15 +339,7 @@ public class AddMedicalHistoryFragment extends Fragment implements View.OnClickL
                 if (checkMedicalHistory()) {
                     showToast("มีประวัติการรักษาอยู่แล้ว");
                 } else {
-                    // Insert MedicalHistory Here
-                    Call<StatusItemDao> call = HttpManager.getInstance().getService().InsertMedicalHistory(
-                            id,
-                            diseaseId,
-                            behaviorId,
-                            new Timestamp(System.currentTimeMillis()),      // GET เวลาปัจจุบัน
-                            new Timestamp(System.currentTimeMillis())       // GET เวลาปัจจุบัน
-                    );
-                    call.enqueue(insertMedicalHistory);
+                    insertMedicalHistory(); // insert MedicalHistory here
                 }
                 break;
         }
