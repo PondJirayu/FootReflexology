@@ -43,7 +43,6 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
 
     Button btnSave;
     Spinner spinnerDisease, spinnerBehavior;
-    List<String> disease, behavior;
     ArrayAdapter<String> adapterDisease, adapterBehavior;
     int rowId, behaviorId, id;
     BehaviorManager behaviorManager;
@@ -136,7 +135,6 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     }
 
     private void loadDisease() {
-        // โหลดรายชื่อโรคจากตารางประวัติการรักษา
         Call<MedicalHistoryItemCollectionDao> call = HttpManager.getInstance().getService().loadMedicalHistory(
                 "medicalhistorys",
                 id,
@@ -145,19 +143,25 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         call.enqueue(loadDisease);
     }
 
-    private void createSpinnerBehavior() {
+    private void createSpinnerBehavior(ArrayList<String> behavior) {
         // Behavior
-        adapterBehavior = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, behavior);
+        adapterBehavior = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                behavior
+        );
         adapterBehavior.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBehavior.setAdapter(adapterBehavior);
         spinnerBehavior.setOnItemSelectedListener(this);
     }
 
-    private void createSpinnerDisease() {
+    private void createSpinnerDisease(ArrayList<String> disease) {
         // Disease
-        adapterDisease = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, disease);
+        adapterDisease = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                disease
+        );
         adapterDisease.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDisease.setAdapter(adapterDisease);
         spinnerDisease.setOnItemSelectedListener(this);
@@ -189,12 +193,12 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         public void onResponse(Call<BehaviorItemCollectionDao> call, Response<BehaviorItemCollectionDao> response) {
             if (response.isSuccessful()) {
                 BehaviorItemCollectionDao dao = response.body();
-                behavior = new ArrayList<>();
+                ArrayList<String> behavior = new ArrayList<>();
                 // add json to array list
                 for (int i = 0; i < dao.getData().size(); i++) {
                     behavior.add(dao.getData().get(i).getList());
                 }
-                createSpinnerBehavior();
+                createSpinnerBehavior(behavior);
                 behaviorManager = new BehaviorManager(dao);
             } else {
                 showToast("ขออภัยเซิร์ฟเวอร์ไม่ตอบสนองโปรดลองเชื่อมต่ออีกครั้งในภายหลัง");
@@ -215,12 +219,12 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
                 if (dao.getData().isEmpty()) {
                     showToast("ไม่พบประวัติการรักษา");
                 } else {
-                    disease = new ArrayList<>();
+                    ArrayList<String> disease = new ArrayList<>();
                     // add json to array list
                     for (int i = 0; i < dao.getData().size(); i++) {
                         disease.add(dao.getData().get(i).getDiseaseName());
                     }
-                    createSpinnerDisease();
+                    createSpinnerDisease(disease);
                     medicalHistoryManager = new MedicalHistoryManager(dao);
                 }
             } else {
@@ -257,6 +261,9 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         }
     };
 
+    /*
+     * Handle Click Spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerDisease) {
