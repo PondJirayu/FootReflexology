@@ -143,8 +143,10 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         call.enqueue(loadDisease);
     }
 
+    /*
+     * Behaviors
+     */
     private void createSpinnerBehavior(ArrayList<String> behavior) {
-        // Behavior
         adapterBehavior = new ArrayAdapter<>(
                 getContext(),
                 android.R.layout.simple_spinner_item,
@@ -155,8 +157,10 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
         spinnerBehavior.setOnItemSelectedListener(this);
     }
 
+    /*
+     * Diseases
+     */
     private void createSpinnerDisease(ArrayList<String> disease) {
-        // Disease
         adapterDisease = new ArrayAdapter<>(
                 getContext(),
                 android.R.layout.simple_spinner_item,
