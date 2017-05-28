@@ -266,15 +266,16 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.spinnerDisease) {
-            // โยนค่าที่ user เลือก เข้าไปที่ Manager
-            medicalHistoryManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
-            rowId = medicalHistoryManager.getMedicalHistoryId();
-        }
-
-        if (parent.getId() == R.id.spinnerBehavior) {
-            behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString());
-            behaviorId = behaviorManager.getBehaviorId();
+        switch (parent.getId()) {
+            case R.id.spinnerDisease:
+                // โยนค่าที่ user เลือก เข้าไปที่ Manager
+                medicalHistoryManager.setDisease(spinnerDisease.getItemAtPosition(position).toString());
+                rowId = medicalHistoryManager.getMedicalHistoryId();
+                break;
+            case R.id.spinnerBehavior:
+                behaviorManager.setBehavior(spinnerBehavior.getItemAtPosition(position).toString());
+                behaviorId = behaviorManager.getBehaviorId();
+                break;
         }
     }
 
