@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -161,7 +162,7 @@ public class DatesChartSummaryFragment extends Fragment {
     }
 
     private void showToast(String text) {
-        Toast.makeText(getContext(),
+        Toast.makeText(Contextor.getInstance().getContext(),
                 text,
                 Toast.LENGTH_SHORT)
                 .show();
@@ -186,6 +187,8 @@ public class DatesChartSummaryFragment extends Fragment {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        showToast("ข้อมูลไม่เพียงพอที่จะนำมาทำสถิติ");
                     }
                 }
             } else {
