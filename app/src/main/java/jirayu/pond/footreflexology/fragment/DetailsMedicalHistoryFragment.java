@@ -14,9 +14,6 @@ import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
 
 import jirayu.pond.footreflexology.R;
 
-/**
- * Created by nuuneoi on 11/16/2014.
- */
 public class DetailsMedicalHistoryFragment extends Fragment {
 
     /************

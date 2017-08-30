@@ -16,9 +16,6 @@ import com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageButton;
 
 import jirayu.pond.footreflexology.R;
 
-/**
- * Created by nuuneoi on 11/16/2014.
- */
 public class DetailsListItem extends BaseCustomViewGroup implements View.OnClickListener {
 
     /************

@@ -7,9 +7,6 @@ import android.view.WindowManager;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
-/**
- * Created by nuuneoi on 11/16/2014.
- */
 public class ScreenUtils {
 
     private static ScreenUtils instance;

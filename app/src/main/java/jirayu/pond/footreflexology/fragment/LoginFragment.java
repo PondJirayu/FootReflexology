@@ -37,9 +37,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by nuuneoi on 11/16/2014.
- */
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     /************

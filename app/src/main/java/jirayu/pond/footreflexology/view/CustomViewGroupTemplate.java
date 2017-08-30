@@ -11,9 +11,6 @@ import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
 
 import jirayu.pond.footreflexology.R;
 
-/**
- * Created by nuuneoi on 11/16/2014.
- */
 public class CustomViewGroupTemplate extends BaseCustomViewGroup {
 
     public CustomViewGroupTemplate(Context context) {
