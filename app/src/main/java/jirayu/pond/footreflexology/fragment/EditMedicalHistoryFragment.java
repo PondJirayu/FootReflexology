@@ -36,7 +36,7 @@ public class EditMedicalHistoryFragment extends Fragment implements View.OnClick
     /************
      * Variables
      ************/
-
+    
     Button btnSave;
     Spinner spinnerDisease, spinnerBehavior;
     ArrayAdapter<String> adapterDisease, adapterBehavior;
